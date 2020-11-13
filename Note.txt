@@ -1,0 +1,11 @@
+Pycharm使用的是Venv虚拟环境，即其Python包是独立的，便于将项目集成到其它地方
+因此会出现报错
+首先对于pip3的报错使用该命令解决：sudo easy_install pip
+如果出现通过pip3安装模块后，py运行还是失败的，使用pycharm的interpreter里面搜索对应模块再安装即可
+设置Keymap：
+command + 3：打开关闭terminal
+其它as vs code
+这边已经设置后续新建项目都会集成该项目的venv环境，方便后续无需重复配置
+
+
+
