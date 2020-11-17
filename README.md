@@ -6,3 +6,5 @@ Android系统UI自动化测试项目
 airtest
 
 poco
+
+预计使用pytest作为主体框架
