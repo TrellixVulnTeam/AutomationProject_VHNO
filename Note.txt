@@ -7,5 +7,10 @@ command + 3：打开关闭terminal
 其它as vs code
 这边已经设置后续新建项目都会集成该项目的venv环境，方便后续无需重复配置
 
+# 兼容Android 11,当出现still waiting for uiautomation ready.
+# 本项目以修改源码：
+print("still waiting for uiautomation ready.")
+# -- Guangtao
+self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
 
 
