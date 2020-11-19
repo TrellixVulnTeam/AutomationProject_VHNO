@@ -13,4 +13,6 @@ print("still waiting for uiautomation ready.")
 # -- Guangtao
 self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
 
+# 兼容使用相对路径存在同目录下文件找不到问题：
+修改Edit configurations -> 将Working directory改成当前项目目录即可
 
