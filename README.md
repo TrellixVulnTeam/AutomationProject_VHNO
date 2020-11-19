@@ -7,4 +7,6 @@ airtest
 
 poco
 
-预计使用pytest作为主体框架 先搭建一个具体的框架主体
+使用pytest作为主体框架 先搭建一个具体的框架主体
+
+先对pytest + poco元素操作进行学习
