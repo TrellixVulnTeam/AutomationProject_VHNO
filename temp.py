@@ -15,6 +15,8 @@ poco = AndroidUiautomationPoco()
         以下func大部分可单独运行：
             1.单独调用 - 当前Device
             2.指定device调用 - 控制不同设备（主要API选择）
+    以下是Airtest的API的用法，它提供了一些方法的封装，同时还对接了图像识别等技术，但Airtest也有局限性，不能根据DOM树
+    来选则对应但节点，依靠图像识别也有一定不精确之处，所以还需要另一个库Poco
 """
 """
     初始化设备
@@ -181,5 +183,7 @@ device_huawei.home()
     初始化AndroidUiautomationPoco
 """
 # poco = AndroidUiautomationPoco()
+
+
 
 
