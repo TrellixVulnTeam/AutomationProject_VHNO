@@ -8,15 +8,15 @@ from time import sleep
 """
     初始化AndroidUiautomationPoco
 """
-poco = AndroidUiautomationPoco()
+# poco = AndroidUiautomationPoco()
 # Huawei P30 pro
 """
     一、以下为airtest操作API
         以下func大部分可单独运行：
             1.单独调用 - 当前Device
             2.指定device调用 - 控制不同设备（主要API选择）
-    以下是Airtest的API的用法，它提供了一些方法的封装，同时还对接了图像识别等技术，但Airtest也有局限性，不能根据DOM树
-    来选则对应但节点，依靠图像识别也有一定不精确之处，所以还需要另一个库Poco
+            以下是Airtest的API的用法，它提供了一些方法的封装，同时还对接了图像识别等技术，但Airtest也有局限性，不能根据DOM树
+            来选则对应但节点，依靠图像识别也有一定不精确之处，所以还需要另一个库Poco
 """
 """
     初始化设备
@@ -30,7 +30,8 @@ device_huawei = init_device("Android", uuid = "MQS0219619020975")
 """
     点击home键
 """
-device_huawei.home()
+# device_huawei.home()
+# sleep(1)
 """
     获取当前已连接的设备序列号
 """
@@ -177,12 +178,49 @@ device_huawei.home()
 # device_huawei.adjust_all_screen()
 
 """
-    二、以下为Poco操作API
+    二、以下为Poco操作API：
+        1.利用Poco我们可以支持DOM选择
+        2.Poco返回的是UIObjectProxy对象，提供了操作API
 """
 """
     初始化AndroidUiautomationPoco
 """
-# poco = AndroidUiautomationPoco()
+poco = AndroidUiautomationPoco()
+"""
+    连接设备
+    Android:///uuid
+"""
+connect_device("Android:///MQS0219619020975")
+home()
+sleep(1)
+"""
+    child节点定位，根据节点树结构来定位元素
+    children是获取所有子节点，即会在所有子节点中寻找
+    对WebView支持不是很好，部分元素只用poco无法定位
+"""
+# poco(text = "Gallery").click()
+# poco(text = "Gallery")
+# poco(name = "com.huawei.android.launcher:id/layout").child().child(name = "Phone").click()
+# poco(name = "android.view.ViewGroup").child("Gallery").click()
+"""
+    获取节点属性
+    根据key获取
+"""
+# node_attr = poco(text = "Gallery").attr("name")
+"""
+    双击，需要结合airtest
+    获取设备屏幕尺寸
+    转换成绝对position
+"""
+# screen_size = [device_huawei.display_info["width"], device_huawei.display_info["height"]]
+# gallery_abs_position = [poco(text = "Gallery").attr("pos")[0] * screen_size[0],
+#                         poco(text = "Gallery").attr("pos")[1] * screen_size[1]]
+# double_click(gallery_abs_position)
+
+
+
+
+
 
 
 
