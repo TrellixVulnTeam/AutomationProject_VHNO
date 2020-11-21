@@ -216,12 +216,107 @@ sleep(1)
 # gallery_abs_position = [poco(text = "Gallery").attr("pos")[0] * screen_size[0],
 #                         poco(text = "Gallery").attr("pos")[1] * screen_size[1]]
 # double_click(gallery_abs_position)
-
-
-
-
-
-
-
+"""
+    drag_to:将某个节点拖到另一个节点
+    如下：拖动亮度条至最大
+"""
+# start_app("com.android.settings")
+# sleep(1)
+# poco(text = "Display & brightness").click()
+# sleep(1)
+# poco("com.android.settings:id/seekbar").drag_to(poco("com.android.settings:id/brightness_indicator_right"), duration = 0.5)
+"""
+    exists:判断某个节点是否存在
+    如下：判断QQMusic是否存在，存在即打开
+"""
+# if (poco("QQMusic").exists()):
+#     poco("QQMusic").click()
+"""
+    focus:获得焦点
+    如下：获得QQMusic的中心焦点
+    可以用于一些拖拽功能，拖拽到某处，使用坐标等方式定义位置
+"""
+# poco(text = "QQMusic").focus("center")
+"""
+    get_bounds():获取边界
+    如下:获取QQMusic的边界：与屏幕四边的绝对距离
+    使用时如需要先换算
+"""
+# bounds = poco(text = "QQMusic").get_bounds()
+"""
+    get_name():获取节点名
+"""
+# node_name = poco(text = "QQMusic").get_name()
+"""
+    get_position():获取节点位置
+    如下:获取QQMusic的中心position
+"""
+# center_position = poco(text = "QQMusic").get_position(focus = "center")
+"""
+    get_size():获取节点大小
+    使用时如需要先换算
+"""
+# size = poco(text = "QQMusic").get_size()
+"""
+    get_text():获取节点文本内容
+"""
+# icon_text = poco(text = "QQMusic").get_text()
+"""
+    long_click():长按
+    如下:长按QQMuic图标3s
+"""
+# poco("QQMusic").long_click(duration = 3)
+"""
+    offspring():获取UI的直接的所有后代
+    如下：获取hotseat的所有后代中的name为Phone的元素
+    该方法读取元素效率没有读取单个元素高，注意使用取舍
+"""
+# print(poco(name = "com.huawei.android.launcher:id/layout").offspring(name = "Phone").click())
+# poco("Phone").click()
+# poco(name = "Phone").click()
+"""
+    parent():获取该节点的父节点
+"""
+# parent_node = poco(name = "Phone").parent()
+# parent_node.child(name = "Phone").click()
+"""
+    scroll():滑动
+    如下：滑动Gallery的图片，percent:滑动的距离占屏幕对应方向的比例
+"""
+# stop_app("com.android.gallery3d")
+# poco(text = "Gallery").click()
+# poco(name = "com.android.gallery3d:id/album_cover_image").click()
+# sleep(1)
+# poco.scroll(percent = 0.8, duration = 0.1)
+"""
+    set_text():设置文字
+"""
+# poco(name = "Messaging").click()
+# poco(text = "Search").set_text("Hello")
+"""
+    sibling():兄弟节点
+    获取同一级parent的兄弟的节点
+"""
+# poco(name = "Messaging").sibling(name = "Phone").click()
+"""
+    swipe():滑动
+    必须放入坐标，如下：是使用两个icon的坐标来达到一个滑动的效果
+"""
+# poco.swipe(poco(name = "Gallery").get_position(), poco(name = "QQMusic").get_position())
+"""
+    wait():等待节点
+    如下：等待gallery节点出现
+    意义：设计等待节点出现的时间段满足某些需求,用处不大
+"""
+# gallery_node = poco(name = "Galle搜索ry").wait(timeout = 3)
+"""
+    wait_for_appearence():等待某个节点出现
+    无返回值，如果未出现会raise PocoTargetTimeout
+    意义：设计等待节点是否出现，在一段时间后是否出现，主要用该等待
+    
+    wait_for_disappearance()：等待某个节点消失，效果与上相反
+"""
+# gallery_node = poco(name = "Gallery").wait_for_appearance(timeout = 10)
+# poco(name = "Gallery").wait_for_disappearance()
 
 

@@ -25,3 +25,7 @@ self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
 
 
 
+
+
+
+
