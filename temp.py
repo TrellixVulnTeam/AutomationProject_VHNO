@@ -21,7 +21,7 @@ from time import sleep
 """
     初始化设备
 """
-device_huawei = init_device("Android", uuid = "MQS0219619020975")
+# device_huawei = init_device("Android", uuid = "MQS0219619020975")
 # Austin 11#
 # device_milan = init_device("Android", uuid = "11921b86")
 # Milan 40#
@@ -190,7 +190,7 @@ poco = AndroidUiautomationPoco()
     连接设备
     Android:///uuid
 """
-connect_device("Android:///MQS0219619020975")
+connect_device("Android:///713b81d")
 home()
 sleep(1)
 """
@@ -308,7 +308,7 @@ sleep(1)
     如下：等待gallery节点出现
     意义：设计等待节点出现的时间段满足某些需求,用处不大
 """
-# gallery_node = poco(name = "Galle搜索ry").wait(timeout = 3)
+# gallery_node = poco(name = "Gallery").wait(timeout = 3)
 """
     wait_for_appearence():等待某个节点出现
     无返回值，如果未出现会raise PocoTargetTimeout
@@ -319,4 +319,25 @@ sleep(1)
 # gallery_node = poco(name = "Gallery").wait_for_appearance(timeout = 10)
 # poco(name = "Gallery").wait_for_disappearance()
 
-
+"""
+    Settings->Apps->查找元素
+    循环查找列表是否存在元素
+"""
+start_app("com.android.settings")
+# sleep(1)
+poco.scroll(percent = 0.8, duration = 1)
+apps_menu = poco(text = "Apps").wait(3)
+apps_menu.click()
+# sleep(1)
+poco(text = "Special app access").click()
+# sleep(1)
+# poco(text = "Battery optimisation").click()
+poco(text = "Battery optimization").click()
+# sleep(1)
+app_exists = False
+app_get = ""
+while(not app_exists):
+    poco.scroll(percent = 0.8, duration = 1)
+    app_get = poco(text = "System Update")
+    app_exists = app_get.exists()
+print("Find this app %s: %s" %(app_get.get_text(), app_exists))
