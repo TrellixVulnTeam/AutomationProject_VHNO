@@ -190,7 +190,7 @@ poco = AndroidUiautomationPoco()
     连接设备
     Android:///uuid
 """
-connect_device("Android:///713b81d")
+connect_device("Android:///e02af793")
 home()
 sleep(1)
 """
@@ -323,21 +323,25 @@ sleep(1)
     Settings->Apps->查找元素
     循环查找列表是否存在元素
 """
-start_app("com.android.settings")
+# start_app("com.android.settings")
 # sleep(1)
-poco.scroll(percent = 0.8, duration = 1)
-apps_menu = poco(text = "Apps").wait(3)
-apps_menu.click()
+# item_exists = False
+# while(not item_exists):
+#     item_get = poco.scroll(percent = 0.8, duration = 1)
+#     apps_menu = poco(text = "Apps").wait(3)
+#     item_exists = apps_menu.exists()
+# apps_menu.click()
 # sleep(1)
-poco(text = "Special app access").click()
+# poco(text = "Special app access").click()
 # sleep(1)
+# # poco(text = "Battery optimization").click()
 # poco(text = "Battery optimisation").click()
-poco(text = "Battery optimization").click()
 # sleep(1)
-app_exists = False
-app_get = ""
-while(not app_exists):
-    poco.scroll(percent = 0.8, duration = 1)
-    app_get = poco(text = "System Update")
-    app_exists = app_get.exists()
-print("Find this app %s: %s" %(app_get.get_text(), app_exists))
+# app_exists = False
+# app_get = ""
+# while(not app_exists):
+#     poco.scroll(percent = 0.8, duration = 1)
+#     app_get = poco(text = "System Update")
+#     app_exists = app_get.exists()
+# print("Find this app %s: %s" %(app_get.get_text(), app_exists))
+

@@ -12,8 +12,8 @@ Android系统UI自动化测试项目
 4.安装pytest：pip3 install pytest
 
 5.安装allure：
-    brew install allure
-    pip3 install pytest-allure-adaptor
+brew install allure
+pip3 install allure-pytest
 
 现在有了测试框架、自动化框架、测试报告、coding……
 
