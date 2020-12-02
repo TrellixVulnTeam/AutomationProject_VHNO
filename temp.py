@@ -185,14 +185,14 @@ from time import sleep
 """
     初始化AndroidUiautomationPoco
 """
-poco = AndroidUiautomationPoco()
+# poco = AndroidUiautomationPoco()
 """
     连接设备
     Android:///uuid
 """
-connect_device("Android:///e02af793")
-home()
-sleep(1)
+# connect_device("Android:///e02af793")
+# home()
+# sleep(1)
 """
     child节点定位，根据节点树结构来定位元素
     children是获取所有子节点，即会在所有子节点中寻找
@@ -344,4 +344,12 @@ sleep(1)
 #     app_get = poco(text = "System Update")
 #     app_exists = app_get.exists()
 # print("Find this app %s: %s" %(app_get.get_text(), app_exists))
+
+# poco = AndroidUiautomationPoco()
+# austin_test = connect_device("Android:///7c2440fd")
+# number = "18575211714"
+# print(number[-4:])
+
+
+
 
