@@ -203,3 +203,4 @@ def change_sound_settings():
 if __name__ == "__main__":
     wake()
     home()
+    change_sound_settings()

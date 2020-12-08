@@ -25,6 +25,8 @@ pip3 install allure-pytest
 
 8.执行顺序：pip3 install pytest-ordering
 
+9.使用Gooey作为桌面应用程序（Mac/Windows均可使用pyinstaller打包）
+
 
 
 
