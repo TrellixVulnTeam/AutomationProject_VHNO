@@ -351,5 +351,17 @@ from time import sleep
 # print(number[-4:])
 
 
+"""
+    poco.scroll:方法上下左右滑动使用方法
+        percent range:
+            up:(0.1, 0.9)
+            down:(-0.1, -0.6)
+            left:(0.8)
+            right:(-0.8)
+"""
+# poco.scroll(direction="horizontal", percent=-0.8, duration=1)
+
+
+
 
 

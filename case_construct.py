@@ -200,7 +200,78 @@ def change_sound_settings():
     print(str(checked_result_default) + "-" + str(checked_result_changed) + "-" + str(checked_result_updated))
 
 
+"""
+    Case 12:验证显示设置是否被保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Display->Sleep->Never->记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def change_display_settings():
+    start_app("com.android.settings")
+    sleep(1)
+    poco(text="Display").wait(3).click()
+    sleep(1)
+    sleep_time = poco(text="Sleep").sibling("android:id/summary").wait(3)
+    sleep_time_default = sleep_time.get_text()
+    print(sleep_time_default)
+    poco(text="Sleep").wait(3).click()
+    poco(text="Never").wait(3).click()
+    sleep_time.invalidate()
+    sleep_time_changed = sleep_time.get_text()
+    print(sleep_time_changed)
+
+
+"""
+    Case 13:验证Gestures设置是否被保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Button & gestures->Gestures->3-finger screenshot->Click it->记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def change_gestures_settings():
+    start_app("com.android.settings")
+    menu_exists = False
+    search_count = 0
+    while not menu_exists:
+        apps_menu = poco(text="Button & gestures").wait()
+        menu_exists = apps_menu.exists()
+        if menu_exists:
+            break
+        poco.scroll(direction="vertical", percent=0.8, duration=1)
+        search_count += 1
+        # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过5次则开始向上查找
+        if search_count >= 5 and not menu_exists:
+            poco.scroll(direction="vertical", percent=-0.6, duration=1)
+    apps_menu.click()
+    poco(text="Gestures").wait(3).click()
+    three_finger_screenshot = poco(text="3-finger screenshot").parent().parent().children()[2]\
+        .child("com.android.settings:id/switchWidget").wait(3)
+    checked_default = three_finger_screenshot.attr("checked")
+    print(checked_default)
+    three_finger_screenshot.click()
+    three_finger_screenshot.invalidate()
+    checked_changed = three_finger_screenshot.attr("checked")
+    print(checked_changed)
+
+
 if __name__ == "__main__":
-    wake()
+    """
+        亮屏并解锁屏幕操作
+    """
+    while not austinDevice.is_screenon():
+        wake()
+        while austinDevice.is_locked():
+            austinDevice.unlock()
     home()
-    change_sound_settings()
+    # test  后续列表操作需要使用上下滑动进行查找元素保证兼容性
+
+
+
+
