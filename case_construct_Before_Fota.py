@@ -3,14 +3,37 @@ from time import sleep
 
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+from poco.exceptions import PocoNoSuchNodeException
+from airtest.core.error import AdbShellError
 
 os.path.abspath(".")
 
 poco = AndroidUiautomationPoco()
 austinDevice = connect_device("Android:///7c2440fd")
 
+# Fota前操作&后对比Case
 # 将case进行分解->剔出通用common方法->将APP分页处理->case整合->架构完善
 # 状态更改需要先进行判断设置为除自身外其它状态,如默认checked = true，则设置为false，并记录前后状态以及Fota后状态
+
+"""
+    common 方法：上下滚动查找元素
+"""
+
+
+def scroll_to_find_element(element_text):
+    menu_exists = False
+    search_count = 0
+    while not menu_exists:
+        element = poco(text=element_text).wait()
+        menu_exists = element.exists()
+        if menu_exists:
+            break
+        poco.scroll(direction="vertical", percent=0.8, duration=1)
+        search_count += 1
+        # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过5次则开始向上查找
+        if search_count >= 5 and not menu_exists:
+            poco.scroll(direction="vertical", percent=-0.6, duration=1)
+    return element
 
 """
     Case 1:获取本地应用程序版本被保留
@@ -64,7 +87,7 @@ def check_calling_history(number="10086"):
 """
 
 
-def check_sms_sender_receiver(number="18575211714", content="Test"):
+def check_sms_sender_receiver(number="18512026630", content="Test"):
     start_app("com.google.android.apps.messaging")
     austinDevice.shell("am start -a android.intent.action.SENDTO -d sms:%s --es sms_body %s" % (number, content))
     poco(text="SMS").click()
@@ -96,7 +119,7 @@ def change_message_settings():
 """
     Case 6:验证手机联系人是否被保留
     relate app:
-        com.google.android.apps.messaging
+        com.google.android.contacts
     test step:
         检查APP存在->adb创建联系人->Save->记录当前联系人->Fota升级后再次获取该值与升级前对比是否相同判定结果
 """
@@ -237,21 +260,10 @@ def change_display_settings():
 
 def change_gestures_settings():
     start_app("com.android.settings")
-    menu_exists = False
-    search_count = 0
-    while not menu_exists:
-        apps_menu = poco(text="Button & gestures").wait()
-        menu_exists = apps_menu.exists()
-        if menu_exists:
-            break
-        poco.scroll(direction="vertical", percent=0.8, duration=1)
-        search_count += 1
-        # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过5次则开始向上查找
-        if search_count >= 5 and not menu_exists:
-            poco.scroll(direction="vertical", percent=-0.6, duration=1)
-    apps_menu.click()
+    gesture_menu = scroll_to_find_element("Button & gestures")
+    gesture_menu.click()
     poco(text="Gestures").wait(3).click()
-    three_finger_screenshot = poco(text="3-finger screenshot").parent().parent().children()[2]\
+    three_finger_screenshot = poco(text="3-finger screenshot").parent().parent().children()[2] \
         .child("com.android.settings:id/switchWidget").wait(3)
     checked_default = three_finger_screenshot.attr("checked")
     print(checked_default)
@@ -259,6 +271,159 @@ def change_gestures_settings():
     three_finger_screenshot.invalidate()
     checked_changed = three_finger_screenshot.attr("checked")
     print(checked_changed)
+
+
+"""
+    Case 14:验证Security设置是否被保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Security & biometrics->Screen lock->PIN->输入1234->Next->输入1234->Confirm->Done->
+        记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def change_security_settings():
+    start_app("com.android.settings")
+
+
+"""
+    Case 15:验证Lock设置是否被保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Security & biometrics->SIM card lock->Lock SIM card->Click it switch->输入1234->OK->
+        记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def change_lock_settings():
+    start_app("com.android.settings")
+
+
+"""
+    Case 16:验证Sim management设置是否被保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->SIM cards & cellular network->SIM card settings->
+        点击SIM1右边齿轮("com.tct.phone:id/settings_button")->修改SIM name("com.tct.phone:id/sim_name")->输入Test->点击OK
+        记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def change_sim_management():
+    start_app("com.android.settings")
+
+
+"""
+    Case 17:验证Accessibility设置是否被保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Accessibility->Remove animations->CLick it->记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def change_accessibility_settings():
+    start_app("com.android.settings")
+
+
+"""
+    Case 18:验证File manager文件是否被保留
+    relate app:
+        com.tcl.tct.filemanager
+    test step:
+        检查APP存在->File Manager->点击x("com.tcl.tct.filemanager:id/guide_close")
+        ->Internal storage->more_menu("com.tcl.tct.filemanager:id/iv_bar_more")
+        ->Create folder->输入Test("com.tcl.tct.filemanager:id/dialog_edit")->CREATE
+        ->记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_file_manager_reserved():
+    start_app("com.tcl.tct.filemanager")
+
+
+"""
+    Case 19:验证IMEI、CU升级前后一致
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->System->Regulatory & safety->imei号("com.jrdcom.Elabel:id/imei")
+        ->cu号("com.jrdcom.Elabel:id/cu_reference_id_view")
+        ->记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_imei_cu():
+    start_app("com.android.settings")
+
+
+"""
+    Case 20:验证SVN升级前后一致
+    relate app:
+        com.google.android.dialer
+    test step:
+        检查APP存在->
+        ->记录默认、修改、升级后元素状态(invalidate进行元素刷新)->拨号盘输入*#*#06#*#*(#需要转义所以是：*%23*%2306%23*%23*)
+        ->记录SVN值->关闭当前APP
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_svn():
+    # start_app("com.google.android.dialer")
+    austinDevice.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
+    try:
+        value_returned = poco("android:id/message").wait().get_text()
+        if "SVN" in value_returned:
+            print("Current svn is:" + value_returned.split("SVN:")[1])
+            poco(text="OK").wait().click()
+    except PocoNoSuchNodeException:
+        print("Can't find needed element, please check!")
+    finally:
+        current_app = austinDevice.get_top_activity()[0]
+        stop_app(current_app)
+
+
+"""
+    Case 21:验证升级后WiFi AP自动连接,WiFi Direct name保留
+    relate app:
+        adb shell dumpsys netstats | grep -E 'iface=wlan.*networkId'
+        com.android.settings
+    test step:
+        检查APP存在->
+            case 1:打开Settings->Wi-Fi->打开WiFi->连接WiFi->保存当前连接WiFi名称      
+            case 2:Wi-Fi preferences->Advanced->Wi-Fi Direct->menu->Rename device->Test->OK
+            ->Fota upgrade
+            ->adb指令获取当前连接的WiFi名称->与Fota前连接的WiFi名称对比
+            ->Wi-Fi Direct name重新获取并与Fota前对比
+"""
+
+
+def check_wifi_auto_connect_and_direct_name():
+    # step 1: connect_wifi() -> save wifi name
+    # step 2: modify_wifi_direct_name() -> save direct name
+    # after fota
+    # step 3: check wifi same as before
+    # step 4: check wifi direct name same as before
+    try:
+        netstats = austinDevice.shell("dumpsys netstats | grep -E 'iface=wlan.*networkId'")
+    except AdbShellError:
+        print("Current WiFi is Empty, test item Failed!")
+    else:
+        if netstats is not None:
+            wifi_name = netstats.split('networkId="')[1].split('",')[0]
+            print(wifi_name)
+        else:
+            print("WiFi abnormal, please retest it")
 
 
 if __name__ == "__main__":
@@ -271,6 +436,31 @@ if __name__ == "__main__":
             austinDevice.unlock()
     home()
     # test  后续列表操作需要使用上下滑动进行查找元素保证兼容性
+    # Tip：
+    # 1.当有外部事件如短信、通知等打断当前操作，容易导致元素识别不到 -- 采取方式多次识别元素？
+    # 2.权限分配 -- 使用adb命令进行全应用权限授权，不使用单独UI授权方式
+    # 3.某些单独只会出现一次的元素，需要加上提前判断是否存在，存在再对其进行操作
+    # 4.Case 17 移除animation的第一个执行，可以提升测试稳定性和测试效率
+    # 5.测试使用本机号码收发拨号等，切记勿添加本机号码为联系人
+    check_contact_reserved()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
