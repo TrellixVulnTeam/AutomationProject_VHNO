@@ -1,12 +1,16 @@
 # coding = utf8
 from time import sleep
-
+import os
+os.path.abspath(".")
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from poco.exceptions import PocoNoSuchNodeException
 
-
-os.path.abspath(".")
+"""
+    @File:case_construct_After_Fota.py
+    @Author:Bruce
+    @Date:2020/12/15
+"""
 
 poco = AndroidUiautomationPoco()
 austinDevice = connect_device("Android:///7c2440fd")

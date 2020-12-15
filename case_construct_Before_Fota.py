@@ -7,6 +7,11 @@ from poco.exceptions import PocoNoSuchNodeException
 from airtest.core.error import AdbShellError
 
 os.path.abspath(".")
+"""
+    @File:case_construct_Before_Fota.py
+    @Author:Bruce
+    @Date:2020/12/15
+"""
 
 poco = AndroidUiautomationPoco()
 austinDevice = connect_device("Android:///7c2440fd")

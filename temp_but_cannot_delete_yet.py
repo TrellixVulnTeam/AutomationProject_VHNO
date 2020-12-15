@@ -1,6 +1,11 @@
 # coding = utf8
 import os
 os.path.abspath(".")
+"""
+    @File:temp_but_cannot_delete_yet.py
+    @Author:Bruce
+    @Date:2020/12/15
+"""
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from time import sleep

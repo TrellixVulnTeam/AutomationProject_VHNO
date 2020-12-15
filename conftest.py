@@ -1,6 +1,11 @@
 # coding = utf8
 import os
-os.path.abspath("..")
+os.path.abspath(".")
+"""
+    @File:conftest.py
+    @Author:Bruce
+    @Date:2020/12/15
+"""
 
 from time import sleep
 import pytest
