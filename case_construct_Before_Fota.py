@@ -672,6 +672,44 @@ def check_vpn_config_reserved():
         print("Some thing error, please check!")
 
 
+"""
+    Case 28:验证升级后MMS设置可以保留
+    relate app:
+        com.google.android.apps.messaging
+    test step:
+        检查APP存在->Messages->
+        Case 1:检查发送的MMS被保留
+        Case 2:修改MMS菜单配置被保留
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_mms_config_reserved():
+    try:
+        stop_app("com.google.android.apps.messaging")
+        start_app("com.google.android.apps.messaging")
+    except Exception:
+        print("Some thing error, please check!")
+
+
+"""
+    Case 29:验证升级后输入法设置可以保留
+    relate app:
+        
+    test step:
+        检查APP存在->->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_input_method_reserved():
+    try:
+        stop_app("com.android.settings")
+        start_app("com.android.settings")
+        install("apk/Sogouinput.apk")
+        shell("settings put secure default_input_method com.sohu.inputmethod.sogou/.SogouIME")
+    except Exception:
+        print("Some thing error, please check!")
+
 
 if __name__ == "__main__":
     """
@@ -698,6 +736,8 @@ if __name__ == "__main__":
     # 3.某些单独只会出现一次的元素，需要加上提前判断是否存在，存在再对其进行操作
     # 4.Case 17 移除animation的第一个执行，可以提升测试稳定性和测试效率
     # 5.测试使用本机号码收发拨号等，切记勿添加本机号码为联系人
-    # 6.Case结束后关闭当前应用程序
+    # 6.Case测试前先关闭当前应用程序
     # 7.设置手机usb stay awake
-    check_vpn_config_reserved()
+    check_input_method_reserved()
+
+

@@ -1,0 +1,14 @@
+Austin root:
+手机确保OEM Lock是打开的
+adb root
+adb remount
+adb reboot bootloader
+fastboot flashing unlock
+fastboot continue
+
+adb root
+adb disable-verity
+adb reboot
+
+adb root
+adb remount

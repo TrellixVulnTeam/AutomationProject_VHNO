@@ -380,6 +380,10 @@ from time import sleep
 
 
 def check_reserved():
-    pass
+    try:
+        stop_app("")
+        start_app("")
+    except Exception:
+        print("Some thing error, please check!")
 
 

@@ -1,0 +1,125 @@
+<?xml version='1.0' encoding='UTF-8' standalone='yes' ?>
+<settings version="191">
+  <setting id="74" name="adb_wifi_enabled" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="43" name="low_battery_sound_timeout" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="34" name="car_undock_sound" value="/product/media/audio/ui/Undock.ogg" package="android" defaultValue="/product/media/audio/ui/Undock.ogg" defaultSysSet="true" />
+  <setting id="290" name="fullscreen_mode_ext" value="1" package="android" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="304" name="Phenotype_boot_count" value="7" package="com.google.android.gms" preserve_in_restore="true" />
+  <setting id="139" name="time_remaining_estimate_based_on_usage" value="0" package="com.android.systemui" defaultValue="0" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="112" name="Phenotype_flags" value="" package="com.google.android.gms" />
+  <setting id="278" name="development_settings_enabled" value="1" package="com.android.settings" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="145" name="enable_restricted_bucket" value="1" package="com.tct.onetouchbooster" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="11" name="window_animation_scale" value="1.0" package="android" defaultValue="1.0" defaultSysSet="true" />
+  <setting id="115" name="_boot_Phenotype_flags" value="" package="com.google.android.gms" preserve_in_restore="true" />
+  <setting id="238" name="launcher_shortcut_info_for_widget" value="8096022000" package="com.tcl.android.launcher" defaultValue="8096022000" defaultSysSet="true" />
+  <setting id="230" name="gdpr_user_action" value="0" package="com.tct.gdpr" defaultValue="0" defaultSysSet="true" />
+  <setting id="269" name="first_boot_for_reload_categories" value="0" package="com.android.settings" defaultValue="0" defaultSysSet="true" />
+  <setting id="105" name="settings_network_and_internet_v2" value="false" package="com.android.phone" defaultValue="false" defaultSysSet="true" />
+  <setting id="297" name="battery_estimates_last_update_time" value="1577811954339" package="com.android.systemui" defaultValue="1577811954339" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="10" name="mode_ringer" value="2" package="android" defaultValue="2" defaultSysSet="true" />
+  <setting id="37" name="default_install_location" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="234" name="wifi_display_on" value="0" package="android" defaultValue="0" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="46" name="device_name" value="T671F" package="android" defaultValue="T671F" defaultSysSet="true" />
+  <setting id="14" name="wifi_networks_available_notification_on" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="30" name="dock_sounds_enabled_when_accessbility" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="75" name="webview_fallback_logic_enabled" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="15" name="bluetooth_on" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="19" name="mobile_data" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="123" name="network_watchlist_last_report_time" value="1577808000000" package="android" defaultValue="1577808000000" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="51" name="database_creation_buildid" value="RKQ1.201004.002" package="android" defaultValue="RKQ1.201004.002" defaultSysSet="true" />
+  <setting id="38" name="emergency_tone" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="81" name="status_bar_battery_percent_styles" value="1" package="com.android.systemui" defaultValue="1" defaultSysSet="true" />
+  <setting id="287" name="is_keyguard_showing" value="1" package="com.android.systemui" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="58" name="max_sound_trigger_detection_service_ops_per_day" value="1000" package="android" defaultValue="1000" defaultSysSet="true" />
+  <setting id="52" name="add_users_when_locked" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="35" name="dock_audio_media_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="200" name="ble_scan_always_enabled" value="1" package="com.google.android.gms" />
+  <setting id="144" name="sm_settings_battery_show" value="0" package="com.tct.onetouchbooster" defaultValue="0" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="73" name="adb_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="26" name="trusted_sound" value="/product/media/audio/ui/Trusted.ogg" package="android" defaultValue="/product/media/audio/ui/Trusted.ogg" defaultSysSet="true" />
+  <setting id="25" name="unlock_sound" value="/product/media/audio/ui/Unlock.ogg" package="android" defaultValue="/product/media/audio/ui/Unlock.ogg" defaultSysSet="true" />
+  <setting id="103" name="launcher_theme_id" value="theme_default" package="com.tcl.android.launcher" defaultValue="theme_default" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="2" name="airplane_mode_radios" value="cell,bluetooth,wifi,nfc,wimax" package="android" defaultValue="cell,bluetooth,wifi,nfc,wimax" defaultSysSet="true" />
+  <setting id="22" name="wifi_max_dhcp_retry_count" value="9" package="android" defaultValue="9" defaultSysSet="true" />
+  <setting id="3" name="airplane_mode_toggleable_radios" value="bluetooth,wifi,nfc" package="android" defaultValue="bluetooth,wifi,nfc" defaultSysSet="true" />
+  <setting id="236" name="default_launcher_setted" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="45" name="heads_up_notifications_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="96" name="low_power" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="232" name="gdpr_guide" value="1" package="com.tct.gdpr" defaultValue="1" defaultSysSet="true" />
+  <setting id="50" name="wifi_hotspot_inactivity_timeout_min" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="63" name="charging_started_sound" value="/product/media/audio/ui/ChargingStarted.ogg" package="android" defaultValue="/product/media/audio/ui/ChargingStarted.ogg" defaultSysSet="true" />
+  <setting id="235" name="set_nav_mode_home_pkg" value="com.tcl.android.launcher" package="android" defaultValue="com.tcl.android.launcher" defaultSysSet="true" />
+  <setting id="291" name="fullscreen_mode" value="1" package="android" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="70" name="zen_mode_ringer_level" value="2" package="android" defaultValue="2" defaultSysSet="true" />
+  <setting id="41" name="preferred_network_mode" value="33,33" package="android" defaultValue="33,33" defaultSysSet="true" />
+  <setting id="53" name="bluetooth_disabled_profiles" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="32" name="desk_undock_sound" value="/product/media/audio/ui/Undock.ogg" package="android" defaultValue="/product/media/audio/ui/Undock.ogg" defaultSysSet="true" />
+  <setting id="60" name="zen_duration" package="android" />
+  <setting id="220" name="application_demopage_enable_state" value="2" package="android" defaultValue="2" defaultSysSet="true" />
+  <setting id="299" name="set_is_keyguard_showing_last_time" value="1577811954451" package="com.android.systemui" defaultValue="1577811954451" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="56" name="mobile_data_always_on" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="281" name="debug_app" package="android" preserve_in_restore="true" />
+  <setting id="9" name="wifi_sleep_policy" value="2" package="android" defaultValue="2" defaultSysSet="true" />
+  <setting id="194" name="device_provisioning_mobile_data" value="0" package="com.google.android.setupwizard" defaultValue="0" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="29" name="dock_sounds_enabled" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="224" name="wifi_scan_always_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="48" name="ntp_server_2" value="persist.vendor.ntp.svr_2" package="android" defaultValue="persist.vendor.ntp.svr_2" defaultSysSet="true" />
+  <setting id="40" name="assisted_dialing_state" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="303" name="network_recommendations_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="7" name="ntp_server" value="pool.ntp.org" package="android" defaultValue="pool.ntp.org" defaultSysSet="true" />
+  <setting id="33" name="car_dock_sound" value="/product/media/audio/ui/Dock.ogg" package="android" defaultValue="/product/media/audio/ui/Dock.ogg" defaultSysSet="true" />
+  <setting id="59" name="sound_trigger_detection_service_op_timeout" value="15000" package="android" defaultValue="15000" defaultSysSet="true" />
+  <setting id="209" name="sysui_nav_bar" value="left[.5W],back[1WC];home;recent[1WC],right[.5W]" package="com.android.settings" defaultValue="left[.5W],back[1WC];home;recent[1WC],right[.5W]" defaultSysSet="true" />
+  <setting id="27" name="power_sounds_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="282" name="stay_on_while_plugged_in" value="7" package="com.android.settings" defaultValue="7" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="140" name="average_time_to_discharge" value="-1" package="com.android.systemui" defaultValue="-1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="64" name="notification_bubbles" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="243" name="package_verifier_user_consent" value="1" package="com.android.vending" preserve_in_restore="true" />
+  <setting id="47" name="lid_behavior" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="86" name="isolated_storage_remote" package="android" preserve_in_restore="true" />
+  <setting id="95" name="zen_mode_config_etag" value="-1091974717" package="android" defaultValue="-1091974717" defaultSysSet="true" />
+  <setting id="36" name="set_install_location" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="68" name="zen_mode" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="12" name="transition_animation_scale" value="1.0" package="android" defaultValue="1.0" defaultSysSet="true" />
+  <setting id="201" name="multi_cb" value="1" package="com.google.android.gms" preserve_in_restore="true" />
+  <setting id="17" name="data_roaming" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="84" name="guide_bar_show_enabled" value="1" package="com.android.systemui" defaultValue="1" defaultSysSet="true" />
+  <setting id="98" name="network_recommendations_package" value="com.google.android.gms" package="android" defaultValue="com.google.android.gms" defaultSysSet="true" />
+  <setting id="1" name="theater_mode_on" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="16" name="cdma_cell_broadcast_sms" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="268" name="TCT_NOTIFICATION_NUMBER" value="2" package="com.android.systemui" defaultValue="2" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="276" name="upload_apk_enable" value="1" package="com.android.vending" />
+  <setting id="163" name="smart_manager_support_one_key_clean" value="1" package="com.tct.onetouchbooster" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="0" name="airplane_mode_on" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="55" name="default_restrict_background_data" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="28" name="low_battery_sound" value="/product/media/audio/ui/LowBattery.ogg" package="android" defaultValue="/product/media/audio/ui/LowBattery.ogg" defaultSysSet="true" />
+  <setting id="61" name="apply_ramping_ringer" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="280" name="wait_for_debugger" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="20" name="netstats_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="54" name="wifi_wakeup_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="69" name="wifi_migration_completed" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="138" name="time_remaining_estimate_millis" value="-1" package="com.android.systemui" defaultValue="-1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="92" name="TCT_HIDE_STATUS_BAR_IMMERSIVE" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="42" name="subscription_mode" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="198" name="assisted_gps_enabled" value="1" package="com.google.android.gsf" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="24" name="lock_sound" value="/product/media/audio/ui/Lock.ogg" package="android" defaultValue="/product/media/audio/ui/Lock.ogg" defaultSysSet="true" />
+  <setting id="6" name="auto_time_zone" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="221" name="wifi_on" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="62" name="wireless_charging_started_sound" value="/product/media/audio/ui/WirelessChargingStarted.ogg" package="android" defaultValue="/product/media/audio/ui/WirelessChargingStarted.ogg" defaultSysSet="true" />
+  <setting id="231" name="device_provisioned" value="1" package="com.tct.gdpr" defaultValue="1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="97" name="sysui_demo_allowed" package="com.android.systemui" />
+  <setting id="65" name="hdmi_control_auto_device_off_enabled" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="5" name="auto_time" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="147" name="airpane_timer_status" value="0" package="com.android.systemui" defaultValue="0" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="21" name="usb_mass_storage_enabled" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="49" name="wifi_p2p_device_name" value="TCL 20 SE" package="android" defaultValue="TCL 20 SE" defaultSysSet="true" />
+  <setting id="111" name="application_enable_state" value="2" package="com.tct.retaildemo" defaultValue="2" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="67" name="enableIMEs" value="1" package="android" defaultValue="1" defaultSysSet="true" />
+  <setting id="39" name="call_auto_retry" value="0" package="android" defaultValue="0" defaultSysSet="true" />
+  <setting id="301" name="current_focus_package_name_tag" value="com.android.systemui/NotificationShade" package="android" defaultValue="com.android.systemui/NotificationShade" defaultSysSet="true" />
+  <setting id="106" name="audio_safe_volume_state" value="3" package="android" defaultValue="3" defaultSysSet="true" />
+  <setting id="104" name="launcher_theme_version" value="1.1" package="com.tcl.android.launcher" defaultValue="1.1" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="296" name="boot_count" value="7" package="android" defaultValue="7" defaultSysSet="true" preserve_in_restore="true" />
+  <setting id="31" name="desk_dock_sound" value="/product/media/audio/ui/Dock.ogg" package="android" defaultValue="/product/media/audio/ui/Dock.ogg" defaultSysSet="true" />
+</settings>
+<namespaceHashes />
