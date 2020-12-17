@@ -21,24 +21,64 @@ austinDevice = connect_device("Android:///7c2440fd")
 # 状态更改需要先进行判断设置为除自身外其它状态,如默认checked = true，则设置为false，并记录前后状态以及Fota后状态
 
 """
-    common 方法：上下滚动查找元素
+    common 方法1：上下滚动查找元素
 """
 
 
 def scroll_to_find_element(element_text):
+    global element
     menu_exists = False
     search_count = 0
     while not menu_exists:
         element = poco(text=element_text).wait()
         menu_exists = element.exists()
         if menu_exists:
-            break
+            return element
         poco.scroll(direction="vertical", percent=0.8, duration=1)
         search_count += 1
         # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过5次则开始向上查找
         if search_count >= 5 and not menu_exists:
             poco.scroll(direction="vertical", percent=-0.6, duration=1)
     return element
+
+
+"""
+    common 方法2：启动chrome并跳过guide&引擎选择
+"""
+
+
+def launch_chrome_and_guide_skip():
+    start_app("com.android.chrome")
+    try:
+        guide_first_button = poco("com.android.chrome:id/terms_accept").wait()
+        if guide_first_button.exists():
+            guide_first_button.click()
+            poco("com.android.chrome:id/negative_button").wait().click()
+    except PocoNoSuchNodeException:
+        print("Chrome guide is finished!")
+    finally:
+        try:
+            search_engine_choose = poco("com.android.chrome:id/button_secondary").wait()
+            if search_engine_choose.exists():
+                search_engine_choose.click()
+        except PocoNoSuchNodeException:
+            print("Search engine is finished!")
+        finally:
+            pass
+
+
+"""
+    common 方法3：chrome进入特定网址
+"""
+
+
+def chrome_enter_website(url="https://www.baidu.com"):
+    launch_chrome_and_guide_skip()
+    chrome_url_bar = poco("com.android.chrome:id/url_bar").wait()
+    chrome_url_bar.click()
+    chrome_url_bar.set_text(url)
+    keyevent("KEYCODE_ENTER")
+
 
 """
     Case 1:获取本地应用程序版本被保留
@@ -409,7 +449,7 @@ def check_svn():
             case 2:Wi-Fi preferences->Advanced->Wi-Fi Direct->menu->Rename device->Test->OK
             ->Fota upgrade
             ->adb指令获取当前连接的WiFi名称->与Fota前连接的WiFi名称对比
-            ->Wi-Fi Direct name重新获取并与Fota前对比
+            ->Fota升级后再次获取该值与升级前对比是否相同判定结果
 """
 
 
@@ -431,15 +471,226 @@ def check_wifi_auto_connect_and_direct_name():
             print("WiFi abnormal, please retest it")
 
 
+"""
+    Case 22:验证升级后热点配置可以保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->SIM cards & cellular network->Hotspot & tethering->Mobile hotspot
+        ->Hotspot name->设置新热点名称为Test->OK->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_hotspot_config_reserved():
+    start_app("com.android.settings")
+    scroll_to_find_element("SIM cards & cellular network").wait().click()
+    scroll_to_find_element("Hotspot & tethering").wait().click()
+    scroll_to_find_element("Mobile hotspot").wait().click()
+    scroll_to_find_element("Hotspot name").wait().click()
+    poco("android:id/edit").wait().set_text("Test")
+    poco(text="OK").wait().click()
+    hotspot_name_changed = scroll_to_find_element("Hotspot name").sibling("android:id/summary").get_text()
+    print(hotspot_name_changed)
+
+
+"""
+    Case 23:验证升级后Location配置可以保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Location->Wi-Fi and Bluetooth scanning->获取Wi-Fi scanning的状态->Click Wi-Fi scanning
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_location_config_reserved():
+    start_app("com.android.settings")
+    scroll_to_find_element("Location").click()
+    scroll_to_find_element("Wi-Fi and Bluetooth scanning").click()
+    wifi_scan_status = scroll_to_find_element("Wi-Fi scanning").parent().sibling().child("android:id/switch_widget")
+    default_wifi_scan_status = wifi_scan_status.attr("checked")
+    print(default_wifi_scan_status)
+    scroll_to_find_element("Wi-Fi scanning").wait().click()
+    wifi_scan_status.invalidate()
+    changed_wifi_scan_status = wifi_scan_status.attr("checked")
+    print(changed_wifi_scan_status)
+
+
+"""
+    Case 24:验证升级后下载的文件和下载记录可以保留
+    relate app:
+        com.android.chrome
+    test step:
+        检查APP存在->Chrome->跳过向导界面->->跳过搜索引擎选择->点击输入网址->下载百度首页图片
+        ->关闭下载提示框及info弹框->进入Downloads查看下载的文件->点击下载的图片->记录编号
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_download_file_and_history_reserved():
+    try:
+        launch_chrome_and_guide_skip()
+        chrome_url_bar = poco("com.android.chrome:id/url_bar").wait()
+        chrome_url_bar.click()
+        chrome_url_bar.set_text("https://www.baidu.com")
+        keyevent("KEYCODE_ENTER")
+        print("Search finished!")
+        poco(text="百度一下,你就知道").wait().long_click()
+        poco(text="Download image").wait().click()
+        try:
+            popup_info = poco("com.android.chrome:id/infobar_close_button").wait()
+            if popup_info.exists():
+                popup_info.click()
+        except PocoNoSuchNodeException:
+            print("popup_info closed!")
+        finally:
+            try:
+                download_again_info = poco("com.android.chrome:id/infobar_close_button").wait()
+                if download_again_info.exists():
+                    download_again_info.click()
+            except PocoNoSuchNodeException:
+                print("download_again_info closed!")
+            finally:
+                try:
+                    poco("com.android.chrome:id/positive_button").wait().click()
+                except PocoNoSuchNodeException:
+                    print("Not first download,so no need click download start icon!")
+                finally:
+                    poco("com.android.chrome:id/menu_button").wait().click()
+                    poco(text="Downloads").wait().click()
+                    download_file = poco("com.android.chrome:id/thumbnail").wait()
+                    download_file.click()
+                    download_file_number = poco("com.android.chrome:id/title_bar").get_text()
+                    print(download_file_number)
+    except PocoNoSuchNodeException:
+        print("Some error happened, stop chrome!")
+    finally:
+        current_app = austinDevice.get_top_activity()[0]
+        stop_app(current_app)
+
+
+"""
+    Case 25:验证升级后保存的书签可以保留
+    relate app:
+        com.android.chrome
+    test step:
+        检查APP存在->Chrome->跳过向导界面->->跳过搜索引擎选择->点击输入网址->Menu->保存书签
+        ->Menu->Bookmarks->Mobile bookmarks->点击进入对应书签网页->检查进入成功对应网页信息OK
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_bookmarks_reserved(url="https://www.baidu.com"):
+    stop_app("com.android.chrome")
+    chrome_enter_website(url)
+    chrome_menu_button = poco("com.android.chrome:id/menu_button").wait()
+    chrome_menu_button.click()
+    poco("com.android.chrome:id/button_two").wait().click()
+    try:
+        if poco(text="Edit bookmark").wait().exists():
+            keyevent("KEYCODE_BACK")
+    except PocoNoSuchNodeException:
+        print("Already saved bookmark!")
+    finally:
+        chrome_menu_button.click()
+        poco(text="Bookmarks").wait().click()
+        try:
+            bookmark_item = poco(text="www.baidu.com").wait()
+            bookmark_item.click()
+            try:
+                bookmark_item_ok = poco(text="百度一下,你就知道").wait().exists()
+                print(bookmark_item_ok)
+            except PocoNoSuchNodeException:
+                print("添加书签不一致")
+        except PocoNoSuchNodeException:
+            print("Add bookmark failed")
+        finally:
+            pass
+
+
+"""
+    Case 26:验证升级后APN配置可以保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->SIM cards & cellular network->SIM card settings->
+        点击进入SIM卡->Access Point Names->找到当前被选中的apn：
+        case 1：验证fota后只修改name的default apn会被恢复成默认的apn
+        case 2：验证fota后新建的apn保留
+        case 3：选中的新建的apn会保留当前被选中状态
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_apn_config_reserved():
+    # Enter into APN list interface
+    stop_app("com.android.settings")
+    start_app("com.android.settings")
+    scroll_to_find_element("SIM cards & cellular network").click()
+    scroll_to_find_element("SIM card settings").click()
+    sim_icon = poco("android:id/icon").wait()
+    if sim_icon.attr("enabled"):
+        sim_icon.click()
+        scroll_to_find_element("Access Point Names").click()
+        print("Enter APNs interface")
+    else:
+        print("Not insert SIM card, please check!")
+    choosed_apn = poco("com.android.settings:id/apn_radiobutton").sibling("com.android.settings:id/text_layout").child(
+        "android:id/title")
+    print(choosed_apn.get_text())
+
+    # Execute 3 cases logic：
+    pass
+
+
+"""
+    Case 27:验证升级后vpn配置可以保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Connected devices->VPN->Create VPN->记录当前VPN名称->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_vpn_config_reserved():
+    try:
+        stop_app("com.android.settings")
+        start_app("com.android.settings")
+        scroll_to_find_element("Connected devices").click()
+        scroll_to_find_element("VPN").click()
+        create_apn = poco("com.android.settings:id/vpn_create").wait()
+        create_apn.click()
+        try:
+            if poco(text="Attention").exists():
+                pass
+            # set a screen lock
+        except PocoNoSuchNodeException:
+            print("Screen lock has been set!")
+        finally:
+            pass
+    except Exception:
+        print("Some thing error, please check!")
+
+
+
 if __name__ == "__main__":
     """
-        亮屏并解锁屏幕操作
+        亮屏并解锁屏幕操作，SIM PIN 1234解锁
     """
-    while not austinDevice.is_screenon():
-        wake()
-        while austinDevice.is_locked():
-            austinDevice.unlock()
-    home()
+    austinDevice.unlock()
+    try:
+        poco("com.android.systemui:id/lock_icon").drag_to(poco("com.android.systemui:id/rectangle_frame"), duration=0.5)
+        try:
+            if poco(text="BACK").wait().exists():
+                for i in range(1, 5):
+                    poco(text="%s" % i).wait().click()
+                keyevent("KEYCODE_ENTER")
+        except PocoNoSuchNodeException:
+            print("Screen lock interface not ok, please check!")
+    except PocoNoSuchNodeException:
+        print("No screen lock")
+    finally:
+        home()
     # test  后续列表操作需要使用上下滑动进行查找元素保证兼容性
     # Tip：
     # 1.当有外部事件如短信、通知等打断当前操作，容易导致元素识别不到 -- 采取方式多次识别元素？
@@ -447,26 +698,6 @@ if __name__ == "__main__":
     # 3.某些单独只会出现一次的元素，需要加上提前判断是否存在，存在再对其进行操作
     # 4.Case 17 移除animation的第一个执行，可以提升测试稳定性和测试效率
     # 5.测试使用本机号码收发拨号等，切记勿添加本机号码为联系人
-    check_contact_reserved()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    # 6.Case结束后关闭当前应用程序
+    # 7.设置手机usb stay awake
+    check_vpn_config_reserved()

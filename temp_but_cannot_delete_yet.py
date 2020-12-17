@@ -367,6 +367,19 @@ from time import sleep
 # poco.scroll(direction="horizontal", percent=-0.8, duration=1)
 
 
+"""
+    Case construct template
+"""
+"""
+    Case :验证升级后可以保留
+    relate app:
+        
+    test step:
+        检查APP存在->->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
 
+
+def check_reserved():
+    pass
 
 

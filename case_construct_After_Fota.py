@@ -94,21 +94,24 @@ def check_fota_hint():
 
 if __name__ == "__main__":
     """
-        亮屏并解锁屏幕操作
+        亮屏并解锁屏幕操作，SIM PIN 1234解锁
     """
-    while not austinDevice.is_screenon():
-        wake()
-        while austinDevice.is_locked():
-            austinDevice.unlock()
-    home()
-    # test  后续列表操作需要使用上下滑动进行查找元素保证兼容性
-    # Tip：
-    # 1.当有外部事件如短信、通知等打断当前操作，容易导致元素识别不到 -- 采取方式多次识别元素？
-    # 2.权限分配 -- 使用adb命令进行全应用权限授权，不使用单独UI授权方式
-    # 3.某些单独只会出现一次的元素，需要加上提前判断是否存在，存在再对其进行操作
-    # 4.Case 17 移除animation的第一个执行，可以提升测试稳定性和测试效率
-    # 5.测试使用本机号码收发拨号等，切记勿添加本机号码为联系人
-
+    austinDevice.unlock()
+    try:
+        poco("com.android.systemui:id/lock_icon").drag_to(poco("com.android.systemui:id/rectangle_frame"), duration=0.5)
+        try:
+            if poco(text="BACK").wait().exists():
+                for i in range(1, 5):
+                    poco(text="%s" % i).wait().click()
+                keyevent("KEYCODE_ENTER")
+        except PocoNoSuchNodeException:
+            print("Screen lock interface not ok, please check!")
+    except PocoNoSuchNodeException:
+        print("No screen lock")
+    finally:
+        home()
+        # test
+    check_fota_hint()
 
 
 

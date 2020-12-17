@@ -28,6 +28,10 @@ self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
 
 遇到Python找不到，IntFlag时，unset PYTHONPATH
 
+"ImportError: sys.meta_path is None, Python is likely shutting down"
+这个报错是能忽略的，是因为poco报错后就退出了，主线程回收垃圾，剩下的子线程抛了这个错，是可以忽略的。
+
+
 
 
 
