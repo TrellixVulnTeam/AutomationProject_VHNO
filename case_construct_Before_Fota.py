@@ -15,6 +15,7 @@ os.path.abspath(".")
 
 poco = AndroidUiautomationPoco()
 austinDevice = connect_device("Android:///7c2440fd")
+# austinDevice = connect_device("Android:///b3e5b958")
 
 # Fota前操作&后对比Case
 # 将case进行分解->剔出通用common方法->将APP分页处理->case整合->架构完善
@@ -35,10 +36,17 @@ def scroll_to_find_element(element_text):
         if menu_exists:
             return element
         poco.scroll(direction="vertical", percent=0.8, duration=1)
+        sleep(1)
         search_count += 1
-        # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过5次则开始向上查找
-        if search_count >= 5 and not menu_exists:
+        print("up: " + str(search_count) + str(menu_exists))
+        # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过10次则开始向上查找
+        while search_count >= 10 and not menu_exists:
             poco.scroll(direction="vertical", percent=-0.6, duration=1)
+            element = poco(text=element_text).wait()
+            menu_exists = element.exists()
+            print("down: " + str(search_count) + str(menu_exists))
+            if menu_exists:
+                return element
     return element
 
 
@@ -329,8 +337,28 @@ def change_gestures_settings():
 """
 
 
-def change_security_settings():
+def reenter_pin():
+    stop_app("com.android.settings")
     start_app("com.android.settings")
+    scroll_to_find_element("Security & biometrics").click()
+    scroll_to_find_element("Screen lock").click()
+    poco("com.android.settings:id/password_entry").wait().set_text("1234")
+    poco(text="Next").wait().click()
+
+
+def change_security_settings():
+    stop_app("com.android.settings")
+    start_app("com.android.settings")
+    scroll_to_find_element("Security & biometrics").click()
+    scroll_to_find_element("Screen lock").click()
+    scroll_to_find_element("PIN").click()
+    poco("com.android.settings:id/password_entry").wait().set_text("1234")
+    poco(text="Next").wait().click()
+    poco("com.android.settings:id/password_entry").wait().set_text("1234")
+    poco(text="Confirm").wait().click()
+    poco(text="Done").wait().click()
+
+    reenter_pin()
 
 
 """
@@ -673,40 +701,127 @@ def check_vpn_config_reserved():
 
 
 """
-    Case 28:验证升级后MMS设置可以保留
+    Case 28:验证升级后输入法设置可以保留
     relate app:
-        com.google.android.apps.messaging
+        com.android.settings
     test step:
-        检查APP存在->Messages->
-        Case 1:检查发送的MMS被保留
-        Case 2:修改MMS菜单配置被保留
+        检查APP存在->
+        adb 设置输入法->adb获取当前输入法(脚本运行中会自动切换至Yosemite，此时判断之前存在即可)
         ->Fota升级后再次获取该值与升级前对比是否相同判定结果
-"""
-
-
-def check_mms_config_reserved():
-    try:
-        stop_app("com.google.android.apps.messaging")
-        start_app("com.google.android.apps.messaging")
-    except Exception:
-        print("Some thing error, please check!")
-
-
-"""
-    Case 29:验证升级后输入法设置可以保留
-    relate app:
-        
-    test step:
-        检查APP存在->->Fota升级后再次获取该值与升级前对比是否相同判定结果
 """
 
 
 def check_input_method_reserved():
     try:
+        # 需要先登录Google商店设置Play Protect->关闭Scan apps with Play Protect
+        # 以防止出现Blocked by Play Protect弹框占用top导致后续install apk以及元素获取失败
+        # disable_play_protect()
+        install("apk/Sogouinput.apk")
+        default_input_method = shell("settings get secure default_input_method")
+        print(default_input_method)
+        shell("settings put secure default_input_method com.sohu.inputmethod.sogou/.SogouIME")
+        changed_input_method = shell("settings get secure default_input_method")
+        print(changed_input_method)
+    except Exception:
+        print("Some thing error, please check!")
+
+
+"""
+    Case 29:验证升级后Navigation bar设置可以保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Button & gestures->System navigation->Switch to Gesture navigation
+        ->记录当前navigation的状态
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_navigation_reserved():
+    try:
         stop_app("com.android.settings")
         start_app("com.android.settings")
-        install("apk/Sogouinput.apk")
-        shell("settings put secure default_input_method com.sohu.inputmethod.sogou/.SogouIME")
+        scroll_to_find_element("Button & gestures").click()
+        poco(text="System navigation").wait().click()
+        navigation_gesture = poco(text="Gesture navigation").wait()
+        navigation_gesture.click()
+        navigation_gesture_switch = navigation_gesture.parent().sibling().child("android:id/checkbox").wait()
+        print(navigation_gesture_switch.attr("checked"))
+
+    except Exception:
+        print("Some thing error, please check!")
+
+
+"""
+    Case 30:验证升级后Notch可以保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->Display->Status bar & notch->Notch
+        ->Hide notch without moving status bar->Choose it
+        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_notch_reserved():
+    try:
+        stop_app("com.android.settings")
+        start_app("com.android.settings")
+        scroll_to_find_element("Display").click()
+        scroll_to_find_element("Status bar & notch").click()
+        poco(text="Notch").wait().click()
+        statusbar_hide = poco(text="Hide notch without moving status bar").wait()\
+            .parent().sibling().child("com.android.settings:id/status_bar_btn2").wait()
+        statusbar_hide.click()
+        statusbar_hide.invalidate()
+        print(statusbar_hide.attr("checked"))
+    except Exception:
+        print("Some thing error, please check!")
+
+
+"""
+    Case 31:验证升级后Screen recorder设置可以保留
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->->Fota升级后再次获取该值与升级前对比是否相同判定结果
+"""
+
+
+def check_screenrecorder_reserved():
+    try:
+        stop_app("com.android.settings")
+        start_app("com.android.settings")
+        scroll_to_find_element("Advanced features").click()
+        poco(text="Screen Recorder").wait().click()
+        record_interactions = poco(text="Record touch interactions").wait()
+        record_interactions_switch = record_interactions.parent().sibling().child("android:id/switch_widget").wait()
+        record_interactions_switch.click()
+        record_interactions_switch.invalidate()
+        print(record_interactions_switch.attr("checked"))
+    except Exception:
+        print("Some thing error, please check!")
+
+
+"""
+    Case 32:验证升级后SW version显示完整并与期望值一致
+    relate app:
+        com.android.settings
+    test step:
+        检查APP存在->Settings->System->About phone->
+        定位到软件版本号->记录
+        ->Fota升级后再次获取该值应该与Fota前版本不同，与Fota后当前测试的版本相同
+"""
+
+
+def check_sw_version_reserved():
+    try:
+        stop_app("com.android.settings")
+        start_app("com.android.settings")
+        scroll_to_find_element("System").click()
+        scroll_to_find_element("About phone").click()
+        sw_version = poco("com.android.settings:id/recycler_view").wait().children()[0].child("android:id/title").wait()
+        print(sw_version.get_text())
     except Exception:
         print("Some thing error, please check!")
 
@@ -738,6 +853,4 @@ if __name__ == "__main__":
     # 5.测试使用本机号码收发拨号等，切记勿添加本机号码为联系人
     # 6.Case测试前先关闭当前应用程序
     # 7.设置手机usb stay awake
-    check_input_method_reserved()
-
-
+    check_sw_version_reserved()

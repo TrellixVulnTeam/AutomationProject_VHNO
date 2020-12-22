@@ -31,6 +31,7 @@ self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
 "ImportError: sys.meta_path is None, Python is likely shutting down"
 这个报错是能忽略的，是因为poco报错后就退出了，主线程回收垃圾，剩下的子线程抛了这个错，是可以忽略的。
 
+有些输入密码等界面因为Android安全机制保护，需要特别注意看是否能够获取到元素控件
 
 
 
