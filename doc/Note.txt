@@ -33,6 +33,14 @@ self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
 
 有些输入密码等界面因为Android安全机制保护，需要特别注意看是否能够获取到元素控件
 
+# 修改源文件：
+1.规避sys.meta_path is None, Python is likely shutting down问题导致的报错
+/Users/cgt/PycharmProjects/AutomationProject/venv/lib/python3.7/site-packages/hrpc/object_proxy.py
+# Guangtao
+try:
+    self._client__.evaluate(RpcObjectProxy(self._uri__, self._client__, action), wait_for_response=False)
+except Exception as ex:
+    print(ex)
 
 
 
