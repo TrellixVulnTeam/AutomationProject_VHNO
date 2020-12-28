@@ -1,9 +1,80 @@
 # coding = utf8
 import os
 
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
 os.path.abspath(".")
+from toolsbar.permissionGrant import grant_permission, device_count
+from toolsbar.common import devices
+from airtest.core.api import *
+from multiprocessing import Process
+
 """
     @File:run_test.py
     @Author:Bruce
     @Date:2020/12/15
 """
+
+
+# 单机运行
+def run_single_device():
+    grant_permission(devices)
+    home()
+    poco = AndroidUiautomationPoco()
+    poco("com.tcl.tct.weather:id/tct_widget_main_layout").click()
+    print("Current device number is: {}".format(device_count))
+
+
+# 多机运行
+def run_multiple_device():
+    pau_list = []
+    pui_list = []
+    for device_item in devices:
+        poco_item = AndroidUiautomationPoco(device=device_item, use_airtest_input=False, screenshot_each_action=False)
+        p_au = Process(target=authorize_task, args=(device_item,), )
+        p_ui = Process(target=ui_task, args=(device_item, poco_item,))
+        pau_list.append(p_au)
+        pui_list.append(p_ui)
+
+    for process_au, process_ui in pau_list, pui_list:
+        process_au.start()
+        process_ui.start()
+    for process_au, process_ui in pau_list, pui_list:
+        process_au.join()
+        process_ui.join()
+
+    print("Current device number is: {}".format(device_count))
+
+
+# 授权任务
+def authorize_task(device_item):
+    try:
+        grant_permission(device_item)
+    except Exception as ex:
+        print(ex)
+    finally:
+        pass
+
+
+# ui测试任务
+def ui_task(device_item, poco_item):
+    try:
+        device_item.home()
+        poco_item(text="Settings").wait().click()
+        poco_item(text="Wi-Fi").wait().click()
+    except Exception as ex:
+        print(ex)
+    finally:
+        pass
+
+
+# 单个设备poco、device不需要初始化
+# 多个设备poco、device都需要创建新对象poco_item
+# 后续将poco_item传入使用即可，airtest相关api，使用对应device_item进行调用
+# case不需要重复写
+# UI 进程和底部进程不要在同一个进程中容易出问题
+
+if __name__ == '__main__':
+    # 执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
+    run_multiple_device()
+    # run_single_device()
