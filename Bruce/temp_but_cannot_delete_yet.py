@@ -1,6 +1,6 @@
 # coding = utf8
 import os
-os.path.abspath(".")
+os.path.abspath("..")
 """
     @File:temp_but_cannot_delete_yet.py
     @Author:Bruce
@@ -81,7 +81,7 @@ from time import sleep
 """
     屏幕截图
 """
-# screen_shot = device_huawei.snapshot("./screenshot/temp.jpg")
+# screen_shot = device_huawei.snapshot("./screenshot/Bruce.jpg")
 """
     获取adb执行结果
 """

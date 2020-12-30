@@ -11,7 +11,7 @@ command + 3：打开关闭terminal
 对于Android如Austin，airtestIDLE的Poco UI tree无法正常获取，
 这时，我们使用uiautomatorviewer/python3 -m weditor来获取ui tree
 
-# 本项目以修改源码：
+# 本项目已修改源码：
 print("still waiting for uiautomation ready.")
 # -- Guangtao
 self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
@@ -42,6 +42,10 @@ try:
 except Exception as ex:
     print(ex)
 
+使用adb shell svc控制一些开关、wifi等
+settings put和get有局限
+
+注意流的开启和关闭对资源的消耗
 
 
 

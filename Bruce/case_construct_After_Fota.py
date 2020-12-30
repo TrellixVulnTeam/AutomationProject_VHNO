@@ -6,7 +6,7 @@ from poco.exceptions import PocoNoSuchNodeException
 from airtest.core.error import AdbShellError, AirtestError
 import os
 
-os.path.abspath(".")
+os.path.abspath("..")
 
 """
     @File:case_construct_After_Fota.py
@@ -185,7 +185,7 @@ def check_gps_location_ok():
         austinDevice.check_app(package_name)
     except AirtestError:
         print("Not found {}, we will install it, thank you!".format(package_name))
-        install("apk/TctWeather.apk")
+        install("../apk/TctWeather.apk")
     finally:
         clear_app(package_name)
         start_app(package_name)
@@ -251,5 +251,5 @@ if __name__ == "__main__":
         print("No screen lock")
     finally:
         home()
-        # test
+    # test
     check_screenrecorder_ok()

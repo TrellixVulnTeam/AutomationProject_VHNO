@@ -6,7 +6,7 @@ from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from poco.exceptions import PocoNoSuchNodeException
 from airtest.core.error import AdbShellError
 
-os.path.abspath(".")
+os.path.abspath("..")
 """
     @File:case_construct_Before_Fota.py
     @Author:Bruce
@@ -24,7 +24,6 @@ austinDevice = connect_device("Android:///7c2440fd")
 """
     common 方法1：上下滚动查找元素
 """
-
 
 def scroll_to_find_element(element_text):
     global element
@@ -716,7 +715,7 @@ def check_input_method_reserved():
         # 需要先登录Google商店设置Play Protect->关闭Scan apps with Play Protect
         # 以防止出现Blocked by Play Protect弹框占用top导致后续install apk以及元素获取失败
         # disable_play_protect()
-        install("apk/Sogouinput.apk")
+        install("../apk/Sogouinput.apk")
         default_input_method = shell("settings get secure default_input_method")
         print(default_input_method)
         shell("settings put secure default_input_method com.sohu.inputmethod.sogou/.SogouIME")
@@ -853,4 +852,5 @@ if __name__ == "__main__":
     # 5.测试使用本机号码收发拨号等，切记勿添加本机号码为联系人
     # 6.Case测试前先关闭当前应用程序
     # 7.设置手机usb stay awake
+    # test
     check_sw_version_reserved()

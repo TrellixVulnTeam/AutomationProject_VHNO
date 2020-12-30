@@ -59,6 +59,7 @@ def authorize_task(device_item):
 # ui测试任务
 def ui_task(device_item, poco_item):
     try:
+        device_item.unlock()
         device_item.home()
         poco_item(text="Settings").wait().click()
         poco_item(text="Wi-Fi").wait().click()
@@ -75,6 +76,7 @@ def ui_task(device_item, poco_item):
 # UI 进程和底部进程不要在同一个进程中容易出问题
 
 if __name__ == '__main__':
+    # Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
     # 执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
     run_multiple_device()
     # run_single_device()
