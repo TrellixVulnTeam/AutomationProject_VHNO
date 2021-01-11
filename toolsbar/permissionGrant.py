@@ -2,7 +2,6 @@
 import os
 
 from airtest.core.error import AdbShellError
-from toolsbar.common import device_count
 import re
 
 os.path.abspath(".")
@@ -30,8 +29,13 @@ def grant_permission(devices):
     app_permission = data_deal(list_apps(devices), devices)
     for app_ in app_permission:
         for permission_ in app_[1]:
-            devices.shell("pm grant {} {}".format(app_[0], permission_))
-            print("{} \nPackage:{} granted p: {}".format(devices, app_[0], permission_))
+            try:
+                devices.shell("pm grant {} {}".format(app_[0], permission_))
+                print("{} \nPackage:{} granted p: {}".format(devices, app_[0], permission_))
+            except AdbShellError as adb_ex:
+                # 一些vender系统应用存在无法授权，即continue跳过该应用
+                print("We will keep going next cycle \n + {}".format(adb_ex))
+                continue
 
 
 def data_deal(app_list, devices):

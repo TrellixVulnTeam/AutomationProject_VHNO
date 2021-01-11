@@ -2,12 +2,12 @@
 import os
 
 import pytest
-
-os.path.abspath(".")
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from poco.exceptions import PocoNoSuchNodeException
 from time import sleep
+os.path.abspath(".")
+
 """
     @File:conftest.py
     @Author:Bruce
@@ -17,6 +17,7 @@ from time import sleep
 """
     a py file which saved pytest's fixture for use
 """
+
 
 @pytest.fixture(scope = "function")
 def Device():

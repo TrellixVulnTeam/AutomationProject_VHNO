@@ -3,11 +3,13 @@ import os
 
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-os.path.abspath(".")
-from toolsbar.permissionGrant import grant_permission, device_count
-from toolsbar.common import devices
+from config import install_app_necessary
+from toolsbar.permissionGrant import grant_permission
+from toolsbar.common import test_devices, device_count
 from airtest.core.api import *
 from multiprocessing import Process
+os.path.abspath(".")
+
 
 """
     @File:run_test.py
@@ -18,10 +20,11 @@ from multiprocessing import Process
 
 # 单机运行
 def run_single_device():
-    grant_permission(devices)
+    grant_permission(test_devices)
+    test_devices.unlock()
     home()
     poco = AndroidUiautomationPoco()
-    poco("com.tcl.tct.weather:id/tct_widget_main_layout").click()
+    poco(text="Settings").click()
     print("Current device number is: {}".format(device_count))
 
 
@@ -29,7 +32,7 @@ def run_single_device():
 def run_multiple_device():
     pau_list = []
     pui_list = []
-    for device_item in devices:
+    for device_item in test_devices:
         poco_item = AndroidUiautomationPoco(device=device_item, use_airtest_input=False, screenshot_each_action=False)
         p_au = Process(target=authorize_task, args=(device_item,), )
         p_ui = Process(target=ui_task, args=(device_item, poco_item,))
@@ -75,8 +78,13 @@ def ui_task(device_item, poco_item):
 # case不需要重复写
 # UI 进程和底部进程不要在同一个进程中容易出问题
 
+
 if __name__ == '__main__':
     # Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
     # 执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
-    run_multiple_device()
-    # run_single_device()
+    install_app_necessary()
+    if device_count > 1:
+        run_multiple_device()
+    else:
+        run_single_device()
+

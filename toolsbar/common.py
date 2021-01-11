@@ -1,10 +1,9 @@
 # coding = utf8
 import os
-
-os.path.abspath(".")
 from airtest.core.api import *
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from config import SERIAL_NUMBER
+os.path.abspath(".")
+
 
 """
     @File:common.py
@@ -13,6 +12,7 @@ from config import SERIAL_NUMBER
 """
 
 device_count = len(SERIAL_NUMBER)
+
 
 def single_device():
     austinDevice = connect_device("Android:///{}".format(SERIAL_NUMBER[0]))
@@ -36,4 +36,4 @@ def init_all_device():
     return device_init
 
 
-devices = init_all_device()
+test_devices = init_all_device()
