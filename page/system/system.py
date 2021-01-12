@@ -18,3 +18,4 @@ class System:
         if exists_app:
             versionName = main_page.device.shell("pm dump %s|grep versionName" % packageName)
             print("[Device:" + main_page.device.serialno + "]" + versionName)
+

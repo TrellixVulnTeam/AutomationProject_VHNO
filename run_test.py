@@ -2,11 +2,13 @@
 
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-from page.main_page import  Main_Page
+from page.dialer.dialer_main_page import Dialer_Main_Page
+from page.main_page import Main_Page
 from toolsbar.common import test_devices, device_count
 from airtest.core.api import *
 from multiprocessing import Process
 from page.system.system import System
+from toolsbar.permissionGrant import grant_permission
 
 os.path.abspath(".")
 
@@ -19,7 +21,7 @@ os.path.abspath(".")
 
 # 单机运行
 def run_single_device():
-    # grant_permission(test_devices)
+    grant_permission(test_devices)
     test_devices.unlock()
     home()
     poco = AndroidUiautomationPoco()
@@ -32,24 +34,37 @@ def run_single_device():
     main_page = Main_Page(test_devices, poco)
     System.get_app_version(main_page)
 
+    dialer_main_page = Dialer_Main_Page(main_page)
+    test_devices.start_app("com.google.android.dialer")
+    dialer_main_page.settings_menu.click()
+
 
 # 多机运行
 def run_multiple_device():
     pau_list = []
     pui_list = []
-    for device_item in test_devices:
-        poco_item = AndroidUiautomationPoco(device=device_item, use_airtest_input=False, screenshot_each_action=False)
-        p_au = Process(target=authorize_task, args=(device_item,), )
-        p_ui = Process(target=ui_task, args=(device_item, poco_item,))
-        pau_list.append(p_au)
-        pui_list.append(p_ui)
 
-    for process_au, process_ui in pau_list, pui_list:
+    # 先启动Authorize进程
+    for device_item in test_devices:
+        p_au = Process(target=authorize_task, args=(device_item,), )
+        pau_list.append(p_au)
+
+    for process_au in pau_list:
         process_au.start()
-        process_ui.start()
-    for process_au, process_ui in pau_list, pui_list:
+    for process_au in pau_list:
         process_au.join()
-        process_ui.join()
+
+    # 待Authorize进程都结束后，再执行UI进程（Authorize进程和Ui进程不能同时进行，会出现时耗错误）
+    if not p_au.is_alive():
+        for device_item in test_devices:
+            poco_item = AndroidUiautomationPoco(device=device_item, use_airtest_input=False, screenshot_each_action=False)
+            p_ui = Process(target=ui_task, args=(device_item, poco_item,))
+            pui_list.append(p_ui)
+
+        for process_ui in pui_list:
+            process_ui.start()
+        for process_ui in pui_list:
+            process_ui.join()
 
     print("Current device number is: {}".format(device_count))
 
@@ -76,6 +91,9 @@ def ui_task(device_item, poco_item):
         # debugger area
         main_page = Main_Page(device_item, poco_item)
         System.get_app_version(main_page)
+        dialer_main_page = Dialer_Main_Page(main_page)
+        device_item.start_app("com.google.android.dialer")
+        dialer_main_page.settings_menu.click()
     except Exception as ex:
         print(ex)
     finally:
