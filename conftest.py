@@ -20,9 +20,9 @@ os.path.abspath(".")
 
 
 @pytest.fixture(scope = "function")
-def Device():
+def before_case_execute():
     print("Before test")
-    yield Device
+    yield before_case_execute
     print("After test")
 
 

@@ -1,15 +1,14 @@
 # coding = utf8
-import os
 
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-from config import install_app_necessary
-from toolsbar.permissionGrant import grant_permission
+from page.main_page import  Main_Page
 from toolsbar.common import test_devices, device_count
 from airtest.core.api import *
 from multiprocessing import Process
-os.path.abspath(".")
+from page.system.system import System
 
+os.path.abspath(".")
 
 """
     @File:run_test.py
@@ -20,12 +19,18 @@ os.path.abspath(".")
 
 # 单机运行
 def run_single_device():
-    grant_permission(test_devices)
+    # grant_permission(test_devices)
     test_devices.unlock()
     home()
     poco = AndroidUiautomationPoco()
-    poco(text="Settings").click()
-    print("Current device number is: {}".format(device_count))
+    # poco(text="Settings").click()
+    # print("Current device number is: {}".format(device_count))
+
+    # debugger area
+    # system = System(test_devices, poco)
+    # system.get_app_version()
+    main_page = Main_Page(test_devices, poco)
+    System.get_app_version(main_page)
 
 
 # 多机运行
@@ -52,7 +57,8 @@ def run_multiple_device():
 # 授权任务
 def authorize_task(device_item):
     try:
-        grant_permission(device_item)
+        # grant_permission(device_item)
+        pass
     except Exception as ex:
         print(ex)
     finally:
@@ -64,8 +70,12 @@ def ui_task(device_item, poco_item):
     try:
         device_item.unlock()
         device_item.home()
-        poco_item(text="Settings").wait().click()
-        poco_item(text="Wi-Fi").wait().click()
+        # poco_item(text="Settings").wait().click()
+        # poco_item(text="Wi-Fi").wait().click()
+
+        # debugger area
+        main_page = Main_Page(device_item, poco_item)
+        System.get_app_version(main_page)
     except Exception as ex:
         print(ex)
     finally:
@@ -82,9 +92,8 @@ def ui_task(device_item, poco_item):
 if __name__ == '__main__':
     # Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
     # 执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
-    install_app_necessary()
+    # install_app_necessary()
     if device_count > 1:
         run_multiple_device()
     else:
         run_single_device()
-

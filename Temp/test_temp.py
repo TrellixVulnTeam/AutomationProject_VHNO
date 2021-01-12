@@ -4,8 +4,9 @@ import os
 
 os.path.abspath("..")
 import subprocess
+import pytest
 """
-    @File:temp.py
+    @File:test_temp.py
     @Author:Bruce
     @Date:2020/12/23
 """
@@ -27,12 +28,21 @@ import subprocess
 # # device_2.home()
 
 
-command = "sh ./apk/install_apk.sh"
-screenData = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
-while True:
-    line = screenData.stdout.readline()
-    print(line.decode("utf-8"))
-    if line == b"" or subprocess.Popen.poll(screenData) == 0:
-        screenData.stdout.close()
-        break
+# command = "sh ./apk/install_apk.sh"
+# screenData = subprocess.Popen(command, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, shell=True)
+# while True:
+#     line = screenData.stdout.readline()
+#     print(line.decode("utf-8"))
+#     if line == b"" or subprocess.Popen.poll(screenData) == 0:
+#         screenData.stdout.close()
+#         break
+
+
+def func(x):
+    return x + 1
+
+
+def test_answer():
+    assert func(4) == 5
+
 
