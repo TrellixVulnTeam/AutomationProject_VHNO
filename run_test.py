@@ -2,6 +2,7 @@
 
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
+from config import install_app_necessary
 from page.dialer.dialer_main_page import Dialer_Main_Page
 from page.main_page import Main_Page
 from toolsbar.common import test_devices, device_count
@@ -72,7 +73,7 @@ def run_multiple_device():
 # 授权任务
 def authorize_task(device_item):
     try:
-        # grant_permission(device_item)
+        grant_permission(device_item)
         pass
     except Exception as ex:
         print(ex)
@@ -110,7 +111,7 @@ def ui_task(device_item, poco_item):
 if __name__ == '__main__':
     # Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
     # 执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
-    # install_app_necessary()
+    install_app_necessary()
     if device_count > 1:
         run_multiple_device()
     else:
