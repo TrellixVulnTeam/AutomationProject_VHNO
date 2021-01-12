@@ -3,7 +3,7 @@
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary
-from page.dialer.dialer_main_page import Dialer_Main_Page
+from page.dialer.dialer_page import Dialer_Page
 from page.main_page import Main_Page
 from toolsbar.common import test_devices, device_count
 from airtest.core.api import *
@@ -35,10 +35,13 @@ def run_single_device():
     main_page = Main_Page(test_devices, poco)
     System.get_app_version(main_page)
 
-    dialer_main_page = Dialer_Main_Page(main_page)
+    dialer_page = Dialer_Page(main_page)
     test_devices.start_app("com.google.android.dialer")
-    dialer_main_page.settings_menu.click()
-    dialer_main_page.settings_menu_Settings.click()
+    dialer_page.settings_menu.wait().click()
+    dialer_page.settings_menu_Settings.wait().click()
+    dialer_page.settings_menu_Settings_Display_options.wait().click()
+    dialer_page.settings_menu_Settings_Display_options_Sort_by.wait().click()
+    dialer_page.settings_menu_Settings_Display_options_Sort_by_Last_name.wait().click()
 
 
 # 多机运行
@@ -93,10 +96,19 @@ def ui_task(device_item, poco_item):
         # debugger area
         main_page = Main_Page(device_item, poco_item)
         System.get_app_version(main_page)
-        dialer_main_page = Dialer_Main_Page(main_page)
+
+        dialer_page = Dialer_Page(main_page)
         device_item.start_app("com.google.android.dialer")
-        dialer_main_page.settings_menu.wait().click()
-        dialer_main_page.settings_menu_Settings.wait().click()
+        dialer_page.settings_menu.wait().click()
+        dialer_page.settings_menu_Settings.wait().click()
+        dialer_page.settings_menu_Settings_Display_options.wait().click()
+        dialer_page.settings_menu_Settings_Display_options_Sort_by.wait().click()
+        dialer_page.settings_menu_Settings_Display_options_Sort_by_Last_name.wait().click()
+
+        number = dialer_page.call()
+        print(number)
+        sleep(3)
+        dialer_page.end_call.wait().click()
     except Exception as ex:
         print(ex)
     finally:
