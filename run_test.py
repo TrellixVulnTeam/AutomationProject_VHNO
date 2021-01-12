@@ -22,7 +22,7 @@ os.path.abspath(".")
 
 # 单机运行
 def run_single_device():
-    grant_permission(test_devices)
+    # grant_permission(test_devices)
     test_devices.unlock()
     home()
     poco = AndroidUiautomationPoco()
@@ -38,6 +38,7 @@ def run_single_device():
     dialer_main_page = Dialer_Main_Page(main_page)
     test_devices.start_app("com.google.android.dialer")
     dialer_main_page.settings_menu.click()
+    dialer_main_page.settings_menu_Settings.click()
 
 
 # 多机运行
@@ -73,7 +74,7 @@ def run_multiple_device():
 # 授权任务
 def authorize_task(device_item):
     try:
-        grant_permission(device_item)
+        # grant_permission(device_item)
         pass
     except Exception as ex:
         print(ex)
@@ -94,7 +95,8 @@ def ui_task(device_item, poco_item):
         System.get_app_version(main_page)
         dialer_main_page = Dialer_Main_Page(main_page)
         device_item.start_app("com.google.android.dialer")
-        dialer_main_page.settings_menu.click()
+        dialer_main_page.settings_menu.wait().click()
+        dialer_main_page.settings_menu_Settings.wait().click()
     except Exception as ex:
         print(ex)
     finally:
@@ -111,7 +113,7 @@ def ui_task(device_item, poco_item):
 if __name__ == '__main__':
     # Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
     # 执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
-    install_app_necessary()
+    # install_app_necessary()
     if device_count > 1:
         run_multiple_device()
     else:

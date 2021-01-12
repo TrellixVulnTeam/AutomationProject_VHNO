@@ -12,8 +12,15 @@ import pytest
 """
 
 
-# from airtest.core.api import connect_device
-# from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+from airtest.core.api import connect_device
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
+device = connect_device("android:///b3e5b958")
+poco = AndroidUiautomationPoco()
+
+device.start_app("com.google.android.dialer")
+poco("com.google.android.dialer:id/three_dot_menu_or_clear_icon_view").wait().click()
+poco(text="Settings").wait().click()
 #
 # device_1 = connect_device('android:///XWNNPN7XBQFA7HUO')
 # # device_2 = connect_device('android:///b3e5b958')

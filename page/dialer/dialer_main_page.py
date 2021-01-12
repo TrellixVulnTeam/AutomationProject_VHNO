@@ -17,6 +17,6 @@ class Dialer_Main_Page():
         self.poco = self.main_page.poco
         self.device = self.main_page.device
 
-        self.settings_menu = self.poco("com.google.android.dialer:id/three_dot_menu_or_clear_icon_view").wait()
-
+        self.settings_menu = self.poco("com.google.android.dialer:id/three_dot_menu_or_clear_icon_view")
+        self.settings_menu_Settings = self.poco(text="Settings")
 
