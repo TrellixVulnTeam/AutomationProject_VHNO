@@ -12,16 +12,6 @@ os.path.abspath(".")
 
 
 class System:
-    #
-    # def __init__(self, device_item, poco_item):
-    #     self.test_device = device_item
-    #     self.poco = poco_item
-
-    # def get_app_version(self, packageName="com.android.settings"):
-    #     exists_app = self.test_device.check_app(packageName)
-    #     if exists_app:
-    #         versionName = self.test_device.shell("pm dump %s|grep versionName" % packageName)
-    #         print("[Device:" + self.test_device.serialno + "]" + versionName)
 
     def get_app_version(main_page, packageName="com.android.settings"):
         exists_app = main_page.device.check_app(packageName)

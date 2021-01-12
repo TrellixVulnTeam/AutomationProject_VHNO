@@ -6,8 +6,9 @@ os.path.abspath("system")
     @File:main_page.py
     @Author:Bruce
     @Date:2021/1/12
-    @Description:A main page to provide device item and poco for all page, so just init one reference in run_test.py
-    
+    @Description:A main page to provide device item and poco for all page, 
+    so just init one reference in run_test.py
+    Driver init:device & poco
 """
 
 
