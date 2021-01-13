@@ -34,11 +34,11 @@ def install_app_necessary():
     for device_serial in SERIAL_NUMBER:
         for apk in apks:
             print("Device [{}] is install {}".format(device_serial, apk))
-            screenData = subprocess.Popen("adb -s {} install ./apk/{}.apk".format(device_serial, apk), stdout=subprocess.PIPE, shell=True)
+            screenData = subprocess.Popen("adb -s {} install ./apk/{}.apk".format(device_serial, apk),
+                                          stdout=subprocess.PIPE, shell=True)
             while True:
                 line = screenData.stdout.readline()
                 print(line.decode("utf-8"))
                 if line == b"" or subprocess.Popen.poll(screenData) == 0:
                     screenData.stdout.close()
                     break
-

@@ -1,6 +1,8 @@
 # coding = utf8
 import os
 from airtest.core.api import *
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
 from config import SERIAL_NUMBER
 os.path.abspath(".")
 
@@ -36,4 +38,5 @@ def init_all_device():
     return device_init
 
 
-test_devices = init_all_device()
+test_device = init_all_device()
+poco = AndroidUiautomationPoco()
