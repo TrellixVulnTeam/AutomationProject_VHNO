@@ -1,9 +1,9 @@
 # coding = utf8
 import subprocess
 
-from airtest.core.api import *
 import re
 import os
+
 
 os.path.abspath(".")
 
@@ -42,3 +42,4 @@ def install_app_necessary():
                 if line == b"" or subprocess.Popen.poll(screenData) == 0:
                     screenData.stdout.close()
                     break
+

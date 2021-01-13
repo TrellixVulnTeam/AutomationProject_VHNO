@@ -296,13 +296,13 @@ from time import sleep
 """
     set_text():设置文字
 """
-# poco(name = "Messaging").click()
+# poco(name = "messaging").click()
 # poco(text = "Search").set_text("Hello")
 """
     sibling():兄弟节点
     获取同一级parent的兄弟的节点
 """
-# poco(name = "Messaging").sibling(name = "Phone").click()
+# poco(name = "messaging").sibling(name = "Phone").click()
 """
     swipe():滑动
     必须放入坐标，如下：是使用两个icon的坐标来达到一个滑动的效果

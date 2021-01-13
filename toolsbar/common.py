@@ -1,5 +1,4 @@
 # coding = utf8
-import os
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
@@ -39,4 +38,3 @@ def init_all_device():
 
 
 test_device = init_all_device()
-poco = AndroidUiautomationPoco()

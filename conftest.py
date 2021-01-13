@@ -3,9 +3,6 @@ import os
 
 import pytest
 from airtest.core.api import *
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
-from poco.exceptions import PocoNoSuchNodeException
-from time import sleep
 os.path.abspath(".")
 
 """
