@@ -38,3 +38,4 @@ def init_all_device():
 
 
 test_device = init_all_device()
+

@@ -149,7 +149,6 @@ def check_sms_sender_receiver(number="18512026630", content="Test"):
     if number[-4:] in receiver_content:
         print("PASS")
 
-
 """
     Case 5:验证短信相关设置是否被保留
     relate app:
@@ -228,7 +227,7 @@ def change_battery_management_settings():
         com.tcl.camera
         com.google.android.permissioncontroller
     test step:
-        检查APP存在->点击WHILE USING THE APP进行授权->点击Settings->点击->点击AI scene detection更改状态
+        检查APP存在->点击Settings->点击->点击AI scene detection更改状态
         ->记录默认、修改、升级后元素状态(invalidate进行元素刷新)->Fota升级后再次获取该值与升级前对比是否相同判定结果
 """
 
@@ -254,16 +253,16 @@ def change_camera_settings():
 
 
 def change_sound_settings():
-    apps_menu = None
-    start_app("com.android.settings")
-    menu_exists = False
-    while not menu_exists:
-        apps_menu = poco(text="Sound & vibration").wait()
-        menu_exists = apps_menu.exists()
-        if menu_exists:
-            break
-        poco.scroll(direction="vertical", percent=0.8, duration=1)
-    apps_menu.click()
+    # apps_menu = None
+    # start_app("com.android.settings")
+    # menu_exists = False
+    # while not menu_exists:
+    #     apps_menu = poco(text="Sound & vibration").wait()
+    #     menu_exists = apps_menu.exists()
+    #     if menu_exists:
+    #         break
+    #     poco.scroll(direction="vertical", percent=0.8, duration=1)
+    # apps_menu.click()
     silent_mode_switch = poco(text="Silent mode").parent().parent().children()[1].child(
         "android:id/switch_widget").wait()
     checked_result_default = silent_mode_switch.attr("checked")

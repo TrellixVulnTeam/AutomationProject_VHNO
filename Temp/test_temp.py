@@ -1,6 +1,7 @@
 # coding = utf8
 import os
 
+import uiautomator2
 
 os.path.abspath("..")
 import subprocess
@@ -51,5 +52,4 @@ def func(x):
 
 def test_answer():
     assert func(4) == 5
-
 
