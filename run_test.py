@@ -7,6 +7,7 @@ from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from config import install_app_necessary
 from page.calendar.calendar_page import Calendar_Page
 from page.camera.camera_page import Camera_Page
+from page.chrome.chrome_page import Chrome_Page
 from page.dialer.dialer_page import Dialer_Page
 from page.filemanager.filemanager_page import FileManager_Page
 from page.fota.fota_page import Fota_Page
@@ -104,9 +105,12 @@ def ui_task(device_item, poco_item):
     # debugger area
 
     main_page = Main_Page(device_item, poco_item)
-    settings_page = Settings_Page(main_page)
+    chrome_page = Chrome_Page(main_page)
     for i in range(20):
-        print(settings_page.change_location_settings())
+        chrome_page.skip_guide()
+        chrome_page.enter_website()
+        chrome_page.download_baidu_image()
+        print(chrome_page.get_first_download_file())
 
 
 """
