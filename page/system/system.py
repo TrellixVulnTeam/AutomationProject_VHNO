@@ -46,7 +46,6 @@ class System:
                 if menu_exists:
                     return element
                 main_page.poco.scroll(direction="vertical", percent=0.6, duration=1)
-                sleep(1)
                 search_count += 1
                 print("up: " + str(search_count) + str(menu_exists))
                 # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过10次则开始向上查找
@@ -54,7 +53,11 @@ class System:
                     main_page.poco.scroll(direction="vertical", percent=-0.6, duration=1)
                     element = main_page.poco(text=element_text).wait()
                     menu_exists = element.exists()
+                    search_count += 1
                     print("down: " + str(search_count) + str(menu_exists))
+                    if search_count >= 10:
+                        search_count = 0
+                        break
                     if menu_exists:
                         return element
         else:
@@ -65,7 +68,6 @@ class System:
                 if menu_exists:
                     return element
                 main_page.poco.scroll(direction="vertical", percent=0.6, duration=1)
-                sleep(1)
                 search_count += 1
                 print("up: " + str(search_count) + str(menu_exists))
                 # 给滑动查找增加向上滑动，兼容到底未找到的情况，即向下查找超过10次则开始向上查找
@@ -73,7 +75,11 @@ class System:
                     main_page.poco.scroll(direction="vertical", percent=-0.6, duration=1)
                     element = main_page.poco(element_id).wait()
                     menu_exists = element.exists()
+                    search_count += 1
                     print("down: " + str(search_count) + str(menu_exists))
+                    if search_count >= 10:
+                        search_count = 0
+                        break
                     if menu_exists:
                         return element
         return element

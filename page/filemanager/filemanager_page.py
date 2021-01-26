@@ -36,7 +36,6 @@ class FileManager_Page:
         create_folder_name = self.create_folder_name.wait()
         create_folder_name.invalidate()
         create_folder_name.set_text(name)
-        sleep(0.5)
         self.create_folder_create.wait().click()
         self.stop_filemanager()
 

@@ -41,7 +41,8 @@ class Settings_Page:
 
     def set_screen_lock(self):
         self.start_settings()
-        System.scroll_to_find_element(self.main_page, element_text="Security & biometrics").click()
+        security = System.scroll_to_find_element(self.main_page, element_text="Security & biometrics")
+        security.click()
         self.poco(text="Screen lock").wait().click()
         self.poco(text="PIN").wait().click()
         self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
@@ -55,7 +56,8 @@ class Settings_Page:
 
     def clear_screen_lock(self):
         self.start_settings()
-        System.scroll_to_find_element(self.main_page, element_text="Security & biometrics").click()
+        security = System.scroll_to_find_element(self.main_page, element_text="Security & biometrics")
+        security.click()
         self.poco(text="Screen lock").wait().click()
         self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
         sleep(0.5)
@@ -66,7 +68,8 @@ class Settings_Page:
 
     def get_imei_cu(self):
         self.start_settings()
-        System.scroll_to_find_element(self.main_page, element_text="System").click()
+        system = System.scroll_to_find_element(self.main_page, element_text="System")
+        system.click()
         self.poco(text="Regulatory & safety").wait().click()
         imei = self.poco("com.jrdcom.Elabel:id/imei").wait().get_text()
         cu = self.poco("com.jrdcom.Elabel:id/cu_reference_id_view").wait().get_text()
@@ -93,16 +96,15 @@ class Settings_Page:
     def disable_wifi(self):
         self.device.shell("svc wifi disable")
 
-    def connect_wifi(self, wifi_name="Test", wifi_password="88888888"):
+    def connect_wifi(self, wifi_name="A_Test", wifi_password="88888888"):
         global current_wifi
         self.enable_wifi()
         self.start_settings()
-        System.scroll_to_find_element(self.main_page, element_text="Wi-Fi").click()
-        sleep(0.5)
-        System.scroll_to_find_element(self.main_page, element_text=wifi_name).click()
-        sleep(0.5)
+        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi.click()
+        wifi_item = System.scroll_to_find_element(self.main_page, element_text=wifi_name)
+        wifi_item.click()
         self.poco("com.android.settings:id/password").wait().set_text(wifi_password)
-        sleep(0.5)
         connect_button = self.poco(text="Connect").wait()
         connect_button.click()
         while True:
@@ -113,23 +115,23 @@ class Settings_Page:
         self.stop_settings()
         return current_wifi
 
-    def forget_wifi(self, wifi_name="Test"):
+    def forget_wifi(self, wifi_name="A_Test"):
         self.enable_wifi()
         self.start_settings()
-        System.scroll_to_find_element(self.main_page, element_text="Wi-Fi").click()
-        sleep(0.5)
-        System.scroll_to_find_element(self.main_page, element_text=wifi_name).click()
-        sleep(0.5)
+        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi.click()
+        wifi_item = System.scroll_to_find_element(self.main_page, element_text=wifi_name)
+        wifi_item.click()
         self.poco(text="FORGET").wait().click()
         self.stop_settings()
 
     def set_wifi_direct_name(self, new_name="Test"):
         self.start_settings()
         self.enable_wifi()
-        System.scroll_to_find_element(self.main_page, element_text="Wi-Fi").click()
-        sleep(0.5)
-        System.scroll_to_find_element(self.main_page, element_text="Wi-Fi preferences").click()
-        sleep(0.5)
+        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi.click()
+        wifi_preference = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi preferences")
+        wifi_preference.click()
         self.poco(text="Advanced").wait().click()
         self.poco(text="Wi-Fi Direct").wait().click()
         self.poco("com.android.settings:id/action_bar").wait().children()[2].children()[1].click()
@@ -142,12 +144,39 @@ class Settings_Page:
     def get_wifi_direct_name(self):
         self.start_settings()
         self.enable_wifi()
-        System.scroll_to_find_element(self.main_page, element_text="Wi-Fi").click()
-        sleep(0.5)
-        System.scroll_to_find_element(self.main_page, element_text="Wi-Fi preferences").click()
-        sleep(0.5)
+        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi.click()
+        wifi_preference = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi preferences")
+        wifi_preference.click()
         self.poco(text="Advanced").wait().click()
         self.poco(text="Wi-Fi Direct").wait().click()
         direct_name = self.poco("com.android.settings:id/preference_content").wait().child().child().get_text()
         self.stop_settings()
         return direct_name
+
+    def set_hotspot_name(self, name="Test"):
+        self.start_settings()
+        sim_cards_menu = System.scroll_to_find_element(self.main_page, element_text="SIM card & cellular network")
+        sim_cards_menu.click()
+        self.poco(text="Hotspot & tethering").wait().click()
+        self.poco(text="Mobile hotspot").wait().click()
+        self.poco(text="Hotspot name").wait().click()
+        self.poco("android:id/edit").wait().set_text(name)
+        self.poco(text="OK").wait().click()
+        hotspot_name_changed = self.poco(text="Hotspot name").sibling("android:id/summary").get_text()
+        self.stop_settings()
+        return hotspot_name_changed
+
+    def change_location_settings(self):
+        self.start_settings()
+        location = System.scroll_to_find_element(self.main_page, element_text="Location")
+        System.double_click_element(self.main_page, location)
+        wifi_bt_scanning = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi and Bluetooth scanning")
+        wifi_bt_scanning.click()
+        wifi_scanning = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi scanning")
+        wifi_scan_status = wifi_scanning.parent().sibling().child("android:id/switch_widget")
+        wifi_scanning.click()
+        wifi_scan_status.invalidate()
+        current_wifi_scanning_status = wifi_scan_status.attr("checked")
+        self.stop_settings()
+        return current_wifi_scanning_status

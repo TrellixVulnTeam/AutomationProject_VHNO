@@ -38,9 +38,9 @@ class Calendar_Page:
         self.start_calendar()
         try:
             if self.guide_page_text.wait().exists():
-                for i in range(3):
-                    self.guide_next_arrow.wait().click()
-                    sleep(0.5)
+                for i in range(2):
+                    guide_next = self.guide_next_arrow.wait()
+                    guide_next.click()
                 self.guide_got_it.wait().click()
                 a = self.guide_got_it.wait().get_text()
                 print(a)

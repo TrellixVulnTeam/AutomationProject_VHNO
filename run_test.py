@@ -106,9 +106,8 @@ def ui_task(device_item, poco_item):
     main_page = Main_Page(device_item, poco_item)
     settings_page = Settings_Page(main_page)
     for i in range(20):
-        print("The {} test!".format(str(i)))
-        print("Set direct name: {} as new!".format(settings_page.set_wifi_direct_name()))
-        print("Get direct name: {}".format(settings_page.get_wifi_direct_name()))
+        print(settings_page.change_location_settings())
+
 
 """
 单个设备poco、device不需要初始化
