@@ -635,41 +635,6 @@ def check_bookmarks_reserved(url="https://www.baidu.com"):
 
 
 """
-    Case 26:验证升级后APN配置可以保留
-    relate app:
-        com.android.settings
-    test step:
-        检查APP存在->Settings->SIM cards & cellular network->SIM card settings->
-        点击进入SIM卡->Access Point Names->找到当前被选中的apn：
-        case 1：验证fota后只修改name的default apn会被恢复成默认的apn
-        case 2：验证fota后新建的apn保留
-        case 3：选中的新建的apn会保留当前被选中状态
-        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
-"""
-
-
-def check_apn_config_reserved():
-    # Enter into APN list interface
-    stop_app("com.android.settings")
-    start_app("com.android.settings")
-    scroll_to_find_element("SIM cards & cellular network").click()
-    scroll_to_find_element("SIM card settings").click()
-    sim_icon = poco("android:id/icon").wait()
-    if sim_icon.attr("enabled"):
-        sim_icon.click()
-        scroll_to_find_element("Access Point Names").click()
-        print("Enter APNs interface")
-    else:
-        print("Not insert SIM card, please check!")
-    choosed_apn = poco("com.android.settings:id/apn_radiobutton").sibling("com.android.settings:id/text_layout").child(
-        "android:id/title")
-    print(choosed_apn.get_text())
-
-    # Execute 3 cases logic：
-    pass
-
-
-"""
     Case 27:验证升级后vpn配置可以保留
     relate app:
         com.android.settings

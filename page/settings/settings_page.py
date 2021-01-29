@@ -3,6 +3,7 @@ import os
 from time import sleep
 
 from airtest.core.error import AdbShellError
+from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System
 
@@ -42,17 +43,25 @@ class Settings_Page:
     def set_screen_lock(self):
         self.start_settings()
         security = System.scroll_to_find_element(self.main_page, element_text="Security & biometrics")
-        security.click()
+        System.double_click_element(self.main_page, security)
         self.poco(text="Screen lock").wait().click()
-        self.poco(text="PIN").wait().click()
-        self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
-        sleep(0.5)
-        self.poco(text="Next").wait().click()
-        self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
-        sleep(0.5)
-        self.poco(text="Confirm").wait().click()
-        self.poco(text="Done").wait().click()
-        self.stop_settings()
+        try:
+            if self.poco(text="Confirm your PIN").wait().exists():
+                print("Screen lock exists")
+            else:
+                self.poco(text="PIN").wait().click()
+                self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
+                sleep(0.5)
+                self.poco(text="Next").wait().click()
+                self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
+                sleep(0.5)
+                self.poco(text="Confirm").wait().click()
+                self.poco(text="Done").wait().click()
+        except PocoNoSuchNodeException:
+            print("Screen lock not exists, so set a screen lock:")
+        finally:
+            self.stop_settings()
+        return "Screen lock OK"
 
     def clear_screen_lock(self):
         self.start_settings()
@@ -180,3 +189,16 @@ class Settings_Page:
         current_wifi_scanning_status = wifi_scan_status.attr("checked")
         self.stop_settings()
         return current_wifi_scanning_status
+
+    def set_vpn(self, name="Test", address="Test"):
+        # Before set vpn, you need set a screen lock first
+        self.start_settings()
+        connected_devices = System.scroll_to_find_element(self.main_page, element_text="Connected devices")
+        System.double_click_element(self.main_page, connected_devices)
+        self.poco(text="VPN").wait().click()
+        self.poco("com.android.settings:id/vpn_create").wait().click()
+        self.poco("com.android.settings:id/name").wait().set_text(name)
+        self.poco("com.android.settings:id/server").wait().set_text(address)
+        sleep(0.5)
+        self.poco(text="SAVE").wait().click()
+        return name

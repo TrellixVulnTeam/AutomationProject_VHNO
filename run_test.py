@@ -105,12 +105,13 @@ def ui_task(device_item, poco_item):
     # debugger area
 
     main_page = Main_Page(device_item, poco_item)
-    chrome_page = Chrome_Page(main_page)
+    settings_page = Settings_Page(main_page)
+    settings_page.set_screen_lock()
+    # settings_page.set_vpn()
     for i in range(20):
-        chrome_page.skip_guide()
-        chrome_page.enter_website()
-        chrome_page.download_baidu_image()
-        print(chrome_page.get_first_download_file())
+        print("Current deivce is {} and {} times test, result is: {}".format(device_item.serialno, str(i),
+                                                                             settings_page.set_vpn("VPN" + str(i))))
+
 
 
 """

@@ -2,7 +2,6 @@
 import os
 from time import sleep
 
-from airtest.core.api import keyevent
 from poco.exceptions import PocoNoSuchNodeException
 
 os.path.abspath(".")
@@ -40,7 +39,7 @@ class Chrome_Page:
         finally:
             self.stop_chrome()
 
-    def enter_website(self, website="https://www.baidu.com"):
+    def enter_website(self, website="www.baidu.com"):
         self.start_chrome()
         try:
             # 检查并跳过 search_engine_choose 按钮
@@ -94,5 +93,27 @@ class Chrome_Page:
         download_file_number = self.poco("com.android.chrome:id/title_bar").get_text()
         self.stop_chrome()
         return download_file_number
+
+    def save_bookmark(self, website="www.baidu.com"):
+        self.enter_website(website)
+        chrome_menu_button = self.poco("com.android.chrome:id/menu_button").wait()
+        chrome_menu_button.click()
+        self.poco("com.android.chrome:id/button_two").wait().click()
+        try:
+            if self.poco(text="Edit bookmark").wait().exists():
+                self.device.keyevent("KEYCODE_BACK")
+        except PocoNoSuchNodeException:
+            print("New bookmark saved!")
+        finally:
+            # 二次验证书签添加成功
+            chrome_menu_button.click()
+            self.poco(text="Bookmarks").wait().click()
+            self.poco(text="Mobile bookmarks").wait().click()
+            try:
+                current_bookmark = self.poco(text=website).wait()
+                self.stop_chrome()
+                return current_bookmark.get_text()
+            except PocoNoSuchNodeException:
+                print("Add bookmark failed")
 
 
