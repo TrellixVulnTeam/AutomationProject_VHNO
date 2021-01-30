@@ -2,7 +2,7 @@
 import os
 from time import sleep
 
-from airtest.core.error import AdbShellError
+from airtest.core.error import AdbShellError, AirtestError
 from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System
@@ -27,10 +27,6 @@ class Settings_Page:
         self.button_gestures_gestures = self.poco(text="Gestures")
         self.button_gestures_gestures_3_finger_screenshot = self.poco(text="3-finger screenshot")
         self.security_sim_card_lock_locksimcard_text = self.poco(text="Lock SIM card")
-        self.sim_card_settings = self.poco(text="SIM card settings")
-        self.sim_card_settings_sim1_settings = self.poco("com.tct.phone:id/settings_button")
-        self.sim_card_settings_sim1_settings_sim_name = self.poco("com.tct.phone:id/sim_name")
-        self.sim_card_settings_sim1_settings_sim_name_ok = self.poco(text="OK")
 
     def start_settings(self):
         self.device.start_app("com.android.settings")
@@ -202,3 +198,13 @@ class Settings_Page:
         sleep(0.5)
         self.poco(text="SAVE").wait().click()
         return name
+
+    def get_data_usage(self):
+        # First：close wifi， enter website，then get data usage
+        self.start_settings()
+        sim_card_cellular_menu = System.scroll_to_find_element(self.main_page,
+                                                               element_text="SIM card & cellular network")
+        System.double_click_element(self.main_page, sim_card_cellular_menu)
+        data_usage = self.poco(text="Data usage").wait().sibling("android:id/summary").get_text()
+        self.stop_settings()
+        return data_usage

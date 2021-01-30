@@ -663,30 +663,30 @@ def check_vpn_config_reserved():
         print("Some thing error, please check!")
 
 
-"""
-    Case 28:验证升级后输入法设置可以保留
-    relate app:
-        com.android.settings
-    test step:
-        检查APP存在->
-        adb 设置输入法->adb获取当前输入法(脚本运行中会自动切换至Yosemite，此时判断之前存在即可)
-        ->Fota升级后再次获取该值与升级前对比是否相同判定结果
-"""
-
-
-def check_input_method_reserved():
-    try:
-        # 需要先登录Google商店设置Play Protect->关闭Scan apps with Play Protect
-        # 以防止出现Blocked by Play Protect弹框占用top导致后续install apk以及元素获取失败
-        # disable_play_protect()
-        install("../apk/Sogouinput.apk")
-        default_input_method = shell("settings get secure default_input_method")
-        print(default_input_method)
-        shell("settings put secure default_input_method com.sohu.inputmethod.sogou/.SogouIME")
-        changed_input_method = shell("settings get secure default_input_method")
-        print(changed_input_method)
-    except Exception:
-        print("Some thing error, please check!")
+# """
+#     Case 28:验证升级后输入法设置可以保留
+#     relate app:
+#         com.android.settings
+#     test step:
+#         检查APP存在->
+#         adb 设置输入法->adb获取当前输入法(脚本运行中会自动切换至Yosemite，此时判断之前存在即可)
+#         ->Fota升级后再次获取该值与升级前对比是否相同判定结果
+# """
+#
+#
+# def check_input_method_reserved():
+#     try:
+#         # 需要先登录Google商店设置Play Protect->关闭Scan apps with Play Protect
+#         # 以防止出现Blocked by Play Protect弹框占用top导致后续install apk以及元素获取失败
+#         # disable_play_protect()
+#         install("../apk/Sogouinput.apk")
+#         default_input_method = shell("settings get secure default_input_method")
+#         print(default_input_method)
+#         shell("settings put secure default_input_method com.sohu.inputmethod.sogou/.SogouIME")
+#         changed_input_method = shell("settings get secure default_input_method")
+#         print(changed_input_method)
+#     except Exception:
+#         print("Some thing error, please check!")
 
 
 """

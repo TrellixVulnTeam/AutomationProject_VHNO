@@ -106,12 +106,15 @@ def ui_task(device_item, poco_item):
 
     main_page = Main_Page(device_item, poco_item)
     settings_page = Settings_Page(main_page)
-    settings_page.set_screen_lock()
-    # settings_page.set_vpn()
+    chrome_page = Chrome_Page(main_page)
     for i in range(20):
         print("Current deivce is {} and {} times test, result is: {}".format(device_item.serialno, str(i),
-                                                                             settings_page.set_vpn("VPN" + str(i))))
-
+                                                                             "OK"))
+        chrome_page.stop_chrome()
+        settings_page.disable_wifi()
+        chrome_page.enter_website()
+        print(settings_page.get_data_usage())
+        settings_page.enable_wifi()
 
 
 """
@@ -121,7 +124,6 @@ def ui_task(device_item, poco_item):
 case不需要重复写
 UI 进程和底部进程不要在同一个进程中容易出问题
 """
-
 
 if __name__ == '__main__':
     """
