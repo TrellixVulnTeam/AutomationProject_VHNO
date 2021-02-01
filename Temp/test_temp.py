@@ -45,7 +45,6 @@ poco(text="Settings").wait().click()
 #         screenData.stdout.close()
 #         break
 
-
 def func(x):
     return x + 1
 

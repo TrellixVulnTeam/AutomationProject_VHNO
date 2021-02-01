@@ -28,18 +28,23 @@ SERIAL_NUMBER = get_serial_number()
 
 
 # 测试前安装所需APP
-def install_app_necessary():
+def install_app_necessary(device=""):
     files = os.popen("ls ./apk/")
     apks = re.findall("(.*).apk", files.read())
-    for device_serial in SERIAL_NUMBER:
-        for apk in apks:
-            print("Device [{}] is install {}".format(device_serial, apk))
-            screenData = subprocess.Popen("adb -s {} install ./apk/{}.apk".format(device_serial, apk),
-                                          stdout=subprocess.PIPE, shell=True)
-            while True:
-                line = screenData.stdout.readline()
-                print(line.decode("utf-8"))
-                if line == b"" or subprocess.Popen.poll(screenData) == 0:
-                    screenData.stdout.close()
-                    break
-
+    # 如下置灰代码用于独立出来不借助poco，独立使用python代码
+    # for device_serial in SERIAL_NUMBER:
+    #     for apk in apks:
+    #         print("Device [{}] is install {}".format(device_serial, apk))
+    #         screenData = subprocess.Popen("adb -s {} install ./apk/{}.apk".format(device_serial, apk),
+    #                                       stdout=subprocess.PIPE, shell=True)
+    #         while True:
+    #             line = screenData.stdout.readline()
+    #             print(line.decode("utf-8"))
+    #             if line == b"" or subprocess.Popen.poll(screenData) == 0:
+    #                 screenData.stdout.close()
+    #                 break
+    # for device_serial in SERIAL_NUMBER:
+    for apk in apks:
+        print("Device [{}] is install {}.apk".format(device.serialno, apk))
+        install_result = device.install_app("./apk/" + apk + ".apk")
+        print(install_result)
