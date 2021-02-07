@@ -1,4 +1,5 @@
 # coding = utf8
+import re
 from time import sleep
 
 from airtest.core.api import *
@@ -426,15 +427,24 @@ def check_file_manager_reserved():
     relate app:
         com.android.settings
     test step:
-        检查APP存在->Settings->System->Regulatory & safety->imei号("com.jrdcom.Elabel:id/imei")
-        ->cu号("com.jrdcom.Elabel:id/cu_reference_id_view")
-        ->记录默认、修改、升级后元素状态(invalidate进行元素刷新)
+        检查APP存在->拨号盘输入*#*#06#*#*(#需要转义所以是：*%23*%2306%23*%23*)
+        ->记录SVN值->关闭当前APP
         ->Fota升级后再次获取该值与升级前对比是否相同判定结果
 """
 
 
 def check_imei_cu():
-    start_app("com.android.settings")
+    austinDevice.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
+    try:
+        value_returned = poco("android:id/message").wait().get_text()
+        if "SVN" in value_returned:
+            print(re.findall("IMEI1:(.*)", value_returned))
+            poco(text="OK").wait().click()
+    except PocoNoSuchNodeException:
+        print("Can't find needed element, please check!")
+    finally:
+        current_app = austinDevice.get_top_activity()[0]
+        stop_app(current_app)
 
 
 """
@@ -817,4 +827,4 @@ if __name__ == "__main__":
     # 6.Case测试前先关闭当前应用程序
     # 7.设置手机usb stay awake
     # test
-    check_sw_version_reserved()
+    check_imei_cu()

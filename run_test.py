@@ -106,11 +106,11 @@ def ui_task(device_item, poco_item):
     # debugger area
 
     main_page = Main_Page(device_item, poco_item)
-    dialer_page = Dialer_Page(main_page)
+    settings_page = Settings_Page(main_page)
+    # print(settings_page.get_current_navigation())
     for i in range(20):
-        print("Current device :{} 's imei is: {}, and svn is: {}".format(device_item.serialno,
-                                                                         str(dialer_page.get_imei()),
-                                                                         str(dialer_page.get_svn())))
+        print("Current device :{} 's navigation is {}".format(device_item.serialno,
+                                                              settings_page.get_current_navigation()))
 
 """
 单个设备poco、device不需要初始化

@@ -115,5 +115,3 @@ class System:
         print(position)
         main_page.device.double_click(position)
 
-
-

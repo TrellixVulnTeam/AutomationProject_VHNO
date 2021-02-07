@@ -208,3 +208,26 @@ class Settings_Page:
         data_usage = self.poco(text="Data usage").wait().sibling("android:id/summary").get_text()
         self.stop_settings()
         return data_usage
+
+    def set_navigation_gesture(self):
+        self.start_settings()
+        button_gestures = System.scroll_to_find_element(self.main_page, element_text="Button & gestures")
+        System.double_click_element(self.main_page, button_gestures)
+        self.poco(text="System navigation").wait().click()
+        navigation_gesture = self.poco(text="Gesture navigation").wait()
+        navigation_gesture.click()
+        navigation_gesture_switch = navigation_gesture.parent().sibling().child("android:id/checkbox").wait()
+        self.stop_settings()
+        return navigation_gesture_switch.attr("checked")
+
+    def get_current_navigation(self):
+        global current_navigation
+        self.start_settings()
+        button_gestures = System.scroll_to_find_element(self.main_page, element_text="Button & gestures")
+        System.double_click_element(self.main_page, button_gestures)
+        self.poco(text="System navigation").wait().click()
+        # 指定元素遍历并返回
+        checked_box = self.poco("com.android.settings:id/recycler_view").wait().offspring(checked=True)
+        current_navigation = checked_box.parent().sibling().child("android:id/title")
+        self.stop_settings()
+        return current_navigation.get_text()
