@@ -1,5 +1,6 @@
 # coding = utf8
 import os
+import re
 from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
@@ -47,12 +48,23 @@ class Dialer_Page:
             value_returned = self.poco("android:id/message").wait().get_text()
             if "SVN" in value_returned:
                 value_returned = value_returned.split("SVN:")[1]
-                print("Current svn is:" + value_returned)
                 self.poco(text="OK").wait().click()
         except PocoNoSuchNodeException:
             print("Can't find needed element, please check!")
         finally:
-            current_app = self.device.get_top_activity()[0]
-            self.device.stop_app(current_app)
-            self.device.home()
+            self.stop_dialer()
+        return value_returned
+
+    def get_imei(self):
+        global value_returned
+        self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
+        try:
+            value_returned = self.poco("android:id/message").wait().get_text()
+            if "IMEI" in value_returned:
+                value_returned = re.findall("IMEI1:(.*)", value_returned)[0]
+                self.poco(text="OK").wait().click()
+        except PocoNoSuchNodeException:
+            print("Can't find needed element, please check!")
+        finally:
+            self.stop_dialer()
         return value_returned

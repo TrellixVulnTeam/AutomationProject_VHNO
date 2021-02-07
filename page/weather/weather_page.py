@@ -44,7 +44,7 @@ class Weather_Page:
         global location
         self.skip_guide()
         try:
-            location = self.poco("com.tcl.tct.weather:id/tv_bar_city").wait(timeout=10).get_text()
+            location = self.poco("com.tcl.tct.weather:id/tv_bar_city").wait(timeout=20).get_text()
         except Exception:
             print("Some thing error, can't get location successfully, please check!")
             location = ""

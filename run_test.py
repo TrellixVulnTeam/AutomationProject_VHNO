@@ -5,6 +5,7 @@ import airtest
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary
+from page.dialer.dialer_page import Dialer_Page
 from page.main_page import Main_Page
 from page.messaging.messaging_page import Messaging_Page
 from page.settings.settings_page import Settings_Page
@@ -34,9 +35,12 @@ def run_single_device():
 
         # debugger area
         main_page = Main_Page(test_device, poco)
-        number = System.get_phone_number(main_page)
-        messaging_page = Messaging_Page(main_page)
-        print(messaging_page.send_message(number))
+        settings_page = Settings_Page(main_page)
+        weather_page = Weather_Page(main_page)
+        settings_page.enable_wifi()
+        location = weather_page.get_location()
+        if location == "Huicheng District":
+            print(test_device.serialno + "Current location is: {}, and Get location PASS!".format(location))
     except Exception as ex:
         print(ex)
 
@@ -73,7 +77,7 @@ def run_multiple_device():
     print("Current device number is: {}".format(device_count))
 
 
-# 授权任务
+# Before test任务
 def authorize_task(device_item):
     # try:
     #     grant_permission(device_item)
@@ -82,8 +86,9 @@ def authorize_task(device_item):
     #     print(ex)
     # finally:
     #     pass
-    install_app_necessary(device_item)
-    grant_permission(device_item)
+    # install_app_necessary(device_item)
+    # grant_permission(device_item)
+    pass
 
 
 # ui测试任务
@@ -101,16 +106,11 @@ def ui_task(device_item, poco_item):
     # debugger area
 
     main_page = Main_Page(device_item, poco_item)
-    settings_page = Settings_Page(main_page)
-    weather_page = Weather_Page(main_page)
-    settings_page.enable_wifi()
-    location = weather_page.get_location()
-    if location == "Huicheng District":
-        print(device_item.serialno + "Current location is: {}, and Get location PASS!".format(location))
-    # for i in range(20):
-    #     print("Current deivce is {} and {} times test, result is: {}".format(device_item.serialno, str(i),
-    #                                                                          "OK"))
-
+    dialer_page = Dialer_Page(main_page)
+    for i in range(20):
+        print("Current device :{} 's imei is: {}, and svn is: {}".format(device_item.serialno,
+                                                                         str(dialer_page.get_imei()),
+                                                                         str(dialer_page.get_svn())))
 
 """
 单个设备poco、device不需要初始化
