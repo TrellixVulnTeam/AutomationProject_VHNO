@@ -2,6 +2,7 @@
 from multiprocessing.dummy import Process
 
 import airtest
+import logging
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary
@@ -16,6 +17,10 @@ from toolsbar.common import test_device, device_count
 from airtest.core.api import *
 
 os.path.abspath(".")
+
+# 过滤airtest log只打印ERROR的Log
+logger = logging.getLogger("airtest")
+logger.setLevel(logging.ERROR)
 
 """
     @File:run_test.py
@@ -111,6 +116,7 @@ def ui_task(device_item, poco_item):
     for i in range(20):
         print("Current device :{} 's navigation is {}".format(device_item.serialno,
                                                               settings_page.get_current_navigation()))
+
 
 """
 单个设备poco、device不需要初始化

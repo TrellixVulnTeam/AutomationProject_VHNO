@@ -229,5 +229,6 @@ class Settings_Page:
         # 指定元素遍历并返回
         checked_box = self.poco("com.android.settings:id/recycler_view").wait().offspring(checked=True)
         current_navigation = checked_box.parent().sibling().child("android:id/title")
+        current_navigation_title = current_navigation.get_text()
         self.stop_settings()
-        return current_navigation.get_text()
+        return current_navigation_title

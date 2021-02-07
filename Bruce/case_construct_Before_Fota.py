@@ -15,7 +15,7 @@ os.path.abspath("..")
 """
 
 poco = AndroidUiautomationPoco()
-austinDevice = connect_device("Android:///7c2440fd")
+austinDevice = connect_device("Android:///69a83185")
 # austinDevice = connect_device("Android:///b3e5b958")
 
 # Fota前操作&后对比Case
@@ -827,4 +827,5 @@ if __name__ == "__main__":
     # 6.Case测试前先关闭当前应用程序
     # 7.设置手机usb stay awake
     # test
-    check_imei_cu()
+    # check_imei_cu()
+    start_app("com.android.settings")
