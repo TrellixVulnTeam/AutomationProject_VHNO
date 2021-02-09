@@ -1,10 +1,10 @@
 # coding = utf8
 from time import sleep
+
 from airtest.core.api import *
+from airtest.core.error import AdbShellError, AirtestError
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from poco.exceptions import PocoNoSuchNodeException
-from airtest.core.error import AdbShellError, AirtestError
-import os
 
 os.path.abspath("..")
 

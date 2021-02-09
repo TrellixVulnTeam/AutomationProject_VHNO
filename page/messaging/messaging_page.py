@@ -1,8 +1,8 @@
 # coding = utf8
 import os
 from time import sleep
-from page.system.system import System, logger
 
+from page.system.system import System
 
 os.path.abspath(".")
 """

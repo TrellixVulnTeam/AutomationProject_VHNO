@@ -1,9 +1,9 @@
 # coding = utf8
 import os
 
-from airtest.core.error import AirtestError
 from poco.exceptions import PocoNoSuchNodeException
-from page.system.system import System, logger
+
+from page.system.system import System
 
 os.path.abspath(".")
 from time import sleep

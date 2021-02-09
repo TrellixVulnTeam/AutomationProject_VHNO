@@ -7,8 +7,6 @@ os.path.abspath("..")
     @Date:2020/12/15
 """
 from airtest.core.api import *
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
-from time import sleep
 
 """
     初始化AndroidUiautomationPoco

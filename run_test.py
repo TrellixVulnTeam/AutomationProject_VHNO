@@ -1,21 +1,17 @@
 # coding = utf8
+import logging
 from multiprocessing.dummy import Process
 
-import airtest
-import logging
+from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary
-from page.dialer.dialer_page import Dialer_Page
-from page.fota.fota_page import Fota_Page
+from page.chrome.chrome_page import Chrome_Page
 from page.main_page import Main_Page
-from page.messaging.messaging_page import Messaging_Page
 from page.settings.settings_page import Settings_Page
-from page.system.system import System
 from page.weather.weather_page import Weather_Page
-from toolsbar.permissionGrant import grant_permission
 from toolsbar.common import test_device, device_count
-from airtest.core.api import *
+from toolsbar.permissionGrant import grant_permission
 
 os.path.abspath(".")
 
@@ -112,8 +108,8 @@ def ui_task(device_item, poco_item):
     # debugger area
 
     main_page = Main_Page(device_item, poco_item)
-    fota_page = Fota_Page(main_page)
-    logger.error(fota_page.check_new_version())
+    chrome_page = Chrome_Page(main_page)
+    chrome_page.enter_website()
     # for i in range(20):
     #     print("Current device :{} 's navigation is {}".format(device_item.serialno,
     #                                                           settings_page.get_current_navigation()))

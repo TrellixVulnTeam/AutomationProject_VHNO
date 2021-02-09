@@ -3,9 +3,9 @@ import re
 from time import sleep
 
 from airtest.core.api import *
+from airtest.core.error import AdbShellError
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from poco.exceptions import PocoNoSuchNodeException
-from airtest.core.error import AdbShellError
 
 os.path.abspath("..")
 """

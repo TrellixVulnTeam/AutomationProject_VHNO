@@ -1,8 +1,8 @@
 # coding = utf8
 from airtest.core.api import *
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import SERIAL_NUMBER
+
 os.path.abspath(".")
 
 

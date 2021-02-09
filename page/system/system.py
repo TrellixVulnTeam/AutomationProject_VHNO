@@ -1,10 +1,9 @@
 # coding = utf8
-import os
-from time import sleep
-
-from airtest.core.api import keyevent
-from poco.exceptions import PocoNoSuchNodeException
 import logging
+import os
+
+from poco.exceptions import PocoNoSuchNodeException
+
 os.path.abspath(".")
 
 """

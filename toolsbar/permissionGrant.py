@@ -1,8 +1,8 @@
 # coding = utf8
 import os
+import re
 
 from airtest.core.error import AdbShellError
-import re
 
 os.path.abspath(".")
 

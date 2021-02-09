@@ -1,9 +1,7 @@
 # coding = utf8
-import subprocess
 
-import re
 import os
-
+import re
 
 os.path.abspath(".")
 

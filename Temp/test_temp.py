@@ -1,11 +1,7 @@
 # coding = utf8
 import os
 
-import uiautomator2
-
 os.path.abspath("..")
-import subprocess
-import pytest
 """
     @File:test_temp.py
     @Author:Bruce

@@ -4,7 +4,7 @@ from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System, logger
+from page.system.system import System
 
 os.path.abspath(".")
 """
