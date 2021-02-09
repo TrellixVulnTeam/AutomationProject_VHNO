@@ -4,6 +4,7 @@ import re
 from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -13,12 +14,12 @@ os.path.abspath(".")
 """
 
 
-class Dialer_Page:
+class Dialer_Page(System):
 
     # Ui element
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.settings_menu = self.poco("com.google.android.dialer:id/three_dot_menu_or_clear_icon_view")
         self.settings_menu_Settings = self.poco(text="Settings")
         self.settings_menu_Settings_Display_options = self.poco(text="Display options")

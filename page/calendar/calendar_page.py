@@ -3,6 +3,7 @@ import os
 from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -12,12 +13,12 @@ os.path.abspath(".")
 """
 
 
-class Calendar_Page:
+class Calendar_Page(System):
 
     # Ui element
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.guide_page_text = self.poco(text="Google Calendar")
         self.guide_next_arrow = self.poco("com.google.android.calendar:id/next_arrow")
         self.guide_got_it = self.poco("com.google.android.calendar:id/oobe_done_button")

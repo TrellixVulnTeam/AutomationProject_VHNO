@@ -1,6 +1,7 @@
 # coding = utf8
 import os
 from time import sleep
+from page.system.system import System, logger
 
 
 os.path.abspath(".")
@@ -11,12 +12,12 @@ os.path.abspath(".")
 """
 
 
-class Messaging_Page:
+class Messaging_Page(System):
 
     # Ui element
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.settings_menu_advanced = self.poco(text="Advanced")
         self.settings_menu_advanced_phone_number = self.poco(text="Phone number")
 
@@ -40,3 +41,10 @@ class Messaging_Page:
             print("PASS")
         return content, number
 
+    def get_phone_number(self):
+        self.device.start_app_timing(package="com.google.android.apps.messaging",
+                                          activity=".ui.appsettings.PerSubscriptionSettingsActivity")
+        sim_number = self.settings_menu_advanced_phone_number.parent().children()[1].wait().get_text()
+        sim_number = sim_number.replace(" ", "")
+        self.device.home()
+        return sim_number

@@ -1,6 +1,7 @@
 # coding = utf8
 import os
 from time import sleep
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -9,11 +10,11 @@ os.path.abspath(".")
     @Date:2021/1/14
 """
 
-class FileManager_Page:
+class FileManager_Page(System):
 
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.internal_storage = self.poco("com.tcl.tct.filemanager:id/phone_name")
         self.menu = self.poco("com.tcl.tct.filemanager:id/iv_bar_more")
         self.create_folder_text = self.poco(text="Create folder")

@@ -4,7 +4,8 @@ from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, logger
+
 
 os.path.abspath(".")
 """
@@ -14,12 +15,10 @@ os.path.abspath(".")
 """
 
 
-class Chrome_Page:
+class Chrome_Page(System):
 
     def __init__(self, main_page):
-        self.main_page = main_page
-        self.poco = main_page.poco
-        self.device = main_page.device
+        System.__init__(self, main_page)
 
     def start_chrome(self):
         self.device.start_app("com.android.chrome")

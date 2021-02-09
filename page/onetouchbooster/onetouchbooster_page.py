@@ -3,6 +3,7 @@ import os
 from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -11,11 +12,11 @@ os.path.abspath(".")
     @Date:2021/1/14
 """
 
-class Onetouchbooster_Page:
+class Onetouchbooster_Page(System):
 
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.guide_close = self.poco("com.tct.onetouchbooster:id/guide_close")
         self.guide_text = self.poco("com.tct.onetouchbooster:id/guide_text")
         self.battery = self.poco("Battery")

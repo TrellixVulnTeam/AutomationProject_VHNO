@@ -1,6 +1,7 @@
 # coding = utf8
 import os
 from time import sleep
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -9,11 +10,11 @@ os.path.abspath(".")
     @Date:2021/1/14
 """
 
-class Camera_Page:
+class Camera_Page(System):
 
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.top_function_bar = self.poco("com.tcl.camera:id/picker_list_layout")
         self.camera_settings_ai_scene_detection = self.poco(text="AI scene detection")
 

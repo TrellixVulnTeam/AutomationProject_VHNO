@@ -2,7 +2,10 @@
 import os
 from time import sleep
 
+from page.system.system import System, logger
+
 os.path.abspath(".")
+
 
 """
     @File:contacts_page.py
@@ -11,12 +14,12 @@ os.path.abspath(".")
 """
 
 
-class Contacts_Page:
+class Contacts_Page(System):
 
     # Ui element
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.save = self.poco("com.google.android.contacts:id/save_button")
 
     def start_contacts(self):

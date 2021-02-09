@@ -5,7 +5,7 @@ from time import sleep
 from airtest.core.error import AdbShellError, AirtestError
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -15,12 +15,11 @@ os.path.abspath(".")
 """
 
 
-class Settings_Page:
+class Settings_Page(System):
 
     def __init__(self, main_page):
-        self.main_page = main_page
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.sound_vibration_silent_mode_text = self.poco(text="Silent mode")
         self.display_sleep = self.poco(text="Sleep")
         self.display_sleep_never = self.poco(text="Never")
@@ -38,8 +37,8 @@ class Settings_Page:
 
     def set_screen_lock(self):
         self.start_settings()
-        security = System.scroll_to_find_element(self.main_page, element_text="Security & biometrics")
-        System.double_click_element(self.main_page, security)
+        security = self.scroll_to_find_element(element_text="Security & biometrics")
+        self.double_click_element(security)
         self.poco(text="Screen lock").wait().click()
         try:
             if self.poco(text="Confirm your PIN").wait().exists():
@@ -61,7 +60,7 @@ class Settings_Page:
 
     def clear_screen_lock(self):
         self.start_settings()
-        security = System.scroll_to_find_element(self.main_page, element_text="Security & biometrics")
+        security = self.scroll_to_find_element(element_text="Security & biometrics")
         security.click()
         self.poco(text="Screen lock").wait().click()
         self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
@@ -73,8 +72,8 @@ class Settings_Page:
 
     def get_imei_cu(self):
         self.start_settings()
-        system = System.scroll_to_find_element(self.main_page, element_text="System")
-        system.click()
+        system = self.scroll_to_find_element(element_text="System")
+        self.click()
         self.poco(text="Regulatory & safety").wait().click()
         imei = self.poco("com.jrdcom.Elabel:id/imei").wait().get_text()
         cu = self.poco("com.jrdcom.Elabel:id/cu_reference_id_view").wait().get_text()
@@ -105,9 +104,9 @@ class Settings_Page:
         global current_wifi
         self.enable_wifi()
         self.start_settings()
-        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
-        wifi_item = System.scroll_to_find_element(self.main_page, element_text=wifi_name)
+        wifi_item = self.scroll_to_find_element(element_text=wifi_name)
         wifi_item.click()
         self.poco("com.android.settings:id/password").wait().set_text(wifi_password)
         connect_button = self.poco(text="Connect").wait()
@@ -123,9 +122,9 @@ class Settings_Page:
     def forget_wifi(self, wifi_name="A_Test"):
         self.enable_wifi()
         self.start_settings()
-        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
-        wifi_item = System.scroll_to_find_element(self.main_page, element_text=wifi_name)
+        wifi_item = self.scroll_to_find_element(element_text=wifi_name)
         wifi_item.click()
         self.poco(text="FORGET").wait().click()
         self.stop_settings()
@@ -133,9 +132,9 @@ class Settings_Page:
     def set_wifi_direct_name(self, new_name="Test"):
         self.start_settings()
         self.enable_wifi()
-        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
-        wifi_preference = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi preferences")
+        wifi_preference = self.scroll_to_find_element(element_text="Wi-Fi preferences")
         wifi_preference.click()
         self.poco(text="Advanced").wait().click()
         self.poco(text="Wi-Fi Direct").wait().click()
@@ -149,9 +148,9 @@ class Settings_Page:
     def get_wifi_direct_name(self):
         self.start_settings()
         self.enable_wifi()
-        wifi = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi")
+        wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
-        wifi_preference = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi preferences")
+        wifi_preference = self.scroll_to_find_element(element_text="Wi-Fi preferences")
         wifi_preference.click()
         self.poco(text="Advanced").wait().click()
         self.poco(text="Wi-Fi Direct").wait().click()
@@ -161,7 +160,7 @@ class Settings_Page:
 
     def set_hotspot_name(self, name="Test"):
         self.start_settings()
-        sim_cards_menu = System.scroll_to_find_element(self.main_page, element_text="SIM card & cellular network")
+        sim_cards_menu = self.scroll_to_find_element(element_text="SIM card & cellular network")
         sim_cards_menu.click()
         self.poco(text="Hotspot & tethering").wait().click()
         self.poco(text="Mobile hotspot").wait().click()
@@ -174,11 +173,11 @@ class Settings_Page:
 
     def change_location_settings(self):
         self.start_settings()
-        location = System.scroll_to_find_element(self.main_page, element_text="Location")
-        System.double_click_element(self.main_page, location)
-        wifi_bt_scanning = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi and Bluetooth scanning")
+        location = self.scroll_to_find_element(element_text="Location")
+        self.double_click_element(location)
+        wifi_bt_scanning = self.scroll_to_find_element(element_text="Wi-Fi and Bluetooth scanning")
         wifi_bt_scanning.click()
-        wifi_scanning = System.scroll_to_find_element(self.main_page, element_text="Wi-Fi scanning")
+        wifi_scanning = self.scroll_to_find_element(element_text="Wi-Fi scanning")
         wifi_scanning.click()
         wifi_scan_status = wifi_scanning.parent().sibling().child("android:id/switch_widget")
         wifi_scan_status.invalidate()
@@ -189,8 +188,8 @@ class Settings_Page:
     def set_vpn(self, name="Test", address="Test"):
         # Before set vpn, you need set a screen lock first
         self.start_settings()
-        connected_devices = System.scroll_to_find_element(self.main_page, element_text="Connected devices")
-        System.double_click_element(self.main_page, connected_devices)
+        connected_devices = self.scroll_to_find_element(element_text="Connected devices")
+        self.double_click_element(connected_devices)
         self.poco(text="VPN").wait().click()
         self.poco("com.android.settings:id/vpn_create").wait().click()
         self.poco("com.android.settings:id/name").wait().set_text(name)
@@ -202,17 +201,17 @@ class Settings_Page:
     def get_data_usage(self):
         # First：close wifi， enter website，then get data usage
         self.start_settings()
-        sim_card_cellular_menu = System.scroll_to_find_element(self.main_page,
+        sim_card_cellular_menu = self.scroll_to_find_element(self.main_page,
                                                                element_text="SIM card & cellular network")
-        System.double_click_element(self.main_page, sim_card_cellular_menu)
+        self.double_click_element(sim_card_cellular_menu)
         data_usage = self.poco(text="Data usage").wait().sibling("android:id/summary").get_text()
         self.stop_settings()
         return data_usage
 
     def set_navigation_gesture(self):
         self.start_settings()
-        button_gestures = System.scroll_to_find_element(self.main_page, element_text="Button & gestures")
-        System.double_click_element(self.main_page, button_gestures)
+        button_gestures = self.scroll_to_find_element(element_text="Button & gestures")
+        self.double_click_element(button_gestures)
         self.poco(text="System navigation").wait().click()
         navigation_gesture = self.poco(text="Gesture navigation").wait()
         navigation_gesture.click()
@@ -223,8 +222,8 @@ class Settings_Page:
     def get_current_navigation(self):
         global current_navigation
         self.start_settings()
-        button_gestures = System.scroll_to_find_element(self.main_page, element_text="Button & gestures")
-        System.double_click_element(self.main_page, button_gestures)
+        button_gestures = self.scroll_to_find_element(element_text="Button & gestures")
+        self.double_click_element(button_gestures)
         self.poco(text="System navigation").wait().click()
         # 指定元素遍历并返回
         checked_box = self.poco("com.android.settings:id/recycler_view").wait().offspring(checked=True)

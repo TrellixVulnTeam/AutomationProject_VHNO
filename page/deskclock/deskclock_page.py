@@ -2,6 +2,7 @@
 import os
 import re
 from time import sleep
+from page.system.system import System, logger
 
 os.path.abspath(".")
 
@@ -12,12 +13,12 @@ os.path.abspath(".")
 """
 
 
-class Deskclock_Page:
+class Deskclock_Page(System):
 
     # Ui element
     def __init__(self, main_page):
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.create_clock = self.poco("com.android.deskclock:id/fab")
         self.create_clock_hour = self.poco("com.android.deskclock:id/timerpicker_hour")
         self.create_clock_minute = self.poco("com.android.deskclock:id/timerpicker_minute")

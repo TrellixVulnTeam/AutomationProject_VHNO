@@ -26,6 +26,7 @@ austinDevice = connect_device("Android:///69a83185")
     common 方法1：上下滚动查找元素
 """
 
+
 def scroll_to_find_element(element_text):
     global element
     menu_exists = False
@@ -149,6 +150,7 @@ def check_sms_sender_receiver(number="18512026630", content="Test"):
     print(receiver_content)
     if number[-4:] in receiver_content:
         print("PASS")
+
 
 """
     Case 5:验证短信相关设置是否被保留
@@ -743,7 +745,7 @@ def check_notch_reserved():
         scroll_to_find_element("Display").click()
         scroll_to_find_element("Status bar & notch").click()
         poco(text="Notch").wait().click()
-        statusbar_hide = poco(text="Hide notch without moving status bar").wait()\
+        statusbar_hide = poco(text="Hide notch without moving status bar").wait() \
             .parent().sibling().child("com.android.settings:id/status_bar_btn2").wait()
         statusbar_hide.click()
         statusbar_hide.invalidate()

@@ -3,6 +3,7 @@ import os
 
 from airtest.core.error import AirtestError
 from poco.exceptions import PocoNoSuchNodeException
+from page.system.system import System, logger
 
 os.path.abspath(".")
 from time import sleep
@@ -12,12 +13,11 @@ from time import sleep
     @Date:2021/2/1
 """
 
-class Weather_Page:
+class Weather_Page(System):
 
     def __init__(self, main_page):
-        self.main_page = main_page
-        self.poco = main_page.poco
-        self.device = main_page.device
+        System.__init__(self, main_page)
+
         self.package_name = "com.tcl.tct.weather"
         self.guide_alert = self.poco(text="Weather notification")
         self.guide_agree = self.poco(text="AGREE")

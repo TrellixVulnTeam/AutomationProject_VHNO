@@ -4,7 +4,7 @@ from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -13,12 +13,11 @@ os.path.abspath(".")
     @Date:2021/1/14
 """
 
-class Fota_Page:
+class Fota_Page(System):
 
     def __init__(self, main_page):
-        self.main_page = main_page
-        self.device = main_page.device
-        self.poco = main_page.poco
+        System.__init__(self, main_page)
+
         self.guide_page_text = self.poco("com.tcl.fota.system:id/app_guide_title")
         self.guide_continue = self.poco("com.tcl.fota.system:id/guide_continue_button")
         self.download_progress_button = self.poco("com.tcl.fota.system:id/download_progress_button")
@@ -47,7 +46,7 @@ class Fota_Page:
         self.start_fota_page()
         searching_fota = False
         while not searching_fota:
-            System.double_click_element(self.main_page, self.download_progress_button)
+            self.double_click_element(self.download_progress_button)
             self.download_progress_button.invalidate()
             progress_text = self.download_progress_button.attr("desc")
             print(progress_text)
