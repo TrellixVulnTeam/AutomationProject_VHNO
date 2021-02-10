@@ -28,6 +28,7 @@ class Camera_Page(System):
         self.device.stop_app("com.tcl.camera")
 
     def enter_camera_settings(self):
+        self.start_camera()
         camera_settings = self.top_function_bar.wait().children()[0]
         print(camera_settings.attr("desc"))
         camera_settings.click()

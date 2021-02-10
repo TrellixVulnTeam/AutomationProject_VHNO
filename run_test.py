@@ -6,6 +6,7 @@ from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary
+from page.camera.camera_page import Camera_Page
 from page.chrome.chrome_page import Chrome_Page
 from page.main_page import Main_Page
 from page.settings.settings_page import Settings_Page
@@ -108,8 +109,8 @@ def ui_task(device_item, poco_item):
     # debugger area
 
     main_page = Main_Page(device_item, poco_item)
-    chrome_page = Chrome_Page(main_page)
-    chrome_page.enter_website()
+    camera_page = Camera_Page(main_page)
+    camera_page.enter_camera_settings()
     # for i in range(20):
     #     print("Current device :{} 's navigation is {}".format(device_item.serialno,
     #                                                           settings_page.get_current_navigation()))
