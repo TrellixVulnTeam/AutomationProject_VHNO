@@ -1,7 +1,14 @@
 # coding = utf8
 
+from multiprocessing.dummy import Process
+
 import pytest
 from airtest.core.api import *
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
+from page.main_page import Main_Page
+from toolsbar.common import test_device, device_count
+
 os.path.abspath(".")
 
 """
@@ -14,13 +21,14 @@ os.path.abspath(".")
     a py file which saved pytest's fixture for use
 """
 
-
-@pytest.fixture(scope = "function")
+# 测试前初始化poco和device
+@pytest.fixture(scope="session", autouse=True)
 def before_case_execute():
-    print("Before test")
-    yield before_case_execute
-    print("After test")
-
+    test_device.unlock()
+    home()
+    poco = AndroidUiautomationPoco()
+    main_page = Main_Page(test_device, poco)
+    return main_page
 
 
 

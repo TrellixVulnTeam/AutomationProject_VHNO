@@ -30,12 +30,13 @@ class Camera_Page(System):
     def enter_camera_settings(self):
         self.start_camera()
         camera_settings = self.top_function_bar.wait().children()[0]
-        print(camera_settings.attr("desc"))
         camera_settings.click()
         ai_scene_detection_switch = self.camera_settings_ai_scene_detection.wait().parent().parent().children()[1].children()
         ai_scene_detection_switch.click()
         ai_scene_detection_switch.invalidate()
-        print(ai_scene_detection_switch.attr("checked"))
+        switch_status = ai_scene_detection_switch.attr("checked")
+        self.stop_camera()
+        return switch_status
 
 
 

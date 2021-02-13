@@ -1,0 +1,21 @@
+[ {
+  "uid" : "79e4ccd24480fad8",
+  "name" : "test_camera",
+  "time" : {
+    "start" : 1613193259792,
+    "stop" : 1613193267344,
+    "duration" : 7552
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "51df7ef07921e0e4",
+  "name" : "test_settings",
+  "time" : {
+    "start" : 1613193267348,
+    "stop" : 1613193290824,
+    "duration" : 23476
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]

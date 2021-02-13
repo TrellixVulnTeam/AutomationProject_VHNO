@@ -1,0 +1,35 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "test_case.test_before_fota",
+    "children" : [ {
+      "name" : "test_camera",
+      "uid" : "79e4ccd24480fad8",
+      "parentUid" : "d483bf4d5bd788602c3be97772b47b53",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613193259792,
+        "stop" : 1613193267344,
+        "duration" : 7552
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_settings",
+      "uid" : "51df7ef07921e0e4",
+      "parentUid" : "d483bf4d5bd788602c3be97772b47b53",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613193267348,
+        "stop" : 1613193290824,
+        "duration" : 23476
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "test_case.test_before_fota"
+  } ]
+}

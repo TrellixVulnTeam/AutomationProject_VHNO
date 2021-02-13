@@ -73,7 +73,7 @@ class Settings_Page(System):
     def get_imei_cu(self):
         self.start_settings()
         system = self.scroll_to_find_element(element_text="System")
-        self.click()
+        system.click()
         self.poco(text="Regulatory & safety").wait().click()
         imei = self.poco("com.jrdcom.Elabel:id/imei").wait().get_text()
         cu = self.poco("com.jrdcom.Elabel:id/cu_reference_id_view").wait().get_text()

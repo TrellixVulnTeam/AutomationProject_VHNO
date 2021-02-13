@@ -1,0 +1,71 @@
+{
+  "uid" : "51df7ef07921e0e4",
+  "name" : "test_settings",
+  "fullName" : "test_case.test_before_fota.TestBeforeFota#test_settings",
+  "historyId" : "5b96566b81b3267387b92d5116909b05",
+  "time" : {
+    "start" : 1613193267348,
+    "stop" : 1613193290824,
+    "duration" : 23476
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "before_case_execute",
+    "time" : {
+      "start" : 1613193252140,
+      "stop" : 1613193259783,
+      "duration" : 7643
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test_case"
+  }, {
+    "name" : "suite",
+    "value" : "test_before_fota"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestBeforeFota"
+  }, {
+    "name" : "host",
+    "value" : "CGTdeMBP"
+  }, {
+    "name" : "thread",
+    "value" : "6646-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_case.test_before_fota"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "51df7ef07921e0e4.json",
+  "parameterValues" : [ ]
+}
