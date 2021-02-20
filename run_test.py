@@ -5,9 +5,7 @@ import pytest
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-from config import install_app_necessary
 from toolsbar.common import test_device
-from toolsbar.permissionGrant import grant_permission
 from toolsbar.save2csv import Save2Csv
 
 os.path.abspath(".")

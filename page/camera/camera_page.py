@@ -41,8 +41,3 @@ class Camera_Page(System):
         set_value = ai_scene_detection_switch.attr("checked")
         self.stop_camera()
         return previous_value, set_value
-
-
-
-
-

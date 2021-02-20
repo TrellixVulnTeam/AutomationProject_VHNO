@@ -1,14 +1,11 @@
 # coding = utf8
 
-from multiprocessing.dummy import Process
-
 import pytest
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from page.main_page import Main_Page
-from toolsbar.common import test_device, device_count
-from toolsbar.save2csv import Save2Csv
+from toolsbar.common import test_device
 
 os.path.abspath(".")
 

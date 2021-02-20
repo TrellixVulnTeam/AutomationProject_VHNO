@@ -3,7 +3,6 @@ import os
 import sys
 
 from page.camera.camera_page import Camera_Page
-from page.settings.settings_page import Settings_Page
 from toolsbar.save2csv import Save2Csv
 
 os.path.abspath(".")

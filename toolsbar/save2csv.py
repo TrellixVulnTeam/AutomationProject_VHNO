@@ -1,6 +1,5 @@
 # coding = utf8
 import csv
-import logging
 import os
 
 from page.system.system import logger
