@@ -1,22 +1,22 @@
 {
-  "uid" : "51df7ef07921e0e4",
-  "name" : "test_settings",
-  "fullName" : "test_case.test_before_fota.TestBeforeFota#test_settings",
-  "historyId" : "5b96566b81b3267387b92d5116909b05",
+  "uid" : "3c495559fe0bf1fd",
+  "name" : "test_sort_all_data",
+  "fullName" : "test_case.test_before_fota.TestBeforeFota#test_sort_all_data",
+  "historyId" : "df31fc24e36e175160319c3fdcc48349",
   "time" : {
-    "start" : 1613193267348,
-    "stop" : 1613193290824,
-    "duration" : 23476
+    "start" : 1613827559893,
+    "stop" : 1613827559895,
+    "duration" : 2
   },
   "status" : "passed",
   "flaky" : false,
   "newFailed" : false,
   "beforeStages" : [ {
-    "name" : "before_case_execute",
+    "name" : "before_all_case_execute",
     "time" : {
-      "start" : 1613193252140,
-      "stop" : 1613193259783,
-      "duration" : 7643
+      "start" : 1613827545183,
+      "stop" : 1613827552221,
+      "duration" : 7038
     },
     "status" : "passed",
     "steps" : [ ],
@@ -39,10 +39,10 @@
     "value" : "TestBeforeFota"
   }, {
     "name" : "host",
-    "value" : "CGTdeMBP"
+    "value" : "CGTdeMacBook-Pro.local"
   }, {
     "name" : "thread",
-    "value" : "6646-MainThread"
+    "value" : "7535-MainThread"
   }, {
     "name" : "framework",
     "value" : "pytest"
@@ -58,14 +58,12 @@
   } ],
   "parameters" : [ ],
   "links" : [ ],
-  "hidden" : false,
-  "retry" : false,
+  "hidden" : true,
+  "retry" : true,
   "extra" : {
-    "severity" : "normal",
-    "retries" : [ ],
     "categories" : [ ],
     "tags" : [ ]
   },
-  "source" : "51df7ef07921e0e4.json",
+  "source" : "3c495559fe0bf1fd.json",
   "parameterValues" : [ ]
 }

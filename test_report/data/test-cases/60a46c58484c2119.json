@@ -1,22 +1,22 @@
 {
-  "uid" : "79e4ccd24480fad8",
+  "uid" : "60a46c58484c2119",
   "name" : "test_camera",
   "fullName" : "test_case.test_before_fota.TestBeforeFota#test_camera",
   "historyId" : "f8f97fc289f63972299ca31220f87a54",
   "time" : {
-    "start" : 1613193259792,
-    "stop" : 1613193267344,
-    "duration" : 7552
+    "start" : 1613827229562,
+    "stop" : 1613827236442,
+    "duration" : 6880
   },
   "status" : "passed",
   "flaky" : false,
   "newFailed" : false,
   "beforeStages" : [ {
-    "name" : "before_case_execute",
+    "name" : "before_all_case_execute",
     "time" : {
-      "start" : 1613193252140,
-      "stop" : 1613193259783,
-      "duration" : 7643
+      "start" : 1613827222482,
+      "stop" : 1613827229553,
+      "duration" : 7071
     },
     "status" : "passed",
     "steps" : [ ],
@@ -39,10 +39,10 @@
     "value" : "TestBeforeFota"
   }, {
     "name" : "host",
-    "value" : "CGTdeMBP"
+    "value" : "CGTdeMacBook-Pro.local"
   }, {
     "name" : "thread",
-    "value" : "6646-MainThread"
+    "value" : "7202-MainThread"
   }, {
     "name" : "framework",
     "value" : "pytest"
@@ -58,14 +58,12 @@
   } ],
   "parameters" : [ ],
   "links" : [ ],
-  "hidden" : false,
-  "retry" : false,
+  "hidden" : true,
+  "retry" : true,
   "extra" : {
-    "severity" : "normal",
-    "retries" : [ ],
     "categories" : [ ],
     "tags" : [ ]
   },
-  "source" : "79e4ccd24480fad8.json",
+  "source" : "60a46c58484c2119.json",
   "parameterValues" : [ ]
 }

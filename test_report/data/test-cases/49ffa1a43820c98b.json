@@ -1,0 +1,156 @@
+{
+  "uid" : "49ffa1a43820c98b",
+  "name" : "test_camera",
+  "fullName" : "test_case.test_before_fota.TestBeforeFota#test_camera",
+  "historyId" : "f8f97fc289f63972299ca31220f87a54",
+  "time" : {
+    "start" : 1613827661790,
+    "stop" : 1613827668641,
+    "duration" : 6851
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "before_all_case_execute",
+    "time" : {
+      "start" : 1613827654742,
+      "stop" : 1613827661782,
+      "duration" : 7040
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "afterStages" : [ ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test_case"
+  }, {
+    "name" : "suite",
+    "value" : "test_before_fota"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestBeforeFota"
+  }, {
+    "name" : "host",
+    "value" : "CGTdeMacBook-Pro.local"
+  }, {
+    "name" : "thread",
+    "value" : "7630-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_case.test_before_fota"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ {
+      "uid" : "815f77b464ebe52a",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613827552229,
+        "stop" : 1613827559889,
+        "duration" : 7660
+      }
+    }, {
+      "uid" : "d8b14d43d282767d",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613827464282,
+        "stop" : 1613827471214,
+        "duration" : 6932
+      }
+    }, {
+      "uid" : "48a8ab5bc2c7cf9",
+      "status" : "broken",
+      "statusDetails" : "TypeError: append() takes exactly one argument (3 given)",
+      "time" : {
+        "start" : 1613827307417,
+        "stop" : 1613827314862,
+        "duration" : 7445
+      }
+    }, {
+      "uid" : "c0cb5c5ae494bf22",
+      "status" : "broken",
+      "statusDetails" : "TypeError: append() takes exactly one argument (3 given)",
+      "time" : {
+        "start" : 1613827278122,
+        "stop" : 1613827284908,
+        "duration" : 6786
+      }
+    }, {
+      "uid" : "60a46c58484c2119",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613827229562,
+        "stop" : 1613827236442,
+        "duration" : 6880
+      }
+    }, {
+      "uid" : "555df993814d9935",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613827121847,
+        "stop" : 1613827128618,
+        "duration" : 6771
+      }
+    }, {
+      "uid" : "3b6aa69b93ccf327",
+      "status" : "broken",
+      "statusDetails" : "AttributeError: 'NoneType' object has no attribute 'device'",
+      "time" : {
+        "start" : 1613826120964,
+        "stop" : 1613826120964,
+        "duration" : 0
+      }
+    }, {
+      "uid" : "718bfe0945579c93",
+      "status" : "broken",
+      "statusDetails" : "AttributeError: 'NoneType' object has no attribute 'device'",
+      "time" : {
+        "start" : 1613826084892,
+        "stop" : 1613826084892,
+        "duration" : 0
+      }
+    }, {
+      "uid" : "1d41719060c70345",
+      "status" : "broken",
+      "statusDetails" : "AttributeError: 'NoneType' object has no attribute 'device'",
+      "time" : {
+        "start" : 1613826010959,
+        "stop" : 1613826010960,
+        "duration" : 1
+      }
+    }, {
+      "uid" : "2012f9bfecbf476d",
+      "status" : "passed",
+      "time" : {
+        "start" : 1613824436878,
+        "stop" : 1613824444070,
+        "duration" : 7192
+      }
+    } ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "49ffa1a43820c98b.json",
+  "parameterValues" : [ ]
+}

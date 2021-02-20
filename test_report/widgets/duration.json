@@ -1,20 +1,30 @@
 [ {
-  "uid" : "79e4ccd24480fad8",
-  "name" : "test_camera",
+  "uid" : "f5309101b5f6236e",
+  "name" : "test_settings",
   "time" : {
-    "start" : 1613193259792,
-    "stop" : 1613193267344,
-    "duration" : 7552
+    "start" : 1613824444074,
+    "stop" : 1613824466596,
+    "duration" : 22522
   },
   "status" : "passed",
   "severity" : "normal"
 }, {
-  "uid" : "51df7ef07921e0e4",
-  "name" : "test_settings",
+  "uid" : "fa6b864056653939",
+  "name" : "test_sort_all_data",
   "time" : {
-    "start" : 1613193267348,
-    "stop" : 1613193290824,
-    "duration" : 23476
+    "start" : 1613827668645,
+    "stop" : 1613827668647,
+    "duration" : 2
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "49ffa1a43820c98b",
+  "name" : "test_camera",
+  "time" : {
+    "start" : 1613827661790,
+    "stop" : 1613827668641,
+    "duration" : 6851
   },
   "status" : "passed",
   "severity" : "normal"
