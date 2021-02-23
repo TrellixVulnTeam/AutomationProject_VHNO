@@ -5,14 +5,15 @@ import pytest
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-from toolsbar.common import test_device
+from toolsbar.common import test_device, logger
 from toolsbar.save2csv import Save2Csv
 
 os.path.abspath(".")
 
 # 过滤airtest log只打印ERROR的Log
-logger = logging.getLogger("airtest")
-logger.setLevel(logging.ERROR)
+logger_airtest = logging.getLogger("airtest")
+logger_airtest.setLevel(logging.ERROR)
+
 
 """
     @File:run_test.py
@@ -139,6 +140,7 @@ if __name__ == '__main__':
     # 这里将获取到到值传下去存到Excel表格中
 
     save2csv = Save2Csv()
-    # save2csv.writeInCsv(["Test", "1", "2"])
     csv_list = save2csv.getDataFromCsv("Fota_Before.csv")
-    logger.error(csv_list)
+    # logger.error(csv_list)
+    logger.info(csv_list)
+

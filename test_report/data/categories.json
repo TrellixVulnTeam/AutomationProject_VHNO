@@ -1,5 +1,47 @@
 {
   "uid" : "4b4757e66a1912dae1a509f688f20b0f",
   "name" : "categories",
-  "children" : [ ]
+  "children" : [ {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert 1 == 2\n  +1\n  -2",
+      "children" : [ {
+        "name" : "test_camera",
+        "uid" : "56e06e01b9c643b4",
+        "parentUid" : "10959c3b9d2f664cb99b9d2e2fac064d",
+        "status" : "failed",
+        "time" : {
+          "start" : 1614089777070,
+          "stop" : 1614089782618,
+          "duration" : 5548
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "10959c3b9d2f664cb99b9d2e2fac064d"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  }, {
+    "name" : "Test defects",
+    "children" : [ {
+      "name" : "poco.exceptions.PocoNoSuchNodeException: Cannot find any visible node by query UIObjectProxy of \"com.android.chrome:id/url_bar\"",
+      "children" : [ {
+        "name" : "test_enter_chrome",
+        "uid" : "60fe2e69320aad6f",
+        "parentUid" : "220cce9bf5e3fc9a4f394f96810cadd0",
+        "status" : "broken",
+        "time" : {
+          "start" : 1614089784768,
+          "stop" : 1614089802468,
+          "duration" : 17700
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "220cce9bf5e3fc9a4f394f96810cadd0"
+    } ],
+    "uid" : "bdbf199525818fae7a8651db9eafe741"
+  } ]
 }

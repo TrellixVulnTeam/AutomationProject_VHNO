@@ -3,6 +3,7 @@ import logging
 import os
 
 from poco.exceptions import PocoNoSuchNodeException
+from toolsbar.common import logger
 
 os.path.abspath(".")
 
@@ -12,9 +13,6 @@ os.path.abspath(".")
     @Date:2021/1/12
     @Description:Current py test is contained some system function
 """
-logger = logging.getLogger()
-logger.setLevel(logging.INFO)
-
 
 class System:
 

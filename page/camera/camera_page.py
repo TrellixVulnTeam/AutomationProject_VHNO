@@ -2,7 +2,7 @@
 import os
 from time import sleep
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -39,5 +39,6 @@ class Camera_Page(System):
         ai_scene_detection_switch.click()
         ai_scene_detection_switch.invalidate()
         set_value = ai_scene_detection_switch.attr("checked")
-        self.stop_camera()
+        logger.info(set_value)
         return previous_value, set_value
+

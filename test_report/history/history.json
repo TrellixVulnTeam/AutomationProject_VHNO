@@ -1,39 +1,41 @@
 {
-  "f8f97fc289f63972299ca31220f87a54" : {
+  "0f58e2c8387a7b749696fb9203b89034" : {
     "statistic" : {
       "failed" : 0,
-      "broken" : 0,
+      "broken" : 1,
       "skipped" : 0,
-      "passed" : 1,
+      "passed" : 0,
       "unknown" : 0,
       "total" : 1
     },
     "items" : [ {
-      "uid" : "49ffa1a43820c98b",
-      "status" : "passed",
+      "uid" : "60fe2e69320aad6f",
+      "status" : "broken",
+      "statusDetails" : "poco.exceptions.PocoNoSuchNodeException: Cannot find any visible node by query UIObjectProxy of \"com.android.chrome:id/url_bar\"",
       "time" : {
-        "start" : 1613827661790,
-        "stop" : 1613827668641,
-        "duration" : 6851
+        "start" : 1614089784768,
+        "stop" : 1614089802468,
+        "duration" : 17700
       }
     } ]
   },
-  "5b96566b81b3267387b92d5116909b05" : {
+  "f8f97fc289f63972299ca31220f87a54" : {
     "statistic" : {
-      "failed" : 0,
+      "failed" : 1,
       "broken" : 0,
       "skipped" : 0,
-      "passed" : 1,
+      "passed" : 0,
       "unknown" : 0,
       "total" : 1
     },
     "items" : [ {
-      "uid" : "f5309101b5f6236e",
-      "status" : "passed",
+      "uid" : "56e06e01b9c643b4",
+      "status" : "failed",
+      "statusDetails" : "AssertionError: assert 1 == 2\n  +1\n  -2",
       "time" : {
-        "start" : 1613824444074,
-        "stop" : 1613824466596,
-        "duration" : 22522
+        "start" : 1614089777070,
+        "stop" : 1614089782618,
+        "duration" : 5548
       }
     } ]
   },
@@ -47,11 +49,11 @@
       "total" : 1
     },
     "items" : [ {
-      "uid" : "fa6b864056653939",
+      "uid" : "1e2d1ddca4e29466",
       "status" : "passed",
       "time" : {
-        "start" : 1613827668645,
-        "stop" : 1613827668647,
+        "start" : 1614089803391,
+        "stop" : 1614089803393,
         "duration" : 2
       }
     } ]

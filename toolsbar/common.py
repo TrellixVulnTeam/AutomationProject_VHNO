@@ -1,10 +1,12 @@
 # coding = utf8
+import logging
+import sys
+
 from airtest.core.api import *
 
 from config import SERIAL_NUMBER
 
 os.path.abspath(".")
-
 
 """
     @File:common.py
@@ -39,3 +41,28 @@ def init_all_device():
 
 test_device = init_all_device()
 
+
+def logger_config(log_path, logging_name):
+    '''
+    配置log
+    :param log_path: 输出log路径
+    :param logging_name: 记录中name，可随意
+    :return:
+    '''
+    '''
+    logger是日志对象，handler是流处理器
+    '''
+    # 获取logger对象,取名
+    logger = logging.getLogger(logging_name)
+    logger.setLevel(logging.INFO)
+    handler = logging.FileHandler(log_path, encoding='UTF-8')
+    # 生成并设置文件日志格式
+    formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+    handler.setFormatter(formatter)
+    # 为logger对象添加句柄
+    logger.addHandler(handler)
+    return logger
+
+
+# 该log机制用于保存自定义的错误或info信息
+logger = logger_config(log_path="./log/{}.log".format("Fota测试"), logging_name="Fota测试")

@@ -15,6 +15,7 @@ os.path.abspath("..")
 """
 
 poco = AndroidUiautomationPoco()
+
 austinDevice = connect_device("Android:///69a83185")
 # austinDevice = connect_device("Android:///b3e5b958")
 

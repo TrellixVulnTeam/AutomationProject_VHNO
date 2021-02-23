@@ -1,31 +1,31 @@
 [ {
-  "uid" : "f5309101b5f6236e",
-  "name" : "test_settings",
+  "uid" : "60fe2e69320aad6f",
+  "name" : "test_enter_chrome",
   "time" : {
-    "start" : 1613824444074,
-    "stop" : 1613824466596,
-    "duration" : 22522
+    "start" : 1614089784768,
+    "stop" : 1614089802468,
+    "duration" : 17700
   },
-  "status" : "passed",
+  "status" : "broken",
   "severity" : "normal"
 }, {
-  "uid" : "fa6b864056653939",
+  "uid" : "1e2d1ddca4e29466",
   "name" : "test_sort_all_data",
   "time" : {
-    "start" : 1613827668645,
-    "stop" : 1613827668647,
+    "start" : 1614089803391,
+    "stop" : 1614089803393,
     "duration" : 2
   },
   "status" : "passed",
   "severity" : "normal"
 }, {
-  "uid" : "49ffa1a43820c98b",
+  "uid" : "56e06e01b9c643b4",
   "name" : "test_camera",
   "time" : {
-    "start" : 1613827661790,
-    "stop" : 1613827668641,
-    "duration" : 6851
+    "start" : 1614089777070,
+    "stop" : 1614089782618,
+    "duration" : 5548
   },
-  "status" : "passed",
+  "status" : "failed",
   "severity" : "normal"
 } ]
