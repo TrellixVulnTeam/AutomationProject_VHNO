@@ -1,4 +1,0 @@
-"Status","Start Time","Stop Time","Duration in ms","Parent Suite","Suite","Sub Suite","Test Class","Test Method","Name","Description"
-"passed","Tue Feb 23 22:16:43 CST 2021","Tue Feb 23 22:16:43 CST 2021","2","test_case","test_before_fota","TestBeforeFota","","","test_sort_all_data",""
-"failed","Tue Feb 23 22:16:17 CST 2021","Tue Feb 23 22:16:22 CST 2021","5548","test_case","test_before_fota","TestBeforeFota","","","test_camera",""
-"broken","Tue Feb 23 22:16:24 CST 2021","Tue Feb 23 22:16:42 CST 2021","17700","test_case","test_before_fota","TestBeforeFota","","","test_enter_chrome",""

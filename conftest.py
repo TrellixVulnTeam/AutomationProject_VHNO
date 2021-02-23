@@ -1,4 +1,5 @@
 # coding = utf8
+
 import allure
 import pytest
 from airtest.core.api import *
@@ -51,5 +52,9 @@ def pytest_runtest_makereport(item, call):
             f.write(rep.nodeid + extra + "\n")
         # 添加allure报告截图
         with allure.step('添加失败截图...'):
-            allure.attach(test_device.snapshot("./screenshot/{}.png".format(item)), "失败截图", allure.attachment_type.PNG)
+            file_name = "./screenshot/{}.png".format(item)
+            test_device.snapshot(file_name)
+            with open(file_name, mode="rb") as f:
+                file = f.read()
+            allure.attach(file, "{}:失败截图".format(item), allure.attachment_type.PNG)
 
