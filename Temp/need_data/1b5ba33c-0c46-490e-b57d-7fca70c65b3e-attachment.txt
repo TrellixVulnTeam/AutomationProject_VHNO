@@ -1,0 +1,2 @@
+INFO     Fota测试:conftest.py:38 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:45 当前界面为主界面

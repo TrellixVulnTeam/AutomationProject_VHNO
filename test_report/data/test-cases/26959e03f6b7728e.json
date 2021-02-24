@@ -1,0 +1,117 @@
+{
+  "uid" : "26959e03f6b7728e",
+  "name" : "test_calendar",
+  "fullName" : "test_case.test_before_fota.TestBeforeFota#test_calendar",
+  "historyId" : "07a7c26c61dc2e309336d02bb422e2d5",
+  "time" : {
+    "start" : 1614154429470,
+    "stop" : 1614154432765,
+    "duration" : 3295
+  },
+  "status" : "passed",
+  "flaky" : false,
+  "newFailed" : false,
+  "beforeStages" : [ {
+    "name" : "after_current_case_execute",
+    "time" : {
+      "start" : 1614154429469,
+      "stop" : 1614154429470,
+      "duration" : 1
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  }, {
+    "name" : "before_all_case_execute",
+    "time" : {
+      "start" : 1614154378977,
+      "stop" : 1614154386504,
+      "duration" : 7527
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "testStage" : {
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ {
+      "uid" : "9a620e2b93599115",
+      "name" : "log",
+      "source" : "9a620e2b93599115.txt",
+      "type" : "text/plain",
+      "size" : 303
+    } ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 1,
+    "shouldDisplayMessage" : false,
+    "hasContent" : true
+  },
+  "afterStages" : [ {
+    "name" : "after_current_case_execute::0",
+    "time" : {
+      "start" : 1614154432767,
+      "stop" : 1614154432969,
+      "duration" : 202
+    },
+    "status" : "passed",
+    "steps" : [ ],
+    "attachments" : [ ],
+    "parameters" : [ ],
+    "stepsCount" : 0,
+    "attachmentsCount" : 0,
+    "shouldDisplayMessage" : false,
+    "hasContent" : false
+  } ],
+  "labels" : [ {
+    "name" : "parentSuite",
+    "value" : "test_case"
+  }, {
+    "name" : "suite",
+    "value" : "test_before_fota"
+  }, {
+    "name" : "subSuite",
+    "value" : "TestBeforeFota"
+  }, {
+    "name" : "host",
+    "value" : "CGTdeMacBook-Pro.local"
+  }, {
+    "name" : "thread",
+    "value" : "18027-MainThread"
+  }, {
+    "name" : "framework",
+    "value" : "pytest"
+  }, {
+    "name" : "language",
+    "value" : "cpython3"
+  }, {
+    "name" : "package",
+    "value" : "test_case.test_before_fota"
+  }, {
+    "name" : "resultFormat",
+    "value" : "allure2"
+  } ],
+  "parameters" : [ ],
+  "links" : [ ],
+  "hidden" : false,
+  "retry" : false,
+  "extra" : {
+    "severity" : "normal",
+    "retries" : [ ],
+    "categories" : [ ],
+    "tags" : [ ]
+  },
+  "source" : "26959e03f6b7728e.json",
+  "parameterValues" : [ ]
+}

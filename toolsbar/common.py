@@ -40,6 +40,7 @@ def init_all_device():
 
 test_device = init_all_device()
 
+
 def logger_config(log_path, logging_name):
     """
     配置log

@@ -12,6 +12,7 @@ command + 3：打开关闭terminal
 这时，我们使用uiautomatorviewer/python3 -m weditor来获取ui tree
 
 # 本项目已修改源码：
+路径：/Users/cgt/Library/Python/3.7/lib/python/site-packages/poco/drivers/android/uiautomation.py"
 print("still waiting for uiautomation ready.")
 # -- Guangtao
 self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))

@@ -1,0 +1,20 @@
+INFO     Fota测试:conftest.py:38 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:camera_page.py:25 function:start_camera:启动camera app:
+INFO     Fota测试:camera_page.py:35 function:enter_camera_settings:进入camera设置界面:
+INFO     Fota测试:camera_page.py:40 function:change_ai_scene_status:改变Ai scene status的值:
+INFO     Fota测试:conftest.py:43 APP关闭完成
+INFO     Fota测试:conftest.py:38 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:camera_page.py:25 function:start_camera:启动camera app:
+INFO     Fota测试:camera_page.py:35 function:enter_camera_settings:进入camera设置界面:
+INFO     Fota测试:camera_page.py:40 function:change_ai_scene_status:改变Ai scene status的值:
+INFO     Fota测试:conftest.py:43 APP关闭完成
+INFO     Fota测试:conftest.py:38 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:camera_page.py:25 function:start_camera:启动camera app:
+INFO     Fota测试:camera_page.py:35 function:enter_camera_settings:进入camera设置界面:
+INFO     Fota测试:camera_page.py:40 function:change_ai_scene_status:改变Ai scene status的值:
+INFO     Fota测试:conftest.py:43 APP关闭完成
+INFO     Fota测试:conftest.py:38 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:camera_page.py:25 function:start_camera:启动camera app:
+INFO     Fota测试:camera_page.py:35 function:enter_camera_settings:进入camera设置界面:
+INFO     Fota测试:camera_page.py:40 function:change_ai_scene_status:改变Ai scene status的值:
+INFO     Fota测试:conftest.py:43 APP关闭完成

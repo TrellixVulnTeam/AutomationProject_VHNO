@@ -1,0 +1,69 @@
+{
+  "uid" : "98d3104e051c652961429bf95fa0b5d6",
+  "name" : "suites",
+  "children" : [ {
+    "name" : "test_case",
+    "children" : [ {
+      "name" : "test_before_fota",
+      "children" : [ {
+        "name" : "TestBeforeFota",
+        "children" : [ {
+          "name" : "test_camera",
+          "uid" : "a8af818a7c34ec2a",
+          "parentUid" : "1fbddcec4a25adbcd10fd63d1e2b4c9b",
+          "status" : "failed",
+          "time" : {
+            "start" : 1614154409876,
+            "stop" : 1614154416534,
+            "duration" : 6658
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "test_enter_chrome",
+          "uid" : "a24f62ba7ca21b9f",
+          "parentUid" : "1fbddcec4a25adbcd10fd63d1e2b4c9b",
+          "status" : "passed",
+          "time" : {
+            "start" : 1614154417360,
+            "stop" : 1614154429147,
+            "duration" : 11787
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "test_calendar",
+          "uid" : "26959e03f6b7728e",
+          "parentUid" : "1fbddcec4a25adbcd10fd63d1e2b4c9b",
+          "status" : "passed",
+          "time" : {
+            "start" : 1614154429470,
+            "stop" : 1614154432765,
+            "duration" : 3295
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        }, {
+          "name" : "test_sort_all_data",
+          "uid" : "f7d7fece95f9263f",
+          "parentUid" : "1fbddcec4a25adbcd10fd63d1e2b4c9b",
+          "status" : "passed",
+          "time" : {
+            "start" : 1614154432976,
+            "stop" : 1614154432979,
+            "duration" : 3
+          },
+          "flaky" : false,
+          "newFailed" : false,
+          "parameters" : [ ]
+        } ],
+        "uid" : "1fbddcec4a25adbcd10fd63d1e2b4c9b"
+      } ],
+      "uid" : "db3dd17da515fd54e0f815d4f8b0a418"
+    } ],
+    "uid" : "86abcc46617c603d802c3e378b13740e"
+  } ]
+}

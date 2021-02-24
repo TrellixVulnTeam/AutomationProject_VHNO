@@ -1,5 +1,6 @@
 # coding = utf8
 import os
+
 os.path.abspath("..")
 """
     @File:temp_but_cannot_delete_yet.py
@@ -383,5 +384,3 @@ def check_reserved():
         start_app("")
     except Exception:
         print("Some thing error, please check!")
-
-

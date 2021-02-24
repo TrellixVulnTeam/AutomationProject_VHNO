@@ -1,8 +1,11 @@
 # coding = utf8
 import os
 import re
+import sys
 
 from airtest.core.error import AdbShellError
+
+from toolsbar.common import logger
 
 os.path.abspath(".")
 
@@ -31,10 +34,14 @@ def grant_permission(devices):
         for permission_ in app_[1]:
             try:
                 devices.shell("pm grant {} {}".format(app_[0], permission_))
-                print("{} \nPackage:{} granted p: {}".format(devices, app_[0], permission_))
+                logger.info(
+                    "function:" + sys._getframe().f_code.co_name + "{} \n应用:{} 授权 p: {}".format(devices,
+                                                                                                app_[0],
+                                                                                                permission_))
             except AdbShellError as adb_ex:
                 # 一些vender系统应用存在无法授权，即continue跳过该应用
-                print("We will keep going next cycle \n + {}".format(adb_ex))
+                logger.warning(
+                    "function:" + sys._getframe().f_code.co_name + "当前系统应用无需授权,故跳过 \n + {}".format(adb_ex))
                 continue
 
 
@@ -45,6 +52,5 @@ def data_deal(app_list, devices):
             permission_name = list_permission(package_name, devices)
             app_permission.append([package_name, permission_name])
         except AdbShellError:
-            print("{} no need permission granted!".format(package_name))
+            logger.warning("function:" + sys._getframe().f_code.co_name + "{} 无需进行授权!".format(package_name))
     return app_permission
-

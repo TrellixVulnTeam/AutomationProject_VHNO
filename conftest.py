@@ -37,16 +37,20 @@ def before_all_case_execute():
 def after_current_case_execute():
     logger.info("当前case测试结束，执行关闭APP操作：")
     yield
-    test_device.stop_app(test_device.get_top_activity()[0])
-    logger.info("APP关闭完成")
+    top_activity = test_device.get_top_activity()[0]
+    if top_activity != "com.tcl.android.launcher":
+        test_device.stop_app(top_activity)
+        logger.info("APP关闭完成")
+    else:
+        logger.info("当前界面为主界面")
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item):
-    '''
+    """
     获取每个用例状态的钩子函数
     :param item:测试用例
-    '''
+    """
     # 获取钩子方法的调用结果
     outcome = yield
     rep = outcome.get_result()

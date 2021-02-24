@@ -1,17 +1,20 @@
 # coding = utf8
 import os
+import sys
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 from time import sleep
+
 """
     @File:weather_page.py
     @Author:Bruce
     @Date:2021/2/1
 """
+
 
 class Weather_Page(System):
 
@@ -23,31 +26,31 @@ class Weather_Page(System):
         self.guide_agree = self.poco(text="AGREE")
 
     def start_weather(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":启动weather app:")
         self.device.start_app("com.tcl.tct.weather")
         sleep(1)
 
     def stop_weather(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭weather app:")
         sleep(1)
         self.device.stop_app("com.tcl.tct.weather")
 
     def skip_guide(self):
-        self.start_weather()
+        logger.info("function:" + sys._getframe().f_code.co_name + ":跳过设置向导:")
         try:
             if self.guide_alert.wait().exists():
                 self.guide_agree.wait().click()
         except PocoNoSuchNodeException as ex:
-            print("no need skip weather guide anymore: " + str(ex))
-        finally:
-            print("Welcome to weather app!")
+            logger.warning("function:" + sys._getframe().f_code.co_name +
+                           ":无需跳过weather设置向导:" + str(ex))
 
     def get_location(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":开启定位，定位当前城市:")
         global location
-        self.skip_guide()
         try:
             location = self.poco("com.tcl.tct.weather:id/tv_bar_city").wait(timeout=20).get_text()
-        except Exception:
-            print("Some thing error, can't get location successfully, please check!")
+        except Exception as ex:
+            logger.error("function:" + sys._getframe().f_code.co_name +
+                         ":当前定位出错,请检查代码:" + str(ex))
             location = ""
-        finally:
-            self.stop_weather()
         return location

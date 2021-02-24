@@ -1,0 +1,26 @@
+{
+  "uid" : "4b4757e66a1912dae1a509f688f20b0f",
+  "name" : "categories",
+  "children" : [ {
+    "name" : "Product defects",
+    "children" : [ {
+      "name" : "AssertionError: assert 1 == 2\n  +1\n  -2",
+      "children" : [ {
+        "name" : "test_camera",
+        "uid" : "a8af818a7c34ec2a",
+        "parentUid" : "10959c3b9d2f664cb99b9d2e2fac064d",
+        "status" : "failed",
+        "time" : {
+          "start" : 1614154409876,
+          "stop" : 1614154416534,
+          "duration" : 6658
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "10959c3b9d2f664cb99b9d2e2fac064d"
+    } ],
+    "uid" : "8fb3a91ba5aaf9de24cc8a92edc82b5d"
+  } ]
+}

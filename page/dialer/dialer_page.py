@@ -1,11 +1,12 @@
 # coding = utf8
 import os
 import re
+import sys
 from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -31,19 +32,22 @@ class Dialer_Page(System):
         self.end_call = self.poco("com.google.android.dialer:id/incall_end_call")
 
     def start_dialer(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":启动dialer app:")
         self.device.start_app("com.google.android.dialer")
         sleep(1)
 
     def stop_dialer(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭dialer app:")
         sleep(1)
         self.device.stop_app("com.google.android.dialer")
 
     def call(self, number="10086"):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":拨打电话给:{}:".format(number))
         self.device.shell("am start -a android.intent.action.CALL tel:%s" % number)
-        print("Called number is {}".format(number))
         return number
 
     def get_svn(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机svn:")
         global value_returned
         self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
         try:
@@ -51,13 +55,13 @@ class Dialer_Page(System):
             if "SVN" in value_returned:
                 value_returned = value_returned.split("SVN:")[1]
                 self.poco(text="OK").wait().click()
-        except PocoNoSuchNodeException:
-            print("Can't find needed element, please check!")
-        finally:
-            self.stop_dialer()
+        except PocoNoSuchNodeException as ex:
+            logger.error("function:" + sys._getframe().f_code.co_name +
+                         ":无法获取到指定元素,请检查代码:" + str(ex))
         return value_returned
 
     def get_imei(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机imei:")
         global value_returned
         self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
         try:
@@ -65,8 +69,7 @@ class Dialer_Page(System):
             if "IMEI" in value_returned:
                 value_returned = re.findall("IMEI1:(.*)", value_returned)[0]
                 self.poco(text="OK").wait().click()
-        except PocoNoSuchNodeException:
-            print("Can't find needed element, please check!")
-        finally:
-            self.stop_dialer()
+        except PocoNoSuchNodeException as ex:
+            logger.error("function:" + sys._getframe().f_code.co_name +
+                         ":无法获取到指定元素,请检查代码:" + str(ex))
         return value_returned

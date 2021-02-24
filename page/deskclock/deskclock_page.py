@@ -1,9 +1,10 @@
 # coding = utf8
 import os
 import re
+import sys
 from time import sleep
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 
@@ -26,15 +27,17 @@ class Deskclock_Page(System):
         self.create_clock_save = self.poco("com.android.deskclock:id/toolbar_confirm_btn")
 
     def start_deskclock(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":启动desk clock app:")
         self.device.start_app("com.android.deskclock")
         sleep(1)
 
     def stop_deskclock(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭desk clock app:")
         sleep(1)
         self.device.stop_app("com.android.deskclock")
 
     def add_clock(self):
-        self.device.start_app("com.android.deskclock")
+        logger.info("function:" + sys._getframe().f_code.co_name + ":添加闹钟:")
         self.create_clock.wait().click()
         hour = self.create_clock_hour.wait().attr("desc")
         minute = self.create_clock_minute.wait().attr("desc")

@@ -32,7 +32,7 @@ class Save2Csv:
                 for item in csv_reader:
                     csv_list.append(item)
         except FileNotFoundError:
-            logger.error("{} not exists!".format(form_name))
+            logger.error("{} 不存在,请检查!".format(form_name))
 
         return csv_list
 

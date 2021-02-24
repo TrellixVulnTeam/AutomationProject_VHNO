@@ -1,8 +1,9 @@
 # coding = utf8
 import os
+import sys
 from time import sleep
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -10,6 +11,7 @@ os.path.abspath(".")
     @Author:Bruce
     @Date:2021/1/14
 """
+
 
 class FileManager_Page(System):
 
@@ -23,15 +25,17 @@ class FileManager_Page(System):
         self.create_folder_create = self.poco(text="CREATE")
 
     def start_filemanager(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":启动filemanager app:")
         self.device.start_app("com.tcl.tct.filemanager")
         sleep(1)
 
     def stop_filemanager(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭filemanager app:")
         sleep(1)
         self.device.stop_app("com.tcl.tct.filemanager")
 
     def create_folder(self, name="Test"):
-        self.start_filemanager()
+        logger.info("function:" + sys._getframe().f_code.co_name + ":创建名为{}的文件夹:".format(name))
         self.internal_storage.wait().click()
         self.menu.wait().click()
         self.create_folder_text.wait().click()
@@ -39,6 +43,3 @@ class FileManager_Page(System):
         create_folder_name.invalidate()
         create_folder_name.set_text(name)
         self.create_folder_create.wait().click()
-        self.stop_filemanager()
-
-

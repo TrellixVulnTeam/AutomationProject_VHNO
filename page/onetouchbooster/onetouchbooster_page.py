@@ -1,10 +1,11 @@
 # coding = utf8
 import os
+import sys
 from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, logger
 
 os.path.abspath(".")
 """
@@ -12,6 +13,7 @@ os.path.abspath(".")
     @Author:Bruce
     @Date:2021/1/14
 """
+
 
 class Onetouchbooster_Page(System):
 
@@ -25,23 +27,21 @@ class Onetouchbooster_Page(System):
         self.intelligent_power_saving_title = self.poco("Intelligent power saving")
 
     def start_onetouchbooster(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":启动one touch booster app:")
         self.device.start_app("com.tct.onetouchbooster")
         sleep(1)
 
     def stop_onetouchbooster(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭one touch booster app:")
         sleep(1)
         self.device.stop_app("com.tct.onetouchbooster")
 
     def skip_guide(self):
-        self.start_onetouchbooster()
+        logger.info("function:" + sys._getframe().f_code.co_name + ":跳过设置向导:")
         try:
             guide_close = self.guide_close.wait()
-            print(self.guide_text.wait().get_text())
             if guide_close.exists():
                 guide_close.click()
         except PocoNoSuchNodeException as ex:
-            print("no need skip onetouchbooster guide anymore: " + str(ex))
-        finally:
-            # operate
-            print("Welcome to onetouchbooster app!")
-            pass
+            logger.warning("function:" + sys._getframe().f_code.co_name +
+                           ":无需跳过one touch booster设置向导:" + str(ex))
