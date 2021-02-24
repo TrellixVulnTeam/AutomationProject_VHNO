@@ -1,6 +1,5 @@
 # coding = utf8
 import logging
-import sys
 
 from airtest.core.api import *
 
@@ -41,14 +40,13 @@ def init_all_device():
 
 test_device = init_all_device()
 
-
 def logger_config(log_path, logging_name):
-    '''
+    """
     配置log
     :param log_path: 输出log路径
     :param logging_name: 记录中name，可随意
     :return:
-    '''
+    """
     '''
     logger是日志对象，handler是流处理器
     '''

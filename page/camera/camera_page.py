@@ -42,3 +42,4 @@ class Camera_Page(System):
         logger.info(set_value)
         return previous_value, set_value
 
+

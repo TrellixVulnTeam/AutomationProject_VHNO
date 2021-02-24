@@ -5,7 +5,9 @@ import pytest
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
+from config import install_app_necessary
 from toolsbar.common import test_device, logger
+from toolsbar.permissionGrant import grant_permission
 from toolsbar.save2csv import Save2Csv
 
 os.path.abspath(".")
@@ -132,15 +134,13 @@ if __name__ == '__main__':
         跑一次，把那些结果计入到excel中，然后手动升级，下一次再跑，如果这个excel表格存在，
         说明已经跑过一次，然后就执行升级后的那一套,进行对比
     """
-    # install_app_necessary(test_device)
-    # grant_permission(test_device)
-    pytest.main(["-v", "-s", "--alluredir={}".format("./Temp/need_data/")])
+    logger.info("测试前进行应用安装 + 全局应用授权：")
+    install_app_necessary(test_device)
+    grant_permission(test_device)
+    logger.info("Fota测试开始：")
+    pytest.main(["-v", "-s", "--reruns={}".format(3), "--alluredir={}".format("./Temp/need_data/")])
     os.system('allure generate {} -o {} --clean'.format("./Temp/need_data/", "./test_report/"))
-
     # 这里将获取到到值传下去存到Excel表格中
-
     save2csv = Save2Csv()
     csv_list = save2csv.getDataFromCsv("Fota_Before.csv")
-    # logger.error(csv_list)
-    logger.info(csv_list)
 

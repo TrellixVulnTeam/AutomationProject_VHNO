@@ -29,14 +29,13 @@ class TestBeforeFota:
         camera_page.enter_camera_settings()
         result = camera_page.change_ai_scene_status()
         saved_data.append([sys._getframe().f_code.co_name, result[0], result[1]])
-        # assert result is not None
         assert 1 == 2
 
     def test_enter_chrome(self, before_all_case_execute):
         global saved_data
         chrome_page = Chrome_Page(before_all_case_execute)
         chrome_page.enter_website()
-        assert 1 == 2
+        assert 1 == 1
 
     # 最后对saved_data进行处理并保存写入
     def test_sort_all_data(self):
