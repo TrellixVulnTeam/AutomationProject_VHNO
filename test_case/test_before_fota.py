@@ -2,9 +2,10 @@
 import os
 import sys
 
-from page.calendar.calendar_page import Calendar_Page
-from page.camera.camera_page import Camera_Page
-from page.chrome.chrome_page import Chrome_Page
+import allure
+import pytest
+
+from page.system.system import System
 from toolsbar.save2csv import Save2Csv
 
 os.path.abspath(".")
@@ -21,35 +22,29 @@ os.path.abspath(".")
 # function name , previous_data, set_data
 saved_data = []
 
+"""
+    同一文件下，用例执行顺序，从上往下
+"""
 
+
+@allure.feature("Fota前置差异化设置")
 class TestBeforeFota:
 
     # case 1:
-    def test_camera(self, before_all_case_execute):
-        global saved_data
-        camera_page = Camera_Page(before_all_case_execute)
-        camera_page.start_camera()
-        camera_page.enter_camera_settings()
-        result = camera_page.change_ai_scene_status()
-        saved_data.append([sys._getframe().f_code.co_name, result[0], result[1]])
-        assert 1 == 2
+    @allure.description("APK版本差异化设置")
+    @allure.step("启动camera->进入camera settings菜单->更改ai scene 状态->保存变量")
+    @pytest.mark.parametrize("packageName", ["com.android.settings", "com.android.deskclock"])
+    def test_apk_version(self, before_all_case_execute, packageName):
+        system = System(before_all_case_execute)
+        result = system.get_app_version(packageName)
+        saved_data.append([sys._getframe().f_code.co_name + "[" +packageName + "]", result, "\\"])
+        assert result is not None
 
-    def test_enter_chrome(self, before_all_case_execute):
-        global saved_data
-        chrome_page = Chrome_Page(before_all_case_execute)
-        chrome_page.start_chrome()
-        chrome_page.enter_website()
-        assert 1 == 1
-
-    def test_calendar(self, before_all_case_execute):
-        calendar_page = Calendar_Page(before_all_case_execute)
-        calendar_page.start_calendar()
-        calendar_page.start_calendar()
-
-    # 最后对saved_data进行处理并保存写入
+    # Not case, test data sort function
+    @allure.description("非测试Case:"
+                        "\n作用:最后对saved_data进行处理并保存写入")
+    @allure.step("初始化Save2Csv对象->将获取到的每个测试结果写入Excel表格保存")
     def test_sort_all_data(self):
-        global saved_data
         save2csv = Save2Csv()
-        for item in saved_data:
-            save2csv.writeInCsv(item)
+        save2csv.writeInCsv(saved_data)
         assert saved_data is not None

@@ -21,7 +21,8 @@ class Save2Csv:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(["Case Name", "Previous value", "Set value"])
             # 取出再写入
-            csv_writer.writerow(data)
+            for item in data:
+                csv_writer.writerow(item)
 
     def getDataFromCsv(self, form_name="Fota_Before.csv"):
         csv_list = []

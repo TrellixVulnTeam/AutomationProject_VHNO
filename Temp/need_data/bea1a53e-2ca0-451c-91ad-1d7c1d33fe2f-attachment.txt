@@ -1,4 +1,0 @@
-INFO     Fota测试:conftest.py:38 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:calendar_page.py:33 function:start_calendar:启动calendar app:
-INFO     Fota测试:calendar_page.py:33 function:start_calendar:启动calendar app:
-INFO     Fota测试:conftest.py:43 APP关闭完成

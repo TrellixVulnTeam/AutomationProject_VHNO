@@ -6,6 +6,8 @@ from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary
+from page.main_page import Main_Page
+from page.system.system import System
 from toolsbar.common import test_device, logger
 from toolsbar.permissionGrant import grant_permission
 from toolsbar.save2csv import Save2Csv
@@ -25,16 +27,15 @@ logger_airtest.setLevel(logging.ERROR)
 
 # 单机运行
 # debugger area
-def run_single_device():
+def debug():
     try:
-        # install_app_necessary(device=test_device)
-        # grant_permission(test_device)
-        test_device.unlock()
-        home()
-        poco = AndroidUiautomationPoco()
-
-        # debugger area
-
+        # test_device.unlock()
+        # home()
+        # poco = AndroidUiautomationPoco()
+        # # debugger area
+        # main_page = Main_Page(test_device, poco)
+        pytest.main(["-v", "-s", "--reruns={}".format(3), "--alluredir={}".format("./Temp/need_data/")])
+        os.system('allure generate {} -o {} --clean'.format("./Temp/need_data/", "./test_report/"))
     except Exception as ex:
         print(ex)
 
@@ -117,11 +118,11 @@ case不需要重复写
 UI 进程和底部进程不要在同一个进程中容易出问题
 """
 
-if __name__ == '__main__':
+def run():
     """
-    Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
-    执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
-    """
+        Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
+        执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
+        """
     """
     # 多机运行由于pytest无提供多机运行pytest，故当前多机运行函数可用于非pytest或自建框架 -- 保留
     # if device_count > 1:
@@ -142,3 +143,12 @@ if __name__ == '__main__':
     save2csv = Save2Csv()
     csv_list = save2csv.getDataFromCsv("Fota_Before.csv")
 
+
+if __name__ == '__main__':
+    # run()
+    debug()
+    # poco = AndroidUiautomationPoco()
+    # main_page = Main_Page(test_device, poco)
+    # system = System(main_page)
+    # result = system.get_app_version("com.android.settings")
+    # print((result))

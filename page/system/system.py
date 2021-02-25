@@ -27,6 +27,7 @@ class System:
         exists_app = self.device.check_app(packageName)
         if exists_app:
             versionName = self.device.shell("pm dump %s|grep versionName" % packageName)
+            return versionName.strip()
 
     def scroll_to_find_element(self, element_text="", element_id=""):
         logger.info("function:" + sys._getframe().f_code.co_name + ":滚动查找元素:")

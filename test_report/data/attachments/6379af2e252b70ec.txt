@@ -1,5 +1,0 @@
-INFO     Fota测试:conftest.py:38 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:chrome_page.py:24 function:start_chrome:启动chrome app:
-INFO     Fota测试:chrome_page.py:46 function:enter_website:进入网页www.baidu.com:
-INFO     Fota测试:chrome_page.py:59 function:enter_website:成功进入网页www.baidu.com:
-INFO     Fota测试:conftest.py:43 APP关闭完成

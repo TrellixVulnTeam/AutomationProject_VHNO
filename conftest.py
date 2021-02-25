@@ -65,7 +65,8 @@ def pytest_runtest_makereport(item):
             f.write(rep.nodeid + extra + "\n")
         # 添加allure报告截图
         with allure.step('添加失败截图...'):
-            file_name = "./screenshot/{}.png".format(item)
+            logger.critical(item)
+            file_name = "./screenshot/{}.png".format(str(item).strip("<").strip(">").replace(" ", "_"))
             test_device.snapshot(file_name)
             with open(file_name, mode="rb") as f:
                 file = f.read()
