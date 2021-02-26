@@ -51,6 +51,7 @@ def logger_config(log_path, logging_name):
     '''
     logger是日志对象，handler是流处理器
     '''
+
     # 获取logger对象,取名
     logger = logging.getLogger(logging_name)
     logger.setLevel(logging.INFO)
@@ -60,6 +61,7 @@ def logger_config(log_path, logging_name):
     handler.setFormatter(formatter)
     # 为logger对象添加句柄
     logger.addHandler(handler)
+
     return logger
 
 

@@ -1,0 +1,61 @@
+{
+  "uid" : "83edc06c07f9ae9e47eb6dd1b683e4e2",
+  "name" : "packages",
+  "children" : [ {
+    "name" : "test_case.test_before_fota",
+    "children" : [ {
+      "name" : "test_apk_version[com.android.settings]",
+      "uid" : "711e7a9f4ea49e4e",
+      "parentUid" : "d483bf4d5bd788602c3be97772b47b53",
+      "status" : "passed",
+      "time" : {
+        "start" : 1614308713044,
+        "stop" : 1614308713673,
+        "duration" : 629
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "'com.android.settings'" ]
+    }, {
+      "name" : "test_apk_version[com.android.deskclock]",
+      "uid" : "5bab34aeb0385d60",
+      "parentUid" : "d483bf4d5bd788602c3be97772b47b53",
+      "status" : "passed",
+      "time" : {
+        "start" : 1614308713863,
+        "stop" : 1614308714369,
+        "duration" : 506
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ "'com.android.deskclock'" ]
+    }, {
+      "name" : "test_dialer_settings",
+      "uid" : "2d4eb12b3ea331f4",
+      "parentUid" : "d483bf4d5bd788602c3be97772b47b53",
+      "status" : "passed",
+      "time" : {
+        "start" : 1614308714537,
+        "stop" : 1614308727314,
+        "duration" : 12777
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    }, {
+      "name" : "test_sort_all_data",
+      "uid" : "6905edfd1a9cb9ba",
+      "parentUid" : "d483bf4d5bd788602c3be97772b47b53",
+      "status" : "passed",
+      "time" : {
+        "start" : 1614308727665,
+        "stop" : 1614308727666,
+        "duration" : 1
+      },
+      "flaky" : false,
+      "newFailed" : false,
+      "parameters" : [ ]
+    } ],
+    "uid" : "test_case.test_before_fota"
+  } ]
+}

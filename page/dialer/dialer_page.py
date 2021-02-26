@@ -73,3 +73,16 @@ class Dialer_Page(System):
             logger.error("function:" + sys._getframe().f_code.co_name +
                          ":无法获取到指定元素,请检查代码:" + str(ex))
         return value_returned
+
+    def enter_sort_interface(self):
+        logger.info("function:" + sys._getframe().f_code.co_name + ":点击右上角菜单")
+        self.settings_menu.wait().click()
+        logger.info("function:" + sys._getframe().f_code.co_name + ":进入settings")
+        self.settings_menu_Settings.wait().click()
+        logger.info("function:" + sys._getframe().f_code.co_name + ":进入Display options")
+        self.settings_menu_Settings_Display_options.wait().click()
+        logger.info("function:" + sys._getframe().f_code.co_name + ":进入Sort by界面")
+        self.settings_menu_Settings_Display_options_Sort_by.wait().click()
+        first_name = self.settings_menu_Settings_Display_options_Sort_by_First_name.wait()
+        last_name = self.settings_menu_Settings_Display_options_Sort_by_Last_name.wait()
+        return first_name, last_name

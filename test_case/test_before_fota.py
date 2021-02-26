@@ -5,6 +5,7 @@ import sys
 import allure
 import pytest
 
+from page.dialer.dialer_page import Dialer_Page
 from page.system.system import System
 from toolsbar.save2csv import Save2Csv
 
@@ -31,13 +32,35 @@ saved_data = []
 class TestBeforeFota:
 
     # case 1:
-    @allure.description("APK版本差异化设置")
-    @allure.step("启动camera->进入camera settings菜单->更改ai scene 状态->保存变量")
+    @allure.description("APK版本差异化")
+    @allure.step("获取当前应用的版本号->保存当前版本号")
     @pytest.mark.parametrize("packageName", ["com.android.settings", "com.android.deskclock"])
     def test_apk_version(self, before_all_case_execute, packageName):
         system = System(before_all_case_execute)
         result = system.get_app_version(packageName)
-        saved_data.append([sys._getframe().f_code.co_name + "[" +packageName + "]", result, "\\"])
+        saved_data.append([sys._getframe().f_code.co_name + "[" + packageName + "]", result, "\\"])
+        assert result is not None
+
+    # case 2:
+    @allure.description("通话设置差异化")
+    @allure.step("进入Dialer->点击右上角Menu->Settings->Display options->Sort by->更改排序方式->保存更改后的结果")
+    def test_dialer_settings(self, before_all_case_execute):
+        dialer_page = Dialer_Page(before_all_case_execute)
+        dialer_page.start_dialer()
+        sort_option = dialer_page.enter_sort_interface()
+        first_name = sort_option[0]
+        last_name = sort_option[1]
+        if first_name.attr("checked"):
+            last_name.click()
+            dialer_page.settings_menu_Settings_Display_options_Sort_by.wait().click()
+            last_name.invalidate()
+            result = last_name.get_text() + ":" + str(last_name.attr("checked"))
+        else:
+            first_name.click()
+            dialer_page.settings_menu_Settings_Display_options_Sort_by.wait().click()
+            first_name.invalidate()
+            result = first_name.get_text() + ":" + str(first_name.attr("checked"))
+        saved_data.append([sys._getframe().f_code.co_name, "\\", result])
         assert result is not None
 
     # Not case, test data sort function
