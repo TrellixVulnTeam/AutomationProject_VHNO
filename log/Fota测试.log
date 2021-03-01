@@ -1,0 +1,41 @@
+2021-03-01 11:00:02,989 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 11:00:02,992 - Fota测试 - INFO - function:call:拨打电话给:10086:
+2021-03-01 11:00:03,610 - Fota测试 - INFO - APP关闭完成
+2021-03-01 11:01:51,964 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 11:01:51,972 - Fota测试 - INFO - function:call:拨打电话给:10086:
+2021-03-01 11:01:52,604 - Fota测试 - INFO - APP关闭完成
+2021-03-01 11:05:49,635 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 11:05:49,643 - Fota测试 - INFO - function:call:拨打电话给:10086:
+2021-03-01 11:05:53,741 - Fota测试 - INFO - 当前界面为主界面
+2021-03-01 11:12:33,544 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 11:12:33,546 - Fota测试 - INFO - function:call:拨打电话给:10086:
+2021-03-01 11:12:37,531 - Fota测试 - INFO - 当前界面为主界面
+2021-03-01 11:13:05,535 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 11:13:05,543 - Fota测试 - INFO - function:call:拨打电话给:100861:
+2021-03-01 11:13:09,510 - Fota测试 - INFO - 当前界面为主界面
+2021-03-01 11:15:08,857 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 11:15:08,859 - Fota测试 - INFO - function:start_dialer:启动dialer app:
+2021-03-01 11:15:10,743 - Fota测试 - INFO - function:enter_sort_interface:点击右上角菜单
+2021-03-01 11:15:12,662 - Fota测试 - INFO - function:enter_sort_interface:进入settings
+2021-03-01 11:15:14,438 - Fota测试 - INFO - function:enter_sort_interface:进入Display options
+2021-03-01 11:15:16,256 - Fota测试 - INFO - function:enter_sort_interface:进入Sort by界面
+2021-03-01 11:15:22,283 - Fota测试 - INFO - APP关闭完成
+2021-03-01 11:35:02,237 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 11:35:02,245 - Fota测试 - INFO - function:send_message:创建并发送短信,number:18575211714,content:Test:
+2021-03-01 11:35:06,809 - Fota测试 - INFO - function:send_message:短信发送成功:
+2021-03-01 11:35:07,407 - Fota测试 - INFO - APP关闭完成
+2021-03-01 14:05:32,807 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 14:05:32,815 - Fota测试 - INFO - function:enter_messaging_settings:进入Messaging Settings菜单:
+2021-03-01 14:05:36,604 - Fota测试 - INFO - APP关闭完成
+2021-03-01 14:06:14,037 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 14:06:14,039 - Fota测试 - INFO - function:enter_messaging_settings:进入Messaging Settings菜单:
+2021-03-01 14:06:15,605 - Fota测试 - INFO - APP关闭完成
+2021-03-01 14:07:34,779 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 14:07:38,190 - Fota测试 - INFO - function:enter_messaging_settings:进入Messaging Settings菜单:
+2021-03-01 14:07:39,482 - Fota测试 - INFO - APP关闭完成
+2021-03-01 14:08:56,981 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 14:09:00,095 - Fota测试 - INFO - function:enter_messaging_settings:进入Messaging Settings菜单:
+2021-03-01 14:09:05,398 - Fota测试 - INFO - APP关闭完成
+2021-03-01 14:09:40,739 - Fota测试 - INFO - 当前case测试结束，执行关闭APP操作：
+2021-03-01 14:09:44,197 - Fota测试 - INFO - function:enter_messaging_settings:进入Messaging Settings菜单:
+2021-03-01 14:09:47,310 - Fota测试 - INFO - APP关闭完成
