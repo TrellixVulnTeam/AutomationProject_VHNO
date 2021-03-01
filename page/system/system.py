@@ -23,10 +23,14 @@ class System:
         self.poco = main_page.poco
 
     def get_app_version(self, packageName="com.android.settings"):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前{}版本:".format(packageName))
-        exists_app = self.device.check_app(packageName)
-        if exists_app:
-            versionName = self.device.shell("pm dump %s|grep versionName" % packageName)
+        try:
+            logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前{}版本:".format(packageName))
+            exists_app = self.device.check_app(packageName)
+            if exists_app:
+                versionName = self.device.shell("pm dump %s|grep versionName" % packageName)
+        except Exception as ex:
+            logger.error("function:" + sys._getframe().f_code.co_name +
+                         ":get app version出现问题:" + str(ex))
             return versionName.strip()
 
     def scroll_to_find_element(self, element_text="", element_id=""):

@@ -34,8 +34,9 @@ def debug():
         # poco = AndroidUiautomationPoco()
         # # debugger area
         # main_page = Main_Page(test_device, poco)
-        pytest.main(["-v", "-s", "--reruns={}".format(3), "--alluredir={}".format("./Temp/need_data/")])
-        os.system('allure generate {} -o {} --clean'.format("./Temp/need_data/", "./test_report/"))
+        # pytest.main(["-v", "-s", "--reruns={}".format(3), "--alluredir={}".format("./Temp/need_data/")])
+        pytest.main(["-v", "-s", "./test_case/test_before_fota.py::TestBeforeFota::test_messaging_settings"])
+        # os.system('allure generate {} -o {} --clean'.format("./Temp/need_data/", "./test_report/"))
     except Exception as ex:
         print(ex)
 

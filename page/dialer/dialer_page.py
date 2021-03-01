@@ -42,8 +42,12 @@ class Dialer_Page(System):
         self.device.stop_app("com.google.android.dialer")
 
     def call(self, number="10086"):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":拨打电话给:{}:".format(number))
-        self.device.shell("am start -a android.intent.action.CALL tel:%s" % number)
+        try:
+            logger.info("function:" + sys._getframe().f_code.co_name + ":拨打电话给:{}:".format(number))
+            self.device.shell("am start -a android.intent.action.CALL tel:%s" % number)
+        except Exception as ex:
+            logger.error("function:" + sys._getframe().f_code.co_name +
+                         ":call出现问题，请检查代码:" + str(ex))
         return number
 
     def get_svn(self):
@@ -75,14 +79,18 @@ class Dialer_Page(System):
         return value_returned
 
     def enter_sort_interface(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":点击右上角菜单")
-        self.settings_menu.wait().click()
-        logger.info("function:" + sys._getframe().f_code.co_name + ":进入settings")
-        self.settings_menu_Settings.wait().click()
-        logger.info("function:" + sys._getframe().f_code.co_name + ":进入Display options")
-        self.settings_menu_Settings_Display_options.wait().click()
-        logger.info("function:" + sys._getframe().f_code.co_name + ":进入Sort by界面")
-        self.settings_menu_Settings_Display_options_Sort_by.wait().click()
-        first_name = self.settings_menu_Settings_Display_options_Sort_by_First_name.wait()
-        last_name = self.settings_menu_Settings_Display_options_Sort_by_Last_name.wait()
+        try:
+            logger.info("function:" + sys._getframe().f_code.co_name + ":点击右上角菜单")
+            self.settings_menu.wait().click()
+            logger.info("function:" + sys._getframe().f_code.co_name + ":进入settings")
+            self.settings_menu_Settings.wait().click()
+            logger.info("function:" + sys._getframe().f_code.co_name + ":进入Display options")
+            self.settings_menu_Settings_Display_options.wait().click()
+            logger.info("function:" + sys._getframe().f_code.co_name + ":进入Sort by界面")
+            self.settings_menu_Settings_Display_options_Sort_by.wait().click()
+            first_name = self.settings_menu_Settings_Display_options_Sort_by_First_name.wait()
+            last_name = self.settings_menu_Settings_Display_options_Sort_by_Last_name.wait()
+        except Exception as ex:
+            logger.error("function:" + sys._getframe().f_code.co_name +
+                         ":enter sort interface 出现问题:" + str(ex))
         return first_name, last_name
