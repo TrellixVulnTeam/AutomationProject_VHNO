@@ -2,7 +2,7 @@
 import csv
 import os
 
-from page.system.system import logger
+from toolsbar.common import logger
 
 os.path.abspath(".")
 """

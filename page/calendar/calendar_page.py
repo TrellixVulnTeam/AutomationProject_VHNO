@@ -5,7 +5,7 @@ from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System, logger
+from page.system.system import System
 
 os.path.abspath(".")
 """
@@ -30,17 +30,17 @@ class Calendar_Page(System):
         self.created_calendar_frame = self.poco("com.google.android.calendar:id/alternate_timeline_holder")
 
     def start_calendar(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":启动calendar app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动calendar app:")
         self.device.start_app("com.google.android.calendar")
         sleep(1)
 
     def stop_calendar(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭calendar app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭calendar app:")
         sleep(1)
         self.device.stop_app("com.google.android.calendar")
 
     def skip_guide(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":跳过设置向导:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":跳过设置向导:")
         try:
             if self.guide_page_text.wait().exists():
                 for i in range(2):
@@ -48,11 +48,11 @@ class Calendar_Page(System):
                     guide_next.click()
                 self.guide_got_it.wait().click()
         except PocoNoSuchNodeException as ex:
-            logger.warning("function:" + sys._getframe().f_code.co_name +
-                           ":无需跳过calendar设置向导:" + str(ex))
+            self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                ":无需跳过calendar设置向导:" + str(ex))
 
     def create_calendar(self, title="Test"):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":创建一个名为{}的calendar:".format(title))
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":创建一个名为{}的calendar:".format(title))
         self.create_calendar_button.wait().click()
         self.add_title_edittext.wait().set_text(title)
         self.save_button.wait().click()

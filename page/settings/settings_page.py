@@ -6,7 +6,7 @@ from time import sleep
 from airtest.core.error import AdbShellError
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System, logger
+from page.system.system import System
 
 os.path.abspath(".")
 """
@@ -29,23 +29,23 @@ class Settings_Page(System):
         self.security_sim_card_lock_locksimcard_text = self.poco(text="Lock SIM card")
 
     def start_settings(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":启动settings app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动settings app:")
         self.device.start_app("com.android.settings")
         sleep(1)
 
     def stop_settings(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭settings app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭settings app:")
         sleep(1)
         self.device.stop_app("com.android.settings")
 
     def set_screen_lock(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":设置屏幕锁1234:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":设置屏幕锁1234:")
         security = self.scroll_to_find_element(element_text="Security & biometrics")
         self.double_click_element(security)
         self.poco(text="Screen lock").wait().click()
         try:
             if self.poco(text="Confirm your PIN").wait().exists():
-                logger.warning("function:" + sys._getframe().f_code.co_name + ":当前屏幕锁已存在:")
+                self.logger.warning("function:" + sys._getframe().f_code.co_name + ":当前屏幕锁已存在:")
             else:
                 self.poco(text="PIN").wait().click()
                 self.poco("com.android.settings:id/password_entry").wait().set_text("1234")
@@ -56,12 +56,12 @@ class Settings_Page(System):
                 self.poco(text="Confirm").wait().click()
                 self.poco(text="Done").wait().click()
         except PocoNoSuchNodeException as ex:
-            logger.warning("function:" + sys._getframe().f_code.co_name +
-                           ":屏幕锁不存在,所以设置一个屏幕锁:" + str(ex))
+            self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                ":屏幕锁不存在,所以设置一个屏幕锁:" + str(ex))
         return "Screen lock OK"
 
     def clear_screen_lock(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":清除屏幕锁:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":清除屏幕锁:")
         security = self.scroll_to_find_element(element_text="Security & biometrics")
         security.click()
         self.poco(text="Screen lock").wait().click()
@@ -72,7 +72,7 @@ class Settings_Page(System):
         self.poco(text="YES, REMOVE").wait().click()
 
     def get_imei_cu(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取cu和imei:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取cu和imei:")
         system = self.scroll_to_find_element(element_text="System")
         system.click()
         self.poco(text="Regulatory & safety").wait().click()
@@ -81,33 +81,33 @@ class Settings_Page(System):
         return cu, imei
 
     def get_current_wifi_name(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前wifi名称:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前wifi名称:")
         global wifi_name
         try:
             netstats = self.device.shell("dumpsys netstats | grep -E 'iface=wlan.*networkId'")
         except AdbShellError as ex:
-            logger.error("function:" + sys._getframe().f_code.co_name +
-                         ":当前未连接wifi,请确认成功连接后再进行测试:" + str(ex))
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":当前未连接wifi,请确认成功连接后再进行测试:" + str(ex))
         else:
             if netstats is not None:
                 wifi_name = netstats.split('networkId="')[1].split('",')[0]
             else:
                 print("WiFi connection is abnormal, please check it")
-                logger.warning("function:" + sys._getframe().f_code.co_name +
-                               ":当前Wifi连接异常,请检查:")
+                self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                    ":当前Wifi连接异常,请检查:")
         return wifi_name
 
     def enable_wifi(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":开启wifi:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":开启wifi:")
         self.device.shell("svc wifi enable")
 
     def disable_wifi(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭wifi:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭wifi:")
         self.device.shell("svc wifi disable")
 
     def connect_wifi(self, wifi_name="A_Test", wifi_password="88888888"):
-        logger.info("function:" + sys._getframe().f_code.co_name +
-                    ":连接wifi,name:{},password:{}:".format(wifi_name, wifi_password))
+        self.logger.info("function:" + sys._getframe().f_code.co_name +
+                         ":连接wifi,name:{},password:{}:".format(wifi_name, wifi_password))
         global current_wifi
         wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
@@ -119,12 +119,12 @@ class Settings_Page(System):
         while True:
             current_wifi = self.get_current_wifi_name()
             if current_wifi is not None:
-                logger.info("function:" + sys._getframe().f_code.co_name + ":当前连接的wifi为{}:".format(current_wifi))
+                self.logger.info("function:" + sys._getframe().f_code.co_name + ":当前连接的wifi为{}:".format(current_wifi))
                 break
         return current_wifi
 
     def forget_wifi(self, wifi_name="A_Test"):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":忘记该wifi:{}:".format(wifi_name))
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":忘记该wifi:{}:".format(wifi_name))
         wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
         wifi_item = self.scroll_to_find_element(element_text=wifi_name)
@@ -132,7 +132,7 @@ class Settings_Page(System):
         self.poco(text="FORGET").wait().click()
 
     def set_wifi_direct_name(self, new_name="Test"):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":设置wifi direct name为:{}:".format(new_name))
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":设置wifi direct name为:{}:".format(new_name))
         wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
         wifi_preference = self.scroll_to_find_element(element_text="Wi-Fi preferences")
@@ -146,7 +146,7 @@ class Settings_Page(System):
         return new_name
 
     def get_wifi_direct_name(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取wifi direct name:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取wifi direct name:")
         wifi = self.scroll_to_find_element(element_text="Wi-Fi")
         wifi.click()
         wifi_preference = self.scroll_to_find_element(element_text="Wi-Fi preferences")
@@ -157,7 +157,7 @@ class Settings_Page(System):
         return direct_name
 
     def set_hotspot_name(self, name="Test"):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":设置wifi hotspot name为:{}:".format(name))
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":设置wifi hotspot name为:{}:".format(name))
         sim_cards_menu = self.scroll_to_find_element(element_text="SIM card & cellular network")
         sim_cards_menu.click()
         self.poco(text="Hotspot & tethering").wait().click()
@@ -169,7 +169,7 @@ class Settings_Page(System):
         return hotspot_name_changed
 
     def change_location_settings(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":改变定位功能设置:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":改变定位功能设置:")
         location = self.scroll_to_find_element(element_text="Location")
         self.double_click_element(location)
         wifi_bt_scanning = self.scroll_to_find_element(element_text="Wi-Fi and Bluetooth scanning")
@@ -183,7 +183,8 @@ class Settings_Page(System):
 
     def set_vpn(self, name="Test", address="Test"):
         # Before set vpn, you need set a screen lock first
-        logger.info("function:" + sys._getframe().f_code.co_name + ":设置vpn,name:{},address:{}:".format(name, address))
+        self.logger.info(
+            "function:" + sys._getframe().f_code.co_name + ":设置vpn,name:{},address:{}:".format(name, address))
         connected_devices = self.scroll_to_find_element(element_text="Connected devices")
         self.double_click_element(connected_devices)
         self.poco(text="VPN").wait().click()
@@ -196,7 +197,7 @@ class Settings_Page(System):
 
     def get_data_usage(self):
         # First：close wifi， enter website，then get data usage
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机date usage:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机date usage:")
         sim_card_cellular_menu = self.scroll_to_find_element(self.main_page,
                                                              element_text="SIM card & cellular network")
         self.double_click_element(sim_card_cellular_menu)
@@ -204,7 +205,7 @@ class Settings_Page(System):
         return data_usage
 
     def set_navigation_gesture(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":设置导航手势:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":设置导航手势:")
         button_gestures = self.scroll_to_find_element(element_text="Button & gestures")
         self.double_click_element(button_gestures)
         self.poco(text="System navigation").wait().click()
@@ -214,7 +215,7 @@ class Settings_Page(System):
         return navigation_gesture_switch.attr("checked")
 
     def get_current_navigation(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前导航手势类型:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前导航手势类型:")
         global current_navigation
         button_gestures = self.scroll_to_find_element(element_text="Button & gestures")
         self.double_click_element(button_gestures)

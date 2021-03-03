@@ -1,3 +1,0 @@
-INFO     Fota测试:conftest.py:44 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:messaging_page.py:65 function:enter_messaging_settings:进入Messaging Settings菜单:
-INFO     Fota测试:conftest.py:49 APP关闭完成

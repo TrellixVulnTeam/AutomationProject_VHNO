@@ -6,7 +6,7 @@ from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System, logger
+from page.system.system import System
 
 os.path.abspath(".")
 """
@@ -32,26 +32,26 @@ class Dialer_Page(System):
         self.end_call = self.poco("com.google.android.dialer:id/incall_end_call")
 
     def start_dialer(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":启动dialer app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动dialer app:")
         self.device.start_app("com.google.android.dialer")
         sleep(1)
 
     def stop_dialer(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭dialer app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭dialer app:")
         sleep(1)
         self.device.stop_app("com.google.android.dialer")
 
     def call(self, number="10086"):
         try:
-            logger.info("function:" + sys._getframe().f_code.co_name + ":拨打电话给:{}:".format(number))
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":拨打电话给:{}:".format(number))
             self.device.shell("am start -a android.intent.action.CALL tel:%s" % number)
         except Exception as ex:
-            logger.error("function:" + sys._getframe().f_code.co_name +
-                         ":call出现问题，请检查代码:" + str(ex))
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":call出现问题，请检查代码:" + str(ex))
         return number
 
     def get_svn(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机svn:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机svn:")
         global value_returned
         self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
         try:
@@ -60,12 +60,12 @@ class Dialer_Page(System):
                 value_returned = value_returned.split("SVN:")[1]
                 self.poco(text="OK").wait().click()
         except PocoNoSuchNodeException as ex:
-            logger.error("function:" + sys._getframe().f_code.co_name +
-                         ":无法获取到指定元素,请检查代码:" + str(ex))
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":无法获取到指定元素,请检查代码:" + str(ex))
         return value_returned
 
     def get_imei(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机imei:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机imei:")
         global value_returned
         self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
         try:
@@ -74,23 +74,23 @@ class Dialer_Page(System):
                 value_returned = re.findall("IMEI1:(.*)", value_returned)[0]
                 self.poco(text="OK").wait().click()
         except PocoNoSuchNodeException as ex:
-            logger.error("function:" + sys._getframe().f_code.co_name +
-                         ":无法获取到指定元素,请检查代码:" + str(ex))
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":无法获取到指定元素,请检查代码:" + str(ex))
         return value_returned
 
     def enter_sort_interface(self):
         try:
-            logger.info("function:" + sys._getframe().f_code.co_name + ":点击右上角菜单")
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":点击右上角菜单")
             self.settings_menu.wait().click()
-            logger.info("function:" + sys._getframe().f_code.co_name + ":进入settings")
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入settings")
             self.settings_menu_Settings.wait().click()
-            logger.info("function:" + sys._getframe().f_code.co_name + ":进入Display options")
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Display options")
             self.settings_menu_Settings_Display_options.wait().click()
-            logger.info("function:" + sys._getframe().f_code.co_name + ":进入Sort by界面")
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Sort by界面")
             self.settings_menu_Settings_Display_options_Sort_by.wait().click()
             first_name = self.settings_menu_Settings_Display_options_Sort_by_First_name.wait()
             last_name = self.settings_menu_Settings_Display_options_Sort_by_Last_name.wait()
         except Exception as ex:
-            logger.error("function:" + sys._getframe().f_code.co_name +
-                         ":enter sort interface 出现问题:" + str(ex))
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":enter sort interface 出现问题:" + str(ex))
         return first_name, last_name

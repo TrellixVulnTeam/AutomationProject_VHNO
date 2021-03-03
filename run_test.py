@@ -1,15 +1,13 @@
 # coding = utf8
 import logging
+import multiprocessing
 import subprocess
 
 import pytest
 from airtest.core.api import *
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-from config import install_app_necessary
-from page.main_page import Main_Page
-from page.system.system import System
-from toolsbar.common import test_device, logger
+from config import install_app_necessary, SERIAL_NUMBER
+from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
 from toolsbar.save2csv import Save2Csv
 
@@ -159,8 +157,31 @@ def _run():
     print(csv_list)
 
 
+def _run_multi():
+    test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
+    for device_ in SERIAL_NUMBER:
+        test_pool.apply_async(func=run_test_fota, args=(device_,))
+        sleep(10)
+    test_pool.close()
+    test_pool.join()
+
+
+def run_test_fota(device_):
+    pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
+                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
+    subprocess.Popen(
+        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
+              "./report/test_report[{}_{}]/".format(cur_time, device_),
+              "--clean"],
+        shell=False).communicate()[0]
+    save2csv = Save2Csv()
+    csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
+    print(csv_list)
+
+
 if __name__ == '__main__':
-    _run()
+    # _run()
+    _run_multi()
     # debug()
     # poco = AndroidUiautomationPoco()
     # main_page = Main_Page(test_device, poco)

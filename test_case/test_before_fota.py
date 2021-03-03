@@ -4,6 +4,7 @@ import sys
 
 import allure
 import pytest
+from airtest.core.api import connect_device
 
 from page.dialer.dialer_page import Dialer_Page
 from page.messaging.messaging_page import Messaging_Page
@@ -40,7 +41,8 @@ class TestBeforeFota:
         system = System(before_all_case_execute)
         result = system.get_app_version(packageName)
         saved_data.append([sys._getframe().f_code.co_name + "[" + packageName + "]", result, "\\"])
-        assert result is not None
+        # assert result is not None
+        assert None is not None
 
     # case 2:
     @allure.description("通话设置差异化")
@@ -97,17 +99,12 @@ class TestBeforeFota:
         hear_out_going_message_button.invalidate()
         print("OK" + str(hear_out_going_message_button.attr("checked")))
 
-
-
-
-
-
-
     # Not case, test data sort function
     @allure.description("非测试Case:"
                         "\n作用:最后对saved_data进行处理并保存写入")
     @allure.step("初始化Save2Csv对象->将获取到的每个测试结果写入Excel表格保存")
-    def test_sort_all_data(self):
+    def test_sort_all_data(self, cmdopt):
+        device_ = connect_device("Android:///{}".format(cmdopt))
         save2csv = Save2Csv()
-        save2csv.writeInCsv(saved_data)
+        save2csv.writeInCsv(saved_data, form_name=str(device_.serialno) + "Fota_Before.csv")
         assert saved_data is not None

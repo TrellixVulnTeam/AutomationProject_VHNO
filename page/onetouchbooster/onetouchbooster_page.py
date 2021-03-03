@@ -5,7 +5,7 @@ from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System, logger
+from page.system.system import System
 
 os.path.abspath(".")
 """
@@ -27,21 +27,21 @@ class Onetouchbooster_Page(System):
         self.intelligent_power_saving_title = self.poco("Intelligent power saving")
 
     def start_onetouchbooster(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":启动one touch booster app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动one touch booster app:")
         self.device.start_app("com.tct.onetouchbooster")
         sleep(1)
 
     def stop_onetouchbooster(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":关闭one touch booster app:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭one touch booster app:")
         sleep(1)
         self.device.stop_app("com.tct.onetouchbooster")
 
     def skip_guide(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":跳过设置向导:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":跳过设置向导:")
         try:
             guide_close = self.guide_close.wait()
             if guide_close.exists():
                 guide_close.click()
         except PocoNoSuchNodeException as ex:
-            logger.warning("function:" + sys._getframe().f_code.co_name +
-                           ":无需跳过one touch booster设置向导:" + str(ex))
+            self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                ":无需跳过one touch booster设置向导:" + str(ex))

@@ -43,6 +43,6 @@ def install_app_necessary(device=""):
     #                 break
     for device_serial in SERIAL_NUMBER:
         for apk in apks:
-            print("Device [{}] is install {}.apk".format(device.serialno, apk))
+            print("Device [{}] is install {}.apk".format(device_serial, apk))
             install_result = device.install_app("./apk/" + apk + ".apk")
             print(install_result)

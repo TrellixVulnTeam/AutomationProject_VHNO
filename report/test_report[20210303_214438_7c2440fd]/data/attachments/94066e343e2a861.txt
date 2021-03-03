@@ -1,3 +1,0 @@
-INFO     Fota测试:conftest.py:44 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:dialer_page.py:46 function:call:拨打电话给:10086:
-INFO     Fota测试:conftest.py:51 当前界面为主界面

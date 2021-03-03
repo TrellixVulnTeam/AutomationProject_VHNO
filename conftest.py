@@ -6,7 +6,7 @@ from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from page.main_page import Main_Page
-from toolsbar.common import test_device, logger
+from toolsbar.common import logger
 
 os.path.abspath(".")
 cur_time = time.strftime("%Y%m%d_%H%M%S")
@@ -24,12 +24,13 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
 
 # 测试前初始化poco和device，手动调用获取main_page，只初始化一次，但全局使用同一个main_page
 @pytest.fixture(scope="session", autouse=True)
-def before_all_case_execute():
-    test_device.wake()
-    test_device.unlock()
-    home()
-    poco = AndroidUiautomationPoco()
-    main_page = Main_Page(test_device, poco)
+def before_all_case_execute(cmdopt):
+    device_ = connect_device("Android:///{}".format(cmdopt))
+    device_.wake()
+    device_.unlock()
+    poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
+                                   screenshot_each_action=False)
+    main_page = Main_Page(device_, poco)
 
     return main_page
 
@@ -40,15 +41,32 @@ def before_all_case_execute():
 
 
 @pytest.fixture(scope="function", autouse=True)
-def after_current_case_execute():
-    logger.info("当前case测试结束，执行关闭APP操作：")
+def after_current_case_execute(cmdopt):
     yield
-    top_activity = test_device.get_top_activity()[0]
+    device_ = connect_device("Android:///{}".format(cmdopt))
+    logger.info("当前case测试结束，执行关闭APP操作：")
+    top_activity = device_.get_top_activity()[0]
     if top_activity != "com.tcl.android.launcher":
-        test_device.stop_app(top_activity)
+        device_.stop_app(top_activity)
         logger.info("APP关闭完成")
     else:
         logger.info("当前界面为主界面")
+
+
+"""
+    传参数，传入device序列号
+"""
+
+
+def pytest_addoption(parser):
+    parser.addoption(
+        "--cmdopt", action="store", default="7c2440fd", help="current device serialno"
+    )
+
+
+@pytest.fixture(scope="session")
+def cmdopt(request):
+    return request.config.getoption("--cmdopt")
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -71,9 +89,9 @@ def pytest_runtest_makereport(item):
             f.write(rep.nodeid + extra + "\n")
         # 添加allure报告截图
         with allure.step('添加失败截图...'):
-            file_name = "./screenshot/{}_{}_{}.png".format(cur_time, test_device.serialno,
+            file_name = "./screenshot/{}_{}_{}.png".format(cur_time, "",
                                                            str(item).strip("<").strip(">").replace(" ", "_"))
-            test_device.snapshot(file_name)
+            snapshot(file_name)
             with open(file_name, mode="rb") as f:
                 file = f.read()
             allure.attach(file, "{}:失败截图".format(item), allure.attachment_type.PNG)

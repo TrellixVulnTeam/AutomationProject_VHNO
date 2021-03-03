@@ -67,5 +67,5 @@ def logger_config(log_path, logging_name):
 
 
 # 该log机制用于保存自定义的错误或info信息
-logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, test_device.serialno, "Fota测试"),
+logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "OK", "Fota测试"),
                        logging_name="Fota测试")

@@ -4,7 +4,7 @@ import sys
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from toolsbar.common import logger
+from toolsbar.common import logger_config, cur_time
 
 os.path.abspath(".")
 
@@ -21,20 +21,22 @@ class System:
     def __init__(self, main_page):
         self.device = main_page.device
         self.poco = main_page.poco
+        self.logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "System", "Fota测试"),
+                                    logging_name="Fota测试")
 
     def get_app_version(self, packageName="com.android.settings"):
         try:
-            logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前{}版本:".format(packageName))
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前{}版本:".format(packageName))
             exists_app = self.device.check_app(packageName)
             if exists_app:
                 versionName = self.device.shell("pm dump %s|grep versionName" % packageName)
         except Exception as ex:
-            logger.error("function:" + sys._getframe().f_code.co_name +
-                         ":get app version出现问题:" + str(ex))
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":get app version出现问题:" + str(ex))
         return versionName.strip()
 
     def scroll_to_find_element(self, element_text="", element_id=""):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":滚动查找元素:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":滚动查找元素:")
         global element
         menu_exists = False
         search_count = 0
@@ -82,7 +84,7 @@ class System:
         """
            亮屏并解锁屏幕操作，SIM PIN 1234解锁
         """
-        logger.info("function:" + sys._getframe().f_code.co_name + ":进行屏幕解锁:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":进行屏幕解锁:")
         self.device.unlock()
         try:
             self.poco("com.android.systemui:id/lock_icon").drag_to(self.poco("com.android.systemui:id"
@@ -94,20 +96,20 @@ class System:
                         self.poco(text="%s" % i).wait().click()
                     self.device.keyevent("KEYCODE_ENTER")
             except PocoNoSuchNodeException as ex:
-                logger.error("function:" + sys._getframe().f_code.co_name +
-                             ":锁屏界面异常,请检查代码:" + str(ex))
+                self.logger.error("function:" + sys._getframe().f_code.co_name +
+                                  ":锁屏界面异常,请检查代码:" + str(ex))
         except PocoNoSuchNodeException as ex:
-            logger.error("function:" + sys._getframe().f_code.co_name +
-                         ":未设置屏幕锁,无需解锁:" + str(ex))
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":未设置屏幕锁,无需解锁:" + str(ex))
         finally:
             self.device.home()
 
     def lock_screen(self):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":按下power键锁定屏幕:")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":按下power键锁定屏幕:")
         self.device.keyevent("KEYCODE_POWER")
 
     def double_click_element(self, element_item):
-        logger.info("function:" + sys._getframe().f_code.co_name + ":双击{}元素:".format(element_item))
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":双击{}元素:".format(element_item))
         position = element_item.get_position()
         position = (position[0] * self.device.get_display_info()["width"],
                     position[1] * self.device.get_display_info()["height"])
