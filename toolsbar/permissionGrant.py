@@ -23,8 +23,12 @@ def list_apps(devices):
 
 
 def list_permission(package_name, devices):
-    permission_list = devices.shell("dumpsys package {} | grep permission | grep granted=false".format(package_name))
-    permission_list = re.findall("\s*(.*):\sgranted", permission_list)
+    # 判断没有启动界面就放出来进行授权
+    # 优化后app数量：67个，优化前app数量：330个
+    if devices.shell("dumpsys package {} | grep category.LAUNCHER".format(package_name)).replace(" ", "") is not None:
+        permission_list = devices.shell(
+            "dumpsys package {} | grep permission | grep granted=false".format(package_name))
+        permission_list = re.findall("\s*(.*):\sgranted", permission_list)
     return permission_list
 
 
@@ -35,9 +39,9 @@ def grant_permission(devices):
             try:
                 devices.shell("pm grant {} {}".format(app_[0], permission_))
                 logger.info(
-                    "function:" + sys._getframe().f_code.co_name + "{} \n应用:{} 授权 p: {}".format(devices,
-                                                                                                app_[0],
-                                                                                                permission_))
+                    "function:" + sys._getframe().f_code.co_name + "{} \n应用:{} 授权 p: {} 完成".format(devices,
+                                                                                                   app_[0],
+                                                                                                   permission_))
             except AdbShellError as adb_ex:
                 # 一些vender系统应用存在无法授权，即continue跳过该应用
                 logger.warning(

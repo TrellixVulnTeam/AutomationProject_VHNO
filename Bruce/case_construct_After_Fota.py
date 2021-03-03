@@ -210,9 +210,7 @@ def check_gps_location_ok():
 def screenrecorder(mark="Screen record", record_time=8, status=False):
     try:
         home()
-        austinDevice.swipe(get_screen_point("top_center_point"), get_screen_point("center_point"))
-        poco("com.android.systemui:id/quick_qs_status_icons").wait().drag_to(
-            poco("com.android.systemui:id/header_label").wait(), duration=1)
+        austinDevice.shell("cmd statusbar expand-settings")
         poco(text="Screen recorder").wait().click()
         print(mark)
         if status:

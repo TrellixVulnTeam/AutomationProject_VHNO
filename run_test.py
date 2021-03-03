@@ -119,7 +119,7 @@ case不需要重复写
 UI 进程和底部进程不要在同一个进程中容易出问题
 """
 
-def run():
+def _run():
     """
         Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
         执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
@@ -136,18 +136,25 @@ def run():
         跑一次，把那些结果计入到excel中，然后手动升级，下一次再跑，如果这个excel表格存在，
         说明已经跑过一次，然后就执行升级后的那一套,进行对比
     """
-    install_app_necessary(test_device)
+
+    # install_app_necessary(test_device)
     grant_permission(test_device)
-    pytest.main(["-v", "-s", "--reruns={}".format(3), "--alluredir={}".format("./Temp/need_data/")])
-    os.system('allure generate {} -o {} --clean'.format("./Temp/need_data/", "./test_report/"))
+    # 多机运行 用多进程再pytest加上去实现
+        #   每台机器进程创建隔一段时间
+    # lib包拷贝过去即可无需重复下载模块
+    # shell优化下，方便修改
+    # 参数独立开保存
+    # log不删，增加时间保存名字
+    # pytest.main(["-v", "-s", "--reruns={}".format(3), "--alluredir={}".format("./Temp/need_data/")])
+    # os.system('allure generate {} -o {} --clean'.format("./Temp/need_data/", "./test_report/"))
     # 这里将获取到到值传下去存到Excel表格中
-    save2csv = Save2Csv()
-    csv_list = save2csv.getDataFromCsv("Fota_Before.csv")
+    # save2csv = Save2Csv()
+    # csv_list = save2csv.getDataFromCsv("Fota_Before.csv")
 
 
 if __name__ == '__main__':
-    # run()
-    debug()
+    _run()
+    # debug()
     # poco = AndroidUiautomationPoco()
     # main_page = Main_Page(test_device, poco)
     # system = System(main_page)

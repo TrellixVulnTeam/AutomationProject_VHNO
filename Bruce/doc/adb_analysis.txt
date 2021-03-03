@@ -25,3 +25,9 @@ adb shell svc wifi enable
 adb shell svc stayon true
 adb shell svc usb setFunctions mtp
 adb shell svc nfc enable
+
+# adb打开通知栏
+1、展开：adb shell cmd statusbar expand-notifications
+2、收起：adb shell cmd statusbar collapse
+3、打开通知里更多设置：adb shell cmd statusbar expand-settings
+4、通知栏帮助：adb shell cmd statusbar help

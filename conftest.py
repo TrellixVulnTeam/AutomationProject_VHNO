@@ -23,6 +23,7 @@ os.path.abspath(".")
 # 测试前初始化poco和device，手动调用获取main_page，只初始化一次，但全局使用同一个main_page
 @pytest.fixture(scope="session", autouse=True)
 def before_all_case_execute():
+    test_device.wake()
     test_device.unlock()
     home()
     poco = AndroidUiautomationPoco()
