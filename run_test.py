@@ -36,9 +36,9 @@ def debug():
         # # debugger area
         # main_page = Main_Page(test_device, poco)
         pytest.main(["-v", "-s", "--reruns={}".format(3),
-                     "--alluredir={}".format("./Temp/need_data[{}_{}]/".format(cur_time, test_device.serialno))])
+                     "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, test_device.serialno))])
         subprocess.Popen(
-            args=["allure", "generate", "./Temp/need_data[{}_{}]/".format(cur_time, test_device.serialno), "-o",
+            args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, test_device.serialno), "-o",
                   "./report/test_report[{}_{}]/".format(cur_time, test_device.serialno),
                   "--clean"],
             shell=False).communicate()[0]
@@ -143,19 +143,20 @@ def _run():
         说明已经跑过一次，然后就执行升级后的那一套,进行对比
     """
 
-    # install_app_necessary(test_device)
-    # grant_permission(test_device)
+    install_app_necessary(test_device)
+    grant_permission(test_device)
     # 后续项目去使用直接将lib包拷贝过去即可无需重复下载模块
     pytest.main(["-v", "-s", "--reruns={}".format(3),
-                 "--alluredir={}".format("./Temp/need_data[{}_{}]/".format(cur_time, test_device.serialno))])
+                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, test_device.serialno))])
     subprocess.Popen(
-        args=["allure", "generate", "./Temp/need_data[{}_{}]/".format(cur_time, test_device.serialno), "-o",
+        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, test_device.serialno), "-o",
               "./report/test_report[{}_{}]/".format(cur_time, test_device.serialno),
               "--clean"],
         shell=False).communicate()[0]
     # 这里将获取到到值传下去存到Excel表格中
-    # save2csv = Save2Csv()
-    # csv_list = save2csv.getDataFromCsv("Fota_Before.csv")
+    save2csv = Save2Csv()
+    csv_list = save2csv.getDataFromCsv("Fota_Before.csv")
+    print(csv_list)
 
 
 if __name__ == '__main__':

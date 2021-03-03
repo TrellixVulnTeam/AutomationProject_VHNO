@@ -17,7 +17,7 @@ class Save2Csv:
     # 写入数据至Excel表格
     # 保存数据格式[x1, x2, x3]
     def writeInCsv(self, data=["Test", "1", "2"], form_name="Fota_Before.csv"):
-        with open("./Temp/{}".format(form_name), "w", encoding="utf-8-sig") as csv_file:
+        with open("./temp/{}".format(form_name), "w", encoding="utf-8-sig") as csv_file:
             csv_writer = csv.writer(csv_file)
             csv_writer.writerow(["Case Name", "Previous value", "Set value"])
             # 取出再写入
@@ -27,7 +27,7 @@ class Save2Csv:
     def getDataFromCsv(self, form_name="Fota_Before.csv"):
         csv_list = []
         try:
-            with open("./Temp/{}".format(form_name), "r", encoding="utf-8-sig") as csv_file:
+            with open("./temp/{}".format(form_name), "r", encoding="utf-8-sig") as csv_file:
                 csv_reader = csv.reader(csv_file)
                 next(csv_reader)
                 for item in csv_reader:
