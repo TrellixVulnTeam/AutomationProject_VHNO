@@ -1,0 +1,7 @@
+INFO     Fota测试:conftest.py:44 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:dialer_page.py:35 function:start_dialer:启动dialer app:
+INFO     Fota测试:dialer_page.py:83 function:enter_sort_interface:点击右上角菜单
+INFO     Fota测试:dialer_page.py:85 function:enter_sort_interface:进入settings
+INFO     Fota测试:dialer_page.py:87 function:enter_sort_interface:进入Display options
+INFO     Fota测试:dialer_page.py:89 function:enter_sort_interface:进入Sort by界面
+INFO     Fota测试:conftest.py:49 APP关闭完成

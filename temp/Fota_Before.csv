@@ -1,0 +1,6 @@
+﻿Case Name,Previous value,Set value
+test_apk_version[com.android.settings],versionName=v4.2047.01.1005.K,\
+test_apk_version[com.android.deskclock],versionName=v4.2027.04.1027.0.T,\
+test_dialer_settings,\,Last name:True
+test_calling_history,\,10086
+test_send_message,\,Conversation with 185 7521 1714

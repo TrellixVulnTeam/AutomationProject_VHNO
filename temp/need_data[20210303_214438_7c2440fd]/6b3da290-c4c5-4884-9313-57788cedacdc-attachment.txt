@@ -1,0 +1,4 @@
+INFO     Fota测试:conftest.py:44 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:messaging_page.py:44 function:send_message:创建并发送短信,number:18575211714,content:Test:
+INFO     Fota测试:messaging_page.py:49 function:send_message:短信发送成功:
+INFO     Fota测试:conftest.py:49 APP关闭完成

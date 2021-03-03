@@ -31,7 +31,7 @@ class System:
         except Exception as ex:
             logger.error("function:" + sys._getframe().f_code.co_name +
                          ":get app version出现问题:" + str(ex))
-            return versionName.strip()
+        return versionName.strip()
 
     def scroll_to_find_element(self, element_text="", element_id=""):
         logger.info("function:" + sys._getframe().f_code.co_name + ":滚动查找元素:")
