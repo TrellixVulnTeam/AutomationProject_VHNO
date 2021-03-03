@@ -9,6 +9,7 @@ from page.main_page import Main_Page
 from toolsbar.common import test_device, logger
 
 os.path.abspath(".")
+cur_time = time.strftime("%Y%m%d_%H%M%S")
 
 """
     @File:conftest.py
@@ -20,6 +21,7 @@ os.path.abspath(".")
     a py file which saved pytest's fixture for use
 """
 
+
 # 测试前初始化poco和device，手动调用获取main_page，只初始化一次，但全局使用同一个main_page
 @pytest.fixture(scope="session", autouse=True)
 def before_all_case_execute():
@@ -28,12 +30,15 @@ def before_all_case_execute():
     home()
     poco = AndroidUiautomationPoco()
     main_page = Main_Page(test_device, poco)
+
     return main_page
 
 
 """
     每条case执行后进行关闭当前APP操作 - 自动调用
 """
+
+
 @pytest.fixture(scope="function", autouse=True)
 def after_current_case_execute():
     logger.info("当前case测试结束，执行关闭APP操作：")
@@ -66,9 +71,9 @@ def pytest_runtest_makereport(item):
             f.write(rep.nodeid + extra + "\n")
         # 添加allure报告截图
         with allure.step('添加失败截图...'):
-            file_name = "./screenshot/{}.png".format(str(item).strip("<").strip(">").replace(" ", "_"))
+            file_name = "./screenshot/{}_{}_{}.png".format(cur_time, test_device.serialno,
+                                                           str(item).strip("<").strip(">").replace(" ", "_"))
             test_device.snapshot(file_name)
             with open(file_name, mode="rb") as f:
                 file = f.read()
             allure.attach(file, "{}:失败截图".format(item), allure.attachment_type.PNG)
-
