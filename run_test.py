@@ -159,7 +159,7 @@ def _run():
 
 
 # 多机测试进程池:兼容单机和多机运行
-def _run_multi():
+def start_test():
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
             install_app_necessary(i)
@@ -169,13 +169,13 @@ def _run_multi():
         grant_permission(test_device)
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
-        test_pool.apply_async(func=run_test_fota, args=(device_,))
+        test_pool.apply_async(func=fota_test_area, args=(device_,))
         sleep(10)
     test_pool.close()
     test_pool.join()
 
 
-def run_test_fota(device_):
+def fota_test_area(device_):
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
                  "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
     subprocess.Popen(
@@ -190,7 +190,7 @@ def run_test_fota(device_):
 
 if __name__ == '__main__':
     # _run()
-    _run_multi()
+    start_test()
     # debug()
     # device = connect_device("Android:///{}".format("7c2440fd"))
     # poco = AndroidUiautomationPoco()
