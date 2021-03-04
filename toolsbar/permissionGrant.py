@@ -33,6 +33,7 @@ def list_permission(package_name, devices):
 
 
 def grant_permission(devices):
+    print("机器正在授权中，请稍后")
     app_permission = data_deal(list_apps(devices), devices)
     for app_ in app_permission:
         for permission_ in app_[1]:

@@ -3,9 +3,12 @@ import os
 import sys
 from time import sleep
 
+from airtest.core.api import connect_device
 from airtest.core.error import AdbShellError
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from poco.exceptions import PocoNoSuchNodeException
 
+from page.main_page import Main_Page
 from page.system.system import System
 
 os.path.abspath(".")
@@ -220,8 +223,10 @@ class Settings_Page(System):
         button_gestures = self.scroll_to_find_element(element_text="Button & gestures")
         self.double_click_element(button_gestures)
         self.poco(text="System navigation").wait().click()
-        # 指定元素遍历并返回
-        checked_box = self.poco("com.android.settings:id/recycler_view").wait().offspring(checked=True)
+        # 通过元素遍历并返回被选中的元素
+        checked_box = self.get_checked_element(element_id="com.android.settings:id/recycler_view")
         current_navigation = checked_box.parent().sibling().child("android:id/title")
         current_navigation_title = current_navigation.get_text()
         return current_navigation_title
+
+

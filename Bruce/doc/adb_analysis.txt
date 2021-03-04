@@ -31,3 +31,12 @@ adb shell svc nfc enable
 2、收起：adb shell cmd statusbar collapse
 3、打开通知里更多设置：adb shell cmd statusbar expand-settings
 4、通知栏帮助：adb shell cmd statusbar help
+
+# 关闭屏幕自动调节亮度
+settings put system screen_brightness_mode 0
+
+# 修改屏幕亮度为最大
+settings put system screen_brightness 999999
+
+# 修改手机休眠时间为最大或Never
+put system screen_off_timeout 0

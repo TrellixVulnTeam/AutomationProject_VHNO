@@ -28,6 +28,10 @@ def before_all_case_execute(cmdopt):
     device_ = connect_device("Android:///{}".format(cmdopt))
     device_.wake()
     device_.unlock()
+    # 关闭自动调节亮度，并设置屏幕常亮、sleep为never或最大
+    device_.shell("settings put system screen_brightness_mode 0")
+    device_.shell("settings put system screen_brightness 999999")
+    device_.shell("settings put system screen_off_timeout 1")
     poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
                                    screenshot_each_action=False)
     main_page = Main_Page(device_, poco)
@@ -89,9 +93,10 @@ def pytest_runtest_makereport(item):
             f.write(rep.nodeid + extra + "\n")
         # 添加allure报告截图
         with allure.step('添加失败截图...'):
-            file_name = "./screenshot/{}_{}_{}.png".format(cur_time, "",
-                                                           str(item).strip("<").strip(">").replace(" ", "_"))
+            file_name = "./screenshot/{}_{}_{}.png".format(str(item).strip("<").strip(">").replace(" ", "_"),
+                                                           cur_time, "")
             snapshot(file_name)
+            sleep(0.5)
             with open(file_name, mode="rb") as f:
                 file = f.read()
             allure.attach(file, "{}:失败截图".format(item), allure.attachment_type.PNG)

@@ -44,7 +44,7 @@ class Messaging_Page(System):
                              ":创建并发送短信,number:{},content:{}:".format(number, content))
             self.device.shell("am start -a android.intent.action.SENDTO -d sms:%s --es sms_body %s" % (number, content))
             self.send_sms.wait().click()
-            receiver_content = self.poco("android:id/list").children()[0].children()[1].get_text()
+            receiver_content = self.poco("com.google.android.apps.messaging:id/tombstone_message").get_text()
             if number[-4:] in receiver_content:
                 self.logger.info("function:" + sys._getframe().f_code.co_name + ":短信发送成功:")
         except Exception as ex:

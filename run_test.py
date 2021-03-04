@@ -123,6 +123,7 @@ UI 进程和底部进程不要在同一个进程中容易出问题
 """
 
 
+# 单机测试
 def _run():
     """
         Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
@@ -157,7 +158,15 @@ def _run():
     print(csv_list)
 
 
+# 多机测试进程池:兼容单机和多机运行
 def _run_multi():
+    if len(SERIAL_NUMBER) > 1:
+        for i in test_device:
+            install_app_necessary(i)
+            grant_permission(i)
+    else:
+        install_app_necessary(test_device)
+        grant_permission(test_device)
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
         test_pool.apply_async(func=run_test_fota, args=(device_,))
@@ -183,8 +192,10 @@ if __name__ == '__main__':
     # _run()
     _run_multi()
     # debug()
+    # device = connect_device("Android:///{}".format("7c2440fd"))
     # poco = AndroidUiautomationPoco()
-    # main_page = Main_Page(test_device, poco)
-    # system = System(main_page)
+    # device.shell("settings put system screen_brightness_mode 0")
+    # device.shell("settings put system screen_brightness 999999")
+    # device.shell("settings put system screen_off_timeout 1")
     # result = system.get_app_version("com.android.settings")
     # print((result))

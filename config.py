@@ -41,8 +41,7 @@ def install_app_necessary(device=""):
     #             if line == b"" or subprocess.Popen.poll(screenData) == 0:
     #                 screenData.stdout.close()
     #                 break
-    for device_serial in SERIAL_NUMBER:
-        for apk in apks:
-            print("Device [{}] is install {}.apk".format(device_serial, apk))
-            install_result = device.install_app("./apk/" + apk + ".apk")
-            print(install_result)
+    for apk in apks:
+        print("Device [{}] is install {}.apk".format(device.serialno, apk))
+        install_result = device.install_app("./apk/" + apk + ".apk")
+        print(install_result)

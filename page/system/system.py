@@ -114,3 +114,20 @@ class System:
         position = (position[0] * self.device.get_display_info()["width"],
                     position[1] * self.device.get_display_info()["height"])
         self.device.double_click(position)
+
+    """
+        @Description:获取当前所在父框架的被checked的元素
+        @element_id:需要遍历的元素所在父框架id
+        @sample:
+            遍历在父框架"com.android.settings:id/recycler_view"中的被选中的checkbox
+            self.poco("com.android.settings:id/recycler_view").wait().offspring(checked=True)
+            ->
+            self.get_checked_element(element_id="com.android.settings:id/recycler_view")
+        @return:list or single element
+    """
+
+    def get_checked_element(self, element_id="", element_text=""):
+        if element_id:
+            return self.poco(element_id).wait().offspring(checked=True)
+        else:
+            return self.poco(text=element_text).wait().offspring(checked=True)
