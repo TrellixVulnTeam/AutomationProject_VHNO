@@ -178,11 +178,15 @@ def start_test():
 def fota_test_area(device_):
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
                  "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
+    # subprocess.Popen(
+    #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
+    #           "./report/test_report[{}_{}]/".format(cur_time, device_),
+    #           "--clean"],
+    #     shell=False).communicate()[0]
     subprocess.Popen(
-        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
-              "./report/test_report[{}_{}]/".format(cur_time, device_),
-              "--clean"],
-        shell=False).communicate()[0]
+        "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
+                                                                                                 cur_time, device_),
+        shell=True).communicate()[0]
     save2csv = Save2Csv()
     csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
     print(csv_list)

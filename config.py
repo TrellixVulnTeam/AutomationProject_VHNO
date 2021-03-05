@@ -2,6 +2,7 @@
 
 import os
 import re
+import subprocess
 
 os.path.abspath(".")
 
@@ -27,8 +28,9 @@ SERIAL_NUMBER = get_serial_number()
 
 # 测试前安装所需APP
 def install_app_necessary(device=""):
-    files = os.popen("ls ./apk/")
-    apks = re.findall("(.*).apk", files.read())
+    files = subprocess.Popen("ls ./apk/", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
+    apks = [i for i in re.split(",", str(files).strip("b'").replace("\\n", ",")) if i != ""]
+    print(apks)
     # 如下置灰代码用于独立出来不借助poco，独立使用python代码
     # for device_serial in SERIAL_NUMBER:
     #     for apk in apks:
@@ -42,6 +44,6 @@ def install_app_necessary(device=""):
     #                 screenData.stdout.close()
     #                 break
     for apk in apks:
-        print("Device [{}] is install {}.apk".format(device.serialno, apk))
-        install_result = device.install_app("./apk/" + apk + ".apk")
+        print("Device [{}] is install {}".format(device.serialno, apk))
+        install_result = device.install_app("./apk/" + apk)
         print(install_result)
