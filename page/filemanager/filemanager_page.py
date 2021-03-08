@@ -1,9 +1,8 @@
 # coding = utf8
 import os
 import sys
-from time import sleep
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 """
@@ -35,11 +34,18 @@ class FileManager_Page(System):
         self.device.stop_app("com.tcl.tct.filemanager")
 
     def create_folder(self, name="Test"):
-        self.logger.info("function:" + sys._getframe().f_code.co_name + ":创建名为{}的文件夹:".format(name))
-        self.internal_storage.wait().click()
-        self.menu.wait().click()
-        self.create_folder_text.wait().click()
-        create_folder_name = self.create_folder_name.wait()
-        create_folder_name.invalidate()
-        create_folder_name.set_text(name)
-        self.create_folder_create.wait().click()
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":创建文件夹:")
+            self.internal_storage.wait().click()
+            self.menu.wait().click()
+            self.create_folder_text.wait().click()
+            create_folder_name = self.create_folder_name.wait()
+            create_folder_name.invalidate()
+            create_folder_name.set_text(name)
+            self.create_folder_create.wait().click()
+            result = "Created Folder Name" + ":" + self.scroll_to_find_element(element_text=name).get_text()
+        except Exception as ex:
+            self.logger.error(
+                "function:" + sys._getframe().f_code.co_name + ":创建文件夹出现问题:" + str(ex))
+        return result

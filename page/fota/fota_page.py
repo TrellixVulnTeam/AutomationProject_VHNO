@@ -1,11 +1,10 @@
 # coding = utf8
 import os
 import sys
-from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 """

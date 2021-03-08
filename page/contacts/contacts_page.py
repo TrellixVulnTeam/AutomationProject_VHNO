@@ -1,9 +1,8 @@
 # coding = utf8
 import os
 import sys
-from time import sleep
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 
@@ -33,8 +32,14 @@ class Contacts_Page(System):
         self.device.stop_app("com.google.android.contacts")
 
     def create_contact(self, contact_name="Test", phone_number="18512026630"):
-        self.logger.info("function:" + sys._getframe().f_code.co_name +
-                         ":创建联系人,名称:{},号码:{}:".format(contact_name, phone_number))
-        self.device.shell("am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/"
-                          "contact -e name %s -e phone %s" % (contact_name, phone_number))
-        return contact_name, phone_number
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name +
+                             ":创建联系人,名称:{},号码:{}:".format(contact_name, phone_number))
+            self.device.shell("am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/"
+                              "contact -e name %s -e phone %s" % (contact_name, phone_number))
+            created_contact = self.scroll_to_find_element(element_text=contact_name).get_text()
+            result = created_contact, phone_number
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":创建联系人出现问题:" + str(ex))
+        return result

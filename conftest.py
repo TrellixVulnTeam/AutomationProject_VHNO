@@ -6,6 +6,7 @@ from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from page.main_page import Main_Page
+from page.system.system import System
 from toolsbar.common import logger
 
 os.path.abspath(".")
@@ -35,6 +36,8 @@ def before_all_case_execute(cmdopt):
     poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
                                    screenshot_each_action=False)
     main_page = Main_Page(device_, poco)
+    system = System(main_page)
+    system.unlock_screen()
 
     return main_page
 
@@ -48,6 +51,7 @@ def before_all_case_execute(cmdopt):
 def after_current_case_execute(cmdopt):
     yield
     device_ = connect_device("Android:///{}".format(cmdopt))
+
     logger.info("当前case测试结束，执行关闭APP操作：")
     top_activity = device_.get_top_activity()[0]
     if top_activity != "com.tcl.android.launcher":
@@ -96,7 +100,7 @@ def pytest_runtest_makereport(item):
             file_name = "./screenshot/{}_{}_{}.png".format(str(item).strip("<").strip(">").replace(" ", "_"),
                                                            cur_time, "")
             snapshot(file_name)
-            sleep(0.5)
+            sleep(1)
             with open(file_name, mode="rb") as f:
                 file = f.read()
             allure.attach(file, "{}:失败截图".format(item), allure.attachment_type.PNG)

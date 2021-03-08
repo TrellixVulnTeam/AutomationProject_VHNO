@@ -1,9 +1,8 @@
 # coding = utf8
 import os
 import sys
-from time import sleep
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 """
@@ -38,7 +37,7 @@ class Messaging_Page(System):
         self.device.stop_app("com.google.android.apps.messaging")
 
     def send_message(self, number="1", content="Test"):
-        global receiver_content
+        receiver_content = ""
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name +
                              ":创建并发送短信,number:{},content:{}:".format(number, content))
@@ -69,3 +68,15 @@ class Messaging_Page(System):
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":enter messaging settings出现问题，请检查代码:" + str(ex))
+
+    def change_hear_outgoing_status(self):
+        result = ""
+        try:
+            hear_out_going_message_button = self.hear_out_going_message_button
+            hear_out_going_message_button.click()
+            hear_out_going_message_button.invalidate()
+            result = "Hear outgoing message sounds" + ":" + str(hear_out_going_message_button.attr("checked"))
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":更改hear outgoing status出现问题，请检查代码:" + str(ex))
+        return result

@@ -2,11 +2,10 @@
 import os
 import re
 import sys
-from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 """
@@ -51,18 +50,23 @@ class Dialer_Page(System):
         return number
 
     def get_svn(self):
-        self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机svn:")
-        global value_returned
-        self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
+        result = ""
         try:
-            value_returned = self.poco("android:id/message").wait().get_text()
-            if "SVN" in value_returned:
-                value_returned = value_returned.split("SVN:")[1]
-                self.poco(text="OK").wait().click()
-        except PocoNoSuchNodeException as ex:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机svn:")
+            global value_returned
+            self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%2306%23*%23*")
+            try:
+                value_returned = self.poco("android:id/message").wait().get_text()
+                if "SVN" in value_returned:
+                    result = value_returned.split("SVN:")[1].replace("\n", "")
+                    self.poco(text="OK").wait().click()
+            except PocoNoSuchNodeException as ex:
+                self.logger.error("function:" + sys._getframe().f_code.co_name +
+                                  ":无法获取到指定元素,请检查代码:" + str(ex))
+        except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name +
-                              ":无法获取到指定元素,请检查代码:" + str(ex))
-        return value_returned
+                              ":获取手机svn出现问题，请检查代码:" + str(ex))
+        return result
 
     def get_imei(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机imei:")
@@ -94,3 +98,36 @@ class Dialer_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":enter sort interface 出现问题:" + str(ex))
         return first_name, last_name
+
+    def change_sort_by(self):
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":进行更改Sort by方式")
+            sort_option = self.enter_sort_interface()
+            first_name = sort_option[0]
+            last_name = sort_option[1]
+            if first_name.attr("checked"):
+                last_name.click()
+                self.settings_menu_Settings_Display_options_Sort_by.wait().click()
+                last_name.invalidate()
+                result = last_name.get_text() + ":" + str(last_name.attr("checked"))
+            else:
+                first_name.click()
+                self.settings_menu_Settings_Display_options_Sort_by.wait().click()
+                first_name.invalidate()
+                result = first_name.get_text() + ":" + str(first_name.attr("checked"))
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":更改Sort by方式出现问题:" + str(ex))
+        return result
+
+    def get_main_software_version(self):
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前设备主软件版本:")
+            self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%233228%23*%23*")
+            result = "Main Software Version" + ":" + self.poco("android:id/message").wait().get_text().replace("\n", ",")
+            self.poco(text="OK").wait().click()
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":获取当前设备主软件版本出现问题:" + str(ex))
+        return result

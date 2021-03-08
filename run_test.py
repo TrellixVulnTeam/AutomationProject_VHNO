@@ -175,6 +175,25 @@ def start_test():
     test_pool.join()
 
 
+# debug
+def debug_area():
+    if len(SERIAL_NUMBER) > 1:
+        for i in test_device:
+            pass
+            # install_app_necessary(i)
+            # grant_permission(i)
+    else:
+        pass
+        # install_app_necessary(test_device)
+        # grant_permission(test_device)
+    test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
+    for device_ in SERIAL_NUMBER:
+        test_pool.apply_async(func=fota_test_area, args=(device_,))
+        sleep(10)
+    test_pool.close()
+    test_pool.join()
+
+
 def fota_test_area(device_):
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
                  "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
@@ -183,10 +202,10 @@ def fota_test_area(device_):
     #           "./report/test_report[{}_{}]/".format(cur_time, device_),
     #           "--clean"],
     #     shell=False).communicate()[0]
-    subprocess.Popen(
-        "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
-                                                                                                 cur_time, device_),
-        shell=True).communicate()[0]
+    # subprocess.Popen(
+    #     "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
+    #                                                                                              cur_time, device_),
+    #     shell=True).communicate()[0]
     save2csv = Save2Csv()
     csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
     print(csv_list)
@@ -194,8 +213,9 @@ def fota_test_area(device_):
 
 if __name__ == '__main__':
     # _run()
-    start_test()
+    # start_test()
     # debug()
+    debug_area()
     # device = connect_device("Android:///{}".format("7c2440fd"))
     # poco = AndroidUiautomationPoco()
     # device.shell("settings put system screen_brightness_mode 0")

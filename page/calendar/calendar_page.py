@@ -1,11 +1,10 @@
 # coding = utf8
 import os
 import sys
-from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 """
@@ -25,9 +24,11 @@ class Calendar_Page(System):
         self.guide_next_arrow = self.poco("com.google.android.calendar:id/next_arrow")
         self.guide_got_it = self.poco("com.google.android.calendar:id/oobe_done_button")
         self.create_calendar_button = self.poco("com.google.android.calendar:id/floating_action_button")
+        self.create_event_button = self.poco(text="Event")
         self.add_title_edittext = self.poco("com.google.android.calendar:id/title")
         self.save_button = self.poco("com.google.android.calendar:id/save")
-        self.created_calendar_frame = self.poco("com.google.android.calendar:id/alternate_timeline_holder")
+        # self.created_calendar_container = self.poco(
+        #     "com.google.android.calendar:id/alternate_timeline_fragment_container").children()[0]
 
     def start_calendar(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动calendar app:")
@@ -52,10 +53,21 @@ class Calendar_Page(System):
                                 ":无需跳过calendar设置向导:" + str(ex))
 
     def create_calendar(self, title="Test"):
-        self.logger.info("function:" + sys._getframe().f_code.co_name + ":创建一个名为{}的calendar:".format(title))
-        self.create_calendar_button.wait().click()
-        self.add_title_edittext.wait().set_text(title)
-        self.save_button.wait().click()
-
-        created_calendar = self.created_calendar_frame.children()[1].children()[0].children()[2].wait()
-        calendar_desc = created_calendar.attr("desc")
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":创建一个名为{}的calendar:".format(title))
+            self.create_calendar_button.wait().click()
+            try:
+                self.create_event_button.wait().click()
+            except PocoNoSuchNodeException as ex:
+                self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                    ":无需点击event按钮:" + str(ex))
+            self.add_title_edittext.wait().set_text(title)
+            self.save_button.wait().click()
+            created_calendar = self.poco(
+                "com.google.android.calendar:id/alternate_timeline_fragment_container").children()[0].wait().children()[
+                2].attr("desc")
+            result = created_calendar
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":创建日历出现问题:" + str(ex))
+        return result

@@ -224,7 +224,6 @@ def check_calendar_reserved():
 def change_battery_management_settings():
     start_app("com.tct.onetouchbooster")
 
-
 """
     Case 10:验证相机设置是否被保留
     relate app:
@@ -257,16 +256,6 @@ def change_camera_settings():
 
 
 def change_sound_settings():
-    # apps_menu = None
-    # start_app("com.android.settings")
-    # menu_exists = False
-    # while not menu_exists:
-    #     apps_menu = poco(text="Sound & vibration").wait()
-    #     menu_exists = apps_menu.exists()
-    #     if menu_exists:
-    #         break
-    #     poco.scroll(direction="vertical", percent=0.8, duration=1)
-    # apps_menu.click()
     silent_mode_switch = poco(text="Silent mode").parent().parent().children()[1].child(
         "android:id/switch_widget").wait()
     checked_result_default = silent_mode_switch.attr("checked")

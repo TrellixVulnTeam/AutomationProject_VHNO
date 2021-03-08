@@ -1,11 +1,10 @@
 # coding = utf8
 import os
 import sys
-from time import sleep
 
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 """
@@ -22,9 +21,9 @@ class Onetouchbooster_Page(System):
 
         self.guide_close = self.poco("com.tct.onetouchbooster:id/guide_close")
         self.guide_text = self.poco("com.tct.onetouchbooster:id/guide_text")
-        self.battery = self.poco("Battery")
+        self.battery = self.poco(text="Battery")
         self.battery_settings = self.poco("com.tct.onetouchbooster:id/battery_settings")
-        self.intelligent_power_saving_title = self.poco("Intelligent power saving")
+        self.intelligent_power_saving_title = self.poco(text="Intelligent power saving")
 
     def start_onetouchbooster(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动one touch booster app:")
@@ -45,3 +44,26 @@ class Onetouchbooster_Page(System):
         except PocoNoSuchNodeException as ex:
             self.logger.warning("function:" + sys._getframe().f_code.co_name +
                                 ":无需跳过one touch booster设置向导:" + str(ex))
+
+    def enter_battery_settings(self):
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Battery settings:")
+            self.battery.wait().click()
+            self.battery_settings.wait().click()
+        except Exception as ex:
+            self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                ":进入Battery settings失败:" + str(ex))
+
+    def change_intelligent_power_saving_status(self):
+        result = ""
+        try:
+            intelligent_power_t = self.intelligent_power_saving_title.wait()
+            intelligent_power_s = intelligent_power_t.parent().child("com.tct.onetouchbooster:id/switch_button")
+            intelligent_power_s.click()
+            intelligent_power_s.invalidate()
+            result = intelligent_power_t.get_text() + ":" + str(
+                intelligent_power_s.attr("checked"))
+        except Exception as ex:
+            self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                ":更改intelligent power saving status失败:" + str(ex))
+        return result

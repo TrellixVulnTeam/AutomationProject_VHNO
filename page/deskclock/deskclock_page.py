@@ -2,9 +2,8 @@
 import os
 import re
 import sys
-from time import sleep
 
-from page.system.system import System
+from page.system.system import System, sleep
 
 os.path.abspath(".")
 
@@ -37,11 +36,17 @@ class Deskclock_Page(System):
         self.device.stop_app("com.android.deskclock")
 
     def add_clock(self):
-        self.logger.info("function:" + sys._getframe().f_code.co_name + ":添加闹钟:")
-        self.create_clock.wait().click()
-        hour = self.create_clock_hour.wait().attr("desc")
-        minute = self.create_clock_minute.wait().attr("desc")
-        self.create_clock_save.wait().click()
-        hour = re.search("picker (.*)", hour).group(1)
-        minute = re.search("picker (.*)", minute).group(1)
-        return hour + ":" + minute
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":添加闹钟:")
+            self.create_clock.wait().click()
+            hour = self.create_clock_hour.wait().attr("desc")
+            minute = self.create_clock_minute.wait().attr("desc")
+            self.create_clock_save.wait().click()
+            hour = re.search("picker (.*)", hour).group(1)
+            minute = re.search("picker (.*)", minute).group(1)
+            created_clock = self.scroll_to_find_element(element_text=hour + ":" + minute).get_text()
+            result = created_clock
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":闹钟创建出现问题:" + str(ex))
+        return result

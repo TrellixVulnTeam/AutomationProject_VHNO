@@ -5,7 +5,7 @@ import sys
 from poco.exceptions import PocoNoSuchNodeException
 
 from toolsbar.common import logger_config, cur_time
-
+from time import sleep
 os.path.abspath(".")
 
 """
@@ -25,15 +25,17 @@ class System:
                                     logging_name="Fota测试")
 
     def get_app_version(self, packageName="com.android.settings"):
+        result = ""
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前{}版本:".format(packageName))
             exists_app = self.device.check_app(packageName)
             if exists_app:
                 versionName = self.device.shell("pm dump %s|grep versionName" % packageName)
+                result = versionName.strip()
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":get app version出现问题:" + str(ex))
-        return versionName.strip()
+        return result
 
     def scroll_to_find_element(self, element_text="", element_id=""):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":滚动查找元素:")
