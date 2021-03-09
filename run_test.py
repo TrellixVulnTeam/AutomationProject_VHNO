@@ -184,19 +184,19 @@ def debug_area():
             # grant_permission(i)
     else:
         pass
-        # install_app_necessary(test_device)
-        # grant_permission(test_device)
+        grant_permission(test_device)
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
         test_pool.apply_async(func=fota_test_area, args=(device_,))
-        sleep(10)
+        # sleep(10)
     test_pool.close()
     test_pool.join()
 
 
 def fota_test_area(device_):
-    pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
-                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
+    pass
+    # pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
+    #              "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
     # subprocess.Popen(
     #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
     #           "./report/test_report[{}_{}]/".format(cur_time, device_),
@@ -206,9 +206,9 @@ def fota_test_area(device_):
     #     "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
     #                                                                                              cur_time, device_),
     #     shell=True).communicate()[0]
-    save2csv = Save2Csv()
-    csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
-    print(csv_list)
+    # save2csv = Save2Csv()
+    # csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
+    # print(csv_list)
 
 
 if __name__ == '__main__':
