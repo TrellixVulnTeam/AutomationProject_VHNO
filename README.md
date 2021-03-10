@@ -17,12 +17,19 @@ Android系统UI自动化测试项目
 3、对Android系统应用通过Page划分集中管理<br> 
 
 可能出现的问题：<br> 
-1、首先对于pip3的报错使用该命令解决：sudo easy_install pip<br> 
+1、首先对于pip3的报错使用该命令解决：<br>
+```
+sudo easy_install pip
+```
 如果出现通过pip3安装模块后，py运行还是失败的，使用pycharm的interpreter里面搜索对应模块再安装即可<br> 
 2、# 本项目已修改源码：<br> 
 路径：/Users/cgt/Library/Python/3.7/lib/python/site-packages/poco/drivers/android/uiautomation.py"<br> 
-print("still waiting for uiautomation ready.")<br> 
-self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))<br> 
+```
+print("still waiting for uiautomation ready.")
+```
+```
+self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))<br>
+``` 
 3、# 兼容使用相对路径存在同目录下文件找不到问题：<br> 
 修改Edit configurations -> 将Working directory改成当前项目目录即可<br> 
 4、#airtest操作API<br> 
@@ -32,16 +39,18 @@ b.指定device调用 - 控制不同设备（主要API选择）<br>
 以下是Airtest的API的用法，它提供了一些方法的封装，同时还对接了图像识别等技术，但Airtest也有局限性，不能根据DOM树
 来选则对应但节点，依靠图像识别也有一定不精确之处，所以还需要另一个库Poco<br> 
 5、遇到Python找不到，IntFlag时，unset PYTHONPATH<br> 
-6、"ImportError: sys.meta_path is None, Python is likely shutting down"<br> 
+6、```"ImportError: sys.meta_path is None, Python is likely shutting down"``` <br>
 这个报错是能忽略的，是因为poco报错后就退出了，主线程回收垃圾，剩下的子线程抛了这个错，是可以忽略的。<br> 
 7、有些输入密码等界面因为Android安全机制保护，需要特别注意看是否能够获取到元素控件<br> 
 8、# 修改源文件：<br> 
 a.规避sys.meta_path is None, Python is likely shutting down问题导致的报错<br> 
 /Users/cgt/PycharmProjects/AutomationProject/venv/lib/python3.7/site-packages/hrpc/object_proxy.py<br> 
-try:<br> 
+``` 
+try:    
     self._client__.evaluate(RpcObjectProxy(self._uri__, self._client__, action), wait_for_response=False)<br> 
-except Exception as ex:<br> 
-    print(ex)<br> 
+except Exception as ex:
+    print(ex)
+``` 
 9、Settings控制：<br> 
 a、使用adb shell svc控制一些开关、wifi等<br> 
 settings put和get有局限<br> 
