@@ -11,12 +11,16 @@ os.path.abspath(".")
     @File:calendar_page.py
     @Author:Bruce
     @Date:2021/1/13
+    @Description:Calendar page，控制设备Calendar应用的函数、控件
+    @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 class Calendar_Page(System):
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
+    """
 
-    # Ui element
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
@@ -30,15 +34,27 @@ class Calendar_Page(System):
         # self.created_calendar_container = self.poco(
         #     "com.google.android.calendar:id/alternate_timeline_fragment_container").children()[0]
 
+    """
+        @description:启动calendar应用
+    """
+
     def start_calendar(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动calendar app:")
         self.device.start_app("com.google.android.calendar")
         sleep(1)
 
+    """
+        @description:关闭calendar应用
+    """
+
     def stop_calendar(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭calendar app:")
         sleep(1)
         self.device.stop_app("com.google.android.calendar")
+
+    """
+        @description:跳过calendar向导页
+    """
 
     def skip_guide(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":跳过设置向导:")
@@ -51,6 +67,12 @@ class Calendar_Page(System):
         except PocoNoSuchNodeException as ex:
             self.logger.warning("function:" + sys._getframe().f_code.co_name +
                                 ":无需跳过calendar设置向导:" + str(ex))
+
+    """
+        @description:创建日历事件
+        @param:
+            title:传入title指定创建的日历事件的名称
+    """
 
     def create_calendar(self, title="Test"):
         result = ""

@@ -12,12 +12,16 @@ os.path.abspath(".")
     @File:dialer_page.py
     @Author:Bruce
     @Date:2021/1/12
+    @Description:Dialer page，控制设备Dialer应用的函数、控件
+    @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 class Dialer_Page(System):
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
+    """
 
-    # Ui element
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
@@ -30,15 +34,29 @@ class Dialer_Page(System):
 
         self.end_call = self.poco("com.google.android.dialer:id/incall_end_call")
 
+    """
+        @description:启动Dialer应用
+    """
+
     def start_dialer(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动dialer app:")
         self.device.start_app("com.google.android.dialer")
         sleep(1)
 
+    """
+        @description:关闭Dialer应用
+    """
+
     def stop_dialer(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭dialer app:")
         sleep(1)
         self.device.stop_app("com.google.android.dialer")
+
+    """
+        @description:拨打电话
+        @param:
+            number:电话号码
+    """
 
     def call(self, number="10086"):
         try:
@@ -48,6 +66,10 @@ class Dialer_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":call出现问题，请检查代码:" + str(ex))
         return number
+
+    """
+        @description:获取设备svn号
+    """
 
     def get_svn(self):
         result = ""
@@ -68,6 +90,10 @@ class Dialer_Page(System):
                               ":获取手机svn出现问题，请检查代码:" + str(ex))
         return result
 
+    """
+        @description:获取设备imei号
+    """
+
     def get_imei(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机imei:")
         global value_returned
@@ -81,6 +107,10 @@ class Dialer_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":无法获取到指定元素,请检查代码:" + str(ex))
         return value_returned
+
+    """
+        @description:进入Dialer设置Sort设置界面
+    """
 
     def enter_sort_interface(self):
         try:
@@ -98,6 +128,10 @@ class Dialer_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":enter sort interface 出现问题:" + str(ex))
         return first_name, last_name
+
+    """
+        @description:更改当前Dialer列表排序方式
+    """
 
     def change_sort_by(self):
         result = ""
@@ -121,12 +155,17 @@ class Dialer_Page(System):
                               ":更改Sort by方式出现问题:" + str(ex))
         return result
 
+    """
+        @description:获取设备当前主软件版本
+    """
+
     def get_main_software_version(self):
         result = ""
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前设备主软件版本:")
             self.device.shell("am start -a android.intent.action.DIAL -d tel:*%23*%233228%23*%23*")
-            result = "Main Software Version" + ":" + self.poco("android:id/message").wait().get_text().replace("\n", ",")
+            result = "Main Software Version" + ":" + self.poco("android:id/message").wait().get_text().replace("\n",
+                                                                                                               ",")
             self.poco(text="OK").wait().click()
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":获取当前设备主软件版本出现问题:" + str(ex))

@@ -11,25 +11,42 @@ os.path.abspath(".")
     @File:chrome_page.py
     @Author:Bruce
     @Date:2021/1/26
+    @Description:Chrome page，控制设备Chrome应用的函数、控件
+    @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 class Chrome_Page(System):
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
+    """
 
     def __init__(self, main_page):
         System.__init__(self, main_page)
         self.menu_icon = self.poco("com.android.chrome:id/menu_button")
         self.menu_download = self.poco(text="Downloads")
 
+    """
+        @description:启动chrome应用
+    """
+
     def start_chrome(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动chrome app:")
         self.device.start_app("com.android.chrome")
         sleep(1)
 
+    """
+        @description:关闭chrome应用
+    """
+
     def stop_chrome(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭chrome app:")
         sleep(1)
         self.device.stop_app("com.android.chrome")
+
+    """
+        @description:跳过chrome向导页
+    """
 
     def skip_guide(self):
         try:
@@ -41,6 +58,11 @@ class Chrome_Page(System):
         except PocoNoSuchNodeException as ex:
             self.logger.warning("function:" + sys._getframe().f_code.co_name +
                                 ":无需跳过chrome设置向导:" + str(ex))
+
+    """
+        @description:进入特定网页
+        @param:website:网页地址
+    """
 
     def enter_website(self, website="www.baidu.com"):
         try:
@@ -66,6 +88,10 @@ class Chrome_Page(System):
             except PocoNoSuchNodeException as ex:
                 self.logger.warning("function:" + sys._getframe().f_code.co_name +
                                     ":无需进行location授权界面:" + str(ex))
+
+    """
+        @description:下载百度首页图片
+    """
 
     def download_baidu_image(self):
         try:
@@ -97,6 +123,10 @@ class Chrome_Page(System):
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":下载百度首页图片出现问题:" + str(ex))
 
+    """
+        @description:获取当前已下载文件的第一个文件
+    """
+
     def get_first_download_file(self):
         result = ""
         try:
@@ -110,6 +140,11 @@ class Chrome_Page(System):
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":获取下载记录中第一个文件number出现问题:" + str(ex))
         return result
+
+    """
+        @description:保存网页为书签
+        @param:website:网页地址
+    """
 
     def save_bookmark(self, website="www.baidu.com"):
         result = ""

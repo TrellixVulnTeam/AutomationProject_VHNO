@@ -11,12 +11,16 @@ os.path.abspath(".")
     @File:deskclock_page.py
     @Author:Bruce
     @Date:2021/1/13
+    @Description:Deskclock page，控制设备Deskclock应用的函数、控件
+    @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 class Deskclock_Page(System):
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
+    """
 
-    # Ui element
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
@@ -25,15 +29,27 @@ class Deskclock_Page(System):
         self.create_clock_minute = self.poco("com.android.deskclock:id/timerpicker_minute")
         self.create_clock_save = self.poco("com.android.deskclock:id/toolbar_confirm_btn")
 
+    """
+        @description:启动deskclock应用
+    """
+
     def start_deskclock(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动desk clock app:")
         self.device.start_app("com.android.deskclock")
         sleep(1)
 
+    """
+        @description:关闭deskclock应用
+    """
+
     def stop_deskclock(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭desk clock app:")
         sleep(1)
         self.device.stop_app("com.android.deskclock")
+
+    """
+        @description:添加闹钟
+    """
 
     def add_clock(self):
         result = ""

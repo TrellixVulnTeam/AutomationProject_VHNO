@@ -13,6 +13,13 @@ os.path.abspath(".")
     @File:permissionGrant.py
     @Author:Bruce
     @Date:2020/12/23
+    @Description:设备批量授权函数
+"""
+
+"""
+    @description:列出当前设备所有App
+    @param:
+        devices:设备
 """
 
 
@@ -20,6 +27,14 @@ def list_apps(devices):
     app_list = devices.shell("pm list packages")
     app_list = re.findall("package:(.*)", app_list)
     return app_list
+
+
+"""
+    @description:列出设备中有启动界面当应用未授权的权限
+    @param:
+        package_name:包名
+        devices:设备
+"""
 
 
 def list_permission(package_name, devices):
@@ -30,6 +45,13 @@ def list_permission(package_name, devices):
             "dumpsys package {} | grep permission | grep granted=false".format(package_name))
         permission_list = re.findall("\s*(.*):\sgranted", permission_list)
     return permission_list
+
+
+"""
+    @description:进行授权操作
+    @param:
+        devices:设备
+"""
 
 
 def grant_permission(devices):
@@ -48,6 +70,14 @@ def grant_permission(devices):
                 logger.warning(
                     "function:" + sys._getframe().f_code.co_name + "当前系统应用无需授权,故跳过 \n + {}".format(adb_ex))
                 continue
+
+
+"""
+    @description:筛选掉无需授权的应用权限
+    @param:
+        app_list:所有应用
+        devices:设备
+"""
 
 
 def data_deal(app_list, devices):

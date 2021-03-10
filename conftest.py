@@ -16,10 +16,16 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
     @File:conftest.py
     @Author:Bruce
     @Date:2020/12/15
+    @Description:Pytest架构的conftest库作为插件存放,存放你的fixture函数,在里面写自己的本地插件
 """
 
 """
-    a py file which saved pytest's fixture for use
+    @description:整个测试case执行前的操作
+    @param:
+        cmdopt:调用cmdopt获取cmd命令行传入的参数
+    @fixture:
+        scope:设置作用域为整个Session
+        autouse:当pytest测试启动时自动运行该函数
 """
 
 
@@ -43,7 +49,12 @@ def before_all_case_execute(cmdopt):
 
 
 """
-    每条case执行后进行关闭当前APP操作 - 自动调用
+    @description:每条case执行后进行关闭当前APP操作
+    @param:
+        cmdopt:调用cmdopt获取cmd命令行传入的参数
+    @fixture:
+        scope:设置作用域为每条case(function)
+        autouse:当pytest测试启动时自动运行该函数
 """
 
 
@@ -62,7 +73,9 @@ def after_current_case_execute(cmdopt):
 
 
 """
-    传参数，传入device序列号
+    @description:传参数，获取从命令行传入的存储的device序列号
+    @param:
+        parser:用户命令行参数与ini文件值的解析器
 """
 
 
@@ -72,17 +85,34 @@ def pytest_addoption(parser):
     )
 
 
+"""
+    @description:命令行接收参数
+    @param:
+        request:请求获取
+    @fixture:
+        scope:设置作用域为整个Session
+"""
+
+
 @pytest.fixture(scope="session")
 def cmdopt(request):
     return request.config.getoption("--cmdopt")
 
 
+"""
+    @description:
+        pytest测试抓取每个用例执行时的报错处理函数
+        (在用例执行的三个阶段setup, call, teardown都会调用一次)
+    @param:
+        item:测试用例
+    @hookimpl:
+        tryfirst:作为第一个钩子函数使用,首先执行钩子函数装饰器
+        hookwrapper:True在其他钩子函数周围执行
+"""
+
+
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
 def pytest_runtest_makereport(item):
-    """
-    获取每个用例状态的钩子函数
-    :param item:测试用例
-    """
     # 获取钩子方法的调用结果
     outcome = yield
     rep = outcome.get_result()

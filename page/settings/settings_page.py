@@ -12,10 +12,15 @@ os.path.abspath(".")
     @File:settings_page.py
     @Author:Bruce
     @Date:2021/1/14
+    @Description:Settings page，控制设备Settings应用的函数、控件
+    @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 class Settings_Page(System):
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
+    """
 
     def __init__(self, main_page):
         System.__init__(self, main_page)
@@ -50,15 +55,27 @@ class Settings_Page(System):
         self.notch = self.poco(text="Notch")
         self.advanced_features_screenrecorder = self.poco(text="Screen Recorder")
 
+    """
+        @description:启动settings应用
+    """
+
     def start_settings(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动settings app:")
         self.device.start_app("com.android.settings")
         sleep(1)
 
+    """
+        @description:关闭settings应用
+    """
+
     def stop_settings(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭settings app:")
         sleep(1)
         self.device.stop_app("com.android.settings")
+
+    """
+        @description:进入Accessibility应用
+    """
 
     def enter_accessibility(self):
         try:
@@ -68,6 +85,10 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error(
                 "function:" + sys._getframe().f_code.co_name + ":进入Accessibility界面出现问题:" + str(ex))
+
+    """
+        @description:更改Remove animations状态
+    """
 
     def change_animations_status(self):
         result = ""
@@ -83,6 +104,10 @@ class Settings_Page(System):
                 "function:" + sys._getframe().f_code.co_name + ":更改remove animation状态出现问题:" + str(ex))
         return result
 
+    """
+        @description:进入SIM card & cellular network
+    """
+
     def enter_simcard_cellular(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入SIM card & cellular network界面:")
@@ -91,6 +116,10 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error(
                 "function:" + sys._getframe().f_code.co_name + ":进入SIM card & cellular network界面出现问题:" + str(ex))
+
+    """
+        @description:更改simcard名称
+    """
 
     def change_simcard_name(self, name="Test"):
         result = ""
@@ -106,6 +135,10 @@ class Settings_Page(System):
                 "function:" + sys._getframe().f_code.co_name + ":更改sim card name出现问题:" + str(ex))
         return result
 
+    """
+        @description:进入Security
+    """
+
     def enter_security(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Security & biometrics界面:")
@@ -114,6 +147,10 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error(
                 "function:" + sys._getframe().f_code.co_name + ":进入Security & biometrics界面出现问题:" + str(ex))
+
+    """
+        @description:更改SIM card lock状态
+    """
 
     def change_sim_card_lock_status(self):
         result = ""
@@ -130,6 +167,10 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":修改sim card lock状态出现问题:" + str(ex))
         return result
+
+    """
+        @description:设置屏幕锁
+    """
 
     def set_screen_lock(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":设置屏幕锁1234:")
@@ -153,6 +194,10 @@ class Settings_Page(System):
                                 ":屏幕锁不存在,所以设置一个屏幕锁:" + str(ex))
         return result
 
+    """
+        @description:清除屏幕锁
+    """
+
     def clear_screen_lock(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":清除屏幕锁:")
         security = self.scroll_to_find_element(element_text="Security & biometrics")
@@ -163,6 +208,10 @@ class Settings_Page(System):
         self.poco(text="Next").wait().click()
         self.poco(text="Swipe").wait().click()
         self.poco(text="YES, REMOVE").wait().click()
+
+    """
+        @description:获取设备IMEI & CU
+    """
 
     def get_imei_cu(self):
         result = ""
@@ -176,6 +225,10 @@ class Settings_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":获取设备IMEI&CU出现问题:" + str(ex))
         return result
+
+    """
+        @description:获取设备当前连接的WI-FI名称
+    """
 
     def get_current_wifi_name(self):
         try:
@@ -198,13 +251,25 @@ class Settings_Page(System):
                               ":获取当前wifi名称出现问题:" + str(ex))
         return wifi_name
 
+    """
+        @description:开启Wi-Fi
+    """
+
     def enable_wifi(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":开启wifi:")
         self.device.shell("svc wifi enable")
 
+    """
+        @description:关闭Wi-Fi
+    """
+
     def disable_wifi(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭wifi:")
         self.device.shell("svc wifi disable")
+
+    """
+        @description:进入Wi-Fi
+    """
 
     def enter_wifi(self):
         try:
@@ -214,6 +279,13 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error(
                 "function:" + sys._getframe().f_code.co_name + ":进入Wi-Fi界面出现问题:" + str(ex))
+
+    """
+        @description:连接Wi-Fi
+        @param:
+            wifi_name:Wi-Fi名称
+            wifi_password:Wi-Fi密码
+    """
 
     def connect_wifi(self, wifi_name="AutomationTest", wifi_password="cgt19981002"):
         result = ""
@@ -246,6 +318,12 @@ class Settings_Page(System):
                               ":连接wifi,name:{},password:{}出现问题:".format(wifi_name, wifi_password) + str(ex))
         return result
 
+    """
+        @description:忘记Wi-Fi
+        @param:
+            wifi_name:Wi-Fi名称
+    """
+
     def forget_wifi(self, wifi_name="A_Test"):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":忘记该wifi:{}:".format(wifi_name))
         wifi = self.scroll_to_find_element(element_text="Wi-Fi")
@@ -253,6 +331,12 @@ class Settings_Page(System):
         wifi_item = self.scroll_to_find_element(element_text=wifi_name)
         wifi_item.click()
         self.poco(text="FORGET").wait().click()
+
+    """
+        @description:设置Wi-Fi Direct名称
+        @param:
+            new_name:新名称
+    """
 
     def set_wifi_direct_name(self, new_name="Test"):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":设置wifi direct name为:{}:".format(new_name))
@@ -268,6 +352,10 @@ class Settings_Page(System):
         self.poco(text="OK").wait().click()
         return new_name
 
+    """
+        @description:获取当前Wi-Fi Direct名称
+    """
+
     def get_wifi_direct_name(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取wifi direct name:")
         wifi = self.scroll_to_find_element(element_text="Wi-Fi")
@@ -278,6 +366,12 @@ class Settings_Page(System):
         self.poco(text="Wi-Fi Direct").wait().click()
         direct_name = self.poco("com.android.settings:id/preference_content").wait().child().child().get_text()
         return direct_name
+
+    """
+        @description:设置Hotspot名称
+        @param:
+            name:名称
+    """
 
     def set_hotspot_name(self, name="Test"):
         result = ""
@@ -295,6 +389,10 @@ class Settings_Page(System):
                 "function:" + sys._getframe().f_code.co_name + ":设置wifi hotspot name为:{}出现问题:".format(name) + str(ex))
         return result
 
+    """
+        @description:进入Location
+    """
+
     def enter_location(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Location界面:")
@@ -303,6 +401,10 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error(
                 "function:" + sys._getframe().f_code.co_name + ":进入Location界面出现问题:" + str(ex))
+
+    """
+        @description:更改Location设置
+    """
 
     def change_location_settings(self):
         result = ""
@@ -320,6 +422,10 @@ class Settings_Page(System):
                 "function:" + sys._getframe().f_code.co_name + ":改变定位功能设置出现问题:" + str(ex))
         return result
 
+    """
+        @description:进入Connected devices
+    """
+
     def enter_connected_devices(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Connected Devices界面:")
@@ -328,6 +434,13 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error(
                 "function:" + sys._getframe().f_code.co_name + ":进入Connected Devices界面出现问题:" + str(ex))
+
+    """
+        @description:设置VPN
+        @param:
+            name:vpn名称
+            address:vpn地址
+    """
 
     def set_vpn(self, name="Test", address="Test"):
         # Before set vpn, you need set a screen lock first
@@ -349,6 +462,10 @@ class Settings_Page(System):
                     ex))
         return result
 
+    """
+        @description:获取设备数据使用情况
+    """
+
     def get_data_usage(self):
         # First：close wifi， enter website，then get data usage
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取手机date usage:")
@@ -358,6 +475,10 @@ class Settings_Page(System):
         data_usage = self.poco(text="Data usage").wait().sibling("android:id/summary").get_text()
         return data_usage
 
+    """
+        @description:进入Button & gestures
+    """
+
     def enter_button_gestures(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Button & gestures界面:")
@@ -365,6 +486,10 @@ class Settings_Page(System):
             self.double_click_element(element_item=button_gestures)
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":进入Button & gestures界面出现问题:" + str(ex))
+
+    """
+        @description:设置Navigation为Gesture
+    """
 
     def set_navigation_gesture(self):
         result = ""
@@ -379,6 +504,10 @@ class Settings_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":设置navigation gesture出现问题:" + str(ex))
         return result
 
+    """
+        @description:获取当前Navigation样式
+    """
+
     def get_current_navigation(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前导航手势类型:")
         global current_navigation
@@ -389,6 +518,10 @@ class Settings_Page(System):
         current_navigation_title = current_navigation.get_text()
         return current_navigation_title
 
+    """
+        @description:进入Sound & vibration
+    """
+
     def enter_sound_vibration(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Sound & vibration界面:")
@@ -396,6 +529,10 @@ class Settings_Page(System):
             self.double_click_element(element_item=sound_vibration)
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":进入Sound & vibration界面出现问题:" + str(ex))
+
+    """
+        @description:更改Silent mode
+    """
 
     def change_silent_mode(self):
         result = ""
@@ -411,6 +548,10 @@ class Settings_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":更改silent mode状态出现问题:" + str(ex))
         return result
 
+    """
+        @description:更改屏幕亮度 & 休眠模式
+    """
+
     def change_brightness_sleep_mode(self):
         result = ""
         try:
@@ -422,6 +563,10 @@ class Settings_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":更改Brightness&Sleep状态出现问题:" + str(ex))
         return result
 
+    """
+        @description:进入Display
+    """
+
     def enter_display(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Display界面:")
@@ -429,6 +574,10 @@ class Settings_Page(System):
             self.double_click_element(element_item=display)
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":进入Sound & vibration界面出现问题:" + str(ex))
+
+    """
+        @description:更改Notch样式
+    """
 
     def change_notch_style(self):
         result = ""
@@ -446,6 +595,10 @@ class Settings_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":更改Notch风格出现问题:" + str(ex))
         return result
 
+    """
+        @description:进入Advanced features
+    """
+
     def enter_advanced_features(self):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":进入Advanced features界面:")
@@ -454,17 +607,21 @@ class Settings_Page(System):
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":进入Advanced features界面出现问题:" + str(ex))
 
+    """
+        @description:更改Screenrecorder设置
+    """
+
     def change_screenrecorder_settings(self):
         result = ""
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":更改screen recorder设置:")
             self.advanced_features_screenrecorder.wait().click()
             record_interactions_title = self.poco(text="Record touch interactions").wait()
-            record_interactions_switch = record_interactions_title.parent().sibling().child("android:id/switch_widget").wait()
+            record_interactions_switch = record_interactions_title.parent().sibling().child(
+                "android:id/switch_widget").wait()
             record_interactions_switch.click()
             record_interactions_switch.invalidate()
             result = "Screenrecorder touch interactions" + ":" + str(record_interactions_switch.attr("checked"))
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":更改screen recorder设置出现问题:" + str(ex))
         return result
-

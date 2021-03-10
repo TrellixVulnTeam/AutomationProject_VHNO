@@ -24,6 +24,7 @@ os.path.abspath(".")
     @File:test_before_fota.py
     @Author:Bruce
     @Date:2021/2/13
+    @Description:Fota差异化设置
 """
 
 """

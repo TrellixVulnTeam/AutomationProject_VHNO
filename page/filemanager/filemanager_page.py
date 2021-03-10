@@ -9,10 +9,15 @@ os.path.abspath(".")
     @File:filemanager_page.py
     @Author:Bruce
     @Date:2021/1/14
+    @Description:Filemanager page，控制设备Filemanager应用的函数、控件
+    @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 class FileManager_Page(System):
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
+    """
 
     def __init__(self, main_page):
         System.__init__(self, main_page)
@@ -23,15 +28,29 @@ class FileManager_Page(System):
         self.create_folder_name = self.poco(text="Folder name")
         self.create_folder_create = self.poco(text="CREATE")
 
+    """
+        @description:启动Filemanager应用
+    """
+
     def start_filemanager(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动filemanager app:")
         self.device.start_app("com.tcl.tct.filemanager")
         sleep(1)
 
+    """
+        @description:关闭Filemanager应用
+    """
+
     def stop_filemanager(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭filemanager app:")
         sleep(1)
         self.device.stop_app("com.tcl.tct.filemanager")
+
+    """
+        @description:创建文件夹
+        @param:
+            name:文件夹名称
+    """
 
     def create_folder(self, name="Test"):
         result = ""

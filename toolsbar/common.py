@@ -12,14 +12,22 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
     @File:common.py
     @Author:Bruce
     @Date:2020/12/23
+    @Description:公共函数库，存放一些设备操控的函数、变量
 """
 
-device_count = len(SERIAL_NUMBER)
+"""
+    @description:初始化单个设备
+"""
 
 
 def single_device():
     austinDevice = connect_device("Android:///{}".format(SERIAL_NUMBER[0]))
     return austinDevice
+
+
+"""
+    @description:初始化多个设备
+"""
 
 
 def multiple_device():
@@ -28,6 +36,11 @@ def multiple_device():
         austinDevice = connect_device("Android:///{}".format(serial_no))
         device_list.append(austinDevice)
     return device_list
+
+
+"""
+    @description:返回当前以初始化完成的设备
+"""
 
 
 def init_all_device():
@@ -39,20 +52,15 @@ def init_all_device():
     return device_init
 
 
-test_device = init_all_device()
+"""
+    @description:logger构建器
+    @param:
+        log_path:log生成路径
+        logging_name:log名称
+"""
 
 
 def logger_config(log_path, logging_name):
-    """
-    配置log
-    :param log_path: 输出log路径
-    :param logging_name: 记录中name，可随意
-    :return:
-    """
-    '''
-    logger是日志对象，handler是流处理器
-    '''
-
     # 获取logger对象,取名
     logger = logging.getLogger(logging_name)
     logger.setLevel(logging.INFO)
@@ -66,6 +74,16 @@ def logger_config(log_path, logging_name):
     return logger
 
 
-# 该log机制用于保存自定义的错误或info信息
+"""
+    @description:连接设备数量
+"""
+device_count = len(SERIAL_NUMBER)
+"""
+    @description:初始化所有设备
+"""
+test_device = init_all_device()
+"""
+    @description:创建logger用于保存自定义的错误或info信息
+"""
 logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "OK", "Fota测试"),
                        logging_name="Fota测试")

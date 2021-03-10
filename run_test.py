@@ -21,6 +21,7 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
     @File:run_test.py
     @Author:Bruce
     @Date:2020/12/15
+    @Description:项目运行函数，存放测试和调试函数
 """
 
 
@@ -159,6 +160,11 @@ def _run():
 
 
 # 多机测试进程池:兼容单机和多机运行
+"""
+    @description:多进程创建进行多台设备测试
+"""
+
+
 def start_test():
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
@@ -176,6 +182,11 @@ def start_test():
 
 
 # debug
+"""
+    @description:调试函数
+"""
+
+
 def debug_area():
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
@@ -193,24 +204,33 @@ def debug_area():
     test_pool.join()
 
 
+"""
+    @description:Fota checklist测试函数执行区域
+    @param:
+        device_:设备序列号
+"""
+
+
 def fota_test_area(device_):
-    pass
-    # pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
-    #              "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
-    # subprocess.Popen(
-    #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
-    #           "./report/test_report[{}_{}]/".format(cur_time, device_),
-    #           "--clean"],
-    #     shell=False).communicate()[0]
+    pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(0),
+                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
+    subprocess.Popen(
+        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
+              "./report/test_report[{}_{}]/".format(cur_time, device_),
+              "--clean"],
+        shell=False).communicate()[0]
     # subprocess.Popen(
     #     "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
     #                                                                                              cur_time, device_),
     #     shell=True).communicate()[0]
-    # save2csv = Save2Csv()
-    # csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
-    # print(csv_list)
+    save2csv = Save2Csv()
+    csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
+    print(csv_list)
 
 
+"""
+    @description:main函数，主要运行函数
+"""
 if __name__ == '__main__':
     # _run()
     # start_test()

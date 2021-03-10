@@ -6,23 +6,33 @@ from poco.exceptions import PocoNoSuchNodeException
 
 from toolsbar.common import logger_config, cur_time
 from time import sleep
+
 os.path.abspath(".")
 
 """
     @File:system.py
     @Author:Bruce
     @Date:2021/1/12
-    @Description:Current py test is contained some system function
+    @Description:System page，控制设备System应用的函数、控件
 """
 
 
 class System:
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化，初始化全局logger记录测试步骤
+    """
 
     def __init__(self, main_page):
         self.device = main_page.device
         self.poco = main_page.poco
         self.logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "System", "Fota测试"),
                                     logging_name="Fota测试")
+
+    """
+        @description:获取APP版本
+        @param:
+            packageName:包名
+    """
 
     def get_app_version(self, packageName="com.android.settings"):
         result = ""
@@ -36,6 +46,13 @@ class System:
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":get app version出现问题:" + str(ex))
         return result
+
+    """
+        @description:滚动查找元素
+        @param:
+            element_text:元素text属性
+            element_id:元素id属性
+    """
 
     def scroll_to_find_element(self, element_text="", element_id=""):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":滚动查找元素:")
@@ -82,6 +99,10 @@ class System:
                         return element
         return element
 
+    """
+        @description:解锁屏幕
+    """
+
     def unlock_screen(self):
         """
            亮屏并解锁屏幕操作，SIM PIN 1234解锁
@@ -106,9 +127,19 @@ class System:
         finally:
             self.device.home()
 
+    """
+        @description:锁定屏幕
+    """
+
     def lock_screen(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":按下power键锁定屏幕:")
         self.device.keyevent("KEYCODE_POWER")
+
+    """
+        @description:双击元素
+        @param:
+            element_item:元素控件对象
+    """
 
     def double_click_element(self, element_item):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":双击{}元素:".format(element_item))
@@ -118,8 +149,9 @@ class System:
         self.device.double_click(position)
 
     """
-        @Description:获取当前所在父框架的被checked的元素
-        @element_id:需要遍历的元素所在父框架id
+        @description:获取当前所在父框架的被checked的元素
+        @param:
+            element_id:需要遍历的元素所在父框架id
         @sample:
             遍历在父框架"com.android.settings:id/recycler_view"中的被选中的checkbox
             self.poco("com.android.settings:id/recycler_view").wait().offspring(checked=True)

@@ -9,12 +9,16 @@ os.path.abspath(".")
     @File:messaging_page.py
     @Author:Bruce
     @Date:2021/1/13
+    @Description:Messaging page，控制设备Messaging应用的函数、控件
+    @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 class Messaging_Page(System):
+    """
+        @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
+    """
 
-    # Ui element
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
@@ -26,15 +30,30 @@ class Messaging_Page(System):
             text="Hear outgoing message sounds").wait().parent().sibling().child(
             "com.google.android.apps.messaging:id/switchWidget")
 
+    """
+        @description:启动Message应用
+    """
+
     def start_message(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":启动message app:")
         self.device.start_app("com.google.android.apps.messaging")
         sleep(1)
 
+    """
+        @description:关闭Message应用
+    """
+
     def stop_message(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭message app:")
         sleep(1)
         self.device.stop_app("com.google.android.apps.messaging")
+
+    """
+        @description:发送短信
+        @param:
+            number:收件人号码
+            content:短信内容
+    """
 
     def send_message(self, number="1", content="Test"):
         receiver_content = ""
@@ -51,6 +70,10 @@ class Messaging_Page(System):
                               ":send message出现问题，请检查代码:" + str(ex))
         return receiver_content
 
+    """
+        @description:获取设备当前SIM卡电话号码
+    """
+
     def get_phone_number(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前手机号码:")
         self.device.start_app_timing(package="com.google.android.apps.messaging",
@@ -58,6 +81,10 @@ class Messaging_Page(System):
         sim_number = self.settings_menu_advanced_phone_number.parent().children()[1].wait().get_text()
         sim_number = sim_number.replace(" ", "")
         return sim_number
+
+    """
+        @description:进入Message设置界面
+    """
 
     def enter_messaging_settings(self):
         try:
@@ -68,6 +95,10 @@ class Messaging_Page(System):
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":enter messaging settings出现问题，请检查代码:" + str(ex))
+
+    """
+        @description:更改Message设置Hear outgoing message sounds设置
+    """
 
     def change_hear_outgoing_status(self):
         result = ""
