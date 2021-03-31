@@ -5,6 +5,7 @@ import sys
 from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System, sleep
+from toolsbar.excel_tools import read_excel_for_page_element
 
 os.path.abspath(".")
 """
@@ -16,6 +17,14 @@ os.path.abspath(".")
 """
 
 
+# 该函数用于简化元素获取操作
+def get_element_parametrize(element_name="guide_page_text"):
+    form_name = "./page/page_sheet.xlsx"
+    element_data = read_excel_for_page_element(form=form_name, sheet_name="onetouchbooster_page",
+                                               element_name=element_name)
+    return element_data
+
+
 class Onetouchbooster_Page(System):
     """
         @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
@@ -24,11 +33,11 @@ class Onetouchbooster_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
-        self.guide_close = self.poco("com.tct.onetouchbooster:id/guide_close")
-        self.guide_text = self.poco("com.tct.onetouchbooster:id/guide_text")
-        self.battery = self.poco(text="Battery")
-        self.battery_settings = self.poco("com.tct.onetouchbooster:id/battery_settings")
-        self.intelligent_power_saving_title = self.poco(text="Intelligent power saving")
+        self.guide_close = self.poco(get_element_parametrize("guide_close"))
+        self.guide_text = self.poco(get_element_parametrize("guide_text"))
+        self.battery = self.poco(text=get_element_parametrize("battery"))
+        self.battery_settings = self.poco(get_element_parametrize("battery_settings"))
+        self.intelligent_power_saving_title = self.poco(text=get_element_parametrize("intelligent_power_saving_title"))
 
     """
        @description:启动onetouchbooster应用

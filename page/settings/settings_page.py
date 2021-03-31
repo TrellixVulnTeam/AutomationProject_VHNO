@@ -6,6 +6,7 @@ from airtest.core.error import AdbShellError
 from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System, sleep
+from toolsbar.excel_tools import read_excel_for_page_element
 
 os.path.abspath(".")
 """
@@ -17,6 +18,14 @@ os.path.abspath(".")
 """
 
 
+# 该函数用于简化元素获取操作
+def get_element_parametrize(element_name="guide_page_text"):
+    form_name = "./page/page_sheet.xlsx"
+    element_data = read_excel_for_page_element(form=form_name, sheet_name="settings_page",
+                                               element_name=element_name)
+    return element_data
+
+
 class Settings_Page(System):
     """
         @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
@@ -25,35 +34,35 @@ class Settings_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
-        self.sound_vibration = "Sound & vibration"
-        self.button_gesture = "Button & gestures"
-        self.security_biometrics = "Security & biometrics"
-        self.simcard_cellularnetwork = "SIM card & cellular network"
-        self.accessibility = "Accessibility"
-        self.wifi = "Wi-Fi"
-        self.location = "Location"
-        self.connected_devices = "Connected devices"
-        self.display = "Display"
-        self.advanced_features = "Advanced features"
-        self.simcard_settings = self.poco(text="SIM card settings")
-        self.simcard_settings_icon = self.poco("com.tct.phone:id/settings_button")
-        self.sound_vibration_silent_mode_text = self.poco(text="Silent mode")
-        self.display_sleep = self.poco(text="Sleep")
-        self.display_sleep_never = self.poco(text="Never")
-        self.button_gestures_gestures = self.poco(text="Gestures")
-        self.button_gestures_gestures_3_finger_screenshot = self.poco(text="3-finger screenshot")
-        self.security_sim_card_lock_text = "SIM card lock"
-        self.security_sim_card_lock_locksimcard_text = self.poco(text="Lock SIM card")
-        self.imei = self.poco("com.jrdcom.Elabel:id/imei")
-        self.cu = self.poco("com.jrdcom.Elabel:id/cu_reference_id_view")
-        self.hotspot_tethering = self.poco(text="Hotspot & tethering")
-        self.mobile_hotspot = self.poco(text="Mobile hotspot")
-        self.hotspot_name = self.poco(text="Hotspot name")
-        self.vpn = self.poco(text="VPN")
-        self.vpn_create = self.poco("com.android.settings:id/vpn_create")
-        self.display_statusbar_notch = self.poco(text="Status bar & notch")
-        self.notch = self.poco(text="Notch")
-        self.advanced_features_screenrecorder = self.poco(text="Screen Recorder")
+        self.sound_vibration = get_element_parametrize("sound_vibration")
+        self.button_gesture = get_element_parametrize("button_gesture")
+        self.security_biometrics = get_element_parametrize("security_biometrics")
+        self.simcard_cellularnetwork = get_element_parametrize("simcard_cellularnetwork")
+        self.accessibility = get_element_parametrize("accessibility")
+        self.wifi = get_element_parametrize("wifi")
+        self.location = get_element_parametrize("location")
+        self.connected_devices = get_element_parametrize("connected_devices")
+        self.display = get_element_parametrize("display")
+        self.advanced_features = get_element_parametrize("advanced_features")
+        self.simcard_settings = self.poco(text=get_element_parametrize("simcard_settings"))
+        self.simcard_settings_icon = self.poco(get_element_parametrize("simcard_settings_icon"))
+        self.sound_vibration_silent_mode_text = self.poco(text=get_element_parametrize("sound_vibration_silent_mode_text"))
+        self.display_sleep = self.poco(text=get_element_parametrize("display_sleep"))
+        self.display_sleep_never = self.poco(text=get_element_parametrize("display_sleep_never"))
+        self.button_gestures_gestures = self.poco(text=get_element_parametrize("button_gestures_gestures"))
+        self.button_gestures_gestures_3_finger_screenshot = self.poco(text=get_element_parametrize("button_gestures_gestures_3_finger_screenshot"))
+        self.security_sim_card_lock_text = get_element_parametrize("security_sim_card_lock_text")
+        self.security_sim_card_lock_locksimcard_text = self.poco(text=get_element_parametrize("security_sim_card_lock_locksimcard_text"))
+        self.imei = self.poco(get_element_parametrize("imei"))
+        self.cu = self.poco(get_element_parametrize("cu"))
+        self.hotspot_tethering = self.poco(text=get_element_parametrize("hotspot_tethering"))
+        self.mobile_hotspot = self.poco(text=get_element_parametrize("mobile_hotspot"))
+        self.hotspot_name = self.poco(text=get_element_parametrize("hotspot_name"))
+        self.vpn = self.poco(text=get_element_parametrize("vpn"))
+        self.vpn_create = self.poco(get_element_parametrize("vpn_create"))
+        self.display_statusbar_notch = self.poco(text=get_element_parametrize("display_statusbar_notch"))
+        self.notch = self.poco(text=get_element_parametrize("notch"))
+        self.advanced_features_screenrecorder = self.poco(text=get_element_parametrize("advanced_features_screenrecorder"))
 
     """
         @description:启动settings应用

@@ -3,6 +3,7 @@ import os
 import sys
 
 from page.system.system import System, sleep
+from toolsbar.excel_tools import read_excel_for_page_element
 
 os.path.abspath(".")
 """
@@ -14,6 +15,14 @@ os.path.abspath(".")
 """
 
 
+# 该函数用于简化元素获取操作
+def get_element_parametrize(element_name="guide_page_text"):
+    form_name = "./page/page_sheet.xlsx"
+    element_data = read_excel_for_page_element(form=form_name, sheet_name="messaging_page",
+                                               element_name=element_name)
+    return element_data
+
+
 class Messaging_Page(System):
     """
         @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
@@ -22,13 +31,13 @@ class Messaging_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
-        self.settings_menu_advanced = self.poco(text="Advanced")
-        self.settings_menu_advanced_phone_number = self.poco(text="Phone number")
-
-        self.send_sms = self.poco("com.google.android.apps.messaging:id/send_message_button_icon")
+        self.settings_menu_advanced = self.poco(text=get_element_parametrize("settings_menu_advanced"))
+        self.settings_menu_advanced_phone_number = self.poco(
+            text=get_element_parametrize("settings_menu_advanced_phone_number"))
+        self.send_sms = self.poco(get_element_parametrize("send_sms"))
         self.hear_out_going_message_button = self.poco(
-            text="Hear outgoing message sounds").wait().parent().sibling().child(
-            "com.google.android.apps.messaging:id/switchWidget")
+            text=get_element_parametrize("hear_out_going_message_button_1")).wait().parent().sibling().child(
+            get_element_parametrize("hear_out_going_message_button_2"))
 
     """
         @description:启动Message应用

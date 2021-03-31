@@ -130,7 +130,7 @@ def pytest_runtest_makereport(item):
             file_name = "./screenshot/{}_{}_{}.png".format(str(item).strip("<").strip(">").replace(" ", "_"),
                                                            cur_time, "")
             snapshot(file_name)
-            sleep(1)
+            sleep(3)
             with open(file_name, mode="rb") as f:
                 file = f.read()
             allure.attach(file, "{}:失败截图".format(item), allure.attachment_type.PNG)

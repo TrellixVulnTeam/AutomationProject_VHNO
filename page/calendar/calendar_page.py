@@ -5,6 +5,7 @@ import sys
 from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System, sleep
+from toolsbar.excel_tools import read_excel_for_page_element
 
 os.path.abspath(".")
 """
@@ -16,6 +17,14 @@ os.path.abspath(".")
 """
 
 
+# 该函数用于简化元素获取操作
+def get_element_parametrize(element_name="guide_page_text"):
+    form_name = "./page/page_sheet.xlsx"
+    element_data = read_excel_for_page_element(form=form_name, sheet_name="calendar_page",
+                                               element_name=element_name)
+    return element_data
+
+
 class Calendar_Page(System):
     """
         @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
@@ -24,15 +33,14 @@ class Calendar_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
-        self.guide_page_text = self.poco(text="Google Calendar")
-        self.guide_next_arrow = self.poco("com.google.android.calendar:id/next_arrow")
-        self.guide_got_it = self.poco("com.google.android.calendar:id/oobe_done_button")
-        self.create_calendar_button = self.poco("com.google.android.calendar:id/floating_action_button")
-        self.create_event_button = self.poco(text="Event")
-        self.add_title_edittext = self.poco("com.google.android.calendar:id/title")
-        self.save_button = self.poco("com.google.android.calendar:id/save")
-        # self.created_calendar_container = self.poco(
-        #     "com.google.android.calendar:id/alternate_timeline_fragment_container").children()[0]
+        print(get_element_parametrize("guide_page_text"))
+        self.guide_page_text = self.poco(text=get_element_parametrize("guide_page_text"))
+        self.guide_next_arrow = self.poco(get_element_parametrize("guide_next_arrow"))
+        self.guide_got_it = self.poco(get_element_parametrize("guide_got_it"))
+        self.create_calendar_button = self.poco(get_element_parametrize("create_calendar_button"))
+        self.create_event_button = self.poco(text=get_element_parametrize("create_event_button"))
+        self.add_title_edittext = self.poco(get_element_parametrize("add_title_edittext"))
+        self.save_button = self.poco(get_element_parametrize("save_button"))
 
     """
         @description:启动calendar应用

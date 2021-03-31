@@ -17,6 +17,7 @@ from page.messaging.messaging_page import Messaging_Page
 from page.onetouchbooster.onetouchbooster_page import Onetouchbooster_Page
 from page.settings.settings_page import Settings_Page
 from page.system.system import System
+from toolsbar.excel_tools import read_excel_for_case_parametrize
 from toolsbar.save2csv import Save2Csv
 
 os.path.abspath(".")
@@ -45,7 +46,8 @@ class TestBeforeFota:
     # case 1:
     @allure.description("APK版本差异化")
     @allure.step("获取当前应用的版本号->保存当前版本号")
-    @pytest.mark.parametrize("packageName", ["com.android.settings", "com.android.deskclock"])
+    @pytest.mark.parametrize("packageName", read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                                            case_name="test_apk_version"))
     def test_apk_version(self, before_all_case_execute, packageName):
         system = System(before_all_case_execute)
         result = system.get_app_version(packageName)
@@ -65,7 +67,8 @@ class TestBeforeFota:
     # case 3:
     @allure.description("通话记录差异化")
     @allure.step("(测试前先插入一张SIM卡)使用adb命令拨打电话->挂断电话->保存当前拨打的电话号码")
-    @pytest.mark.parametrize("number", ["10086"])
+    @pytest.mark.parametrize("number", read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                                       case_name="test_calling_history"))
     def test_calling_history(self, before_all_case_execute, number):
         dialer_page = Dialer_Page(before_all_case_execute)
         dialer_page.call(number)
@@ -76,7 +79,9 @@ class TestBeforeFota:
     # case 4:
     @allure.description("已发短信差异化")
     @allure.step("使用adb命令发送短信给自身号码->点击SMS发送->获取发送的结果->保存当前发送的结果")
-    @pytest.mark.parametrize("number, content", [("18575211714", "Test")])
+    @pytest.mark.parametrize("number, content",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_send_message"))
     def test_send_message(self, before_all_case_execute, number, content):
         messaging_page = Messaging_Page(before_all_case_execute)
         result = messaging_page.send_message(number, content)
@@ -96,7 +101,9 @@ class TestBeforeFota:
     # case 6:
     @allure.description("创建联系人差异化")
     @allure.step("通过adb进入联系人创建界面->创建指定联系人->检查联系人是否创建成功->保存当前创建联系人状态")
-    @pytest.mark.parametrize("contact_name, phone_number", [("Test", "18575211714")])
+    @pytest.mark.parametrize("contact_name, phone_number",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_contact_reserved"))
     def test_contact_reserved(self, before_all_case_execute, contact_name, phone_number):
         contacts_page = Contacts_Page(before_all_case_execute)
         result = contacts_page.create_contact(contact_name, phone_number)
@@ -116,7 +123,9 @@ class TestBeforeFota:
     # case 8:
     @allure.description("创建日历差异化")
     @allure.step("启动calendar->检测跳过Guide页面->创建日历->检测当前日历是否创建成功->保存当前创建日历状态")
-    @pytest.mark.parametrize("title", ["Test"])
+    @pytest.mark.parametrize("title",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_calendar_reserved"))
     def test_calendar_reserved(self, before_all_case_execute, title):
         calendar_page = Calendar_Page(before_all_case_execute)
         calendar_page.start_calendar()
@@ -204,7 +213,9 @@ class TestBeforeFota:
     @allure.description("SIM card name差异化")
     @allure.step(
         "启动Settings->进入SIM card & cellular network->SIM card settings->设置小齿轮->修改Sim card name->保存当前更改的sim card name状态")
-    @pytest.mark.parametrize("name", ["Test"])
+    @pytest.mark.parametrize("name",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_simcard_name"))
     def test_simcard_name(self, before_all_case_execute, name):
         settings_page = Settings_Page(before_all_case_execute)
         settings_page.start_settings()
@@ -227,7 +238,9 @@ class TestBeforeFota:
     # case 18:
     @allure.description("Filemanager差异化")
     @allure.step("启动FileManager->进入Internal storage->创建文件夹->保存当前创建的文件夹的名字")
-    @pytest.mark.parametrize("name", ["Test"])
+    @pytest.mark.parametrize("name",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_create_folder"))
     def test_create_folder(self, before_all_case_execute, name):
         filemanager_page = FileManager_Page(before_all_case_execute)
         filemanager_page.start_filemanager()
@@ -256,7 +269,9 @@ class TestBeforeFota:
     # case 21:
     @allure.description("Wifi AP差异化")
     @allure.step("启动Settings->WiFi->adb打开Wifi->连接Wifi->adb获取当前连接的Wifi名称->保存当前WiFi的名称")
-    @pytest.mark.parametrize("wifi_name, wifi_password", [("AutomationTest", "cgt19981002")])
+    @pytest.mark.parametrize("wifi_name, wifi_password",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_wifi_ap"))
     def test_wifi_ap(self, before_all_case_execute, wifi_name, wifi_password):
         settings_page = Settings_Page(before_all_case_execute)
         settings_page.start_settings()
@@ -269,7 +284,9 @@ class TestBeforeFota:
     # case 22:
     @allure.description("Wifi Hotspot name差异化")
     @allure.step("启动Settings->进入SIM card & cellular network->更改Hotspot name->保存当前Hotspot名称")
-    @pytest.mark.parametrize("name", ["Test"])
+    @pytest.mark.parametrize("name",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_hotspot"))
     def test_hotspot(self, before_all_case_execute, name):
         settings_page = Settings_Page(before_all_case_execute)
         settings_page.start_settings()
@@ -292,7 +309,9 @@ class TestBeforeFota:
     # case 24:
     @allure.description("Chrome下载记录差异化")
     @allure.step("启动Chrome->跳过Guide->进入百度网页->下载百度首页图片->进入Download menu获取下载的文件的number->保存number")
-    @pytest.mark.parametrize("website", ["www.baidu.com"])
+    @pytest.mark.parametrize("website",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_chrome_download"))
     def test_chrome_download(self, before_all_case_execute, website):
         chrome_page = Chrome_Page(before_all_case_execute)
         chrome_page.start_chrome()
@@ -306,7 +325,9 @@ class TestBeforeFota:
     # case 25:
     @allure.description("Chrome书签差异化")
     @allure.step("启动Chrome->跳过Guide->进入百度网页->点击保存为书签->保存书签名称")
-    @pytest.mark.parametrize("website", ["www.baidu.com"])
+    @pytest.mark.parametrize("website",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_chrome_bookmarks"))
     def test_chrome_bookmarks(self, before_all_case_execute, website):
         chrome_page = Chrome_Page(before_all_case_execute)
         chrome_page.start_chrome()
@@ -315,10 +336,12 @@ class TestBeforeFota:
         saved_data.append([sys._getframe().f_code.co_name, "\\", result])
         assert result is not None
 
-    # case 26:
+    # # case 26:
     @allure.description("VPN配置差异化")
     @allure.step("启动Settings->检测是否有屏幕锁->没有即设置,有即进行VPN设置->进入Connected devices->设置VPN->保存当前设置的VPN名称")
-    @pytest.mark.parametrize("name, address", [("Test", "Test")])
+    @pytest.mark.parametrize("name, address",
+                             read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
+                                                             case_name="test_vpn_config"))
     def test_vpn_config(self, before_all_case_execute, name, address):
         settings_page = Settings_Page(before_all_case_execute)
         settings_page.start_settings()

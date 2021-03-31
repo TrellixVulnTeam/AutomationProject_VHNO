@@ -6,6 +6,7 @@ import sys
 from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System, sleep
+from toolsbar.excel_tools import read_excel_for_page_element
 
 os.path.abspath(".")
 """
@@ -17,6 +18,14 @@ os.path.abspath(".")
 """
 
 
+# 该函数用于简化元素获取操作
+def get_element_parametrize(element_name="guide_page_text"):
+    form_name = "./page/page_sheet.xlsx"
+    element_data = read_excel_for_page_element(form=form_name, sheet_name="dialer_page",
+                                               element_name=element_name)
+    return element_data
+
+
 class Dialer_Page(System):
     """
         @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
@@ -25,14 +34,18 @@ class Dialer_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
-        self.settings_menu = self.poco("com.google.android.dialer:id/three_dot_menu_or_clear_icon_view")
-        self.settings_menu_Settings = self.poco(text="Settings")
-        self.settings_menu_Settings_Display_options = self.poco(text="Display options")
-        self.settings_menu_Settings_Display_options_Sort_by = self.poco(text="Sort by")
-        self.settings_menu_Settings_Display_options_Sort_by_First_name = self.poco(text="First name")
-        self.settings_menu_Settings_Display_options_Sort_by_Last_name = self.poco(text="Last name")
+        self.settings_menu = self.poco(get_element_parametrize("settings_menu"))
+        self.settings_menu_Settings = self.poco(text=get_element_parametrize("settings_menu_Settings"))
+        self.settings_menu_Settings_Display_options = self.poco(
+            text=get_element_parametrize("settings_menu_Settings_Display_options"))
+        self.settings_menu_Settings_Display_options_Sort_by = self.poco(
+            text=get_element_parametrize("settings_menu_Settings_Display_options_Sort_by"))
+        self.settings_menu_Settings_Display_options_Sort_by_First_name = self.poco(
+            text=get_element_parametrize("settings_menu_Settings_Display_options_Sort_by_First_name"))
+        self.settings_menu_Settings_Display_options_Sort_by_Last_name = self.poco(
+            text=get_element_parametrize("settings_menu_Settings_Display_options_Sort_by_Last_name"))
 
-        self.end_call = self.poco("com.google.android.dialer:id/incall_end_call")
+        self.end_call = self.poco(get_element_parametrize("end_call"))
 
     """
         @description:启动Dialer应用

@@ -5,6 +5,7 @@ import sys
 from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System, sleep
+from toolsbar.excel_tools import read_excel_for_page_element
 
 os.path.abspath(".")
 """
@@ -16,6 +17,14 @@ os.path.abspath(".")
 """
 
 
+# 该函数用于简化元素获取操作
+def get_element_parametrize(element_name="guide_page_text"):
+    form_name = "./page/page_sheet.xlsx"
+    element_data = read_excel_for_page_element(form=form_name, sheet_name="fota_page",
+                                               element_name=element_name)
+    return element_data
+
+
 class Fota_Page(System):
     """
         @param:main_page:传入Main_Page实例完成设备的Device、Poco的初始化
@@ -24,9 +33,9 @@ class Fota_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
-        self.guide_page_text = self.poco("com.tcl.fota.system:id/app_guide_title")
-        self.guide_continue = self.poco("com.tcl.fota.system:id/guide_continue_button")
-        self.download_progress_button = self.poco("com.tcl.fota.system:id/download_progress_button")
+        self.guide_page_text = self.poco(get_element_parametrize("guide_page_text"))
+        self.guide_continue = self.poco(get_element_parametrize("guide_continue"))
+        self.download_progress_button = self.poco(get_element_parametrize("download_progress_button"))
 
     """
         @description:启动Fota应用
