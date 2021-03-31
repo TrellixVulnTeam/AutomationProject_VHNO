@@ -1,0 +1,5 @@
+INFO     Fota测试:system.py:110 function:unlock_screen:进行屏幕解锁:
+ERROR    Fota测试:system.py:126 function:unlock_screen:未设置屏幕锁,无需解锁:Cannot find any visible node by query UIObjectProxy of "com.android.systemui:id/rectangle_frame"
+INFO     Fota测试:system.py:40 function:get_app_version:获取当前com.android.settings版本:
+INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:72 当前界面为主界面

@@ -1,0 +1,403 @@
+{
+  "uid" : "ab17fc5a4eb3bca4b216b548c7f9fcbc",
+  "name" : "timeline",
+  "children" : [ {
+    "name" : "CGTdeMacBook-Pro.local",
+    "children" : [ {
+      "name" : "15712-MainThread",
+      "children" : [ {
+        "name" : "test_chrome_bookmarks[www.baidu.com]",
+        "uid" : "bebe2641afef67dd",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180908741,
+          "stop" : 1617180937627,
+          "duration" : 28886
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'www.baidu.com'" ]
+      }, {
+        "name" : "test_security_sim_card",
+        "uid" : "4acf6874286a8b6e",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180719132,
+          "stop" : 1617180732797,
+          "duration" : 13665
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_battery_management_settings",
+        "uid" : "f180b69e3b70ebd7",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180649914,
+          "stop" : 1617180661753,
+          "duration" : 11839
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_contact_reserved[Test-18575211714]",
+        "uid" : "2f9628fd48610a83",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180618005,
+          "stop" : 1617180619854,
+          "duration" : 1849
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Test'", "'18575211714'" ]
+      }, {
+        "name" : "test_vpn_config[Test-Test]",
+        "uid" : "955225238a3e32b2",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180937975,
+          "stop" : 1617180971384,
+          "duration" : 33409
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Test'", "'Test'" ]
+      }, {
+        "name" : "test_simcard_name[Test]",
+        "uid" : "acb34ef62c06e1e3",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180732972,
+          "stop" : 1617180780115,
+          "duration" : 47143
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Test'" ]
+      }, {
+        "name" : "test_main_software_version",
+        "uid" : "49a4e3c568e27d6f",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617181004581,
+          "stop" : 1617181008141,
+          "duration" : 3560
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_sort_all_data",
+        "uid" : "673930874dbc35d5",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617181008424,
+          "stop" : 1617181008481,
+          "duration" : 57
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_chrome_download[www.baidu.com]",
+        "uid" : "fabe330e2952f966",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180871084,
+          "stop" : 1617180908469,
+          "duration" : 37385
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'www.baidu.com'" ]
+      }, {
+        "name" : "test_calling_history[number0]",
+        "uid" : "f5509253dfd2fa13",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180600518,
+          "stop" : 1617180604118,
+          "duration" : 3600
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "case_name\ntest_calling_history    10086\ntest_calling_history     Test\nName: case_data, dtype: object" ]
+      }, {
+        "name" : "test_messaging_settings",
+        "uid" : "6a8a623e8af95111",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180611545,
+          "stop" : 1617180617697,
+          "duration" : 6152
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_notch_settings",
+        "uid" : "f69d92f82debea5b",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180971694,
+          "stop" : 1617180986171,
+          "duration" : 14477
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_wifi_ap[Guangtao-cgtisthebest]",
+        "uid" : "dc3d4275e100b482",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180824576,
+          "stop" : 1617180841177,
+          "duration" : 16601
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Guangtao'", "'cgtisthebest'" ]
+      }, {
+        "name" : "test_calendar_reserved[Test]",
+        "uid" : "48ee74ce5ca8e502",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180637017,
+          "stop" : 1617180649589,
+          "duration" : 12572
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Test'" ]
+      }, {
+        "name" : "test_hotspot[Test]",
+        "uid" : "6747a831b9512305",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180841365,
+          "stop" : 1617180852799,
+          "duration" : 11434
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Test'" ]
+      }, {
+        "name" : "test_apk_version[com.android.settings]",
+        "uid" : "377aef8418565d35",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180586857,
+          "stop" : 1617180587366,
+          "duration" : 509
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'com.android.settings'" ]
+      }, {
+        "name" : "test_clock_reserved",
+        "uid" : "274dfc3127e0c656",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180620075,
+          "stop" : 1617180636740,
+          "duration" : 16665
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_send_message[18575211714-Test]",
+        "uid" : "c5655139dd93f7be",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180604262,
+          "stop" : 1617180611190,
+          "duration" : 6928
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Test'", "'18575211714'" ]
+      }, {
+        "name" : "test_gesture_settings",
+        "uid" : "1f37f9b7b3c176f6",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180685312,
+          "stop" : 1617180701674,
+          "duration" : 16362
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_dialer_settings",
+        "uid" : "9362f188b0a07970",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180587485,
+          "stop" : 1617180600169,
+          "duration" : 12684
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_remove_animation",
+        "uid" : "1dd4b666dad97179",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180780430,
+          "stop" : 1617180807891,
+          "duration" : 27461
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_imei_cu",
+        "uid" : "7969a1b971cbd593",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180817658,
+          "stop" : 1617180820062,
+          "duration" : 2404
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_camera_settings",
+        "uid" : "2423384e19a56315",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180662090,
+          "stop" : 1617180670238,
+          "duration" : 8148
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_location_settings",
+        "uid" : "4976fd94a5bab613",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180853131,
+          "stop" : 1617180870768,
+          "duration" : 17637
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_create_folder[Test]",
+        "uid" : "f11b5bc7e54670a3",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180808209,
+          "stop" : 1617180817316,
+          "duration" : 9107
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ "'Test'" ]
+      }, {
+        "name" : "test_sound_settings",
+        "uid" : "925e603d2d3f082d",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180670503,
+          "stop" : 1617180684233,
+          "duration" : 13730
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_display_settings",
+        "uid" : "1d5cf5bbb4b86825",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180684557,
+          "stop" : 1617180685173,
+          "duration" : 616
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_security_screen_lock",
+        "uid" : "71a1d3de568fc8ba",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180702015,
+          "stop" : 1617180719023,
+          "duration" : 17008
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_svn",
+        "uid" : "f805243641098f59",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180820277,
+          "stop" : 1617180824194,
+          "duration" : 3917
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      }, {
+        "name" : "test_screenrecorder_settings",
+        "uid" : "f6375eb995fe2062",
+        "parentUid" : "eedbb0c9d231e3ef07bfce6f4ce44777",
+        "status" : "passed",
+        "time" : {
+          "start" : 1617180986510,
+          "stop" : 1617181004282,
+          "duration" : 17772
+        },
+        "flaky" : false,
+        "newFailed" : false,
+        "parameters" : [ ]
+      } ],
+      "uid" : "eedbb0c9d231e3ef07bfce6f4ce44777"
+    } ],
+    "uid" : "cc6a01107772af71b199c928ad867e64"
+  } ]
+}

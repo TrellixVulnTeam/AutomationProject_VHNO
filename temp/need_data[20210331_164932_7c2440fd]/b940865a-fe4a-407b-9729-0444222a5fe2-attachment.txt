@@ -1,0 +1,6 @@
+INFO     Fota测试:dialer_page.py:76 function:call:拨打电话给:case_name
+test_calling_history    10086
+test_calling_history     Test
+Name: case_data, dtype: object:
+INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:72 当前界面为主界面

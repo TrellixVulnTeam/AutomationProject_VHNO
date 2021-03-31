@@ -1,0 +1,5 @@
+INFO     Fota测试:onetouchbooster_page.py:47 function:start_onetouchbooster:启动one touch booster app:
+INFO     Fota测试:onetouchbooster_page.py:65 function:skip_guide:跳过设置向导:
+INFO     Fota测试:onetouchbooster_page.py:80 function:enter_battery_settings:进入Battery settings:
+INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:70 APP关闭完成
