@@ -232,9 +232,9 @@ def fota_test_area(device_):
 """
 if __name__ == '__main__':
     # _run()
-    # start_test()
+    start_test()
     # debug()
-    debug_area()
+    # debug_area()
     # device = connect_device("Android:///{}".format("7c2440fd"))
     # poco = AndroidUiautomationPoco()
     # device.shell("settings put system screen_brightness_mode 0")

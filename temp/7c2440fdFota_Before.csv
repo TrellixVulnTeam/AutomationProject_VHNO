@@ -1,33 +1,33 @@
 ﻿Case Name,Previous value,Set value
 test_apk_version[com.android.settings],versionName=v4.2047.01.1005.K,\
-test_dialer_settings,\,First name:True
+test_dialer_settings,\,Last name:True
 test_calling_history,\,"case_name
 test_calling_history    10086
 test_calling_history     Test
 Name: case_data, dtype: object"
 test_send_message,\,Conversation with 185 7521 1714
-test_messaging_settings,\,Hear outgoing message sounds:True
+test_messaging_settings,\,Hear outgoing message sounds:False
 test_contact_reserved,\,"('Test', '18575211714')"
-test_clock_reserved,\,16:50
+test_clock_reserved,\,10:33
 test_calendar_reserved,\,
-test_battery_management_settings,\,Intelligent power saving:False
-test_camera_settings,\,AI scene detection:False
+test_battery_management_settings,\,Intelligent power saving:True
+test_camera_settings,\,AI scene detection:True
 test_sound_settings,\,
 test_display_settings,\,Brightness:100% & Sleep:Never
 test_gesture_settings,\,Gesture navigation:True
 test_security_screen_lock,\,
-test_security_sim_card,\,Lock SIM card:False
+test_security_sim_card,\,Lock SIM card:True
 test_simcard_name,\,SIM card Name:Test
-test_remove_animation,\,Remove animations:True
+test_remove_animation,\,Remove animations:False
 test_create_folder,\,Created Folder Name:Test
 test_imei_cu,\,"IMEI:354300100006051,354300100006069, CU:T671F-RDLCAP12"
 test_svn,\,01
 test_wifi_ap,\,Connected WiFi:AutomationTest
 test_hotspot,\,New Hotspot Name:Test
-test_location_settings,\,Wi-Fi scanning status:False
-test_chrome_download,\,Downloaded file Number:4902 (550×175)
+test_location_settings,\,Wi-Fi scanning status:True
+test_chrome_download,\,Downloaded file Number:5035 (696×171)
 test_chrome_bookmarks,\,
 test_vpn_config,\,New VPN Name:Test
 test_notch_settings,\,Notch Style:True
-test_screenrecorder_settings,\,Screenrecorder touch interactions:False
+test_screenrecorder_settings,\,Screenrecorder touch interactions:True
 test_main_software_version,\,"Main Software Version:B2BBE0E0DP00,Y2BBE0E0DP00,S2BBZZE0DP00,O2BBFZE0DPM0,N2BBGLE0DP00,"
