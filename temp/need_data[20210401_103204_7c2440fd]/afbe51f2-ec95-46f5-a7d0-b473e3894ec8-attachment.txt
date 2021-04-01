@@ -1,0 +1,6 @@
+INFO     Fota测试:camera_page.py:42 function:start_camera:启动camera app:
+INFO     Fota测试:camera_page.py:61 function:enter_camera_settings:进入camera设置界面:
+INFO     Fota测试:system.py:145 function:double_click_element:双击UIObjectProxy of "com.tcl.camera:id/picker_list_layout/[0]"元素:
+INFO     Fota测试:camera_page.py:74 function:change_ai_scene_status:改变Ai scene status的值:
+INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:70 APP关闭完成

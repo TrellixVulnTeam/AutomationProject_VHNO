@@ -1,0 +1,5 @@
+INFO     Fota测试:filemanager_page.py:45 function:start_filemanager:启动filemanager app:
+INFO     Fota测试:filemanager_page.py:67 function:create_folder:创建文件夹:
+INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
+INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:70 APP关闭完成

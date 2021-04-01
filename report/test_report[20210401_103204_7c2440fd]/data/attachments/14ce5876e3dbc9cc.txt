@@ -1,0 +1,11 @@
+INFO     Fota测试:settings_page.py:72 function:start_settings:启动settings app:
+INFO     Fota测试:settings_page.py:285 function:enter_wifi:进入Wi-Fi界面:
+INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
+INFO     Fota测试:system.py:145 function:double_click_element:双击UIObjectProxy of "text=Wi-Fi"元素:
+INFO     Fota测试:settings_page.py:268 function:enable_wifi:开启wifi:
+INFO     Fota测试:settings_page.py:303 function:connect_wifi:连接wifi,name:AutomationTest,password:cgt19981002:
+INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
+INFO     Fota测试:settings_page.py:244 function:get_current_wifi_name:获取当前wifi名称:
+INFO     Fota测试:settings_page.py:322 function:connect_wifi:当前连接的wifi为AutomationTest:
+INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:72 当前界面为主界面

@@ -1,0 +1,3 @@
+INFO     Fota测试:dialer_page.py:90 function:get_svn:获取手机svn:
+INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
+INFO     Fota测试:conftest.py:70 APP关闭完成

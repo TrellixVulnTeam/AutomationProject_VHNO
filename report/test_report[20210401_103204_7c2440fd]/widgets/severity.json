@@ -1,0 +1,301 @@
+[ {
+  "uid" : "d65cf5e74b79aec9",
+  "name" : "test_camera_settings",
+  "time" : {
+    "start" : 1617244459270,
+    "stop" : 1617244467639,
+    "duration" : 8369
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "9cc931d5193a554b",
+  "name" : "test_create_folder[Test]",
+  "time" : {
+    "start" : 1617244610455,
+    "stop" : 1617244620021,
+    "duration" : 9566
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "31fafe349f4847d",
+  "name" : "test_simcard_name[Test]",
+  "time" : {
+    "start" : 1617244532892,
+    "stop" : 1617244580882,
+    "duration" : 47990
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "16232ffe27ce5434",
+  "name" : "test_gesture_settings",
+  "time" : {
+    "start" : 1617244482480,
+    "stop" : 1617244501030,
+    "duration" : 18550
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "35e4c7e2ab2548b5",
+  "name" : "test_main_software_version",
+  "time" : {
+    "start" : 1617244815635,
+    "stop" : 1617244819344,
+    "duration" : 3709
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8f16360eabf5ed85",
+  "name" : "test_screenrecorder_settings",
+  "time" : {
+    "start" : 1617244796181,
+    "stop" : 1617244815382,
+    "duration" : 19201
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "6ee5d61bab1073a2",
+  "name" : "test_notch_settings",
+  "time" : {
+    "start" : 1617244780892,
+    "stop" : 1617244795858,
+    "duration" : 14966
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d27173043af19d75",
+  "name" : "test_imei_cu",
+  "time" : {
+    "start" : 1617244620355,
+    "stop" : 1617244622690,
+    "duration" : 2335
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "34fd471bd6333320",
+  "name" : "test_contact_reserved[Test-18575211714]",
+  "time" : {
+    "start" : 1617244425713,
+    "stop" : 1617244427564,
+    "duration" : 1851
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "e56793e1bc340b63",
+  "name" : "test_send_message[18575211714-Test]",
+  "time" : {
+    "start" : 1617244412261,
+    "stop" : 1617244419188,
+    "duration" : 6927
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "f1266ecd067ad4f1",
+  "name" : "test_sound_settings",
+  "time" : {
+    "start" : 1617244467943,
+    "stop" : 1617244481436,
+    "duration" : 13493
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ca389f71d7020390",
+  "name" : "test_vpn_config[Test-Test]",
+  "time" : {
+    "start" : 1617244745135,
+    "stop" : 1617244780540,
+    "duration" : 35405
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5f894f4d41b042fe",
+  "name" : "test_location_settings",
+  "time" : {
+    "start" : 1617244656367,
+    "stop" : 1617244675126,
+    "duration" : 18759
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "20d4f59c530f438d",
+  "name" : "test_calendar_reserved[Test]",
+  "time" : {
+    "start" : 1617244434089,
+    "stop" : 1617244446926,
+    "duration" : 12837
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8d858e28aa6be265",
+  "name" : "test_sort_all_data",
+  "time" : {
+    "start" : 1617244819743,
+    "stop" : 1617244819795,
+    "duration" : 52
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "8f6cfe5264b79f2d",
+  "name" : "test_chrome_download[www.baidu.com]",
+  "time" : {
+    "start" : 1617244675455,
+    "stop" : 1617244715248,
+    "duration" : 39793
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "cab9fef37fcecd9a",
+  "name" : "test_security_sim_card",
+  "time" : {
+    "start" : 1617244518888,
+    "stop" : 1617244532716,
+    "duration" : 13828
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "ca1c2f1b8a208b89",
+  "name" : "test_svn",
+  "time" : {
+    "start" : 1617244622915,
+    "stop" : 1617244626795,
+    "duration" : 3880
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "68a3a29d01b2d152",
+  "name" : "test_hotspot[Test]",
+  "time" : {
+    "start" : 1617244644419,
+    "stop" : 1617244656035,
+    "duration" : 11616
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "5cfcd48c9c7bb44a",
+  "name" : "test_dialer_settings",
+  "time" : {
+    "start" : 1617244395280,
+    "stop" : 1617244408201,
+    "duration" : 12921
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "3fe19c0b95af2007",
+  "name" : "test_wifi_ap[Guangtao-cgtisthebest]",
+  "time" : {
+    "start" : 1617244627125,
+    "stop" : 1617244644258,
+    "duration" : 17133
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "28ada73960d1ec3b",
+  "name" : "test_remove_animation",
+  "time" : {
+    "start" : 1617244581192,
+    "stop" : 1617244610173,
+    "duration" : 28981
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "507c2629b3bd65f1",
+  "name" : "test_calling_history[number0]",
+  "time" : {
+    "start" : 1617244408531,
+    "stop" : 1617244412142,
+    "duration" : 3611
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "723989e1988d3dd1",
+  "name" : "test_security_screen_lock",
+  "time" : {
+    "start" : 1617244501374,
+    "stop" : 1617244518779,
+    "duration" : 17405
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "877a6d1aca61cebc",
+  "name" : "test_messaging_settings",
+  "time" : {
+    "start" : 1617244419513,
+    "stop" : 1617244425409,
+    "duration" : 5896
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "111deadaea73fb58",
+  "name" : "test_display_settings",
+  "time" : {
+    "start" : 1617244481743,
+    "stop" : 1617244482336,
+    "duration" : 593
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "4ae5c389c0e7d3e0",
+  "name" : "test_apk_version[com.android.settings]",
+  "time" : {
+    "start" : 1617244394504,
+    "stop" : 1617244395181,
+    "duration" : 677
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "559b1f3de67684bf",
+  "name" : "test_battery_management_settings",
+  "time" : {
+    "start" : 1617244447228,
+    "stop" : 1617244458939,
+    "duration" : 11711
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "d89e7dba891f9f0",
+  "name" : "test_clock_reserved",
+  "time" : {
+    "start" : 1617244427791,
+    "stop" : 1617244433784,
+    "duration" : 5993
+  },
+  "status" : "passed",
+  "severity" : "normal"
+}, {
+  "uid" : "bd697d611b2c9909",
+  "name" : "test_chrome_bookmarks[www.baidu.com]",
+  "time" : {
+    "start" : 1617244715601,
+    "stop" : 1617244744767,
+    "duration" : 29166
+  },
+  "status" : "passed",
+  "severity" : "normal"
+} ]
