@@ -1,12 +1,17 @@
 # coding = utf8
 import logging
 import multiprocessing
+import re
 import subprocess
 
 import pytest
 from airtest.core.api import *
+from airtest.core.error import AdbShellError, AdbError
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary, SERIAL_NUMBER
+from page.fota.fota_page import Fota_Page
+from page.main_page import Main_Page
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
 from toolsbar.save2csv import Save2Csv
@@ -211,20 +216,61 @@ def debug_area():
 """
 
 
+def updatesw_check(device_):
+    device = connect_device("Android:///{}".format(device_))
+    device.wake()
+    device.unlock()
+    poco = AndroidUiautomationPoco(device=device, use_airtest_input=False,
+                                   screenshot_each_action=False)
+    main_page = Main_Page(device, poco)
+    print("OK1")
+    device.shell("reboot")
+    print("OK2")
+    # 等待升级完成与设备上线
+    device_update_online = False
+    times = 0
+    print("等待升级完成与设备上线")
+    while True:
+        times += 1
+        try:
+            device = connect_device("Android:///{}".format(device_))
+            if "com.tcl.android.launcher" in device.shell("ps -A|grep " + "com.tcl.android.launcher"):
+                device_update_online = True
+                print("2")
+                return device_update_online
+            if times >= 120:
+                print("3")
+                device_update_online = False
+                break
+        except Exception as ex:
+            print("4:  " + str(ex))
+            print("等待升级完成与设备上线异常")
+            continue
+        finally:
+            print("设备当前是否在线：" + str(device_update_online))
+
+
 def fota_test_area(device_):
-    pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(1),
-                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
-    subprocess.Popen(
-        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
-              "./report/test_report[{}_{}]/".format(cur_time, device_),
-              "--clean"],
-        shell=False).communicate()[0]
+    # pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(1),
+    #              "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
+    # # 设置差异化
+    # subprocess.Popen(
+    #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
+    #           "./report/test_report[{}_{}]/".format(cur_time, device_),
+    #           "--clean"],
+    #     shell=False).communicate()[0]
+    pass
+    # 升级:升级作为case写入test_before_fota.py中即，在差异化之后执行
+    # 再次获取差异化数据写入新的excel
+
+    # 对比两个差异化前后的excel数据是否一致：判断该30条case差异化成功
+
     # subprocess.Popen(
     #     "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
     #                                                                                              cur_time, device_),
     #     shell=True).communicate()[0]
-    save2csv = Save2Csv()
-    csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
+    # save2csv = Save2Csv()
+    # csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
 
 
 """
@@ -232,9 +278,14 @@ def fota_test_area(device_):
 """
 if __name__ == '__main__':
     # _run()
-    start_test()
+    # start_test()
     # debug()
+
     # debug_area()
+    for device_ in SERIAL_NUMBER:
+        updatesw_check(device_)
+        sleep(10)
+
     # device = connect_device("Android:///{}".format("7c2440fd"))
     # poco = AndroidUiautomationPoco()
     # device.shell("settings put system screen_brightness_mode 0")

@@ -33,9 +33,16 @@ class Fota_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+        self.new_version = get_element_parametrize("new_version")
+        self.old_version = get_element_parametrize("old_version")
+
+        self.launcher_package = get_element_parametrize("launcher_package")
+        self.expect_update_time = int(get_element_parametrize("expect_update_time"))
+
         self.guide_page_text = self.poco(get_element_parametrize("guide_page_text"))
         self.guide_continue = self.poco(get_element_parametrize("guide_continue"))
         self.download_progress_button = self.poco(get_element_parametrize("download_progress_button"))
+        self.download_version_available = self.poco(get_element_parametrize("download_version_available"))
 
     """
         @description:启动Fota应用
@@ -67,6 +74,8 @@ class Fota_Page(System):
         except PocoNoSuchNodeException as ex:
             self.logger.warning("function:" + sys._getframe().f_code.co_name +
                                 ":无需跳过fota向导界面:" + str(ex))
+        finally:
+            sleep(1)
 
     """
         @description:检查当前是否有新版本可以升级
@@ -74,16 +83,69 @@ class Fota_Page(System):
 
     def check_new_version(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":检查是否存在最新版本:")
-        searching_fota = False
-        while not searching_fota:
-            self.double_click_element(self.download_progress_button)
-            self.download_progress_button.invalidate()
-            progress_text = self.download_progress_button.attr("desc")
-            print(progress_text)
-            if progress_text == "Checking..." or progress_text == "Checking for updates...":
-                searching_fota = True
-            if searching_fota:
-                break
-        if self.poco(text="No update available").wait(10).exists():
-            self.logger.warning("function:" + sys._getframe().f_code.co_name +
-                                ":当前已是最新版本:")
+        new_version_exists = False
+        try:
+            self.download_progress_button.wait().click()
+            sleep(10)
+            download_available = self.download_version_available.wait()
+            download_available.invalidate()
+            version_check_message = download_available.get_text()
+            if version_check_message == "New version available":
+                new_version_exists = True
+                self.logger.warning("function:" + sys._getframe().f_code.co_name +
+                                    ":当前已是最新版本:" + str(new_version_exists))
+                return new_version_exists
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":版本检测异常:" + str(ex))
+        return new_version_exists
+
+    def updatesw(self):
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":开始新版本升级:")
+        try:
+            self.start_fota_page()
+            self.skip_guide()
+            if self.check_new_version():
+                while True:
+                    if self.poco(text='INSTALL NOW').wait().exists():
+                        self.logger.info("function:" + sys._getframe().f_code.co_name + ":差分包下载完成，开始升级:")
+                        self.poco(text='INSTALL NOW').wait().click()
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":新版本软件升级异常:" + str(ex))
+
+    def check_update_result(self):
+        update_result = False
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级安装完成:")
+            # 等待升级安装完成
+            if self.wait_update_finished_device_online():
+                # 开机后检测当前版本是否为最新版本
+                self.logger.info("function:" + sys._getframe().f_code.co_name + ":开机后检测当前版本是否为最新版本:")
+                if self.new_version in self.device.shell("getprop |grep ro.build.fingerprint").strip():
+                    update_result = True
+                elif self.old_version in self.device.shell("getprop |grep ro.build.fingerprint").strip():
+                    update_result = False
+            else:
+                self.logger.error("function:" + sys._getframe().f_code.co_name + ":软件升级过程中安装失败:")
+                update_result = False
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":升级软件后检测版本异常:" + str(ex))
+        return update_result
+
+    def wait_update_finished_device_online(self):
+        # 等待升级完成与设备上线
+        device_update_online = False
+        try:
+            times = 0
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线:")
+            while True:
+                times += 1
+                sleep(1)
+                if self.launcher_package in self.device.shell("ps -A|grep " + self.launcher_package):
+                    device_update_online = True
+                    return device_update_online
+                if times >= self.expect_update_time:
+                    device_update_online = False
+                    break
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线异常:" + str(ex))
+        return device_update_online
