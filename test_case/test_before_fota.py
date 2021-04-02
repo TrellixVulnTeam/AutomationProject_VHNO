@@ -392,7 +392,7 @@ class TestBeforeFota:
     def test_updatesw(self, before_all_case_execute):
         fota_page = Fota_Page(before_all_case_execute)
         # fota_page.updatesw()
-        # print(str(fota_page.check_update_result()))
+        print(str(fota_page.wait_update_finished_device_online()))
 
     @allure.description("非测试Case:"
                         "\n作用:最后对saved_data进行处理并保存写入")

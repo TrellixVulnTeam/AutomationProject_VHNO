@@ -251,8 +251,9 @@ def updatesw_check(device_):
 
 
 def fota_test_area(device_):
-    # pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(1),
-    #              "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
+    pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(1),
+                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
+    # updatesw_check(device_)
     # # 设置差异化
     # subprocess.Popen(
     #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
@@ -281,10 +282,10 @@ if __name__ == '__main__':
     # start_test()
     # debug()
 
-    # debug_area()
-    for device_ in SERIAL_NUMBER:
-        updatesw_check(device_)
-        sleep(10)
+    debug_area()
+    # for device_ in SERIAL_NUMBER:
+    #     updatesw_check(device_)
+    #     sleep(10)
 
     # device = connect_device("Android:///{}".format("7c2440fd"))
     # poco = AndroidUiautomationPoco()

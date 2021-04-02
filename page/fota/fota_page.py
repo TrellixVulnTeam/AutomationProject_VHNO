@@ -2,6 +2,7 @@
 import os
 import sys
 
+from airtest.core.api import connect_device
 from poco.exceptions import PocoNoSuchNodeException
 
 from page.system.system import System, sleep
@@ -132,20 +133,47 @@ class Fota_Page(System):
         return update_result
 
     def wait_update_finished_device_online(self):
+        # # 等待升级完成与设备上线
+        # device_update_online = False
+        # try:
+        #     times = 0
+        #     self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线:")
+        #     while True:
+        #         times += 1
+        #         sleep(1)
+        #         if self.launcher_package in self.device.shell("ps -A|grep " + self.launcher_package):
+        #             device_update_online = True
+        #             return device_update_online
+        #         if times >= self.expect_update_time:
+        #             device_update_online = False
+        #             break
+        # except Exception as ex:
+        #     self.logger.error("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线异常:" + str(ex))
+        # return device_update_online
+        print("OK1")
+        current_device_serialno = self.device.serialno
+        self.device.shell("reboot")
+        print("OK2")
         # 等待升级完成与设备上线
         device_update_online = False
-        try:
-            times = 0
-            self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线:")
-            while True:
-                times += 1
-                sleep(1)
-                if self.launcher_package in self.device.shell("ps -A|grep " + self.launcher_package):
+        times = 0
+        print("等待升级完成与设备上线")
+        while True:
+            times += 1
+            try:
+                device = connect_device("Android:///{}".format(current_device_serialno))
+                if "com.tcl.android.launcher" in device.shell("ps -A|grep " + "com.tcl.android.launcher"):
                     device_update_online = True
+                    print("2")
                     return device_update_online
-                if times >= self.expect_update_time:
+                if times >= 120:
+                    print("3")
                     device_update_online = False
                     break
-        except Exception as ex:
-            self.logger.error("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线异常:" + str(ex))
+            except Exception as ex:
+                print("4:  " + str(ex))
+                print("等待升级完成与设备上线异常")
+                continue
+            finally:
+                print("设备当前是否在线：" + str(device_update_online))
         return device_update_online
