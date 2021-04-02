@@ -12,6 +12,7 @@ from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from config import install_app_necessary, SERIAL_NUMBER
 from page.fota.fota_page import Fota_Page
 from page.main_page import Main_Page
+from page.system.system import System
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
 from toolsbar.save2csv import Save2Csv
@@ -196,11 +197,11 @@ def debug_area():
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
             pass
-            # install_app_necessary(i)
-            # grant_permission(i)
+            install_app_necessary(i)
+            grant_permission(i)
     else:
-        pass
-        # grant_permission(test_device)
+        install_app_necessary(test_device)
+        grant_permission(test_device)
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
         test_pool.apply_async(func=fota_test_area, args=(device_,))
@@ -216,51 +217,16 @@ def debug_area():
 """
 
 
-def updatesw_check(device_):
-    device = connect_device("Android:///{}".format(device_))
-    device.wake()
-    device.unlock()
-    poco = AndroidUiautomationPoco(device=device, use_airtest_input=False,
-                                   screenshot_each_action=False)
-    main_page = Main_Page(device, poco)
-    print("OK1")
-    device.shell("reboot")
-    print("OK2")
-    # 等待升级完成与设备上线
-    device_update_online = False
-    times = 0
-    print("等待升级完成与设备上线")
-    while True:
-        times += 1
-        try:
-            device = connect_device("Android:///{}".format(device_))
-            if "com.tcl.android.launcher" in device.shell("ps -A|grep " + "com.tcl.android.launcher"):
-                device_update_online = True
-                print("2")
-                return device_update_online
-            if times >= 120:
-                print("3")
-                device_update_online = False
-                break
-        except Exception as ex:
-            print("4:  " + str(ex))
-            print("等待升级完成与设备上线异常")
-            continue
-        finally:
-            print("设备当前是否在线：" + str(device_update_online))
-
-
 def fota_test_area(device_):
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "--reruns={}".format(1),
                  "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
-    # updatesw_check(device_)
-    # # 设置差异化
-    # subprocess.Popen(
-    #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
-    #           "./report/test_report[{}_{}]/".format(cur_time, device_),
-    #           "--clean"],
-    #     shell=False).communicate()[0]
-    pass
+    # 设置差异化
+    subprocess.Popen(
+        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
+              "./report/test_report[{}_{}]/".format(cur_time, device_),
+              "--clean"],
+        shell=False).communicate()[0]
+    updatesw(device_)
     # 升级:升级作为case写入test_before_fota.py中即，在差异化之后执行
     # 再次获取差异化数据写入新的excel
 
@@ -274,18 +240,34 @@ def fota_test_area(device_):
     # csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
 
 
+def updatesw(device_):
+    print("开始新版本升级")
+    try:
+        device_c = connect_device("Android:///{}".format(device_))
+        poco = AndroidUiautomationPoco(device=device_c, use_airtest_input=False,
+                                       screenshot_each_action=False)
+        main_page = Main_Page(device_c, poco)
+        system = System(main_page)
+        system.unlock_screen()
+        fota_page = Fota_Page(main_page)
+        fota_page.start_fota_page()
+        fota_page.skip_guide()
+        fota_page.updatesw()
+        print("升级结果：" + str(fota_page.check_update_result(device_)))
+        print("Fota升级测试结束")
+    except Exception as ex:
+        print(str(ex))
+
+
 """
     @description:main函数，主要运行函数
 """
 if __name__ == '__main__':
     # _run()
-    # start_test()
+    start_test()
     # debug()
 
-    debug_area()
-    # for device_ in SERIAL_NUMBER:
-    #     updatesw_check(device_)
-    #     sleep(10)
+    # debug_area()
 
     # device = connect_device("Android:///{}".format("7c2440fd"))
     # poco = AndroidUiautomationPoco()

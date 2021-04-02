@@ -377,22 +377,14 @@ class TestBeforeFota:
     #     saved_data.append([sys._getframe().f_code.co_name, "\\", result])
     #     assert result is not None
     #
-    # # case 29:
-    # @allure.description("设备主软件版本检测")
-    # @allure.step("使用adb获取当前设备主软件版本->保存当前主软件版本号")
-    # def test_main_software_version(self, before_all_case_execute):
-    #     dialer_page = Dialer_Page(before_all_case_execute)
-    #     result = dialer_page.get_main_software_version()
-    #     saved_data.append([sys._getframe().f_code.co_name, "\\", result])
-    #     assert result is not None
-
-    # case 30:
-    @allure.description("设备Fota开始Fota升级")
-    @allure.step("OK")
-    def test_updatesw(self, before_all_case_execute):
-        fota_page = Fota_Page(before_all_case_execute)
-        # fota_page.updatesw()
-        print(str(fota_page.wait_update_finished_device_online()))
+    # case 29:
+    @allure.description("设备主软件版本检测")
+    @allure.step("使用adb获取当前设备主软件版本->保存当前主软件版本号")
+    def test_main_software_version(self, before_all_case_execute):
+        dialer_page = Dialer_Page(before_all_case_execute)
+        result = dialer_page.get_main_software_version()
+        saved_data.append([sys._getframe().f_code.co_name, "\\", result])
+        assert result is not None
 
     @allure.description("非测试Case:"
                         "\n作用:最后对saved_data进行处理并保存写入")

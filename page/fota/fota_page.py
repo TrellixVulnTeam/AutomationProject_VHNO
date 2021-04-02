@@ -44,6 +44,8 @@ class Fota_Page(System):
         self.guide_continue = self.poco(get_element_parametrize("guide_continue"))
         self.download_progress_button = self.poco(get_element_parametrize("download_progress_button"))
         self.download_version_available = self.poco(get_element_parametrize("download_version_available"))
+        self.permission_agree = self.poco(text=get_element_parametrize("permission_agree"))
+        self.update_restart_time = int(get_element_parametrize("update_restart_time"))
 
     """
         @description:启动Fota应用
@@ -106,24 +108,32 @@ class Fota_Page(System):
             self.start_fota_page()
             self.skip_guide()
             if self.check_new_version():
+                self.logger.info("function:" + sys._getframe().f_code.co_name + ":开始下载新版本:")
+                self.download_progress_button.wait().click()
+                self.permission_agree.wait().click()
+                # 不同项目升级方式不一样，当前Austin，是在线升级后，需要手动点击重启
                 while True:
                     if self.poco(text='INSTALL NOW').wait().exists():
-                        self.logger.info("function:" + sys._getframe().f_code.co_name + ":差分包下载完成，开始升级:")
+                        self.logger.info("function:" + sys._getframe().f_code.co_name + ":差分包下载完成，升级完成，重启:")
                         self.poco(text='INSTALL NOW').wait().click()
+                    elif self.poco(text="RESTART").wait().exists():
+                        self.logger.info("function:" + sys._getframe().f_code.co_name + ":差分包下载完成，升级完成，手动重启:")
+                        self.poco(text='RESTART').wait().click()
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":新版本软件升级异常:" + str(ex))
 
-    def check_update_result(self):
+    def check_update_result(self, serialno_):
         update_result = False
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级安装完成:")
             # 等待升级安装完成
-            if self.wait_update_finished_device_online():
+            if self.wait_update_finished_device_online(serialno_)[0]:
+                device_cur = self.wait_update_finished_device_online(serialno_)[1]
                 # 开机后检测当前版本是否为最新版本
                 self.logger.info("function:" + sys._getframe().f_code.co_name + ":开机后检测当前版本是否为最新版本:")
-                if self.new_version in self.device.shell("getprop |grep ro.build.fingerprint").strip():
+                if self.new_version in device_cur.shell("getprop |grep ro.build.fingerprint").strip():
                     update_result = True
-                elif self.old_version in self.device.shell("getprop |grep ro.build.fingerprint").strip():
+                elif self.old_version in device_cur.shell("getprop |grep ro.build.fingerprint").strip():
                     update_result = False
             else:
                 self.logger.error("function:" + sys._getframe().f_code.co_name + ":软件升级过程中安装失败:")
@@ -132,48 +142,29 @@ class Fota_Page(System):
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":升级软件后检测版本异常:" + str(ex))
         return update_result
 
-    def wait_update_finished_device_online(self):
-        # # 等待升级完成与设备上线
-        # device_update_online = False
-        # try:
-        #     times = 0
-        #     self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线:")
-        #     while True:
-        #         times += 1
-        #         sleep(1)
-        #         if self.launcher_package in self.device.shell("ps -A|grep " + self.launcher_package):
-        #             device_update_online = True
-        #             return device_update_online
-        #         if times >= self.expect_update_time:
-        #             device_update_online = False
-        #             break
-        # except Exception as ex:
-        #     self.logger.error("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线异常:" + str(ex))
-        # return device_update_online
-        print("OK1")
-        current_device_serialno = self.device.serialno
-        self.device.shell("reboot")
-        print("OK2")
+    def wait_update_finished_device_online(self, serialno_):
+        current_device_serialno = serialno_
         # 等待升级完成与设备上线
         device_update_online = False
         times = 0
-        print("等待升级完成与设备上线")
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线:")
         while True:
             times += 1
             try:
                 device = connect_device("Android:///{}".format(current_device_serialno))
                 if "com.tcl.android.launcher" in device.shell("ps -A|grep " + "com.tcl.android.launcher"):
                     device_update_online = True
-                    print("2")
-                    return device_update_online
-                if times >= 120:
-                    print("3")
+                    return device_update_online, device
+                if times >= self.update_restart_time:
                     device_update_online = False
                     break
             except Exception as ex:
-                print("4:  " + str(ex))
-                print("等待升级完成与设备上线异常")
+                self.logger.warning(
+                    "function:" + sys._getframe().f_code.co_name + ":第 {} 次，等待机器 {} 开机重试中:  : {})".format(times,
+                                                                                                          current_device_serialno,
+                                                                                                          str(ex)))
                 continue
             finally:
-                print("设备当前是否在线：" + str(device_update_online))
+                self.logger.info(
+                    "function:" + sys._getframe().f_code.co_name + ":设备当前是否在线: " + str(device_update_online))
         return device_update_online
