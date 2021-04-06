@@ -2,6 +2,8 @@
 import os
 import sys
 
+from poco.exceptions import PocoNoSuchNodeException
+
 from page.system.system import System, sleep
 from toolsbar.excel_tools import read_excel_for_page_element
 
@@ -64,10 +66,37 @@ class Contacts_Page(System):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name +
                              ":创建联系人,名称:{},号码:{}:".format(contact_name, phone_number))
+            sleep(1)
             self.device.shell("am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/"
                               "contact -e name %s -e phone %s" % (contact_name, phone_number))
+            sleep(1)
+            self.double_click_element(element_item=self.poco(text="Save").wait())
+            self.start_contacts()
+            if self.poco(text="Skip").exists():
+                self.poco(text="Skip").wait().click()
             created_contact = self.scroll_to_find_element(element_text=contact_name).get_text()
             result = created_contact, phone_number
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":创建联系人出现问题:" + str(ex))
+        return result
+
+    """
+        @description:获取指定联系人
+        @param:
+            contact_name:联系人名称
+            phone_number:联系人号码
+    """
+
+    def get_contact(self, contact_name="Test", phone_number="18512026630"):
+        result = ""
+        try:
+            self.start_contacts()
+            self.poco(text="Skip").wait().click()
+
+            self.logger.info("function:" + sys._getframe().f_code.co_name +
+                             ":获取指定联系人,名称:{},号码:{}:".format(contact_name, phone_number))
+            current_contact = self.scroll_to_find_element(element_text=contact_name).get_text()
+            result = current_contact, phone_number
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":获取指定联系人出现问题:" + str(ex))
         return result

@@ -1,3 +1,0 @@
-INFO     Fota测试:settings_page.py:228 function:get_imei_cu:获取设备IMEI&CU:
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:70 APP关闭完成

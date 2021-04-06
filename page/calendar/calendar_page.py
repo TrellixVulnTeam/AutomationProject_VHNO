@@ -33,7 +33,6 @@ class Calendar_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
-        print(get_element_parametrize("guide_page_text"))
         self.guide_page_text = self.poco(text=get_element_parametrize("guide_page_text"))
         self.guide_next_arrow = self.poco(get_element_parametrize("guide_next_arrow"))
         self.guide_got_it = self.poco(get_element_parametrize("guide_got_it"))
@@ -92,6 +91,7 @@ class Calendar_Page(System):
             except PocoNoSuchNodeException as ex:
                 self.logger.warning("function:" + sys._getframe().f_code.co_name +
                                     ":无需点击event按钮:" + str(ex))
+            sleep(1)
             self.add_title_edittext.wait().set_text(title)
             self.save_button.wait().click()
             created_calendar = self.poco(

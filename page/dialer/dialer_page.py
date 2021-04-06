@@ -46,6 +46,7 @@ class Dialer_Page(System):
             text=get_element_parametrize("settings_menu_Settings_Display_options_Sort_by_Last_name"))
 
         self.end_call = self.poco(get_element_parametrize("end_call"))
+        self.recents_button = self.poco(get_element_parametrize("recents_button"))
 
     """
         @description:启动Dialer应用
@@ -169,6 +170,26 @@ class Dialer_Page(System):
         return result
 
     """
+        @description:获取当前Dialer的列表排序方式
+    """
+
+    def get_sort_by(self):
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取Sort by方式")
+            sort_option = self.enter_sort_interface()
+            first_name = sort_option[0]
+            last_name = sort_option[1]
+            if first_name.attr("checked"):
+                result = first_name.get_text() + ":" + str(first_name.attr("checked"))
+            else:
+                result = last_name.get_text() + ":" + str(last_name.attr("checked"))
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":获取Sort by方式出现问题:" + str(ex))
+        return result
+
+    """
         @description:获取设备当前主软件版本
     """
 
@@ -182,4 +203,24 @@ class Dialer_Page(System):
             self.poco(text="OK").wait().click()
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name + ":获取当前设备主软件版本出现问题:" + str(ex))
+        return result
+
+    """
+        @description:获取当前最新通话记录
+        @param:
+            number:根据number查找通话记录
+    """
+
+    def get_last_dialer_number(self, number):
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前最新通话记录:")
+            self.start_dialer()
+            self.recents_button.wait().click()
+            if self.poco(text=number).wait().exists():
+                result = number
+            else:
+                result = "未找到该测试号码"
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":获取当前最新通话记录出现问题:" + str(ex))
         return result

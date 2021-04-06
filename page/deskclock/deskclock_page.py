@@ -63,6 +63,27 @@ class Deskclock_Page(System):
     def add_clock(self):
         result = ""
         try:
+            self.poco(text="Alarm").wait().click()
+            self.logger.info("function:" + sys._getframe().f_code.co_name + ":添加闹钟:")
+            self.create_clock.wait().click()
+            hour = self.create_clock_hour.wait().attr("desc")
+            minute = self.create_clock_minute.wait().attr("desc")
+            self.create_clock_save.wait().click()
+            hour = re.search("picker (.*)", hour).group(1)
+            minute = re.search("picker (.*)", minute).group(1)
+            created_clock = self.scroll_to_find_element(element_text=hour + ":" + minute).get_text()
+            result = created_clock
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name + ":闹钟创建出现问题:" + str(ex))
+        return result
+
+    """
+            @description:获取闹钟
+        """
+
+    def get_clock(self):
+        result = ""
+        try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":添加闹钟:")
             self.create_clock.wait().click()
             hour = self.create_clock_hour.wait().attr("desc")

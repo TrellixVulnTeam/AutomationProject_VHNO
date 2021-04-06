@@ -38,6 +38,7 @@ class Messaging_Page(System):
         self.hear_out_going_message_button = self.poco(
             text=get_element_parametrize("hear_out_going_message_button_1")).wait().parent().sibling().child(
             get_element_parametrize("hear_out_going_message_button_2"))
+        self.message_conversation_title = self.poco(get_element_parametrize("message_conversation_title")).wait()
 
     """
         @description:启动Message应用
@@ -71,13 +72,36 @@ class Messaging_Page(System):
                              ":创建并发送短信,number:{},content:{}:".format(number, content))
             self.device.shell("am start -a android.intent.action.SENDTO -d sms:%s --es sms_body %s" % (number, content))
             self.send_sms.wait().click()
-            receiver_content = self.poco("com.google.android.apps.messaging:id/tombstone_message").get_text()
+            receiver_content = self.message_conversation_title.get_text()
             if number[-4:] in receiver_content:
                 self.logger.info("function:" + sys._getframe().f_code.co_name + ":短信发送成功:")
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":send message出现问题，请检查代码:" + str(ex))
         return receiver_content
+
+    """
+            @description:获取当前最新短信发送记录
+            @param:
+                number:根据number查找短信发送记录
+        """
+
+    def get_message(self, number, content):
+        result = ""
+        try:
+            self.logger.info("function:" + sys._getframe().f_code.co_name +
+                             ":获取当前最新短信发送记录 {}:".format(number))
+            self.poco(text=number).wait().click()
+            receiver_content = self.message_conversation_title.get_text()
+            if number[-4:] in receiver_content:
+                result = number
+                self.logger.info("function:" + sys._getframe().f_code.co_name + ":获取当前最新短信发送记录:{}".format(content))
+            else:
+                result = "未找到最新短信发送记录"
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":获取当前最新短信发送记录，出现问题，请检查代码:" + str(ex))
+        return result
 
     """
         @description:获取设备当前SIM卡电话号码
@@ -119,4 +143,18 @@ class Messaging_Page(System):
         except Exception as ex:
             self.logger.error("function:" + sys._getframe().f_code.co_name +
                               ":更改hear outgoing status出现问题，请检查代码:" + str(ex))
+        return result
+
+    """
+        @description:获取Message设置Hear outgoing message sounds设置
+    """
+
+    def get_hear_outgoing_status(self):
+        result = ""
+        try:
+            hear_out_going_message_button = self.hear_out_going_message_button
+            result = "Hear outgoing message sounds" + ":" + str(hear_out_going_message_button.attr("checked"))
+        except Exception as ex:
+            self.logger.error("function:" + sys._getframe().f_code.co_name +
+                              ":获取hear outgoing status出现问题，请检查代码:" + str(ex))
         return result

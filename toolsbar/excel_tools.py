@@ -26,15 +26,19 @@ def read_excel_for_case_parametrize(form="../test_case/before_fota_data.xlsx", s
     original_data = df.loc[case_name, "case_data"]
     # 将数据获得后进行处理重新拼接为list
     final_data = []
-    if "(" in original_data:
-        dl = []
-        d1 = original_data.split(",")[0].replace("(", "").strip()
-        d2 = original_data.split(",")[1].replace(")", "").strip()
-        dl.append(d1)
-        dl.append(d2)
-        final_data.append(tuple(dl))
-    else:
+    if "int" in str(type(original_data)):
+        original_data = str(original_data)
         final_data.append(original_data)
+    else:
+        if "(" in original_data:
+            dl = []
+            d1 = original_data.split(",")[0].replace("(", "").strip()
+            d2 = original_data.split(",")[1].replace(")", "").strip()
+            dl.append(d1)
+            dl.append(d2)
+            final_data.append(tuple(dl))
+        else:
+            final_data.append(original_data)
     return final_data
 
 

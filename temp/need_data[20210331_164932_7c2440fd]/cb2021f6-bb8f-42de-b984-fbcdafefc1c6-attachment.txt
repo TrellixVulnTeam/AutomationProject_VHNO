@@ -1,7 +1,0 @@
-INFO     Fota测试:settings_page.py:72 function:start_settings:启动settings app:
-INFO     Fota测试:settings_page.py:613 function:enter_advanced_features:进入Advanced features界面:
-INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
-INFO     Fota测试:system.py:145 function:double_click_element:双击UIObjectProxy of "text=Advanced features"元素:
-INFO     Fota测试:settings_page.py:626 function:change_screenrecorder_settings:更改screen recorder设置:
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:70 APP关闭完成

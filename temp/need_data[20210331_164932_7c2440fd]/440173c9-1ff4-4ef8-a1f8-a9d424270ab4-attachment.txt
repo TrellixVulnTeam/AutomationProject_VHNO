@@ -1,3 +1,0 @@
-INFO     Fota测试:settings_page.py:567 function:change_brightness_sleep_mode:更改Brightness&Sleep状态:
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:72 当前界面为主界面

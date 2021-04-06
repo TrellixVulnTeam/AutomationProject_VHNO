@@ -1,9 +1,0 @@
-INFO     Fota测试:settings_page.py:72 function:start_settings:启动settings app:
-INFO     Fota测试:settings_page.py:407 function:enter_location:进入Location界面:
-INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
-INFO     Fota测试:system.py:145 function:double_click_element:双击UIObjectProxy of "text=Location"元素:
-INFO     Fota测试:settings_page.py:421 function:change_location_settings:改变定位功能设置:
-INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
-INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:70 APP关闭完成

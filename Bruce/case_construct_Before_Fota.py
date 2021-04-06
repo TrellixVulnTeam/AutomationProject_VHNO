@@ -184,7 +184,6 @@ def check_contact_reserved(contact_name="Test", phone_number="18575211714"):
     austinDevice.shell("am start -a android.intent.action.INSERT -t vnd.android.cursor.dir/"
                        "contact -e name %s -e phone %s" % (contact_name, phone_number))
 
-
 """
     Case 7:验证创建的Clock是否被保留
     relate app:

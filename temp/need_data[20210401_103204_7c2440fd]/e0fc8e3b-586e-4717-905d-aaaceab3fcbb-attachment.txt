@@ -1,8 +1,0 @@
-INFO     Fota测试:settings_page.py:72 function:start_settings:启动settings app:
-INFO     Fota测试:settings_page.py:153 function:enter_security:进入Security & biometrics界面:
-INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
-INFO     Fota测试:system.py:145 function:double_click_element:双击UIObjectProxy of "text=Security & biometrics"元素:
-INFO     Fota测试:settings_page.py:185 function:set_screen_lock:设置屏幕锁1234:
-WARNING  Fota测试:settings_page.py:190 function:set_screen_lock:当前屏幕锁已存在:
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:72 当前界面为主界面

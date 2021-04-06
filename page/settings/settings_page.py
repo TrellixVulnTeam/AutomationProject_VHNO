@@ -167,7 +167,9 @@ class Settings_Page(System):
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":修改sim card lock状态:")
             self.scroll_to_find_element(element_text=self.security_sim_card_lock_text).click()
             lock_sim_card = self.security_sim_card_lock_locksimcard_text.wait()
-            lock_sim_card_switch = lock_sim_card.parent().sibling().child("android:id/switch_widget")
+            sleep(1)
+            lock_sim_card_switch = lock_sim_card.parent().parent().children()[1].child("android:id/switch_widget")
+            sleep(1)
             lock_sim_card_switch.click()
             self.poco("android:id/edit").wait().set_text("1234")
             self.poco(text="OK").wait().click()
@@ -188,6 +190,7 @@ class Settings_Page(System):
         try:
             if self.poco(text="Confirm your PIN").wait().exists():
                 self.logger.warning("function:" + sys._getframe().f_code.co_name + ":当前屏幕锁已存在:")
+                result = "Screen lock:exists"
             else:
                 self.poco(text="PIN").wait().click()
                 self.poco("com.android.settings:id/password_entry").wait().set_text("1234")

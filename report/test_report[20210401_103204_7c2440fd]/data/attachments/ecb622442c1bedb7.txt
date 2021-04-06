@@ -1,5 +1,0 @@
-INFO     Fota测试:calendar_page.py:50 function:start_calendar:启动calendar app:
-INFO     Fota测试:calendar_page.py:68 function:skip_guide:跳过设置向导:
-INFO     Fota测试:calendar_page.py:88 function:create_calendar:创建一个名为Test的calendar:
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:70 APP关闭完成

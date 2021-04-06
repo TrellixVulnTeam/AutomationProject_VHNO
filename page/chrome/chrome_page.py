@@ -106,6 +106,7 @@ class Chrome_Page(System):
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":下载百度首页图片:")
             self.poco(text="百度一下,你就知道").wait().long_click()
+            sleep(1)
             self.poco(text="Download image").wait().click()
             try:
                 popup_info = self.poco("com.android.chrome:id/infobar_close_button").wait()
@@ -155,7 +156,7 @@ class Chrome_Page(System):
         @param:website:网页地址
     """
 
-    def save_bookmark(self, website="www.baidu.com"):
+    def save_bookmark(self, website="www.baidu.com", sub_website="m.baidu.com"):
         result = ""
         try:
             self.logger.info("function:" + sys._getframe().f_code.co_name + ":保存{}为书签:".format(website))
@@ -175,7 +176,7 @@ class Chrome_Page(System):
                 self.poco(text="Bookmarks").wait().click()
                 self.poco(text="Mobile bookmarks").wait().click()
                 try:
-                    current_bookmark = self.poco(text=website).wait()
+                    current_bookmark = self.poco(text=sub_website).wait()
                     result = "Saved bookmark Name" + ":" + current_bookmark.get_text()
                 except PocoNoSuchNodeException as ex:
                     self.logger.warning("function:" + sys._getframe().f_code.co_name +

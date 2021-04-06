@@ -1,8 +1,0 @@
-INFO     Fota测试:chrome_page.py:43 function:start_chrome:启动chrome app:
-INFO     Fota测试:chrome_page.py:62 function:skip_guide:跳过设置向导:
-INFO     Fota测试:chrome_page.py:161 function:save_bookmark:保存www.baidu.com为书签:
-INFO     Fota测试:chrome_page.py:78 function:enter_website:进入网页www.baidu.com:
-INFO     Fota测试:chrome_page.py:91 function:enter_website:成功进入网页www.baidu.com:
-WARNING  Fota测试:chrome_page.py:182 function:save_bookmark:书签www.baidu.com添加失败:Cannot find any visible node by query UIObjectProxy of "text=www.baidu.com"
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:70 APP关闭完成

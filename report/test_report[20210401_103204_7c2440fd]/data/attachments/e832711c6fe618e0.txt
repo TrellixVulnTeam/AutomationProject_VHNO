@@ -1,8 +1,0 @@
-INFO     Fota测试:settings_page.py:72 function:start_settings:启动settings app:
-INFO     Fota测试:settings_page.py:536 function:enter_sound_vibration:进入Sound & vibration界面:
-INFO     Fota测试:system.py:58 function:scroll_to_find_element:滚动查找元素:
-INFO     Fota测试:system.py:145 function:double_click_element:双击UIObjectProxy of "text=Sound & vibration"元素:
-INFO     Fota测试:settings_page.py:549 function:change_silent_mode:更改silent mode状态:
-ERROR    Fota测试:settings_page.py:557 function:change_silent_mode:更改silent mode状态出现问题:Cannot find any visible node by query UIObjectProxy of "text=Silent mode"
-INFO     Fota测试:conftest.py:66 当前case测试结束，执行关闭APP操作：
-INFO     Fota测试:conftest.py:70 APP关闭完成
