@@ -170,15 +170,14 @@ def _run():
 
 
 def start_test():
+    print("当前设备数量：" + str(len(SERIAL_NUMBER)))
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
-            pass
-            # install_app_necessary(i)
-            # grant_permission(i)
+            install_app_necessary(i)
+            grant_permission(i)
     else:
-        pass
-        # install_app_necessary(test_device)
-        # grant_permission(test_device)
+        install_app_necessary(test_device)
+        grant_permission(test_device)
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
         test_pool.apply_async(func=fota_test_area, args=(device_,))
@@ -194,10 +193,10 @@ def start_test():
 
 
 def debug_area():
+    print("当前设备数量：" + str(len(SERIAL_NUMBER)))
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
             install_app_necessary(i)
-            grant_permission(i)
     else:
         install_app_necessary(test_device)
         grant_permission(test_device)
@@ -220,25 +219,18 @@ def fota_test_area(device_):
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "{}".format("./test_case/test_before_fota.py"),
                  "--reruns={}".format(1),
                  "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
-    # # 设置差异化
-    # subprocess.Popen(
-    #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
-    #           "./report/test_report[{}_{}]/".format(cur_time, device_),
-    #           "--clean"],
-    #     shell=False).communicate()[0]
-    # updatesw(device_)
-
-    # 升级:升级作为case写入test_before_fota.py中即，在差异化之后执行
-    # 再次获取差异化数据写入新的excel
-
-    # 对比两个差异化前后的excel数据是否一致：判断该30条case差异化成功
+    # 设置差异化
+    subprocess.Popen(
+        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
+              "./report/test_report[{}_{}]/".format(cur_time, device_),
+              "--clean"],
+        shell=False).communicate()[0]
+    updatesw(device_)
 
     # subprocess.Popen(
     #     "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
     #                                                                                              cur_time, device_),
     #     shell=True).communicate()[0]
-    # save2csv = Save2Csv()
-    # csv_list = save2csv.getDataFromCsv(form_name=str(device_) + "Fota_Before.csv")
 
 
 """
@@ -272,7 +264,11 @@ def updatesw(device_):
 """
 if __name__ == '__main__':
     # _run()
-    start_test()
+    print("脚本开始测试，Fota checklist模块测试正在运行中……")
+    for i in range(5):
+        print("这是第{}次测试该脚本".format(i))
+        start_test()
+    print("脚本测试结束，请检查测试结果")
     # debug()
 
     # debug_area()

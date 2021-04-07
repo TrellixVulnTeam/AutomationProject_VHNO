@@ -1,6 +1,7 @@
 # coding = utf8
 import os
 import sys
+import time
 
 import allure
 import pytest
@@ -21,6 +22,7 @@ from toolsbar.excel_tools import read_excel_for_case_parametrize
 from toolsbar.save2csv import Save2Csv
 
 os.path.abspath(".")
+cur_time = time.strftime("%Y%m%d_%H%M%S")
 """
     @File:test_before_fota.py
     @Author:Bruce
@@ -392,5 +394,6 @@ class TestBeforeFota:
     def test_sort_all_data(self, cmdopt):
         device_ = connect_device("Android:///{}".format(cmdopt))
         save2csv = Save2Csv()
-        save2csv.writeInCsv(saved_data, form_name="device_" + str(device_.serialno) + "_Fota_Before.csv")
+        save2csv.writeInCsv(saved_data,
+                            form_name="device_" + str(device_.serialno) + "_Fota_Before_{}.csv".format(cur_time))
         assert saved_data is not None
