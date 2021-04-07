@@ -85,5 +85,5 @@ test_device = init_all_device()
 """
     @description:创建logger用于保存自定义的错误或info信息
 """
-logger = logger_config(log_path="./log/{}_{}_{}.log".format(time.strftime("%Y%m%d_%H%M%S"), "OK", "Fota测试"),
+logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "OK", "Fota测试"),
                        logging_name="Fota测试")

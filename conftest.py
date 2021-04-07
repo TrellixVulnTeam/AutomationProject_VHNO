@@ -128,7 +128,7 @@ def pytest_runtest_makereport(item):
         # 添加allure报告截图
         with allure.step('添加失败截图...'):
             file_name = "./screenshot/{}_{}_{}.png".format(str(item).strip("<").strip(">").replace(" ", "_"),
-                                                           time.strftime("%Y%m%d_%H%M%S"), "")
+                                                           cur_time, "")
             snapshot(file_name)
             sleep(3)
             with open(file_name, mode="rb") as f:

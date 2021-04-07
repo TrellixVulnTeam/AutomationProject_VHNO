@@ -71,11 +71,11 @@ def start_test():
 def fota_test_area(device_):
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "{}".format("./test_case/test_before_fota.py"),
                  "--reruns={}".format(1),
-                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(time.strftime("%Y%m%d_%H%M%S"), device_))])
+                 "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
     # 设置差异化
     subprocess.Popen(
-        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(time.strftime("%Y%m%d_%H%M%S"), device_), "-o",
-              "./report/test_report[{}_{}]/".format(time.strftime("%Y%m%d_%H%M%S"), device_),
+        args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
+              "./report/test_report[{}_{}]/".format(cur_time, device_),
               "--clean"],
         shell=False).communicate()[0]
     updatesw(device_)
@@ -126,9 +126,8 @@ def fota_checklist_test_module():
 """
 if __name__ == '__main__':
     print("脚本开始测试，Fota checklist模块测试正在运行中……")
-    for i in range(30):
+    for i in range(5):
         print("这是第{}次测试该脚本".format(i))
         fota_checklist_test_module()
-        sleep(1)
         print("This is {} times running and time is {}".format(str(i), time.strftime("%Y%m%d_%H%M%S")))
     print("脚本测试结束，请检查测试结果")
