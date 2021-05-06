@@ -129,5 +129,6 @@ if __name__ == '__main__':
     for i in range(5):
         print("这是第{}次测试该脚本".format(i))
         fota_checklist_test_module()
+        print("OK -- Test")
         print("This is {} times running and time is {}".format(str(i), time.strftime("%Y%m%d_%H%M%S")))
     print("脚本测试结束，请检查测试结果")
