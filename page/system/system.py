@@ -5,7 +5,6 @@ import sys
 from poco.exceptions import PocoNoSuchNodeException
 
 from toolsbar.common import logger_config, cur_time
-from time import sleep
 
 os.path.abspath(".")
 

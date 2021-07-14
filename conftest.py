@@ -1,5 +1,4 @@
 # coding = utf8
-import os
 
 import allure
 import pytest

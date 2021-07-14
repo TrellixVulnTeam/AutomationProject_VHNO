@@ -46,13 +46,16 @@ class Settings_Page(System):
         self.advanced_features = get_element_parametrize("advanced_features")
         self.simcard_settings = self.poco(text=get_element_parametrize("simcard_settings"))
         self.simcard_settings_icon = self.poco(get_element_parametrize("simcard_settings_icon"))
-        self.sound_vibration_silent_mode_text = self.poco(text=get_element_parametrize("sound_vibration_silent_mode_text"))
+        self.sound_vibration_silent_mode_text = self.poco(
+            text=get_element_parametrize("sound_vibration_silent_mode_text"))
         self.display_sleep = self.poco(text=get_element_parametrize("display_sleep"))
         self.display_sleep_never = self.poco(text=get_element_parametrize("display_sleep_never"))
         self.button_gestures_gestures = self.poco(text=get_element_parametrize("button_gestures_gestures"))
-        self.button_gestures_gestures_3_finger_screenshot = self.poco(text=get_element_parametrize("button_gestures_gestures_3_finger_screenshot"))
+        self.button_gestures_gestures_3_finger_screenshot = self.poco(
+            text=get_element_parametrize("button_gestures_gestures_3_finger_screenshot"))
         self.security_sim_card_lock_text = get_element_parametrize("security_sim_card_lock_text")
-        self.security_sim_card_lock_locksimcard_text = self.poco(text=get_element_parametrize("security_sim_card_lock_locksimcard_text"))
+        self.security_sim_card_lock_locksimcard_text = self.poco(
+            text=get_element_parametrize("security_sim_card_lock_locksimcard_text"))
         self.imei = self.poco(get_element_parametrize("imei"))
         self.cu = self.poco(get_element_parametrize("cu"))
         self.hotspot_tethering = self.poco(text=get_element_parametrize("hotspot_tethering"))
@@ -62,7 +65,8 @@ class Settings_Page(System):
         self.vpn_create = self.poco(get_element_parametrize("vpn_create"))
         self.display_statusbar_notch = self.poco(text=get_element_parametrize("display_statusbar_notch"))
         self.notch = self.poco(text=get_element_parametrize("notch"))
-        self.advanced_features_screenrecorder = self.poco(text=get_element_parametrize("advanced_features_screenrecorder"))
+        self.advanced_features_screenrecorder = self.poco(
+            text=get_element_parametrize("advanced_features_screenrecorder"))
 
     """
         @description:启动settings应用

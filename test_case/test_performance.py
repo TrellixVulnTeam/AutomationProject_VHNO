@@ -8,7 +8,6 @@ import pytest
 from airtest.core.api import connect_device
 
 os.path.abspath(".")
-from page.settings.settings_page import Settings_Page
 from page.system.system import System
 from toolsbar.excel_tools import read_excel_for_case_parametrize
 from toolsbar.save2csv import Save2Csv

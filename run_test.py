@@ -5,13 +5,9 @@ import subprocess
 
 import pytest
 from airtest.core.api import *
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary, SERIAL_NUMBER
-from page.main_page import Main_Page
-from page.system.system import System
 from toolsbar.common import test_device
-from toolsbar.permissionGrant import grant_permission
 
 os.path.abspath(".")
 
@@ -73,12 +69,6 @@ def performance_test_area(device_):
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "{}".format("./test_case/test_performance.py"),
                  "--reruns={}".format(1),
                  "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
-    # 设置差异化
-    # subprocess.Popen(
-    #     args=["allure", "generate", "./temp/need_data[{}_{}]/".format(cur_time, device_), "-o",
-    #           "./report/test_report[{}_{}]/".format(cur_time, device_),
-    #           "--clean"],
-    #     shell=False).communicate()[0]
     subprocess.Popen(
         "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
                                                                                                  cur_time, device_),
