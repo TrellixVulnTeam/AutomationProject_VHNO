@@ -1,4 +1,5 @@
 # coding = utf8
+import os
 
 import allure
 import pytest
@@ -32,6 +33,7 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
 # 测试前初始化poco和device，手动调用获取main_page，只初始化一次，但全局使用同一个main_page
 @pytest.fixture(scope="session", autouse=True)
 def before_all_case_execute(cmdopt):
+    print("conftest ==================")
     device_ = connect_device("Android:///{}".format(cmdopt))
     device_.wake()
     device_.unlock()
@@ -127,6 +129,8 @@ def pytest_runtest_makereport(item):
             f.write(rep.nodeid + extra + "\n")
         # 添加allure报告截图
         with allure.step('添加失败截图...'):
+            if not os.path.exists("./screenshot"):
+                os.makedirs("./screenshot")
             file_name = "./screenshot/{}_{}_{}.png".format(str(item).strip("<").strip(">").replace(" ", "_"),
                                                            cur_time, "")
             snapshot(file_name)
