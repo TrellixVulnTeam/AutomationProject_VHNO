@@ -6,8 +6,9 @@ import subprocess
 import pytest
 from airtest.core.api import *
 
-from config import install_app_necessary, SERIAL_NUMBER
+from config import install_app_necessary, SERIAL_NUMBER, push_file_into_device
 from toolsbar.common import test_device
+from toolsbar.permissionGrant import grant_permission
 
 os.path.abspath(".")
 
@@ -45,10 +46,13 @@ def start_test():
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
             install_app_necessary(i)
-            # grant_permission(i)
+            grant_permission(i)
+            push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", i)
     else:
-        install_app_necessary(test_device)
+        pass
+        # install_app_necessary(test_device)
         # grant_permission(test_device)
+        # push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", test_device)
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
         test_pool.apply_async(func=performance_test_area, args=(device_,))
@@ -67,7 +71,7 @@ def start_test():
 def performance_test_area(device_):
     print("Pytest start")
     pytest.main(["-v", "-s", "--cmdopt={}".format(device_), "{}".format("./test_case/test_performance.py"),
-                 "--reruns={}".format(1),
+                 "--reruns={}".format(0),
                  "--alluredir={}".format("./temp/need_data[{}_{}]/".format(cur_time, device_))])
     subprocess.Popen(
         "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,

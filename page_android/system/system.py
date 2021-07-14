@@ -1,10 +1,13 @@
 # coding = utf8
 import os
 import sys
+from time import sleep
 
+from airtest.core.error import AdbShellError
 from poco.exceptions import PocoNoSuchNodeException
 
 from toolsbar.common import logger_config, cur_time
+from toolsbar.permissionGrant import list_apps
 
 os.path.abspath(".")
 
@@ -12,7 +15,7 @@ os.path.abspath(".")
     @File:system.py
     @Author:Bruce
     @Date:2021/1/12
-    @Description:System page，控制设备System应用的函数、控件
+    @Description:System page_android，控制设备System应用的函数、控件
 """
 
 
@@ -24,8 +27,8 @@ class System:
     def __init__(self, main_page):
         self.device = main_page.device
         self.poco = main_page.poco
-        self.logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "System", "Fota测试"),
-                                    logging_name="Fota测试")
+        self.logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "System", "性能测试"),
+                                    logging_name="性能测试")
 
     """
         @description:获取APP版本
@@ -164,3 +167,29 @@ class System:
             return self.poco(element_id).wait().offspring(checked=True)
         else:
             return self.poco(text=element_text).wait().offspring(checked=True)
+
+    def kill_all_apps(self):
+        self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭后台所有app:")
+        sleep(1)
+        app_list = list_apps(self.device)
+        for app_package in app_list:
+            format_package_name = app_package.replace("\r", "")
+            if "poco" in format_package_name:
+                continue
+            elif "yosemite" in format_package_name:
+                continue
+            elif "pocoservice" in format_package_name:
+                continue
+            elif "shell" in format_package_name:
+                continue
+            try:
+                if self.device.shell("dumpsys package {} | grep category.LAUNCHER".format(format_package_name)).replace(
+                        " ",
+                        "") is not None:
+                    self.logger.info(
+                        "function:" + sys._getframe().f_code.co_name + ":当前已关闭app:{}".format(format_package_name))
+                    self.device.stop_app(format_package_name)
+                    print("function:" + sys._getframe().f_code.co_name + ":当前已关闭app:{}".format(format_package_name))
+            except AdbShellError:
+                continue
+        print("Poco service & Yosemite no need to killed, others were killed!!!")

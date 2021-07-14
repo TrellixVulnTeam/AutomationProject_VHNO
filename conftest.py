@@ -5,8 +5,8 @@ import pytest
 from airtest.core.api import *
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
-from page.main_page import Main_Page
-from page.system.system import System
+from page_android.main_page import Main_Page
+from page_android.system.system import System
 from toolsbar.common import logger
 
 os.path.abspath(".")
@@ -45,7 +45,7 @@ def before_all_case_execute(cmdopt):
     main_page = Main_Page(device_, poco)
     system = System(main_page)
     system.unlock_screen()
-
+    system.kill_all_apps()
     return main_page
 
 

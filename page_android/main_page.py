@@ -6,7 +6,7 @@ os.path.abspath(".")
     @File:main_page.py
     @Author:Bruce
     @Date:2021/1/13
-    @Description:A main page for all other page to inherit to init poco and device driver
+    @Description:A main page_android for all other page_android to inherit to init poco and device driver
 """
 
 

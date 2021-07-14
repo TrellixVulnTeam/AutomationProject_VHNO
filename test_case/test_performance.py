@@ -7,8 +7,11 @@ import allure
 import pytest
 from airtest.core.api import connect_device
 
+from page_windows import main_page
+from page_windows.clock.clock_page import Clock_Page
+
 os.path.abspath(".")
-from page.system.system import System
+from page_android.system.system import System
 from toolsbar.excel_tools import read_excel_for_case_parametrize
 from toolsbar.save2csv import Save2Csv
 
@@ -43,6 +46,12 @@ class TestPerformance:
     def test_apk_version(self, before_all_case_execute, packageName):
         system = System(before_all_case_execute)
         result = system.get_app_version(packageName)
+        system.kill_all_apps()
+        system.get_app_version(packageName)
+        system.device.start_app("com.android.settings")
+        system.scroll_to_find_element(element_text="蓝牙").click()
+        clock = Clock_Page()
+        clock.start_clock()
         saved_data.append([sys._getframe().f_code.co_name + "[" + packageName + "]", result, "\\"])
         assert result is not None
 

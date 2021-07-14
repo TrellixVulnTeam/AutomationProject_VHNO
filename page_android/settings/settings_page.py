@@ -5,7 +5,8 @@ import sys
 from airtest.core.error import AdbShellError
 from poco.exceptions import PocoNoSuchNodeException
 
-from page.system.system import System, sleep
+from page_android.system.system import System
+from time import sleep
 from toolsbar.excel_tools import read_excel_for_page_element
 
 os.path.abspath(".")
@@ -13,14 +14,14 @@ os.path.abspath(".")
     @File:settings_page.py
     @Author:Bruce
     @Date:2021/1/14
-    @Description:Settings page，控制设备Settings应用的函数、控件
+    @Description:Settings page_android，控制设备Settings应用的函数、控件
     @param:继承System，传入Main_Page实例完成设备Device、Poco初始化
 """
 
 
 # 该函数用于简化元素获取操作
 def get_element_parametrize(element_name="guide_page_text"):
-    form_name = "./page/page_sheet.xlsx"
+    form_name = "./page_android/page_sheet.xlsx"
     element_data = read_excel_for_page_element(form=form_name, sheet_name="settings_page",
                                                element_name=element_name)
     return element_data

@@ -52,7 +52,7 @@ def read_excel_for_case_parametrize(form="../test_case/before_fota_data.xlsx", s
 
 
 # 从excel中读取数据并返回（element）
-def read_excel_for_page_element(form="../page/page_sheet.xlsx", sheet_name="calendar_page",
+def read_excel_for_page_element(form="../page_android/page_sheet.xlsx", sheet_name="calendar_page",
                                 element_name="guide_got_it"):
     df = pd.read_excel(form, sheet_name=sheet_name, index_col="element_name")
     original_data = df.loc[element_name, "element_data"]

@@ -57,6 +57,13 @@ def install_app_necessary(device=""):
         print(install_result)
 
 
+def push_file_into_device(file_path=r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", device=""):
+    print("正在移动测试资源到机器，请稍候")
+    push_result = subprocess.Popen("adb -s {} push {} /sdcard/".format(device.serialno, file_path), shell=True,
+                                   stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
+    print("文件移动结果：".format(push_result))
+
+
 # Return devices serial number
 """
     @description:获取当前连接的所有设备序列号
