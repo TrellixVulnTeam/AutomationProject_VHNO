@@ -25,6 +25,7 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
     @Author:Bruce
     @Date:2020/12/15
     @Description:项目运行函数，存放测试和调试函数
+    For seevision automation framework
 """
 
 """
