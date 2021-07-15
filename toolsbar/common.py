@@ -1,5 +1,6 @@
 # coding = utf8
 import logging
+import shutil
 
 from airtest.core.api import *
 
@@ -89,3 +90,15 @@ if not os.path.exists("./log"):
     os.makedirs("./log")
 logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "OK", "性能测试"),
                        logging_name="性能测试")
+
+
+def create_folder(folder_name):
+    result = False
+    if os.path.exists(folder_name):
+        shutil.rmtree(folder_name, ignore_errors=True)
+    os.mkdir(folder_name)
+    if os.path.exists(folder_name):
+        result = True
+    else:
+        result = False
+    return result

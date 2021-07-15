@@ -7,7 +7,6 @@ import allure
 import pytest
 from airtest.core.api import connect_device
 
-from page_windows import main_page
 from page_windows.clock.clock_page import Clock_Page
 
 os.path.abspath(".")
@@ -39,8 +38,8 @@ saved_data = []
 class TestPerformance:
 
     # case 1:
-    @allure.description("APK版本差异化")
-    @allure.step("获取当前应用的版本号->保存当前版本号")
+    @allure.description("开机速度测试")
+    @allure.step("开始录屏->秒表reset->设备wake->进入home界面->reboot设备->进入到锁屏界面则->停止录屏->保存录屏->切帧图片")
     @pytest.mark.parametrize("packageName", read_excel_for_case_parametrize(form="./test_case/before_fota_data.xlsx",
                                                                             case_name="test_apk_version"))
     def test_apk_version(self, before_all_case_execute, packageName):

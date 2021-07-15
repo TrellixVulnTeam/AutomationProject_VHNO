@@ -19,15 +19,17 @@ class Ev_Recorder_Page:
 
     def start_ev_recorder(self):
         main_page.open_program(path=r"D:\EVCapture\EVCapture.exe")
-        sleep(1)
+        sleep(2)
         self.handle = main_page.find_handle(self.title)
+        return self.handle
 
     def stop_ev_recorder(self):
         # 先手动设置关闭时，退出程序
         main_page.stop_program(self.handle)
 
-    def get_focus(self):
-        main_page.put_window_focus(self.handle)
+    def get_focus(self, handle):
+        # main_page.put_window_focus(self.handle)
+        main_page.put_window_focus(handle)
 
     def start_and_pause_record(self):
         pyautogui.hotkey(self.start_pause_record[0], self.start_pause_record[1])
@@ -36,7 +38,8 @@ class Ev_Recorder_Page:
         pyautogui.hotkey(self.stop_reserve_record[0], self.stop_reserve_record[1])
 
     # 录制完成后将视频名称直接输入然后enter,测试时务必切换到英文输入法
-    def change_record_video_name(self, name="case3_unlock_screen_1"):
+    def change_record_video_name(self, case_number, case_count):
+        name = "case{}_testVideo_{}".format(case_number, case_count)
         pyautogui.typewrite(message=name, interval=0.1)
         pyautogui.press("enter")
 
@@ -50,7 +53,7 @@ class Ev_Recorder_Page:
 
 if __name__ == '__main__':
     ev_recorder_page = Ev_Recorder_Page()
-    for i in range(10000):
+    for i in range(3):
         ev_recorder_page.start_ev_recorder()
         sleep(2)
         ev_recorder_page.change_video_to_specific_path(r"D:\For_Work\PandaOs性能测试_study\temp")
@@ -59,4 +62,6 @@ if __name__ == '__main__':
         sleep(10)
         ev_recorder_page.stop_and_reserve_record()
         sleep(2)
-        ev_recorder_page.change_record_video_name(name="Record_Test_{}_and_Happy_Stable".format(i + 1))
+        ev_recorder_page.change_record_video_name(name="Record_Test_{}_and_Happy_Stable_Second_Test".format(i + 1))
+        sleep(2)
+        ev_recorder_page.stop_ev_recorder()

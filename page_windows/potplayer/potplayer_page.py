@@ -22,8 +22,9 @@ class PotPlayer_Page:
 
     def start_potplayer(self):
         main_page.open_program(path=r"D:\PotPlayer\PotPlayerMini64.exe")
-        sleep(1)
+        sleep(2)
         self.handle = main_page.find_handle(self.title)
+        return self.handle
 
     def stop_potplayer(self):
         main_page.stop_program(self.handle)
@@ -36,9 +37,11 @@ class PotPlayer_Page:
         pyautogui.press(self.enter)
         sleep(3)
         pyautogui.hotkey(self.tv_camera_size_60[0], self.tv_camera_size_60[1])
+        sleep(2)
 
-    def get_focus(self):
-        main_page.put_window_focus(self.handle)
+    def get_focus(self, handle):
+        # main_page.put_window_focus(self.handle)
+        main_page.put_window_focus(handle)
 
 
 if __name__ == '__main__':
