@@ -37,6 +37,9 @@ class PotPlayer_Page:
         sleep(3)
         pyautogui.hotkey(self.tv_camera_size_60[0], self.tv_camera_size_60[1])
 
+    def get_focus(self):
+        main_page.put_window_focus(self.handle)
+
 
 if __name__ == '__main__':
     potplayer_page = PotPlayer_Page()
