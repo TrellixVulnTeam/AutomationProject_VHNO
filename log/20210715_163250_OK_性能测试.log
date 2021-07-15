@@ -1,0 +1,174 @@
+2021-07-15 16:33:12,900 - 性能测试 - WARNING - function:data_dealcom.android.cts.priv.ctsshim 无需进行授权!
+2021-07-15 16:33:13,017 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.qms.service.telemetry 无需进行授权!
+2021-07-15 16:33:13,119 - 性能测试 - WARNING - function:data_dealcom.android.internal.display.cutout.emulation.corner 无需进行授权!
+2021-07-15 16:33:13,228 - 性能测试 - WARNING - function:data_dealcom.google.android.ext.services 无需进行授权!
+2021-07-15 16:33:13,325 - 性能测试 - WARNING - function:data_dealcom.android.internal.display.cutout.emulation.double 无需进行授权!
+2021-07-15 16:33:13,442 - 性能测试 - WARNING - function:data_dealcom.android.providers.telephony 无需进行授权!
+2021-07-15 16:33:13,553 - 性能测试 - WARNING - function:data_dealcom.android.dynsystem 无需进行授权!
+2021-07-15 16:33:13,773 - 性能测试 - WARNING - function:data_dealcom.halfbrick.fruitninjamini 无需进行授权!
+2021-07-15 16:33:13,880 - 性能测试 - WARNING - function:data_dealcom.android.providers.calendar 无需进行授权!
+2021-07-15 16:33:13,973 - 性能测试 - WARNING - function:data_dealcom.android.providers.media 无需进行授权!
+2021-07-15 16:33:14,079 - 性能测试 - WARNING - function:data_dealcom.qti.service.colorservice 无需进行授权!
+2021-07-15 16:33:14,170 - 性能测试 - WARNING - function:data_dealcom.android.internal.systemui.navbar.gestural_wide_back 无需进行授权!
+2021-07-15 16:33:14,538 - 性能测试 - WARNING - function:data_dealcom.android.wallpapercropper 无需进行授权!
+2021-07-15 16:33:14,838 - 性能测试 - WARNING - function:data_dealcom.redstone.ota.aidlserver 无需进行授权!
+2021-07-15 16:33:14,915 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.cinnamon 无需进行授权!
+2021-07-15 16:33:14,990 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.rounded.systemui 无需进行授权!
+2021-07-15 16:33:15,272 - 性能测试 - WARNING - function:data_dealcom.android.externalstorage 无需进行授权!
+2021-07-15 16:33:15,370 - 性能测试 - WARNING - function:data_dealcom.qualcomm.uimremoteclient 无需进行授权!
+2021-07-15 16:33:15,470 - 性能测试 - WARNING - function:data_dealcom.android.htmlviewer 无需进行授权!
+2021-07-15 16:33:15,585 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.uceShimService 无需进行授权!
+2021-07-15 16:33:15,689 - 性能测试 - WARNING - function:data_dealcom.android.companiondevicemanager 无需进行授权!
+2021-07-15 16:33:15,990 - 性能测试 - WARNING - function:data_dealcom.android.mms.service 无需进行授权!
+2021-07-15 16:33:16,106 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.qms.service.connectionsecurity 无需进行授权!
+2021-07-15 16:33:16,225 - 性能测试 - WARNING - function:data_dealcom.android.providers.downloads 无需进行授权!
+2021-07-15 16:33:16,327 - 性能测试 - WARNING - function:data_dealcom.android.networkstack.inprocess 无需进行授权!
+2021-07-15 16:33:16,428 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.rounded.android 无需进行授权!
+2021-07-15 16:33:16,531 - 性能测试 - WARNING - function:data_dealvendor.qti.hardware.cacert.server 无需进行授权!
+2021-07-15 16:33:16,641 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.callenhancement 无需进行授权!
+2021-07-15 16:33:16,746 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.telephonyservice 无需进行授权!
+2021-07-15 16:33:16,848 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.circular.themepicker 无需进行授权!
+2021-07-15 16:33:16,952 - 性能测试 - WARNING - function:data_dealvendor.qti.iwlan 无需进行授权!
+2021-07-15 16:33:17,048 - 性能测试 - WARNING - function:data_dealcom.google.android.overlay.modules.permissioncontroller 无需进行授权!
+2021-07-15 16:33:17,392 - 性能测试 - WARNING - function:data_dealcom.qualcomm.uimremoteserver 无需进行授权!
+2021-07-15 16:33:17,498 - 性能测试 - WARNING - function:data_dealcom.qti.confuridialer 无需进行授权!
+2021-07-15 16:33:17,605 - 性能测试 - WARNING - function:data_dealcom.android.providers.downloads.ui 无需进行授权!
+2021-07-15 16:33:17,705 - 性能测试 - WARNING - function:data_dealcom.android.pacprocessor 无需进行授权!
+2021-07-15 16:33:17,807 - 性能测试 - WARNING - function:data_dealcom.android.internal.display.cutout.emulation.tall 无需进行授权!
+2021-07-15 16:33:17,911 - 性能测试 - WARNING - function:data_dealcom.android.certinstaller 无需进行授权!
+2021-07-15 16:33:18,008 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.black 无需进行授权!
+2021-07-15 16:33:18,134 - 性能测试 - WARNING - function:data_dealcom.android.carrierconfig 无需进行授权!
+2021-07-15 16:33:18,262 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.green 无需进行授权!
+2021-07-15 16:33:18,365 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.ocean 无需进行授权!
+2021-07-15 16:33:18,464 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.space 无需进行授权!
+2021-07-15 16:33:18,566 - 性能测试 - WARNING - function:data_dealorg.codeaurora.bluetooth 无需进行授权!
+2021-07-15 16:33:18,666 - 性能测试 - WARNING - function:data_dealcom.android.internal.systemui.navbar.threebutton 无需进行授权!
+2021-07-15 16:33:18,769 - 性能测试 - WARNING - function:data_dealcom.qti.qualcomm.datastatusnotification 无需进行授权!
+2021-07-15 16:33:18,886 - 性能测试 - WARNING - function:data_dealandroid 无需进行授权!
+2021-07-15 16:33:19,004 - 性能测试 - WARNING - function:data_dealcom.android.contacts 无需进行授权!
+2021-07-15 16:33:19,216 - 性能测试 - WARNING - function:data_dealcom.android.camera2 无需进行授权!
+2021-07-15 16:33:19,312 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.callfeaturessetting 无需进行授权!
+2021-07-15 16:33:19,418 - 性能测试 - WARNING - function:data_dealcom.qualcomm.wfd.service 无需进行授权!
+2021-07-15 16:33:19,535 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.rounded.launcher 无需进行授权!
+2021-07-15 16:33:19,642 - 性能测试 - WARNING - function:data_dealcom.qti.qualcomm.deviceinfo 无需进行授权!
+2021-07-15 16:33:19,749 - 性能测试 - WARNING - function:data_dealcom.android.egg 无需进行授权!
+2021-07-15 16:33:19,849 - 性能测试 - WARNING - function:data_dealcom.android.mtp 无需进行授权!
+2021-07-15 16:33:19,953 - 性能测试 - WARNING - function:data_dealcom.android.ons 无需进行授权!
+2021-07-15 16:33:20,268 - 性能测试 - WARNING - function:data_dealcom.android.backupconfirm 无需进行授权!
+2021-07-15 16:33:20,366 - 性能测试 - WARNING - function:data_dealcom.android.internal.systemui.navbar.twobutton 无需进行授权!
+2021-07-15 16:33:20,465 - 性能测试 - WARNING - function:data_dealcom.android.provision 无需进行授权!
+2021-07-15 16:33:20,566 - 性能测试 - WARNING - function:data_dealorg.codeaurora.ims 无需进行授权!
+2021-07-15 16:33:20,670 - 性能测试 - WARNING - function:data_dealcom.android.statementservice 无需进行授权!
+2021-07-15 16:33:20,766 - 性能测试 - WARNING - function:data_dealcom.android.hotspot2 无需进行授权!
+2021-07-15 16:33:20,869 - 性能测试 - WARNING - function:data_dealcom.android.settings.intelligence 无需进行授权!
+2021-07-15 16:33:21,206 - 性能测试 - WARNING - function:data_dealcom.android.internal.systemui.navbar.gestural_extra_wide_back 无需进行授权!
+2021-07-15 16:33:21,308 - 性能测试 - WARNING - function:data_dealcom.google.android.permissioncontroller 无需进行授权!
+2021-07-15 16:33:21,411 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.dynamicddsservice 无需进行授权!
+2021-07-15 16:33:21,511 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qcrilmsgtunnel 无需进行授权!
+2021-07-15 16:33:21,612 - 性能测试 - WARNING - function:data_dealcom.android.providers.settings 无需进行授权!
+2021-07-15 16:33:21,709 - 性能测试 - WARNING - function:data_dealcom.android.sharedstoragebackup 无需进行授权!
+2021-07-15 16:33:21,812 - 性能测试 - WARNING - function:data_dealcom.panda.eyeprotect 无需进行授权!
+2021-07-15 16:33:21,925 - 性能测试 - WARNING - function:data_dealcom.android.printspooler 无需进行授权!
+2021-07-15 16:33:22,024 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.filled.settings 无需进行授权!
+2021-07-15 16:33:22,127 - 性能测试 - WARNING - function:data_dealcom.android.dreams.basic 无需进行授权!
+2021-07-15 16:33:22,229 - 性能测试 - WARNING - function:data_dealcom.google.android.overlay.modules.ext.services 无需进行授权!
+2021-07-15 16:33:22,328 - 性能测试 - WARNING - function:data_dealcom.android.webview 无需进行授权!
+2021-07-15 16:33:22,428 - 性能测试 - WARNING - function:data_dealcom.android.se 无需进行授权!
+2021-07-15 16:33:22,527 - 性能测试 - WARNING - function:data_dealcom.android.inputdevices 无需进行授权!
+2021-07-15 16:33:22,625 - 性能测试 - WARNING - function:data_dealcom.android.bips 无需进行授权!
+2021-07-15 16:33:22,726 - 性能测试 - WARNING - function:data_dealcom.qti.dpmserviceapp 无需进行授权!
+2021-07-15 16:33:22,824 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.circular.settings 无需进行授权!
+2021-07-15 16:33:22,925 - 性能测试 - WARNING - function:data_dealcom.google.android.overlay.modules.modulemedtadatagoogle.forframework 无需进行授权!
+2021-07-15 16:33:23,026 - 性能测试 - WARNING - function:data_dealcom.qti.xdivert 无需进行授权!
+2021-07-15 16:33:23,126 - 性能测试 - WARNING - function:data_dealcom.android.musicfx 无需进行授权!
+2021-07-15 16:33:23,227 - 性能测试 - WARNING - function:data_dealcom.google.android.modulemetadata 无需进行授权!
+2021-07-15 16:33:23,326 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon.teardrop 无需进行授权!
+2021-07-15 16:33:23,428 - 性能测试 - WARNING - function:data_dealandroid.ext.shared 无需进行授权!
+2021-07-15 16:33:23,544 - 性能测试 - WARNING - function:data_dealcom.android.onetimeinitializer 无需进行授权!
+2021-07-15 16:33:23,662 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.simsettings 无需进行授权!
+2021-07-15 16:33:23,781 - 性能测试 - WARNING - function:data_dealcom.android.server.telecom 无需进行授权!
+2021-07-15 16:33:23,898 - 性能测试 - WARNING - function:data_dealcom.android.keychain 无需进行授权!
+2021-07-15 16:33:24,010 - 性能测试 - WARNING - function:data_dealcom.android.printservice.recommendation 无需进行授权!
+2021-07-15 16:33:24,117 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.filled.systemui 无需进行授权!
+2021-07-15 16:33:24,231 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.qtisystemservice 无需进行授权!
+2021-07-15 16:33:24,327 - 性能测试 - WARNING - function:data_dealcom.android.calllogbackup 无需进行授权!
+2021-07-15 16:33:24,432 - 性能测试 - WARNING - function:data_dealcom.android.localtransport 无需进行授权!
+2021-07-15 16:33:24,530 - 性能测试 - WARNING - function:data_dealcom.android.packageinstaller 无需进行授权!
+2021-07-15 16:33:24,638 - 性能测试 - WARNING - function:data_dealcom.android.carrierdefaultapp 无需进行授权!
+2021-07-15 16:33:24,745 - 性能测试 - WARNING - function:data_dealcom.dsi.ant.server 无需进行授权!
+2021-07-15 16:33:24,848 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.remoteSimlockAuth 无需进行授权!
+2021-07-15 16:33:24,948 - 性能测试 - WARNING - function:data_dealcom.android.theme.font.notoserifsource 无需进行授权!
+2021-07-15 16:33:25,047 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.filled.android 无需进行授权!
+2021-07-15 16:33:25,148 - 性能测试 - WARNING - function:data_dealcom.android.proxyhandler 无需进行授权!
+2021-07-15 16:33:25,251 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.workloadclassifier 无需进行授权!
+2021-07-15 16:33:25,348 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.circular.systemui 无需进行授权!
+2021-07-15 16:33:25,886 - 性能测试 - WARNING - function:data_dealcom.google.android.overlay.modules.permissioncontroller.forframework 无需进行授权!
+2021-07-15 16:33:25,996 - 性能测试 - WARNING - function:data_dealcom.android.managedprovisioning 无需进行授权!
+2021-07-15 16:33:26,215 - 性能测试 - WARNING - function:data_dealcom.google.android.documentsui 无需进行授权!
+2021-07-15 16:33:26,319 - 性能测试 - WARNING - function:data_dealcom.android.dreams.phototable 无需进行授权!
+2021-07-15 16:33:26,411 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon.squircle 无需进行授权!
+2021-07-15 16:33:26,509 - 性能测试 - WARNING - function:data_dealcom.android.storagemanager 无需进行授权!
+2021-07-15 16:33:26,609 - 性能测试 - WARNING - function:data_dealcom.android.bookmarkprovider 无需进行授权!
+2021-07-15 16:33:26,832 - 性能测试 - WARNING - function:data_dealcom.android.settings 无需进行授权!
+2021-07-15 16:33:26,949 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.cne 无需进行授权!
+2021-07-15 16:33:27,050 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.ims 无需进行授权!
+2021-07-15 16:33:27,165 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.lpa 无需进行授权!
+2021-07-15 16:33:27,268 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.smq 无需进行授权!
+2021-07-15 16:33:27,367 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.uim 无需进行授权!
+2021-07-15 16:33:27,463 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.filled.launcher 无需进行授权!
+2021-07-15 16:33:27,563 - 性能测试 - WARNING - function:data_dealcom.android.networkstack.permissionconfig 无需进行授权!
+2021-07-15 16:33:27,785 - 性能测试 - WARNING - function:data_dealcom.android.calculator2 无需进行授权!
+2021-07-15 16:33:27,891 - 性能测试 - WARNING - function:data_dealcom.qualcomm.location 无需进行授权!
+2021-07-15 16:33:27,988 - 性能测试 - WARNING - function:data_dealcom.android.cts.ctsshim 无需进行授权!
+2021-07-15 16:33:28,086 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.circular.launcher 无需进行授权!
+2021-07-15 16:33:28,185 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.uimGbaApp 无需进行授权!
+2021-07-15 16:33:28,289 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.services.secureui 无需进行授权!
+2021-07-15 16:33:28,388 - 性能测试 - WARNING - function:data_dealcom.android.vpndialogs 无需进行授权!
+2021-07-15 16:33:28,492 - 性能测试 - WARNING - function:data_dealcom.qualcomm.location.XT 无需进行授权!
+2021-07-15 16:33:28,709 - 性能测试 - WARNING - function:data_dealcom.android.music 无需进行授权!
+2021-07-15 16:33:28,831 - 性能测试 - WARNING - function:data_dealcom.android.phone 无需进行授权!
+2021-07-15 16:33:28,963 - 性能测试 - WARNING - function:data_dealcom.android.shell 无需进行授权!
+2021-07-15 16:33:29,074 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.filled.themepicker 无需进行授权!
+2021-07-15 16:33:29,198 - 性能测试 - WARNING - function:data_dealcom.android.wallpaperbackup 无需进行授权!
+2021-07-15 16:33:29,300 - 性能测试 - WARNING - function:data_dealcom.android.providers.blockednumber 无需进行授权!
+2021-07-15 16:33:29,406 - 性能测试 - WARNING - function:data_dealcom.android.providers.userdictionary 无需进行授权!
+2021-07-15 16:33:29,508 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.seccamservice 无需进行授权!
+2021-07-15 16:33:29,611 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.qdma 无需进行授权!
+2021-07-15 16:33:29,713 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.qmmi 无需进行授权!
+2021-07-15 16:33:29,811 - 性能测试 - WARNING - function:data_dealcom.android.internal.systemui.navbar.gestural 无需进行授权!
+2021-07-15 16:33:29,915 - 性能测试 - WARNING - function:data_dealcom.android.location.fused 无需进行授权!
+2021-07-15 16:33:30,036 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.orchid 无需进行授权!
+2021-07-15 16:33:30,379 - 性能测试 - WARNING - function:data_dealcom.android.systemui 无需进行授权!
+2021-07-15 16:33:30,483 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.purple 无需进行授权!
+2021-07-15 16:33:30,591 - 性能测试 - WARNING - function:data_dealcom.android.bluetoothmidiservice 无需进行授权!
+2021-07-15 16:33:30,703 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.confdialer 无需进行授权!
+2021-07-15 16:33:30,811 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.poweroffalarm 无需进行授权!
+2021-07-15 16:33:30,911 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.networksetting 无需进行授权!
+2021-07-15 16:33:31,008 - 性能测试 - WARNING - function:data_dealcom.android.traceur 无需进行授权!
+2021-07-15 16:33:31,107 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.qms.service.trustzoneaccess 无需进行授权!
+2021-07-15 16:33:31,204 - 性能测试 - WARNING - function:data_dealandroid.auto_generated_rro_product__ 无需进行授权!
+2021-07-15 16:33:31,311 - 性能测试 - WARNING - function:data_dealcom.android.bluetooth 无需进行授权!
+2021-07-15 16:33:31,408 - 性能测试 - WARNING - function:data_dealcom.qualcomm.timeservice 无需进行授权!
+2021-07-15 16:33:31,509 - 性能测试 - WARNING - function:data_dealcom.qualcomm.atfwd 无需进行授权!
+2021-07-15 16:33:31,609 - 性能测试 - WARNING - function:data_dealcom.qualcomm.embms 无需进行授权!
+2021-07-15 16:33:31,715 - 性能测试 - WARNING - function:data_dealcom.android.providers.contacts 无需进行授权!
+2021-07-15 16:33:31,829 - 性能测试 - WARNING - function:data_dealcom.android.captiveportallogin 无需进行授权!
+2021-07-15 16:33:31,928 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon.roundedrect 无需进行授权!
+2021-07-15 16:33:32,029 - 性能测试 - WARNING - function:data_dealcom.android.internal.systemui.navbar.gestural_narrow_back 无需进行授权!
+2021-07-15 16:33:32,125 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.rounded.settings 无需进行授权!
+2021-07-15 16:33:32,224 - 性能测试 - WARNING - function:data_dealandroid.auto_generated_rro_vendor__ 无需进行授权!
+2021-07-15 16:33:32,325 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.circular.android 无需进行授权!
+2021-07-15 16:33:32,451 - 性能测试 - INFO - function:grant_permission<airtest.core.android.android.Android object at 0x0000022680BFB788> 
+应用:com.sohu.inputmethod.sogou 授权 p: android.permission.READ_SMS 完成
+2021-07-15 16:33:32,571 - 性能测试 - INFO - function:grant_permission<airtest.core.android.android.Android object at 0x0000022680BFB788> 
+应用:com.sohu.inputmethod.sogou 授权 p: android.permission.ACCESS_FINE_LOCATION 完成
+2021-07-15 16:33:32,692 - 性能测试 - INFO - function:grant_permission<airtest.core.android.android.Android object at 0x0000022680BFB788> 
+应用:com.sohu.inputmethod.sogou 授权 p: android.permission.RECEIVE_SMS 完成
+2021-07-15 16:33:32,841 - 性能测试 - INFO - function:grant_permission<airtest.core.android.android.Android object at 0x0000022680BFB788> 
+应用:com.sohu.inputmethod.sogou 授权 p: android.permission.READ_EXTERNAL_STORAGE 完成
+2021-07-15 16:33:32,955 - 性能测试 - INFO - function:grant_permission<airtest.core.android.android.Android object at 0x0000022680BFB788> 
+应用:com.sohu.inputmethod.sogou 授权 p: android.permission.ACCESS_COARSE_LOCATION 完成
+2021-07-15 16:33:33,090 - 性能测试 - INFO - function:grant_permission<airtest.core.android.android.Android object at 0x0000022680BFB788> 
+应用:com.sohu.inputmethod.sogou 授权 p: android.permission.READ_PHONE_STATE 完成
+2021-07-15 16:33:33,204 - 性能测试 - INFO - function:grant_permission<airtest.core.android.android.Android object at 0x0000022680BFB788> 
+应用:com.sohu.inputmethod.sogou 授权 p: android.permission.CAMERA 完成

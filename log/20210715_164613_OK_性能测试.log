@@ -1,0 +1,2 @@
+2021-07-15 16:46:19,759 - 性能测试 - INFO - function:unlock_screen:进行屏幕解锁:
+2021-07-15 16:46:20,727 - 性能测试 - ERROR - function:unlock_screen:未设置屏幕锁,无需解锁:Cannot find any visible node by query UIObjectProxy of "com.android.systemui:id/rectangle_frame"

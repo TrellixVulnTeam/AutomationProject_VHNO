@@ -1,0 +1,18 @@
+2021-07-15 16:57:52,731 - 性能测试 - INFO - function:unlock_screen:进行屏幕解锁:
+2021-07-15 16:57:53,715 - 性能测试 - ERROR - function:unlock_screen:未设置屏幕锁,无需解锁:Cannot find any visible node by query UIObjectProxy of "com.android.systemui:id/rectangle_frame"
+2021-07-15 16:57:54,187 - 性能测试 - INFO - function:kill_all_apps:关闭后台所有app:
+2021-07-15 16:57:55,921 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.halfbrick.fruitninjamini
+2021-07-15 16:57:56,383 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.sohu.inputmethod.sogou
+2021-07-15 16:57:56,617 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.teslacoilsw.launcher
+2021-07-15 16:57:57,049 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.gallery
+2021-07-15 16:57:57,583 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.quicksearchbox
+2021-07-15 16:57:58,600 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.soundrecorder
+2021-07-15 16:58:00,016 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.camera2
+2021-07-15 16:58:00,743 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.launcher3
+2021-07-15 16:58:01,411 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.calendar
+2021-07-15 16:58:04,742 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.inputmethod.latin
+2021-07-15 16:58:05,148 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.google.android.documentsui
+2021-07-15 16:58:05,783 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.settings
+2021-07-15 16:58:06,677 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.calculator2
+2021-07-15 16:58:07,593 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.music
+2021-07-15 16:58:08,930 - 性能测试 - INFO - function:kill_all_apps:当前已关闭app:com.android.deskclock
