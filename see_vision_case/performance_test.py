@@ -15,6 +15,7 @@ from page_windows.clock.clock_page import Clock_Page
 from page_windows.ev_recorder.ev_recorder_page import Ev_Recorder_Page
 from page_windows.ffmpeg.ffmpeg_page import Ffmpeg_Page
 from page_windows.potplayer.potplayer_page import PotPlayer_Page
+from see_vision_case.performance_test_case import case_chooser
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
 
@@ -51,10 +52,11 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
 def start_test(case_number):
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
-        test_pool.apply_async(func=performance_test_area, args=(device_, case_number,))
+        result = test_pool.apply_async(func=performance_test_area, args=(device_, case_number,))
         sleep(10)
     test_pool.close()
     test_pool.join()
+    return result
 
 
 """
@@ -79,31 +81,8 @@ def performance_test_area(device_, case_number):
     system.unlock_screen()
     system.kill_all_apps()
     # 根据case编号来执行case
-    test_pool_inside = multiprocessing.Pool(2)
-    test_pool_inside.apply_async(func=case_switch(case_number, main_page,), args=(case_number, main_page,))
-    test_pool_inside.apply_async(func=keep_device_wake, args=(main_page,))
-    test_pool_inside.close()
-    test_pool_inside.join()
-    # case_switch(case_number, main_page)
-
-
-def keep_device_wake(main_page):
-    while True:
-        main_page.device.wake()
-        print("Keep device wake light up!")
-
-
-def case_switch(case_number, main_page):
-    print("Case_number:{}".format(case_number))
-    if case_number == 1:
-        sleep(2)
-        print("Run case 1")
-        print(main_page.device.serialno)
-        main_page.device.wake()
-        main_page.device.start_app("com.android.settings")
-    elif case_number == 2:
-        sleep(2)
-        print("Run case 2")
+    sleep(2)
+    return case_chooser(case_number, main_page)
 
 
 def test_prepare(test_device):
@@ -140,8 +119,8 @@ if __name__ == '__main__':
     clock_handle = clock.start_clock()
     sleep(5)
     ev_handle = ev_recorder_page.start_ev_recorder()
-    for i in range(28):
-        for j in range(10):
+    for i in range(1):
+        for j in range(1000):
             print("case{}_第{}次_Test".format(i + 1, j + 1))
             # 手动改ev recorder路径，和后续ffmpeg一致
             ev_recorder_page.start_and_pause_record()
@@ -155,9 +134,9 @@ if __name__ == '__main__':
                 传入case编号，执行相应case
             """
             case_number = i + 1
-            start_test(case_number)
+            print("当前case{}_第{}次测试结果为：{}".format(case_number, j + 1, start_test(case_number).get()))
 
-            sleep(5)
+            sleep(2)
 
             ev_recorder_page.get_focus(ev_handle)
             ev_recorder_page.stop_and_reserve_record()

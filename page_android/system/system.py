@@ -3,6 +3,7 @@ import os
 import sys
 from time import sleep
 
+from airtest.core.api import connect_device
 from airtest.core.error import AdbShellError
 from poco.exceptions import PocoNoSuchNodeException
 
@@ -189,7 +190,32 @@ class System:
                     self.logger.info(
                         "function:" + sys._getframe().f_code.co_name + ":当前已关闭app:{}".format(format_package_name))
                     self.device.stop_app(format_package_name)
-                    print("function:" + sys._getframe().f_code.co_name + ":当前已关闭app:{}".format(format_package_name))
+                    # print("function:" + sys._getframe().f_code.co_name + ":当前已关闭app:{}".format(format_package_name))
             except AdbShellError:
                 continue
         print("Poco service & Yosemite no need to killed, others were killed!!!")
+
+    def reboot_device_and_wait(self):
+        device_serialno = self.device.serialno
+        self.device.shell("reboot")
+        device_reboot_result = False
+        count_time = 0
+        while True:
+            sleep(1)
+            count_time += 1
+            try:
+                device_ready_now = connect_device("Android:///{}".format(device_serialno))
+                sleep(1)
+                device_ready_now.wake()
+                if "com.teslacoilsw.launcher" in device_ready_now.shell("dumpsys window | grep mCurrentFocus"):
+                    device_reboot_result = True
+                    break
+                elif count_time >= 600:
+                    device_reboot_result = False
+                    break
+            except Exception as ex:
+                print("等待设备重启时间：{}s:_______:exception:{}".format(count_time, str(ex)))
+                continue
+            finally:
+                print("Device boot status:{}".format(device_reboot_result))
+        return device_reboot_result
