@@ -123,8 +123,8 @@ def performance_test_work_flow():
     ev_handle = ev_recorder_page.start_ev_recorder()
     # 大循环控制case number
     # 小循环控制每条case执行次数
-    for i in range(5):
-        for j in range(100):
+    for i in range(28):
+        for j in range(10):
             print("case{}_第{}次_Test".format(i + 1, j + 1))
             # 手动改ev recorder路径，和后续ffmpeg一致
             ev_recorder_page.start_and_pause_record()
