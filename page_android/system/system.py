@@ -5,9 +5,8 @@ from time import sleep
 
 from airtest.core.api import connect_device
 from airtest.core.error import AdbShellError
-from poco.exceptions import PocoNoSuchNodeException
 
-from toolsbar.common import logger_config, cur_time
+from toolsbar.common import logger_config
 from toolsbar.permissionGrant import list_apps
 
 os.path.abspath(".")
@@ -28,8 +27,10 @@ class System:
     def __init__(self, main_page):
         self.device = main_page.device
         self.poco = main_page.poco
-        self.logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "System", "性能测试"),
+        self.logger = logger_config(log_path="./log/{}_{}.log".format("System", "性能测试"),
                                     logging_name="性能测试")
+        self.screen_width = self.device.display_info["width"]
+        self.screen_height = self.device.display_info["height"]
 
     """
         @description:获取APP版本
@@ -101,42 +102,6 @@ class System:
                     if menu_exists:
                         return element
         return element
-
-    """
-        @description:解锁屏幕
-    """
-
-    def unlock_screen(self):
-        """
-           亮屏并解锁屏幕操作，SIM PIN 1234解锁
-        """
-        self.logger.info("function:" + sys._getframe().f_code.co_name + ":进行屏幕解锁:")
-        self.device.unlock()
-        try:
-            self.poco("com.android.systemui:id/lock_icon").drag_to(self.poco("com.android.systemui:id"
-                                                                             "/rectangle_frame"),
-                                                                   duration=0.5)
-            try:
-                if self.poco(text="BACK").wait().exists():
-                    for i in range(1, 5):
-                        self.poco(text="%s" % i).wait().click()
-                    self.device.keyevent("KEYCODE_ENTER")
-            except PocoNoSuchNodeException as ex:
-                self.logger.error("function:" + sys._getframe().f_code.co_name +
-                                  ":锁屏界面异常,请检查代码:" + str(ex))
-        except PocoNoSuchNodeException as ex:
-            self.logger.error("function:" + sys._getframe().f_code.co_name +
-                              ":未设置屏幕锁,无需解锁:" + str(ex))
-        finally:
-            self.device.home()
-
-    """
-        @description:锁定屏幕
-    """
-
-    def lock_screen(self):
-        self.logger.info("function:" + sys._getframe().f_code.co_name + ":按下power键锁定屏幕:")
-        self.device.keyevent("KEYCODE_POWER")
 
     """
         @description:双击元素
@@ -219,3 +184,61 @@ class System:
             finally:
                 print("Device boot status:{}".format(device_reboot_result))
         return device_reboot_result
+
+    def rest_screen(self):
+        result = False
+        sleep(3)
+        if self.device.is_screenon():
+            self.device.keyevent("POWER")
+        else:
+            self.device.wake()
+            sleep(3)
+            self.device.keyevent("POWER")
+        sleep(2)
+        if not self.device.is_screenon():
+            result = True
+        return result
+
+    def lock_screen(self):
+        sleep(1)
+        if self.device.is_screenon():
+            self.device.keyevent("POWER")
+
+    def unlock_screen(self):
+        sleep(1)
+        self.device.wake()
+        self.device.unlock()
+
+    def unlock_screen_by_slide(self):
+        result = False
+        sleep(1)
+        self.device.wake()
+        print("开始滑动解锁！")
+        self.poco.scroll(direction="vertical", percent=0.6, duration=0.5)
+        # width = self.device.display_info["width"]
+        # height = self.device.display_info["height"]
+        # self.device.swipe((width / 2, height - 50), (width / 2, 50))
+        result = self.check_on_home_screen()
+        return result
+
+    def check_on_home_screen(self):
+        result = False
+        sleep(1)
+        if "com.teslacoilsw.launcher" in self.device.shell("dumpsys window | grep mCurrentFocus"):
+            result = True
+        return result
+
+    def light_up_screen(self):
+        self.lock_screen()
+        sleep(1)
+        self.device.keyevent("POWER")
+        sleep(1)
+        result = self.check_on_home_screen()
+        return result
+
+    def wake_up_main_menu(self):
+        self.device.unlock()
+        self.poco("com.teslacoilsw.launcher:id/bottomsheet_expand_indicator").wait().click()
+
+    def slide_back_to_launcher(self):
+        self.poco.start_gesture([0.5, 0.99]).hold(2).to([0.5, 0.5]).up()

@@ -23,9 +23,9 @@ class Ev_Recorder_Page:
         self.handle = main_page.find_handle(self.title)
         return self.handle
 
-    def stop_ev_recorder(self):
+    def stop_ev_recorder(self, handle):
         # 先手动设置关闭时，退出程序
-        main_page.stop_program(self.handle)
+        main_page.stop_program(handle)
 
     def get_focus(self, handle):
         # main_page.put_window_focus(self.handle)

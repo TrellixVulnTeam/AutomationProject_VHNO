@@ -88,7 +88,7 @@ test_device = init_all_device()
 """
 if not os.path.exists("./log"):
     os.makedirs("./log")
-logger = logger_config(log_path="./log/{}_{}_{}.log".format(cur_time, "OK", "性能测试"),
+logger = logger_config(log_path="./log/{}_{}.log".format("OK", "性能测试"),
                        logging_name="性能测试")
 
 

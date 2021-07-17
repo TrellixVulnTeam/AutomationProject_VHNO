@@ -19,11 +19,12 @@ from see_vision_case.performance_test_case import case_chooser
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
 
-os.path.abspath("..")
+os.path.abspath(".")
 # 过滤airtest log只打印ERROR的Log
 logger_airtest = logging.getLogger("airtest")
 logger_airtest.setLevel(logging.ERROR)
 cur_time = time.strftime("%Y%m%d_%H%M%S")
+
 """
     @File:run_test.py
     @Author:Bruce
@@ -81,7 +82,7 @@ def performance_test_area(device_, case_number):
     system.unlock_screen()
     system.kill_all_apps()
     # 根据case编号来执行case
-    sleep(2)
+    # sleep(2)
     return case_chooser(case_number, main_page)
 
 
@@ -95,16 +96,17 @@ def test_prepare(test_device):
             push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", i)
     else:
         pass
-        # install_app_necessary(test_device)
-        # grant_permission(test_device)
-        # push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", test_device)
+        install_app_necessary(test_device)
+        grant_permission(test_device)
+        push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", test_device)
 
 
-if __name__ == '__main__':
+def performance_test_work_flow():
     """
-        整体运行流程:看稳定性和case执行起来效果,移除pytest，自己搭建框架，独立开来，不然后续不利于拓展测试项
-        最后再加上log进去
-        case编写需要一定时间比较多
+    整体运行流程:看稳定性和case执行起来效果,移除pytest，自己搭建框架，独立开来，不然后续不利于拓展测试项
+    最后再加上log进去
+    case编写需要一定时间比较多
+    因为自动化操作和手动有些许不同，注意标注好每条case怎么判断计时的开始与结束！！！
     """
     test_prepare(test_device=test_device)
     ev_recorder_page = Ev_Recorder_Page()
@@ -113,14 +115,16 @@ if __name__ == '__main__':
     potplayer_page = PotPlayer_Page()
     clock = Clock_Page()
 
-    potplayer_page.start_potplayer()
+    potplayer_handle = potplayer_page.start_potplayer()
     potplayer_page.open_camera()
 
     clock_handle = clock.start_clock()
-    sleep(5)
+    sleep(2)
     ev_handle = ev_recorder_page.start_ev_recorder()
-    for i in range(1):
-        for j in range(1000):
+    # 大循环控制case number
+    # 小循环控制每条case执行次数
+    for i in range(5):
+        for j in range(100):
             print("case{}_第{}次_Test".format(i + 1, j + 1))
             # 手动改ev recorder路径，和后续ffmpeg一致
             ev_recorder_page.start_and_pause_record()
@@ -135,13 +139,19 @@ if __name__ == '__main__':
             """
             case_number = i + 1
             print("当前case{}_第{}次测试结果为：{}".format(case_number, j + 1, start_test(case_number).get()))
-
             sleep(2)
 
-            ev_recorder_page.get_focus(ev_handle)
             ev_recorder_page.stop_and_reserve_record()
             sleep(2)
             ev_recorder_page.change_record_video_name(i + 1, j + 1)
             sleep(2)
             ffmpeg_page.cut_video_into_pieces_frame_picture(i + 1, j + 1)
             sleep(2)
+    potplayer_page.stop_potplayer(potplayer_handle)
+    clock.stop_clock(clock_handle)
+
+
+if __name__ == '__main__':
+    # performance_test_work_flow()
+    for i in range(1):
+        print("当前case{}_第{}次测试结果为：{}".format(21, i + 1, start_test(21).get()))

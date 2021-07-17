@@ -24,8 +24,8 @@ class Clock_Page:
         self.handle = main_page.find_handle(self.title)
         return self.handle
 
-    def stop_clock(self):
-        main_page.stop_program(self.handle)
+    def stop_clock(self, handle):
+        main_page.stop_program(handle)
 
     def reset_and_begin(self):
         pyautogui.press(self.reset_begin)

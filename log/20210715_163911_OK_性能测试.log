@@ -1,21 +1,0 @@
-2021-07-15 16:39:14,584 - 性能测试 - WARNING - function:data_dealcom.android.cts.priv.ctsshim 无需进行授权!
-2021-07-15 16:39:14,675 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.qms.service.telemetry 无需进行授权!
-2021-07-15 16:39:14,788 - 性能测试 - WARNING - function:data_dealcom.android.internal.display.cutout.emulation.corner 无需进行授权!
-2021-07-15 16:39:14,912 - 性能测试 - WARNING - function:data_dealcom.google.android.ext.services 无需进行授权!
-2021-07-15 16:39:15,048 - 性能测试 - WARNING - function:data_dealcom.android.internal.display.cutout.emulation.double 无需进行授权!
-2021-07-15 16:39:15,173 - 性能测试 - WARNING - function:data_dealcom.android.providers.telephony 无需进行授权!
-2021-07-15 16:39:15,275 - 性能测试 - WARNING - function:data_dealcom.android.dynsystem 无需进行授权!
-2021-07-15 16:39:15,516 - 性能测试 - WARNING - function:data_dealcom.halfbrick.fruitninjamini 无需进行授权!
-2021-07-15 16:39:15,646 - 性能测试 - WARNING - function:data_dealcom.android.providers.calendar 无需进行授权!
-2021-07-15 16:39:15,775 - 性能测试 - WARNING - function:data_dealcom.android.providers.media 无需进行授权!
-2021-07-15 16:39:15,892 - 性能测试 - WARNING - function:data_dealcom.qti.service.colorservice 无需进行授权!
-2021-07-15 16:39:15,997 - 性能测试 - WARNING - function:data_dealcom.android.internal.systemui.navbar.gestural_wide_back 无需进行授权!
-2021-07-15 16:39:16,323 - 性能测试 - WARNING - function:data_dealcom.android.wallpapercropper 无需进行授权!
-2021-07-15 16:39:16,641 - 性能测试 - WARNING - function:data_dealcom.redstone.ota.aidlserver 无需进行授权!
-2021-07-15 16:39:16,751 - 性能测试 - WARNING - function:data_dealcom.android.theme.color.cinnamon 无需进行授权!
-2021-07-15 16:39:16,855 - 性能测试 - WARNING - function:data_dealcom.android.theme.icon_pack.rounded.systemui 无需进行授权!
-2021-07-15 16:39:17,176 - 性能测试 - WARNING - function:data_dealcom.android.externalstorage 无需进行授权!
-2021-07-15 16:39:17,270 - 性能测试 - WARNING - function:data_dealcom.qualcomm.uimremoteclient 无需进行授权!
-2021-07-15 16:39:17,377 - 性能测试 - WARNING - function:data_dealcom.android.htmlviewer 无需进行授权!
-2021-07-15 16:39:17,473 - 性能测试 - WARNING - function:data_dealcom.qualcomm.qti.uceShimService 无需进行授权!
-2021-07-15 16:39:17,580 - 性能测试 - WARNING - function:data_dealcom.android.companiondevicemanager 无需进行授权!

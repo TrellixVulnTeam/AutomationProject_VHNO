@@ -26,8 +26,8 @@ class PotPlayer_Page:
         self.handle = main_page.find_handle(self.title)
         return self.handle
 
-    def stop_potplayer(self):
-        main_page.stop_program(self.handle)
+    def stop_potplayer(self, handle):
+        main_page.stop_program(handle)
 
     def open_camera(self):
         pyautogui.hotkey(self.camera_config[0], self.camera_config[1])
