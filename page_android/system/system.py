@@ -223,9 +223,15 @@ class System:
 
     def check_on_home_screen(self):
         result = False
-        sleep(1)
+        sleep(3)
         if "com.teslacoilsw.launcher" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
+        return result
+
+    def check_on_lock_screen(self):
+        result = False
+        sleep(1)
+        result = self.poco("com.android.systemui:id/clock_view").exists()
         return result
 
     def light_up_screen(self):

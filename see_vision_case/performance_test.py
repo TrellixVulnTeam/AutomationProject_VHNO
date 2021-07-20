@@ -16,6 +16,7 @@ from page_windows.ev_recorder.ev_recorder_page import Ev_Recorder_Page
 from page_windows.ffmpeg.ffmpeg_page import Ffmpeg_Page
 from page_windows.potplayer.potplayer_page import PotPlayer_Page
 from see_vision_case.performance_test_case import case_chooser
+from toolsbar import email_tools
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
 
@@ -81,8 +82,9 @@ def performance_test_area(device_, case_number):
     system = System(main_page)
     system.unlock_screen()
     system.kill_all_apps()
+
     # 根据case编号来执行case
-    # sleep(2)
+    sleep(2)
     return case_chooser(case_number, main_page)
 
 
@@ -90,23 +92,21 @@ def test_prepare(test_device):
     print("当前设备数量：" + str(len(SERIAL_NUMBER)))
     if len(SERIAL_NUMBER) > 1:
         for i in test_device:
-            pass
             install_app_necessary(i)
             grant_permission(i)
             push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", i)
     else:
-        pass
         install_app_necessary(test_device)
         grant_permission(test_device)
         push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", test_device)
 
 
-def performance_test_work_flow():
+def performance_test_work_flow(i=0, j=0, case_count=28, case_running_times=10):
     """
-    整体运行流程:看稳定性和case执行起来效果,移除pytest，自己搭建框架，独立开来，不然后续不利于拓展测试项
-    最后再加上log进去
-    case编写需要一定时间比较多
-    因为自动化操作和手动有些许不同，注意标注好每条case怎么判断计时的开始与结束！！！
+        整体运行流程:看稳定性和case执行起来效果,移除pytest，自己搭建框架，独立开来，不然后续不利于拓展测试项
+        最后再加上log进去
+        case编写需要一定时间比较多
+        因为自动化操作和手动有些许不同，注意标注好每条case怎么判断计时的开始与结束！！！
     """
     test_prepare(test_device=test_device)
     ev_recorder_page = Ev_Recorder_Page()
@@ -121,37 +121,72 @@ def performance_test_work_flow():
     clock_handle = clock.start_clock()
     sleep(2)
     ev_handle = ev_recorder_page.start_ev_recorder()
-    # 大循环控制case number
-    # 小循环控制每条case执行次数
-    for i in range(28):
-        for j in range(10):
-            print("case{}_第{}次_Test".format(i + 1, j + 1))
-            # 手动改ev recorder路径，和后续ffmpeg一致
-            ev_recorder_page.start_and_pause_record()
-            sleep(2)
-            clock.get_focus(clock_handle)
-            clock.reset_and_begin()
-
-            # operate in Android device
-            """
-                Android Device operate area
-                传入case编号，执行相应case
-            """
-            case_number = i + 1
-            print("当前case{}_第{}次测试结果为：{}".format(case_number, j + 1, start_test(case_number).get()))
-            sleep(2)
-
-            ev_recorder_page.stop_and_reserve_record()
-            sleep(2)
-            ev_recorder_page.change_record_video_name(i + 1, j + 1)
-            sleep(2)
-            ffmpeg_page.cut_video_into_pieces_frame_picture(i + 1, j + 1)
-            sleep(2)
+    case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=i, j=j, case_count=case_count,
+                       case_running_times=case_running_times)
     potplayer_page.stop_potplayer(potplayer_handle)
     clock.stop_clock(clock_handle)
+
+
+def rerun_case_construct(ev_recorder_page, clock, clock_handle, ffmpeg_page, case_count, case_running_times, i, j):
+    # 重跑机制：适用于当case报错exception后，进行判断如果当前case执行失败则单独将该case进行重跑，不影响测试结果保存
+    rerun_case_number = 0
+    if i < case_count:
+        rerun_case_number = i
+        case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, case_count=case_count,
+                           case_running_times=case_running_times, i=rerun_case_number, j=j)
+
+
+case_rerun_times_limit = 0
+
+
+def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, j=0, case_count=28,
+                       case_running_times=10):
+    # 大循环控制case number
+    # 小循环控制每条case执行次数
+    current_case_number = 0
+    current_case_running_times = 0
+    try:
+        for i in range(i, case_count):
+            current_case_number = i
+            for j in range(case_running_times):
+                current_case_running_times = j
+                print("case{}_第{}次_Test".format(i + 1, j + 1))
+                # 手动改ev recorder路径，和后续ffmpeg一致
+                ev_recorder_page.start_and_pause_record()
+                sleep(2)
+                clock.get_focus(clock_handle)
+                clock.reset_and_begin()
+
+                # operate in Android device
+                """
+                    Android Device operate area
+                    传入case编号，执行相应case
+                """
+                case_number = i + 1
+                print("当前case{}_第{}次测试结果为：{}".format(case_number, j + 1, start_test(case_number).get()))
+                sleep(2)
+
+                ev_recorder_page.stop_and_reserve_record()
+                sleep(2)
+                ev_recorder_page.change_record_video_name(i + 1, j + 1)
+                sleep(2)
+                ffmpeg_page.cut_video_into_pieces_frame_picture(i + 1, j + 1)
+                sleep(2)
+    except Exception as ex:
+        # 如果开始重跑就发送邮件给792607724@qq.com，说明那一条发生错误，并继续尝试重跑
+        feed_back = "Current time happened exception, please check current case code's logic is ok? case number:{}, and case running time is:{},and exception is {}".format(
+            current_case_number, current_case_running_times, str(ex))
+        email_tools.send_mail(message_content=feed_back, subject_content="测试错误邮件反馈")
+        print(feed_back)
+        if case_rerun_times_limit < 3:
+            if current_case_running_times < case_running_times:
+                case_running_times += 1
+                rerun_case_construct(ev_recorder_page, clock, clock_handle, ffmpeg_page, case_count=case_count,
+                                     case_running_times=case_running_times, i=current_case_number,
+                                     j=current_case_running_times)
 
 
 if __name__ == '__main__':
     # performance_test_work_flow()
     for i in range(1):
-        print("当前case{}_第{}次测试结果为：{}".format(21, i + 1, start_test(21).get()))
+        print("当前case{}_第{}次测试结果为：{}".format(6, i + 1, start_test(6).get()))

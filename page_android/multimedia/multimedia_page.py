@@ -64,5 +64,12 @@ class Multimedia_Page(System):
         system = System(self)
         dest_video = system.scroll_to_find_element(element_text="百战成诗")
         dest_video.click()
+        if self.poco(text="打开方式").wait().exists():
+            self.poco(text="打开方式").click()
+            sleep(1)
+            if self.poco(text="相册").wait().exists():
+                self.poco(text="相册").click()
+                if self.poco(text="始终").wait().exists():
+                    self.poco(text="始终").click()
         if self.poco(text="START OVER").wait().exists():
             self.poco(text="START OVER").click()

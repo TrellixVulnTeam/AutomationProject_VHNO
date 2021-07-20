@@ -69,7 +69,7 @@ def case3_unlock_speed(main_page):
 def case4_wake_speed(main_page):
     main_page.device.wake()
     system = System(main_page)
-    result = system.light_up_screen()
+    result = system.check_on_home_screen()
     logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
     return result
 
@@ -96,7 +96,7 @@ def case6_expand_folder_speed(main_page):
     launcher_page = Launcher_Page(main_page)
     launcher_page.drag_2app_to_create_folder(app1_text="设置", app2_text="相机")
     main_page.poco.start_gesture([0.5, 0.5]).hold(0).to([0.5, 0.5]).up()
-    sleep(2)
+    sleep(3)
     result = main_page.poco(text="设置").exists()
     logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
     return result

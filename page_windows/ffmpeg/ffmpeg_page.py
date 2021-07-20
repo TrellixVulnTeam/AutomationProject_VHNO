@@ -37,7 +37,7 @@ class Ffmpeg_Page:
         video_path = "{}case{}_testVideo_{}.mp4".format(self.case_saved_folder, case_number, case_count)
         picture_path = "{}case{}_and_{}_times_frame_picture".format(self.case_picture_saved_folder,
                                                                     case_number, case_count)
-        command = "ffmpeg -i {} -q:v 1 -f image2 {}\\xxx_%05d.jpg".format(video_path, picture_path)
+        command = "ffmpeg -i {} -q:v 1 -f image2 {}\\测试图片_%05d.jpg".format(video_path, picture_path)
         # 如无文件夹就创建，有就删除再创建
         if create_folder(picture_path):
             cut_result = \

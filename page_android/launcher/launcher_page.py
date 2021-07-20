@@ -24,6 +24,7 @@ class Launcher_Page(System):
 
     def search_app_in_main_menu(self, app_text=""):
         sleep(1)
+        # app = self.scroll_to_find_element(element_text=app_text)
         app = self.poco(text=app_text).wait()
         # print(app.attr("pos"))
         # apps_location = (app.attr("pos")[0] * self.screen_width, app.attr("pos")[1] * self.screen_height)
@@ -43,7 +44,7 @@ class Launcher_Page(System):
 
     def drag_app_to_current_screen(self, elements):
         elements.start_gesture().hold(1).to([0.5, 0.5]).up()
-        sleep(1)
+        sleep(3)
 
     def drag_2app_to_create_folder(self, app1_text, app2_text):
         self.wake_up_main_menu()
