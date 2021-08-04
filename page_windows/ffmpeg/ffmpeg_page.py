@@ -33,6 +33,10 @@ class Ffmpeg_Page:
         # self.case_picture_saved_folder = "D:\\For_Work\\PandaOs性能测试_study\\test_result_temp\\"
         self.case_picture_saved_folder = case_picture_saved_folder
 
+    """
+        @description:该函数用于通过ffmpeg命令将视频进行切帧，并保存图片至指定路径
+    """
+
     def cut_video_into_pieces_frame_picture(self, case_number, case_count):
         video_path = "{}case{}_testVideo_{}.mp4".format(self.case_saved_folder, case_number, case_count)
         picture_path = "{}case{}_and_{}_times_frame_picture".format(self.case_picture_saved_folder,

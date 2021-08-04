@@ -23,6 +23,10 @@ class Wangzherongyao_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于从主菜单中启动王者荣耀app
+    """
+
     def boot_wangzherongyao_from_main_menu(self):
         launcher_page = Launcher_Page(self)
         launcher_page.wake_up_main_menu()
@@ -30,6 +34,10 @@ class Wangzherongyao_Page(System):
         sleep(1)
         wangzherongyao.click()
         sleep(1)
+
+    """
+        @description:该函数用于检测当前界面是否在王者荣耀界面
+    """
 
     def check_on_wangzherongyao(self):
         result = False

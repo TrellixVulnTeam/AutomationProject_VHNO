@@ -57,6 +57,14 @@ def install_app_necessary(device=""):
         print(install_result)
 
 
+"""
+    @description:将文件adb push到设备存储中
+    @param:
+        file_path：需要push进设备的文件路径
+        device：设备对象
+"""
+
+
 def push_file_into_device(file_path=r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", device=""):
     print("正在移动测试资源到机器，请稍候")
     push_result = subprocess.Popen("adb -s {} push {} /sdcard/".format(device.serialno, file_path), shell=True,

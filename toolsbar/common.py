@@ -91,6 +91,12 @@ if not os.path.exists("./log"):
 logger = logger_config(log_path="./log/{}_{}.log".format("OK", "性能测试"),
                        logging_name="性能测试")
 
+"""
+    @description:用于创建文件夹的公共函数
+    @param:
+        folder_name:文件夹名称
+"""
+
 
 def create_folder(folder_name):
     result = False

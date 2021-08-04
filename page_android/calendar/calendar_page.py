@@ -23,6 +23,10 @@ class Calendar_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于从主菜单中启动日历
+    """
+
     def boot_calendar_from_main_menu(self):
         launcher_page = Launcher_Page(self)
         launcher_page.wake_up_main_menu()
@@ -30,6 +34,10 @@ class Calendar_Page(System):
         sleep(1)
         calendar.click()
         sleep(1)
+
+    """
+        @description:该函数用于检测当前界面是否在日历
+    """
 
     def check_on_calendar(self):
         result = False

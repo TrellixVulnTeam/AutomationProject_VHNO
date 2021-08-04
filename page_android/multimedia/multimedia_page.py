@@ -23,6 +23,10 @@ class Multimedia_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于从主菜单启动音乐app
+    """
+
     def boot_music_from_main_menu(self):
         launcher_page = Launcher_Page(self)
         launcher_page.wake_up_main_menu()
@@ -31,12 +35,20 @@ class Multimedia_Page(System):
         music.click()
         sleep(1)
 
+    """
+        @description:该函数用于检测当前是否在音乐界面
+    """
+
     def check_on_music(self):
         result = False
         sleep(1)
         if "com.android.music.MusicBrowserActivity" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result
+
+    """
+        @description:该函数用于从主菜单中启动视频app
+    """
 
     def boot_video_from_main_menu(self):
         launcher_page = Launcher_Page(self)
@@ -46,6 +58,10 @@ class Multimedia_Page(System):
         video.click()
         sleep(1)
 
+    """
+        @description:该函数用于检测当前是否在视频app界面
+    """
+
     def check_on_video(self):
         result = False
         sleep(1)
@@ -53,12 +69,20 @@ class Multimedia_Page(System):
             result = True
         return result
 
+    """
+        @description:该函数用于检测当前视频app是否正在播放视频
+    """
+
     def check_on_video_playing(self):
         result = False
         sleep(1)
         if "com.yd.gallery.videoplayer.MovieActivity" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result
+
+    """
+        @description:该函数用于从视频app中播放该100MB的视频 - “百战成诗”
+    """
 
     def play_100m_video(self):
         system = System(self)

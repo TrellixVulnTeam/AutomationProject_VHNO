@@ -7,6 +7,7 @@ import pyautogui
 from page_windows import main_page
 
 os.path.abspath(".")
+pyautogui.FAILSAFE = False
 
 
 class Ev_Recorder_Page:
@@ -17,25 +18,49 @@ class Ev_Recorder_Page:
         self.start_pause_record = ("ctrl", "f1")
         self.stop_reserve_record = ("ctrl", "f2")
 
+    """
+        @description:该函数用于通过win32api启动录屏程序
+    """
+
     def start_ev_recorder(self):
         main_page.open_program(path=r"D:\EVCapture\EVCapture.exe")
         sleep(2)
         self.handle = main_page.find_handle(self.title)
         return self.handle
 
+    """
+        @description:该函数用于通过win32api关闭录屏程序
+    """
+
     def stop_ev_recorder(self, handle):
         # 先手动设置关闭时，退出程序
         main_page.stop_program(handle)
+
+    """
+        @description:该函数用于通过win32api获取当前录屏的焦点
+    """
 
     def get_focus(self, handle):
         # main_page.put_window_focus(self.handle)
         main_page.put_window_focus(handle)
 
+    """
+        @description:该函数用于通过快捷键组合执行开启和暂停录屏
+    """
+
     def start_and_pause_record(self):
         pyautogui.hotkey(self.start_pause_record[0], self.start_pause_record[1])
 
+    """
+        @description:该函数用于通过快捷键组合执行停止和保存录屏
+    """
+
     def stop_and_reserve_record(self):
         pyautogui.hotkey(self.stop_reserve_record[0], self.stop_reserve_record[1])
+
+    """
+        @description:该函数用于通过case号和case执行次数对录制的视频进行重命名并保存
+    """
 
     # 录制完成后将视频名称直接输入然后enter,测试时务必切换到英文输入法
     def change_record_video_name(self, case_number, case_count):

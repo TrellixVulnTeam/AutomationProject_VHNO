@@ -16,6 +16,13 @@ mail_pass = "kvujhbtkwjkgbcda"  # 口令
 sender = "792607724@qq.com"
 receivers = ["792607724@qq.com"]
 
+"""
+    @description:邮件发送
+    @param:
+        message_content：邮件内容
+        subject_content：邮件主题
+"""
+
 
 def send_mail(message_content, subject_content):
     message = MIMEText(message_content, "plain", "utf-8")

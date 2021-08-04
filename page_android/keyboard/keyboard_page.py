@@ -23,11 +23,19 @@ class Keyboard_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于在设置app中唤起输入法
+    """
+
     def wake_up_keyboard_inSettings(self):
         settings_page = Settings_Page(self)
         settings_page.boot_settings_from_main_menu()
         self.poco(text="搜索").wait().click()
         sleep(1)
+
+    """
+        @description:该函数用于检测当前在设置菜单中是否成功唤醒输入法
+    """
 
     def check_keyboard_inSettings(self):
         result = False
@@ -35,6 +43,10 @@ class Keyboard_Page(System):
         if "com.panda.settings.search.SearchActivity" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result
+
+    """
+        @description:该函数用于在设置菜单中搜索特定内容
+    """
 
     # english keyboard - android original keyboard
     def search_inSettings_by_keyboard(self, input_content="Work"):
@@ -44,9 +56,17 @@ class Keyboard_Page(System):
         self.keyboard_singleword_input(input_content)
         sleep(1)
 
+    """
+        @description:该函数用于控制keyevent的输入法输入
+    """
+
     def keyboard_singleword_input(self, input_content="work"):
         for single_word in input_content:
             self.device.keyevent(keycode_chooser(single_word.upper()))
+
+    """
+        @description:该函数用于获取当前设置菜单中搜索框中的内容
+    """
 
     def get_content_frome_search_box(self, search_content="w"):
         sleep(1)
@@ -61,6 +81,10 @@ keycode_switch = {"0": "KEYCODE_0", "1": "KEYCODE_1", "2": "KEYCODE_2", "3": "KE
                   "P": "KEYCODE_P", "Q": "KEYCODE_Q", "R": "KEYCODE_R", "S": "KEYCODE_S", "T": "KEYCODE_T",
                   "U": "KEYCODE_U", "V": "KEYCODE_V", "W": "KEYCODE_W", "X": "KEYCODE_X", "Y": "KEYCODE_Y",
                   "Z": "KEYCODE_Z"}
+
+"""
+    @description:该函数用于将输入的0-9&A-Z映射到Keyevent中
+"""
 
 
 def keycode_chooser(keycode_number):

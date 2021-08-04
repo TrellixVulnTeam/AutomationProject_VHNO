@@ -23,6 +23,10 @@ class Settings_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于从主菜单中启动设置app
+    """
+
     def boot_settings_from_main_menu(self):
         launcher_page = Launcher_Page(self)
         launcher_page.wake_up_main_menu()
@@ -31,6 +35,10 @@ class Settings_Page(System):
         settings.click()
         sleep(1)
 
+    """
+        @description:该函数用于检测当前是否在设置菜单
+    """
+
     def check_on_settings(self):
         result = False
         sleep(1)
@@ -38,8 +46,16 @@ class Settings_Page(System):
             result = True
         return result
 
+    """
+        @description:该函数用于直接通过adb指令打开wifi
+    """
+
     def open_wifi(self):
         self.device.shell("svc wifi enable")
+
+    """
+        @description:该函数用于进入设置菜单并打开Wifi菜单
+    """
 
     def enter_wifi_settings(self):
         self.open_wifi()

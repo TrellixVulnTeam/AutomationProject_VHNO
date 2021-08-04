@@ -23,6 +23,10 @@ class Wechat_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于从主菜单中启动微信
+    """
+
     def boot_wechat_from_main_menu(self):
         launcher_page = Launcher_Page(self)
         launcher_page.wake_up_main_menu()
@@ -30,6 +34,10 @@ class Wechat_Page(System):
         sleep(1)
         wechat.click()
         sleep(1)
+
+    """
+            @description:该函数用于检测当前是否在微信界面
+    """
 
     def check_on_wechat(self):
         result = False

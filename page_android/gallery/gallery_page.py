@@ -23,6 +23,10 @@ class Gallery_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于从主菜单中启动图库
+    """
+
     def boot_gallery_from_main_menu(self):
         launcher_page = Launcher_Page(self)
         launcher_page.wake_up_main_menu()
@@ -31,6 +35,10 @@ class Gallery_Page(System):
         gallery.click()
         sleep(1)
 
+    """
+        @description:该函数用于检查当前是否在图库界面
+    """
+
     def check_on_gallery(self):
         result = False
         sleep(1)
@@ -38,10 +46,18 @@ class Gallery_Page(System):
             result = True
         return result
 
+    """
+        @description:该函数用于从图库中打开第一张图片
+    """
+
     def click_first_img(self):
         sleep(3)
         self.poco("com.android.gallery:id/id_recycle_view").children()[0].children()[2].children()[0].click()
         sleep(1)
+
+    """
+        @description:该函数用于从检测图片的发送按钮是否存在
+    """
 
     def check_on_img_interface(self):
         return self.poco(text="发送").wait().exists()

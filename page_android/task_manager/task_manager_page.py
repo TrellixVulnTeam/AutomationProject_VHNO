@@ -22,9 +22,17 @@ class Task_Manager_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于从主菜单下方上滑来启动人物管理器
+    """
+
     def boot_task_manager_from_main_menu(self):
         self.poco.start_gesture([0.5, 0.99]).hold(0).to([0.5, 0.88]).hold(1).up()
         sleep(1)
+
+    """
+        @description:该函数用于检测当前是否在任务管理器界面
+    """
 
     def check_on_task_manager(self):
         result = False

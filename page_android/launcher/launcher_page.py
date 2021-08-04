@@ -22,6 +22,10 @@ class Launcher_Page(System):
     def __init__(self, main_page):
         System.__init__(self, main_page)
 
+    """
+        @description:该函数用于在主菜单中通过app text获取某个APP
+    """
+
     def search_app_in_main_menu(self, app_text=""):
         sleep(1)
         # app = self.scroll_to_find_element(element_text=app_text)
@@ -34,17 +38,33 @@ class Launcher_Page(System):
         # app.drag_to((0.8, 0.5), duration=3)
         return app
 
+    """
+        @description:该函数用于从主菜单中拖动对应app并生成第二屏
+    """
+
     def drag_app_to_new_screen(self, elements):
         elements.start_gesture().hold(1).to([0.9, 0.5]).up()
         sleep(1)
+
+    """
+        @description:该函数用于滑动屏幕到新屏幕
+    """
 
     def slide_to_new_screen(self):
         self.poco.start_gesture([0.9, 0.5]).hold(0).to([0.5, 0.5]).up()
         sleep(1)
 
+    """
+        @description:该函数用于从主菜单中拖动对应app到当前屏幕上
+    """
+
     def drag_app_to_current_screen(self, elements):
         elements.start_gesture().hold(1).to([0.5, 0.5]).up()
         sleep(3)
+
+    """
+        @description:该函数用于拖动两个app在一起生成桌面文件夹
+    """
 
     def drag_2app_to_create_folder(self, app1_text, app2_text):
         self.wake_up_main_menu()

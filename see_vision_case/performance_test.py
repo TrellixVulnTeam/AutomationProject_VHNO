@@ -65,6 +65,7 @@ def start_test(case_number):
     @description:性能测试函数执行区域
     @param:
         device_:设备序列号
+        case_number:测试用例的号码（数量）
 """
 
 
@@ -88,6 +89,13 @@ def performance_test_area(device_, case_number):
     return case_chooser(case_number, main_page)
 
 
+"""
+    @description:测试前准备函数
+    @param:
+        test_device:设备序列号
+"""
+
+
 def test_prepare(test_device):
     print("当前设备数量：" + str(len(SERIAL_NUMBER)))
     if len(SERIAL_NUMBER) > 1:
@@ -95,10 +103,22 @@ def test_prepare(test_device):
             install_app_necessary(i)
             grant_permission(i)
             push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", i)
+            # pass
     else:
         install_app_necessary(test_device)
         grant_permission(test_device)
         push_file_into_device(r"D:\For_Work\PandaOs性能测试_study\test_resource\push_into_device", test_device)
+        # pass
+
+
+"""
+    @description:性能测试执行工作流
+    @param:
+        i:用于case后续报错重跑的的数量（number）
+        j:用于case后续报错重跑执行次数
+        case_count:case数量（number）
+        case_running_times:case执行次数
+"""
 
 
 def performance_test_work_flow(i=0, j=0, case_count=28, case_running_times=10):
@@ -127,6 +147,20 @@ def performance_test_work_flow(i=0, j=0, case_count=28, case_running_times=10):
     clock.stop_clock(clock_handle)
 
 
+"""
+    @description:case重跑机制
+    @param:
+        i:用于case后续报错重跑的的数量（number）
+        j:用于case后续报错重跑执行次数
+        case_count:case数量（number）
+        case_running_times:case执行次数
+        ev_recorder_page:传入EV录屏的对象
+        clock:传入clock对象
+        clock_handle:传入clock的handle
+        ffmpeg_page:传入FFmpeg的对象
+"""
+
+
 def rerun_case_construct(ev_recorder_page, clock, clock_handle, ffmpeg_page, case_count, case_running_times, i, j):
     # 重跑机制：适用于当case报错exception后，进行判断如果当前case执行失败则单独将该case进行重跑，不影响测试结果保存
     rerun_case_number = 0
@@ -136,7 +170,21 @@ def rerun_case_construct(ev_recorder_page, clock, clock_handle, ffmpeg_page, cas
                            case_running_times=case_running_times, i=rerun_case_number, j=j)
 
 
+# Case重跑次数限制
 case_rerun_times_limit = 0
+
+"""
+    @description:case重跑机制
+    @param:
+        i:用于case后续报错重跑的的数量（number）
+        j:用于case后续报错重跑执行次数
+        case_count:case数量（number）
+        case_running_times:case执行次数
+        ev_recorder_page:传入EV录屏的对象
+        clock:传入clock对象
+        clock_handle:传入clock的handle
+        ffmpeg_page:传入FFmpeg的对象
+"""
 
 
 def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, j=0, case_count=28,
@@ -149,6 +197,8 @@ def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, 
         for i in range(i, case_count):
             current_case_number = i
             for j in range(case_running_times):
+                if j > 10:
+                    break
                 current_case_running_times = j
                 print("case{}_第{}次_Test".format(i + 1, j + 1))
                 # 手动改ev recorder路径，和后续ffmpeg一致
@@ -189,4 +239,4 @@ def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, 
 if __name__ == '__main__':
     # performance_test_work_flow()
     for i in range(1):
-        print("当前case{}_第{}次测试结果为：{}".format(6, i + 1, start_test(6).get()))
+        print("当前case{}_第{}次测试结果为：{}".format(6, i + 1, start_test(1).get()))

@@ -134,6 +134,10 @@ class System:
         else:
             return self.poco(text=element_text).wait().offspring(checked=True)
 
+    """
+        @description:该函数用于通过adb命令筛选并kill掉其他的所有app进程等
+    """
+
     def kill_all_apps(self):
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":关闭后台所有app:")
         sleep(1)
@@ -160,6 +164,10 @@ class System:
                 continue
         print("Poco service & Yosemite no need to killed, others were killed!!!")
 
+    """
+        @description:该函数用于使用adb指令直接reboot设备并判断是否重启成功
+    """
+
     def reboot_device_and_wait(self):
         device_serialno = self.device.serialno
         self.device.shell("reboot")
@@ -185,6 +193,10 @@ class System:
                 print("Device boot status:{}".format(device_reboot_result))
         return device_reboot_result
 
+    """
+        @description:该函数用于使用keyevent进行设备灭屏
+    """
+
     def rest_screen(self):
         result = False
         sleep(3)
@@ -199,15 +211,27 @@ class System:
             result = True
         return result
 
+    """
+        @description:该函数用于使用keyevent进行锁屏
+    """
+
     def lock_screen(self):
         sleep(1)
         if self.device.is_screenon():
             self.device.keyevent("POWER")
 
+    """
+        @description:该函数用于解锁屏幕
+    """
+
     def unlock_screen(self):
         sleep(1)
         self.device.wake()
         self.device.unlock()
+
+    """
+        @description:该函数用于通过滑动方式进行解锁设备
+    """
 
     def unlock_screen_by_slide(self):
         result = False
@@ -221,6 +245,10 @@ class System:
         result = self.check_on_home_screen()
         return result
 
+    """
+        @description:该函数用于检测当前是否在home主界面
+    """
+
     def check_on_home_screen(self):
         result = False
         sleep(3)
@@ -228,11 +256,19 @@ class System:
             result = True
         return result
 
+    """
+        @description:该函数用于检测当前是否在锁屏界面
+    """
+
     def check_on_lock_screen(self):
         result = False
         sleep(1)
         result = self.poco("com.android.systemui:id/clock_view").exists()
         return result
+
+    """
+        @description:该函数用于通过keyevent点亮屏幕
+    """
 
     def light_up_screen(self):
         self.lock_screen()
@@ -242,9 +278,17 @@ class System:
         result = self.check_on_home_screen()
         return result
 
+    """
+        @description:该函数用于通过nova launcher的indicator指示器来唤起主菜单
+    """
+
     def wake_up_main_menu(self):
         self.device.unlock()
         self.poco("com.teslacoilsw.launcher:id/bottomsheet_expand_indicator").wait().click()
+
+    """
+        @description:该函数用于通过上滑手势回到Launcher界面
+    """
 
     def slide_back_to_launcher(self):
         self.poco.start_gesture([0.5, 0.99]).hold(2).to([0.5, 0.5]).up()
