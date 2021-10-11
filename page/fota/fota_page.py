@@ -143,8 +143,8 @@ class Fota_Page(System):
         return update_result
 
     def wait_update_finished_device_online(self, serialno_):
-        current_device_serialno = serialno_
-        # 等待升级完成与设备上线
+        current_device_serialwno = serialno_
+        # 等待升级完成与设备上线s
         device_update_online = False
         times = 0
         self.logger.info("function:" + sys._getframe().f_code.co_name + ":等待升级完成与设备上线:")

@@ -45,6 +45,7 @@ saved_data = []
 @allure.feature("Fota前置差异化设置")
 class TestBeforeFota:
 
+
     # case 1:
     @allure.description("APK版本差异化")
     @allure.step("获取当前应用的版本号->保存当前版本号")
