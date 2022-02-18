@@ -1,6 +1,6 @@
 import os
 
-from see_vision_case.performance_test import performance_test_work_flow, system_test_work_flow
+from see_vision_case.performance_test import system_test_work_flow
 
 os.path.abspath(".")
 
