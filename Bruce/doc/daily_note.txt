@@ -1,0 +1,17 @@
+Poco获取元素赋值保存时与多进程之间出现问题，下一个进程调用时出现connect refuse
+修改代码结构以解决，原因是由于Poco对象在main page中重复调用，存在冲突导致后续进程被refuse
+--4h
+
+Google Message应用程序联网后会进行版本不变Ui更新，后续自动化测试中需要关注3rd软件Ui的变化
+尽量选则直接路径获得元素，避免路径过深，Ui变化导致问题点层出
+--1h
+
+创建calendar、contacts、deskclock、dialer、messaging、system、main_page体系
+-- 2h
+
+将两台测试机恢复出厂设置调试一次跑通，代码稳定性加强
+-- 1h
+
+
+
+

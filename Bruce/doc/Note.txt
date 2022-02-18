@@ -1,0 +1,53 @@
+Pycharm使用的是Venv虚拟环境，即其Python包是独立的，便于将项目集成到其它地方
+因此会出现报错
+首先对于pip3的报错使用该命令解决：sudo easy_install pip
+如果出现通过pip3安装模块后，py运行还是失败的，使用pycharm的interpreter里面搜索对应模块再安装即可
+设置Keymap：
+command + 3：打开关闭terminal
+其它as vs code
+这边已经设置后续新建项目都会集成该项目的venv环境，方便后续无需重复配置
+
+# 兼容Android 11,当出现still waiting for uiautomation ready.
+对于Android如Austin，airtestIDLE的Poco UI tree无法正常获取，
+这时，我们使用uiautomatorviewer/python3 -m weditor来获取ui tree
+
+# 本项目已修改源码：
+路径：/Users/cgt/Library/Python/3.7/lib/python/site-packages/poco/drivers/android/uiautomation.py"
+print("still waiting for uiautomation ready.")
+# -- Guangtao
+self.adb_client.shell('am start -n {}/.TestActivity'.format(PocoServicePackage))
+
+# 兼容使用相对路径存在同目录下文件找不到问题：
+修改Edit configurations -> 将Working directory改成当前项目目录即可
+
+#airtest操作API
+以下func大部分可单独运行：
+1.单独调用 - 当前Device
+2.指定device调用 - 控制不同设备（主要API选择）
+以下是Airtest的API的用法，它提供了一些方法的封装，同时还对接了图像识别等技术，但Airtest也有局限性，不能根据DOM树
+来选则对应但节点，依靠图像识别也有一定不精确之处，所以还需要另一个库Poco
+
+遇到Python找不到，IntFlag时，unset PYTHONPATH
+
+"ImportError: sys.meta_path is None, Python is likely shutting down"
+这个报错是能忽略的，是因为poco报错后就退出了，主线程回收垃圾，剩下的子线程抛了这个错，是可以忽略的。
+
+有些输入密码等界面因为Android安全机制保护，需要特别注意看是否能够获取到元素控件
+
+# 修改源文件：
+1.规避sys.meta_path is None, Python is likely shutting down问题导致的报错
+/Users/cgt/PycharmProjects/AutomationProject/venv/lib/python3.7/site-packages/hrpc/object_proxy.py
+# Guangtao
+try:
+    self._client__.evaluate(RpcObjectProxy(self._uri__, self._client__, action), wait_for_response=False)
+except Exception as ex:
+    print(ex)
+
+使用adb shell svc控制一些开关、wifi等
+settings put和get有局限
+
+注意流的开启和关闭对资源的消耗
+
+
+
+
