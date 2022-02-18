@@ -182,20 +182,6 @@ def system_test_work_flow(case_count):
         start_test(i + 1).get()
 
 
-"""
-    @description:case重跑机制
-    @param:
-        i:用于case后续报错重跑的的数量（number）
-        j:用于case后续报错重跑执行次数
-        case_count:case数量（number）
-        case_running_times:case执行次数
-        ev_recorder_page:传入EV录屏的对象
-        clock:传入clock对象
-        clock_handle:传入clock的handle
-        ffmpeg_page:传入FFmpeg的对象
-"""
-
-
 def rerun_case_construct(ev_recorder_page, clock, clock_handle, ffmpeg_page, case_count, case_running_times, i, j):
     # 重跑机制：适用于当case报错exception后，进行判断如果当前case执行失败则单独将该case进行重跑，不影响测试结果保存
     rerun_case_number = 0
