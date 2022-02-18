@@ -16,10 +16,12 @@ from page_windows.ev_recorder.ev_recorder_page import Ev_Recorder_Page
 from page_windows.ffmpeg.ffmpeg_page import Ffmpeg_Page
 from page_windows.potplayer.potplayer_page import PotPlayer_Page
 from see_vision_case.calendar_test_case import calendar_case_chooser
+from see_vision_case.clock_test_case import clock_case_chooser
 from see_vision_case.performance_test_case import case_chooser
 from toolsbar import email_tools
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
+from toolsbar.save2txt import toTxt
 
 os.path.abspath(".")
 # 过滤airtest log只打印ERROR的Log
@@ -101,16 +103,16 @@ def system_test_area(device_, case_number):
     device_.unlock()
     poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
                                    screenshot_each_action=False)
-    grant_permission(device_)
+    # grant_permission(device_)
     main_page = Main_Page(device_, poco)
     system = System(main_page)
     system.unlock_screen()
-    system.kill_all_apps()
+    # system.kill_all_apps()
 
     # 根据case编号来执行case
     sleep(2)
-    return calendar_case_chooser(case_number, main_page)
-    # return clock_case_chooser(case_number, main_page)
+    # return calendar_case_chooser(case_number, main_page)
+    return clock_case_chooser(case_number, main_page)
 
 
 """
@@ -179,7 +181,10 @@ def performance_test_work_flow(i=0, j=0, case_count=28, case_running_times=10):
 def system_test_work_flow(case_count):
     i = 0
     for i in range(i, case_count):
-        start_test(i + 1).get()
+        result = start_test(i + 1).get()
+        print(result)
+        # 写入Result.txt
+        toTxt(result)
 
 
 def rerun_case_construct(ev_recorder_page, clock, clock_handle, ffmpeg_page, case_count, case_running_times, i, j):

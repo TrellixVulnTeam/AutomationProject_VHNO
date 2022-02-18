@@ -1,8 +1,9 @@
 # coding = utf8
 import os
 import sys
+from time import sleep
 
-from page_android.system.system import System
+from page_android.clock.clock_page import Clock_Page
 
 os.path.abspath(".")
 """
@@ -28,23 +29,95 @@ def logit(func):
     return with_logging
 
 
+"""
+    case1_create500Clock
+    创建闹钟会间隔1min创建一个闹钟，晚上挂着，第二天来测试会响铃即可
+"""
+
+
 @logit
-def case1_boot_speed(main_page):
+def case1_createGapClock(main_page):
     main_page.device.wake()
-    system = System(main_page)
-    result = system.unlock_screen_by_slide()
-    print("OKOK1")
+    clock_page = Clock_Page(main_page)
+    clock_page.launchClock()
+    result = []
+    # 创建60个闹钟
+    for i in range(60):
+        result.append(clock_page.createClock("case1_createGapClock - 测试创建大量间隔1min时钟{}".format(str(i + 1))))
+        # 每隔1min创建一个闹钟
+        sleep(60)
     logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
+    result.insert(0, sys._getframe().f_code.co_name + "\n")
     return result
 
 
+"""
+    case2_create500Clock
+    创建批量闹钟，挂着即可，创建500个,第二天来查看,自行手动重启,再查看,滑动,再全选删除
+"""
+
+
 @logit
-def case2_test(main_page):
+def case2_create500Clock(main_page):
     main_page.device.wake()
-    system = System(main_page)
-    result = system.unlock_screen_by_slide()
-    print("OKOK2")
+    clock_page = Clock_Page(main_page)
+    clock_page.launchClock()
+    result = []
+    for i in range(500):
+        result.append(clock_page.createClock("case2_create500Clock - 测试批量创建时钟{}".format(str(i + 1))))
     logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
+    result.insert(0, sys._getframe().f_code.co_name + "\n")
+    return result
+
+
+"""
+    case3_createWholeWorldClock
+    会去先获取所有的世界时钟，再逐个添加城市时钟，后续自行测试即可
+"""
+
+
+@logit
+def case3_createWholeWorldClock(main_page):
+    main_page.device.wake()
+    clock_page = Clock_Page(main_page)
+    clock_page.launchClock()
+    result = clock_page.createWorldClock("case3_createWholeWorldClock - 测试创建所有世界时钟")
+    logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
+    result.insert(0, sys._getframe().f_code.co_name + "\n")
+    return result
+
+
+"""
+    case4_timerPauseContinueTest
+    计时器每隔500ms暂停继续压力测试,最终会返回测试次数
+"""
+
+
+@logit
+def case4_timerPauseContinueTest(main_page):
+    main_page.device.wake()
+    clock_page = Clock_Page(main_page)
+    clock_page.launchClock()
+    result = [clock_page.timerTest()]
+    logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
+    result.insert(0, sys._getframe().f_code.co_name + "\n")
+    return result
+
+
+"""
+    case5_stopwatchQuickCount
+    秒表每隔100ms计次按钮压测
+"""
+
+
+@logit
+def case5_stopwatchQuickCount(main_page):
+    main_page.device.wake()
+    clock_page = Clock_Page(main_page)
+    clock_page.launchClock()
+    result = [clock_page.stopwatchQuickCountTest()]
+    logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
+    result.insert(0, sys._getframe().f_code.co_name + "\n")
     return result
 
 
@@ -57,4 +130,5 @@ def clock_case_chooser(case_number, main_page):
     return switch.get(case_number, default)(main_page)
 
 
-switch = {1: case1_boot_speed, 2: case2_test}
+switch = {1: case1_createGapClock, 2: case2_create500Clock, 3: case3_createWholeWorldClock,
+          4: case4_timerPauseContinueTest, 5: case5_stopwatchQuickCount}

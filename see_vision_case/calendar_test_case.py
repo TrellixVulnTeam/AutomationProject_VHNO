@@ -3,7 +3,6 @@ import os
 import sys
 
 from page_android.calendar.calendar_page import Calendar_Page
-from page_android.system.system import System
 
 os.path.abspath(".")
 """
@@ -32,13 +31,13 @@ def logit(func):
 @logit
 def case1_create500Schedule(main_page):
     main_page.device.wake()
-    system = System(main_page)
     calendar_page = Calendar_Page(main_page)
     result = []
-    for i in range(5):
-        calendar_page.launchCalendar()
+    calendar_page.launchCalendar()
+    for i in range(500):
         result.append(calendar_page.createSchedule("测试批量创建日程{}".format(str(i + 1))))
     logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
+    result.insert(0, sys._getframe().f_code.co_name + "\n")
     return result
 
 
