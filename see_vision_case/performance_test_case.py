@@ -23,7 +23,7 @@ os.path.abspath(".")
 from functools import wraps
 from toolsbar.log_control import log_control
 
-logger = log_control.log_single_item()
+logger = log_control.log_single_item(name="性能测试")
 
 
 def logit(func):

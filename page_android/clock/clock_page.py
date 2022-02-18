@@ -45,3 +45,5 @@ class Clock_Page(System):
         if "com.android.deskclock" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result
+
+

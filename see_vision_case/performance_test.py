@@ -15,6 +15,7 @@ from page_windows.clock.clock_page import Clock_Page
 from page_windows.ev_recorder.ev_recorder_page import Ev_Recorder_Page
 from page_windows.ffmpeg.ffmpeg_page import Ffmpeg_Page
 from page_windows.potplayer.potplayer_page import PotPlayer_Page
+from see_vision_case.calendar_test_case import calendar_case_chooser
 from see_vision_case.performance_test_case import case_chooser
 from toolsbar import email_tools
 from toolsbar.common import test_device
@@ -54,7 +55,8 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
 def start_test(case_number):
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
-        result = test_pool.apply_async(func=performance_test_area, args=(device_, case_number,))
+        result = test_pool.apply_async(func=system_test_area, args=(device_, case_number,))
+        # result = test_pool.apply_async(func=performance_test_area, args=(device_, case_number,))
         sleep(10)
     test_pool.close()
     test_pool.join()
@@ -73,10 +75,6 @@ def performance_test_area(device_, case_number):
     device_ = connect_device("Android:///{}".format(device_))
     device_.wake()
     device_.unlock()
-    # 关闭自动调节亮度，并设置屏幕常亮、sleep为never或最大
-    device_.shell("settings put system screen_brightness_mode 0")
-    device_.shell("settings put system screen_brightness 999999")
-    device_.shell("settings put system screen_off_timeout 1")
     poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
                                    screenshot_each_action=False)
     main_page = Main_Page(device_, poco)
@@ -87,6 +85,32 @@ def performance_test_area(device_, case_number):
     # 根据case编号来执行case
     sleep(2)
     return case_chooser(case_number, main_page)
+
+
+"""
+    @description:系统测试函数执行区域
+    @param:
+        device_:设备序列号
+        case_number:测试用例的号码（数量）
+"""
+
+
+def system_test_area(device_, case_number):
+    device_ = connect_device("Android:///{}".format(device_))
+    device_.wake()
+    device_.unlock()
+    poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
+                                   screenshot_each_action=False)
+    grant_permission(device_)
+    main_page = Main_Page(device_, poco)
+    system = System(main_page)
+    system.unlock_screen()
+    system.kill_all_apps()
+
+    # 根据case编号来执行case
+    sleep(2)
+    return calendar_case_chooser(case_number, main_page)
+    # return clock_case_chooser(case_number, main_page)
 
 
 """
@@ -145,6 +169,17 @@ def performance_test_work_flow(i=0, j=0, case_count=28, case_running_times=10):
                        case_running_times=case_running_times)
     potplayer_page.stop_potplayer(potplayer_handle)
     clock.stop_clock(clock_handle)
+
+
+"""
+    系统测试压力测试脚本工作流
+"""
+
+
+def system_test_work_flow(case_count):
+    i = 0
+    for i in range(i, case_count):
+        start_test(i + 1).get()
 
 
 """
@@ -215,7 +250,6 @@ def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, 
                 case_number = i + 1
                 print("当前case{}_第{}次测试结果为：{}".format(case_number, j + 1, start_test(case_number).get()))
                 sleep(2)
-
                 ev_recorder_page.stop_and_reserve_record()
                 sleep(2)
                 ev_recorder_page.change_record_video_name(i + 1, j + 1)
