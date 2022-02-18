@@ -5,12 +5,8 @@ import subprocess
 
 import pytest
 from airtest.core.api import *
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 
 from config import install_app_necessary, SERIAL_NUMBER
-from page.fota.fota_page import Fota_Page
-from page.main_page import Main_Page
-from page.system.system import System
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
 
@@ -27,21 +23,8 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
     @Description:项目运行函数，存放测试和调试函数
 """
 
-"""
-    单个设备poco、device不需要初始化
-    多个设备poco、device都需要创建新对象poco_item
-    后续将poco_item传入使用即可，airtest相关api，使用对应device_item进行调用
-    case不需要重复写
-    UI 进程和底部进程不要在同一个进程中容易出问题
-"""
 
 # 多机测试进程池:兼容单机和多机运行
-"""
-    @description:多进程创建进行多台设备测试
-    @tip:
-        Pycharm调用adb缺陷，需要使用terminal输入charm来启动pycharm，以获得dash权限
-        执行case前，手动将pocoservice.apk的contniue安装好并将授权界面点掉，防止后续错误发生
-"""
 
 
 def start_test():
@@ -78,38 +61,6 @@ def fota_test_area(device_):
               "./report/test_report[{}_{}]/".format(cur_time, device_),
               "--clean"],
         shell=False).communicate()[0]
-    updatesw(device_)
-
-    # subprocess.Popen(
-    #     "allure generate ./temp/need_data[{}_{}] -o ./report/test_report[{}_{}]/ --clean".format(cur_time, device_,
-    #                                                                                              cur_time, device_),
-    #     shell=True).communicate()[0]
-
-
-"""
-    @description:Fota checklist测试软件升级函数执行区域
-    @param:
-        device_:设备序列号
-"""
-
-
-def updatesw(device_):
-    print("开始新版本升级")
-    try:
-        device_c = connect_device("Android:///{}".format(device_))
-        poco = AndroidUiautomationPoco(device=device_c, use_airtest_input=False,
-                                       screenshot_each_action=False)
-        main_page = Main_Page(device_c, poco)
-        system = System(main_page)
-        system.unlock_screen()
-        fota_page = Fota_Page(main_page)
-        fota_page.start_fota_page()
-        fota_page.skip_guide()
-        fota_page.updatesw()
-        print("升级结果：" + str(fota_page.check_update_result(device_)))
-        print("Fota升级测试结束")
-    except Exception as ex:
-        print(str(ex))
 
 
 """
@@ -121,9 +72,6 @@ def fota_checklist_test_module():
     start_test()
 
 
-"""
-    @description:main函数，主要运行函数
-"""
 if __name__ == '__main__':
     print("脚本开始测试，Fota checklist模块测试正在运行中……")
     for i in range(5):
