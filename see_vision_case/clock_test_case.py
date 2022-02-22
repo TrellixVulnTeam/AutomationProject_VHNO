@@ -43,9 +43,11 @@ def case1_createGapClock(main_page):
     result = []
     # 创建60个闹钟
     for i in range(60):
+    # for i in range(2):
         result.append(clock_page.createClock("case1_createGapClock - 测试创建大量间隔1min时钟{}".format(str(i + 1))))
         # 每隔1min创建一个闹钟
         sleep(60)
+        # sleep(1)
     logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
     result.insert(0, sys._getframe().f_code.co_name + "\n")
     return result
@@ -63,10 +65,16 @@ def case2_create500Clock(main_page):
     clock_page = Clock_Page(main_page)
     clock_page.launchClock()
     result = []
-    for i in range(500):
-        result.append(clock_page.createClock("case2_create500Clock - 测试批量创建时钟{}".format(str(i + 1))))
-    logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
-    result.insert(0, sys._getframe().f_code.co_name + "\n")
+    try:
+        for i in range(500):
+        # for i in range(50):
+            result.append(clock_page.createClock("case2_create500Clock - 测试批量创建时钟{}".format(str(i + 1))))
+        logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))
+    except Exception as ex:
+        print("Ignore unreal exception : {}".format(str(ex)))
+        result.append("Ignore unreal exception : {}".format(str(ex)))
+    finally:
+        result.insert(0, sys._getframe().f_code.co_name + "\n")
     return result
 
 

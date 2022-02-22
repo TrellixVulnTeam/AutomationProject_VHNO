@@ -133,6 +133,7 @@ class Clock_Page(System):
             sleep(0.5)
             self.poco.click(position)
             if j >= 300:
+            # if j >= 3:
                 print("循环测试结束，循环次数{}".format(j))
                 self.logger.info("循环测试结束，循环次数{}".format(j))
                 self.poco(text="取消").wait(3).click()

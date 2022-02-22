@@ -3,6 +3,8 @@ import logging
 import multiprocessing
 import os
 import time
+import traceback
+
 from airtest.core.api import connect_device
 from config import SERIAL_NUMBER, install_app_necessary, push_file_into_device
 from page_android.main_page import Main_Page
@@ -114,8 +116,11 @@ def system_test_area(device_, case_number):
         # result = calendar_case_chooser(case_number, main_page)
         result = clock_case_chooser(case_number, main_page)
     except Exception as ex:
-        if os.path.exists("./screenshot"):
-            device_.snapshot("./screenshot/{}[device_error].jpg".format(cur_time))
+        if not os.path.exists("./screenshot"):
+            os.mkdir("./screenshot")
+        device_.snapshot("./screenshot/{}[device_error].jpg".format(cur_time))
+        print(str(traceback.format_exc()) + "\n==========")
+        toTxt("Error: \n{}".format(str(traceback.format_exc())))
         print(
             "Here is exception in the statement , please check the code or test device behavior: \n {}".format(str(ex)))
     return result
