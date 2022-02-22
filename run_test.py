@@ -1,7 +1,6 @@
 import multiprocessing
 import os
 import subprocess
-from time import sleep
 
 from see_vision_case.performance_test import system_test_work_flow
 
@@ -30,7 +29,7 @@ if __name__ == '__main__':
     # system_test_work_flow(calendar_case_number)
 
     test_pool = multiprocessing.Pool(2)
-    test_pool.apply_async(func=logcat_run,)
+    test_pool.apply_async(func=logcat_run, )
     test_pool.apply_async(func=system_test_work_flow(clock_case_number))
     test_pool.close()
     test_pool.join()
