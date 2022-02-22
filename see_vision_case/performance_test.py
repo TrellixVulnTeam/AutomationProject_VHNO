@@ -91,7 +91,7 @@ def performance_test_area(device_, case_number):
     @description:系统测试函数执行区域
     @param:
         device_:设备序列号
-        case_number:测试用例的号码（数量）
+        case_number:测试用例的号  码（数量）
 """
 
 
