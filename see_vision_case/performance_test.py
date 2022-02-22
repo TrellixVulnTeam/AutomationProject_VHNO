@@ -3,11 +3,7 @@ import logging
 import multiprocessing
 import os
 import time
-from time import sleep
-
 from airtest.core.api import connect_device
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
-
 from config import SERIAL_NUMBER, install_app_necessary, push_file_into_device
 from page_android.main_page import Main_Page
 from page_android.system.system import System
@@ -15,9 +11,11 @@ from page_windows.clock.clock_page import Clock_Page
 from page_windows.ev_recorder.ev_recorder_page import Ev_Recorder_Page
 from page_windows.ffmpeg.ffmpeg_page import Ffmpeg_Page
 from page_windows.potplayer.potplayer_page import PotPlayer_Page
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from see_vision_case.calendar_test_case import calendar_case_chooser
 from see_vision_case.clock_test_case import clock_case_chooser
 from see_vision_case.performance_test_case import case_chooser
+from time import sleep
 from toolsbar import email_tools
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
@@ -98,21 +96,29 @@ def performance_test_area(device_, case_number):
 
 
 def system_test_area(device_, case_number):
-    device_ = connect_device("Android:///{}".format(device_))
-    device_.wake()
-    device_.unlock()
-    poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
-                                   screenshot_each_action=False)
-    # grant_permission(device_)
-    main_page = Main_Page(device_, poco)
-    system = System(main_page)
-    system.unlock_screen()
-    # system.kill_all_apps()
+    result = "Error, no result!"
+    try:
+        device_ = connect_device("Android:///{}".format(device_))
+        device_.wake()
+        device_.unlock()
+        poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
+                                       screenshot_each_action=False)
+        grant_permission(device_)
+        main_page = Main_Page(device_, poco)
+        system = System(main_page)
+        system.unlock_screen()
+        system.kill_all_apps()
 
-    # 根据case编号来执行case
-    sleep(2)
-    # return calendar_case_chooser(case_number, main_page)
-    return clock_case_chooser(case_number, main_page)
+        # 根据case编号来执行case
+        sleep(2)
+        # result = calendar_case_chooser(case_number, main_page)
+        result = clock_case_chooser(case_number, main_page)
+    except Exception as ex:
+        if os.path.exists("./screenshot"):
+            device_.snapshot("./screenshot/{}[device_error].jpg".format(cur_time))
+        print(
+            "Here is exception in the statement , please check the code or test device behavior: \n {}".format(str(ex)))
+    return result
 
 
 """
