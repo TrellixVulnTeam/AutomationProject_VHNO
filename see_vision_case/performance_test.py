@@ -15,6 +15,7 @@ from page_windows.ffmpeg.ffmpeg_page import Ffmpeg_Page
 from page_windows.potplayer.potplayer_page import PotPlayer_Page
 from poco.drivers.android.uiautomation import AndroidUiautomationPoco
 from see_vision_case.calendar_test_case import calendar_case_chooser
+from see_vision_case.camera_test_case import camera_case_chooser
 from see_vision_case.clock_test_case import clock_case_chooser
 from see_vision_case.performance_test_case import case_chooser
 from time import sleep
@@ -114,7 +115,8 @@ def system_test_area(device_, case_number):
         # 根据case编号来执行case
         sleep(2)
         # result = calendar_case_chooser(case_number, main_page)
-        result = clock_case_chooser(case_number, main_page)
+        # result = clock_case_chooser(case_number, main_page)
+        result = camera_case_chooser(case_number, main_page)
     except Exception as ex:
         if not os.path.exists("./screenshot"):
             os.mkdir("./screenshot")

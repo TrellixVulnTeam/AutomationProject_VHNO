@@ -252,7 +252,7 @@ class System:
     def check_on_home_screen(self):
         result = False
         sleep(3)
-        if "com.teslacoilsw.launcher" in self.device.shell("dumpsys window | grep mCurrentFocus"):
+        if "com.android.launcher3" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result
 
@@ -292,3 +292,15 @@ class System:
 
     def slide_back_to_launcher(self):
         self.poco.start_gesture([0.5, 0.99]).hold(2).to([0.5, 0.5]).up()
+
+    def enter_recentMenu(self):
+        self.logger.info("Enter recent menu now！")
+        print("Enter recent menu now！")
+        self.poco.start_gesture([0.5, 0.99]).hold(1).to([0.5, 0.8]).hold(1).up()
+        self.poco.start_gesture([0.5, 0.99]).hold(1).to([0.5, 0.8]).hold(1).up()
+        sleep(1)
+
+    def slide_to_close_CurAPP(self):
+        self.logger.info("Slide to close current app")
+        print("Slide to close current app")
+        self.poco.start_gesture([0.5, 0.6]).to([0.5, 0.1]).up()

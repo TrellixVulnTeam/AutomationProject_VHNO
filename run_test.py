@@ -24,10 +24,11 @@ def logcat_run():
 
 if __name__ == '__main__':
     # performance_test_work_flow(0, 0, case_count=28, case_running_times=30)
-    clock_case_number = 5
+
     # calendar_case_number = 1
     # system_test_work_flow(calendar_case_number)
 
+    clock_case_number = 3
     test_pool = multiprocessing.Pool(2)
     test_pool.apply_async(func=logcat_run, )
     test_pool.apply_async(func=system_test_work_flow(clock_case_number))
