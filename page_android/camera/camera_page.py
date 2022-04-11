@@ -84,3 +84,4 @@ class Camera_Page(System):
 
     def check_thumbnail_picture(self):
         return self.poco("com.android.camera2:id/preview_thumb").exists()
+

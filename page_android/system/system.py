@@ -1,10 +1,12 @@
 # coding = utf8
 import os
 import sys
+import time
 from time import sleep
 
 from airtest.core.api import connect_device
 from airtest.core.error import AdbShellError
+from poco.exceptions import PocoNoSuchNodeException
 
 from toolsbar.common import logger_config
 from toolsbar.permissionGrant import list_apps
@@ -180,7 +182,7 @@ class System:
                 device_ready_now = connect_device("Android:///{}".format(device_serialno))
                 sleep(1)
                 device_ready_now.wake()
-                if "com.teslacoilsw.launcher" in device_ready_now.shell("dumpsys window | grep mCurrentFocus"):
+                if "com.youdao.hardware.panda" in device_ready_now.shell("dumpsys window | grep mCurrentFocus"):
                     device_reboot_result = True
                     break
                 elif count_time >= 600:
@@ -192,6 +194,48 @@ class System:
             finally:
                 print("Device boot status:{}".format(device_reboot_result))
         return device_reboot_result
+
+    def device_reboot(self, cur):
+        result_list = []
+        device_serialno = self.device.serialno
+        sleep(1)
+        """
+            实现区域：begin
+        """
+        print("第{}次重启测试".format(cur))
+        self.device.shell("reboot")
+        device_start_reboot_time = time.strftime("%Y%m%d_%H%M%S")
+        device_end_reboot_time = 0
+        device_reboot_result = False
+        count_time = 0
+        while True:
+            sleep(1)
+            count_time += 1
+            try:
+                device_ready_now = connect_device("Android:///{}".format(device_serialno))
+                device_ready_now.wake()
+                device_ready_now.unlock()
+                if "com.youdao.hardware.panda" in device_ready_now.shell("dumpsys window | grep mCurrentFocus"):
+                    device_reboot_result = True
+                    device_end_reboot_time = time.strftime("%Y%m%d_%H%M%S")
+                    break
+                elif count_time >= 600:
+                    device_reboot_result = False
+                    break
+            except Exception as ex:
+                print("等待设备重启时间：{}s:_______:exception:{}".format(count_time, str(ex)))
+                continue
+        """
+            实现区域：end
+        """
+        result_list.append(
+            [cur,
+             "第{}次重启测试开始时间:{}".format(cur, device_start_reboot_time) + " " +
+             "第{}次重启测试结束时间:{}".format(cur,
+                                      device_end_reboot_time)
+                , "此次升级结果为{}".format(device_reboot_result)])
+        print("第{}次重启测试_时间{}——————结果{}".format(cur, device_start_reboot_time, device_reboot_result))
+        return result_list
 
     """
         @description:该函数用于使用keyevent进行设备灭屏

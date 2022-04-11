@@ -12,10 +12,10 @@ os.path.abspath(".")
 
 def toTxt(result):
     print(type(result))
-    if type(result) ==list:
+    if type(result) == list:
         for i in result:
             with open("./Result.txt", "a+") as f:
-                f.write(i + "\n")
+                f.write(str(i) + "\n")
     else:
         with open("./Result.txt", "a+") as f:
-            f.write(result + "\n")
+            f.write(str(result) + "\n")

@@ -4,8 +4,11 @@ import multiprocessing
 import os
 import time
 import traceback
+from time import sleep
 
 from airtest.core.api import connect_device
+from poco.drivers.android.uiautomation import AndroidUiautomationPoco
+
 from config import SERIAL_NUMBER, install_app_necessary, push_file_into_device
 from page_android.main_page import Main_Page
 from page_android.system.system import System
@@ -13,12 +16,8 @@ from page_windows.clock.clock_page import Clock_Page
 from page_windows.ev_recorder.ev_recorder_page import Ev_Recorder_Page
 from page_windows.ffmpeg.ffmpeg_page import Ffmpeg_Page
 from page_windows.potplayer.potplayer_page import PotPlayer_Page
-from poco.drivers.android.uiautomation import AndroidUiautomationPoco
-from see_vision_case.calendar_test_case import calendar_case_chooser
-from see_vision_case.camera_test_case import camera_case_chooser
-from see_vision_case.clock_test_case import clock_case_chooser
 from see_vision_case.performance_test_case import case_chooser
-from time import sleep
+from see_vision_case.system_test_case import system_case_chosser
 from toolsbar import email_tools
 from toolsbar.common import test_device
 from toolsbar.permissionGrant import grant_permission
@@ -106,7 +105,7 @@ def system_test_area(device_, case_number):
         device_.unlock()
         poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
                                        screenshot_each_action=False)
-        grant_permission(device_)
+        # grant_permission(device_)
         main_page = Main_Page(device_, poco)
         system = System(main_page)
         system.unlock_screen()
@@ -116,7 +115,8 @@ def system_test_area(device_, case_number):
         sleep(2)
         # result = calendar_case_chooser(case_number, main_page)
         # result = clock_case_chooser(case_number, main_page)
-        result = camera_case_chooser(case_number, main_page)
+        # result = camera_case_chooser(case_number, main_page)
+        result = system_case_chosser(case_number, main_page)
     except Exception as ex:
         if not os.path.exists("./screenshot"):
             os.mkdir("./screenshot")

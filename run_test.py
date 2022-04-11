@@ -28,10 +28,11 @@ if __name__ == '__main__':
     # calendar_case_number = 1
     # system_test_work_flow(calendar_case_number)
 
-    clock_case_number = 3
+    # clock_case_number = 3
+    system_case_number = 1
     test_pool = multiprocessing.Pool(2)
     test_pool.apply_async(func=logcat_run, )
-    test_pool.apply_async(func=system_test_work_flow(clock_case_number))
+    test_pool.apply_async(func=system_test_work_flow(system_case_number))
     test_pool.close()
     test_pool.join()
 
