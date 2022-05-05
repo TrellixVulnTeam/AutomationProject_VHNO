@@ -28,14 +28,14 @@ class Launcher_Page(System):
 
     def search_app_in_main_menu(self, app_text=""):
         sleep(1)
-        # app = self.scroll_to_find_element(element_text=app_text)
+        app = self.scroll_to_find_element(element_text=app_text)
         app = self.poco(text=app_text).wait()
-        # print(app.attr("pos"))
-        # apps_location = (app.attr("pos")[0] * self.screen_width, app.attr("pos")[1] * self.screen_height)
-        # print("{}'s location is:{}".format(app_text, apps_location))
+        print(app.attr("pos"))
+        apps_location = (app.attr("pos")[0] * self.screen_width, app.attr("pos")[1] * self.screen_height)
+        print("{}'s location is:{}".format(app_text, apps_location))
         # self.device.touch([apps_location[0], apps_location[1]])
         # app.long_click(duration=1)
-        # app.drag_to((0.8, 0.5), duration=3)
+        # app.drag_to((0.8, 0.5), duration=1)
         return app
 
     """

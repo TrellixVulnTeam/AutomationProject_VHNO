@@ -36,7 +36,7 @@ def get_serial_number():
 
 
 def install_app_necessary(device=""):
-    files = subprocess.Popen("ls ./apk/", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
+    files = subprocess.Popen("ls D:\For_Work\PandaOs性能测试_study\\test_resource\\20个应用", shell=True, stdout=subprocess.PIPE, stderr=subprocess.PIPE).communicate()[0]
     apks = [i for i in re.split(",", str(files).strip("b'").replace("\\n", ",")) if i != ""]
     print(apks)
     # 如下置灰代码用于独立出来不借助poco，独立使用python代码

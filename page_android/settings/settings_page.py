@@ -27,6 +27,10 @@ class Settings_Page(System):
         @description:该函数用于从主菜单中启动设置app
     """
 
+    def start_settings(self):
+        self.device.start_app("com.android.settings")
+        sleep(1)
+
     def boot_settings_from_main_menu(self):
         launcher_page = Launcher_Page(self)
         launcher_page.wake_up_main_menu()
@@ -60,6 +64,8 @@ class Settings_Page(System):
     def enter_wifi_settings(self):
         self.open_wifi()
         self.boot_settings_from_main_menu()
+        self.poco(text="声音").wait().click()
+        sleep(0.5)
         self.poco(text="无线局域网").wait().click()
         sleep(1)
         result = self.poco(text="手动添加网络").wait().exists()

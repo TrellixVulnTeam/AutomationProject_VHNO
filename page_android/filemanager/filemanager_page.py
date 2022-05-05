@@ -42,6 +42,6 @@ class Filemanager_Page(System):
     def check_on_filemanager(self):
         result = False
         sleep(1)
-        if "com.google.android.documentsui" in self.device.shell("dumpsys window | grep mCurrentFocus"):
+        if "com.android.documentsui" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result

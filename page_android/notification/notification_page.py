@@ -27,14 +27,16 @@ class Notification_Page(System):
     """
 
     def drag_down_notification_center(self):
-        self.device.swipe((0.5, 0.01), (0.5, 0.9), duration=0)
+        self.device.touch([0, 0])
+        sleep(0.5)
+        self.device.swipe((500, 0.01), (500, 300), duration=0)
 
     """
         @description:该函数用于从状态栏上拖下通知中心列表
     """
 
     def drag_down_notification_list(self):
-        self.poco.start_gesture((0.5, 0.01)).hold(0).to((0.5, 0.9)).up()
+        self.poco.start_gesture((0.5, 0)).hold(0).to((0.5, 1)).up()
 
     """
         @description:该函数用于在通知列表中通过对应通知标题点击特定的通知

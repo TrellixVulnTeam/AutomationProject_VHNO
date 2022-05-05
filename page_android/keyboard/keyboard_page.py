@@ -31,6 +31,7 @@ class Keyboard_Page(System):
         settings_page = Settings_Page(self)
         settings_page.boot_settings_from_main_menu()
         self.poco(text="搜索").wait().click()
+
         sleep(1)
 
     """
@@ -40,7 +41,9 @@ class Keyboard_Page(System):
     def check_keyboard_inSettings(self):
         result = False
         sleep(1)
-        if "com.panda.settings.search.SearchActivity" in self.device.shell("dumpsys window | grep mCurrentFocus"):
+        self.device.touch((0.5 * self.screen_width, 0.999 * self.screen_height + 400))
+        if "com.android.settings.Settings$AvailableVirtualKeyboardActivity" in self.device.shell(
+                "dumpsys window | grep mCurrentFocus"):
             result = True
         return result
 

@@ -57,8 +57,8 @@ cur_time = time.strftime("%Y%m%d_%H%M%S")
 def start_test(case_number):
     test_pool = multiprocessing.Pool(len(SERIAL_NUMBER))
     for device_ in SERIAL_NUMBER:
-        result = test_pool.apply_async(func=system_test_area, args=(device_, case_number,))
-        # result = test_pool.apply_async(func=performance_test_area, args=(device_, case_number,))
+        # result = test_pool.apply_async(func=system_test_area, args=(device_, case_number,))
+        result = test_pool.apply_async(func=performance_test_area, args=(device_, case_number,))
         sleep(10)
     test_pool.close()
     test_pool.join()
@@ -77,6 +77,9 @@ def performance_test_area(device_, case_number):
     device_ = connect_device("Android:///{}".format(device_))
     device_.wake()
     device_.unlock()
+    device_.shell("settings put system panda_extend_policy 0")
+    # 启动nova launcher app
+    device_.start_app("com.teslacoilsw.launcher")
     poco = AndroidUiautomationPoco(device=device_, use_airtest_input=False,
                                    screenshot_each_action=False)
     main_page = Main_Page(device_, poco)
@@ -252,6 +255,7 @@ def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, 
                     传入case编号，执行相应case
                 """
                 case_number = i + 1
+                # case_number = 28
                 print("当前case{}_第{}次测试结果为：{}".format(case_number, j + 1, start_test(case_number).get()))
                 sleep(2)
                 ev_recorder_page.stop_and_reserve_record()

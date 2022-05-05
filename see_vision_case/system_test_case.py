@@ -33,7 +33,7 @@ def case1_boot_speed(main_page):
     main_page.device.wake()
     system = System(main_page)
     result = []
-    times = 3
+    times = 1000
     for i in range(times):
         result.append(system.device_reboot(cur=i + 1))
     logger.info("function:" + sys._getframe().f_code.co_name + ":Test result：{} ".format(result))

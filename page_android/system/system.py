@@ -296,7 +296,7 @@ class System:
     def check_on_home_screen(self):
         result = False
         sleep(3)
-        if "com.android.launcher3" in self.device.shell("dumpsys window | grep mCurrentFocus"):
+        if "com.youdao.hardware.panda" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result
 
@@ -328,6 +328,8 @@ class System:
 
     def wake_up_main_menu(self):
         self.device.unlock()
+        self.device.start_app("com.teslacoilsw.launcher")
+        sleep(0.5)
         self.poco("com.teslacoilsw.launcher:id/bottomsheet_expand_indicator").wait().click()
 
     """

@@ -27,6 +27,9 @@ class Task_Manager_Page(System):
     """
 
     def boot_task_manager_from_main_menu(self):
+        self.device.start_app("com.youdao.hardware.panda")
+        self.device.touch([0, 0])
+        sleep(0.5)
         self.poco.start_gesture([0.5, 0.99]).hold(0).to([0.5, 0.88]).hold(1).up()
         sleep(1)
 
