@@ -53,7 +53,7 @@ def install_app_necessary(device=""):
     #                 break
     for apk in apks:
         print("Device [{}] is install {}".format(device.serialno, apk))
-        install_result = device.install_app("./apk/" + apk)
+        install_result = device.install_app("D:\For_Work\PandaOs性能测试_study\\test_resource\\20个应用\\" + apk)
         print(install_result)
 
 

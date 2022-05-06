@@ -280,7 +280,7 @@ class System:
     def unlock_screen_by_slide(self):
         result = False
         sleep(1)
-        self.device.wake()
+        # self.device.wake()
         print("开始滑动解锁！")
         self.poco.scroll(direction="vertical", percent=0.6, duration=0.5)
         # width = self.device.display_info["width"]
@@ -296,7 +296,7 @@ class System:
     def check_on_home_screen(self):
         result = False
         sleep(3)
-        if "com.youdao.hardware.panda" in self.device.shell("dumpsys window | grep mCurrentFocus"):
+        if "com.youdao.hardware.panda" or "com.teslacoilsw.launcher" in self.device.shell("dumpsys window | grep mCurrentFocus"):
             result = True
         return result
 
