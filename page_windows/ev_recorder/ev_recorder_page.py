@@ -60,6 +60,7 @@ class Ev_Recorder_Page:
 
     """
         @description:该函数用于通过case号和case执行次数对录制的视频进行重命名并保存
+        ok
     """
 
     # 录制完成后将视频名称直接输入然后enter,测试时务必切换到英文输入法
