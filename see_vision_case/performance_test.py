@@ -170,7 +170,7 @@ def performance_test_work_flow(i=0, j=0, case_count=28, case_running_times=10):
         case编写需要一定时间比较多
         因为自动化操作和手动有些许不同，注意标注好每条case怎么判断计时的开始与结束！！！
     """
-    # test_prepare(test_device=test_device)
+    test_prepare(test_device=test_device)
     ev_recorder_page = Ev_Recorder_Page()
     ffmpeg_page = Ffmpeg_Page("D:\\For_Work\\PandaOs性能测试_study\\temp\\",
                               "D:\\For_Work\\PandaOs性能测试_study\\test_result_temp\\")
@@ -236,10 +236,10 @@ def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, 
     current_case_number = 0
     current_case_running_times = 0
     try:
-        case_number_list = [3, 4, 16, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
+        # case_number_list = [3, 4, 16, 19, 20, 21, 22, 23, 24, 25, 26, 27, 28]
         # 补测循环
-        for i in case_number_list:
-            # for i in range(i, case_count):
+        # for i in case_number_list:
+        for i in range(i, case_count):
             current_case_number = i
             for j in range(case_running_times):
                 if j > 10:
@@ -258,7 +258,8 @@ def case_running_cycle(ev_recorder_page, clock, clock_handle, ffmpeg_page, i=0, 
                     传入case编号，执行相应case
                 """
                 case_number = i + 1
-                case_number = i
+                # 补测循环变量无需+1
+                # case_number = i
                 print("当前case{}_第{}次测试结果为：{}".format(case_number, j + 1, start_test(case_number).get()))
                 sleep(2)
                 ev_recorder_page.stop_and_reserve_record()
